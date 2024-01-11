@@ -37,6 +37,7 @@ dependencies:
   geolocator: ^10.1.0
   # url launchers
   url_launcher: ^6.2.3
+  # sms autofill
   sms_autofill:
     git:
       url: https://github.com/SunnatilloShavkatov/sms_autofill.git
