@@ -10,10 +10,15 @@ sealed class Failure extends Equatable {
 }
 
 class ServerFailure extends Failure {
-  const ServerFailure({required super.message});
+  const ServerFailure({
+    required super.message,
+    this.statusCode,
+  });
+
+  final int? statusCode;
 
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [message, statusCode];
 }
 
 class NoInternetFailure extends Failure {

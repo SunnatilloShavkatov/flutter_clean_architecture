@@ -13,6 +13,8 @@ extension BuildContextExt on BuildContext {
 
   ThemeTextStyles get textStyle => theme.extension<ThemeTextStyles>()!;
 
+  TextTheme get textTheme => theme.textTheme;
+
   ScaffoldFeatureController<SnackBar, SnackBarClosedReason> Function(
     SnackBar snackBar,
   ) get showSnackBar => ScaffoldMessenger.of(this).showSnackBar;

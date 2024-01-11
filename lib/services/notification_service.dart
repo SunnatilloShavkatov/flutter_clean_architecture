@@ -6,6 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import '../../../firebase_options.dart';
+import '../router/app_routes.dart';
 
 late AndroidNotificationChannel channel;
 late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
@@ -108,6 +109,7 @@ sealed class NotificationService {
       onDidReceiveNotificationResponse: (response) async {
         debugPrint('foreground notification tapped');
         debugPrint('$response');
+        chuck.showInspector();
       },
     );
   }

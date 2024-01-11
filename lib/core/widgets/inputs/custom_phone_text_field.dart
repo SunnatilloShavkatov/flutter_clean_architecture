@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../core/extension/extension.dart';
+import 'masked_text_input_formatter.dart';
 
 class CustomPhoneTextField extends StatefulWidget {
   const CustomPhoneTextField({
@@ -10,7 +11,6 @@ class CustomPhoneTextField extends StatefulWidget {
     required this.controller,
     this.autoFocus = false,
     this.onChanged,
-    this.keyboardType,
     this.prefixText,
     this.errorText,
     this.inputAction,
@@ -25,7 +25,6 @@ class CustomPhoneTextField extends StatefulWidget {
     this.suffixIcon,
     this.suffixStyle,
     this.prefixIcon,
-    this.inputFormatters,
     this.fillColor,
     this.contentPadding,
     this.focusedBorder,
@@ -46,7 +45,6 @@ class CustomPhoneTextField extends StatefulWidget {
   final TextEditingController controller;
   final bool autoFocus;
   final void Function(String value)? onChanged;
-  final TextInputType? keyboardType;
   final String? prefixText;
   final String? errorText;
   final TextInputAction? inputAction;
@@ -62,7 +60,6 @@ class CustomPhoneTextField extends StatefulWidget {
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final TextStyle? suffixStyle;
-  final List<TextInputFormatter>? inputFormatters;
   final Color? fillColor;
   final EdgeInsets? contentPadding;
   final InputBorder? focusedBorder;
@@ -70,7 +67,7 @@ class CustomPhoneTextField extends StatefulWidget {
   final InputBorder? errorBorder;
   final InputBorder? focusedErrorBorder;
   final bool required;
-  final String Function(String?)? validator;
+  final String? Function(String?)? validator;
   final bool? filled;
   final bool haveBorder;
 
@@ -117,8 +114,15 @@ class _CustomPhoneTextFieldState extends State<CustomPhoneTextField> {
               ),
             ),
           TextFormField(
-            validator: (value) => widget.validator!(value),
-            inputFormatters: widget.inputFormatters,
+            validator: widget.validator,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            inputFormatters: [
+              MaskedTextInputFormatter(
+                mask: '## ### ## ##',
+                separator: ' ',
+                filter: RegExp('[0-9]'),
+              ),
+            ],
             style: const TextStyle(
               fontSize: 14,
               height: 16 / 14,
@@ -154,7 +158,7 @@ class _CustomPhoneTextFieldState extends State<CustomPhoneTextField> {
               errorText: widget.showError ?? false ? widget.errorText : null,
             ),
             cursorColor: context.theme.colorScheme.primary,
-            keyboardType: widget.keyboardType,
+            keyboardType: TextInputType.phone,
             onEditingComplete: widget.onComplete,
           ),
         ],

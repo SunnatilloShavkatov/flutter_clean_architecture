@@ -26,6 +26,7 @@ dependencies:
   # rest api
   dio: ^5.4.0
   dio_retry_plus: ^2.0.5
+  chuck_interceptor: ^2.0.8
   # box
   gap: ^3.0.1
   # router
@@ -36,6 +37,10 @@ dependencies:
   geolocator: ^10.1.0
   # url launchers
   url_launcher: ^6.2.3
+  sms_autofill:
+    git:
+      url: https://github.com/SunnatilloShavkatov/sms_autofill.git
+      ref: staging
   # package info
   package_info_plus: ^5.0.1
   # cached image

@@ -7,6 +7,8 @@ sealed class Routes {
 
   /// Auth
   static const String auth = '/auth';
+  static const String confirmCode = '/confirm-code';
+  static const String register = '/register';
 
   /// Home
   static const String home = '/home';

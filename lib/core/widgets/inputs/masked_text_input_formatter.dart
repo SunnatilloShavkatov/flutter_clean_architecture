@@ -13,7 +13,9 @@ class MaskedTextInputFormatter extends TextInputFormatter {
 
   @override
   TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue,) {
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
     final String text = newValue.text;
     final String newText = newValue.toJSON()['text'].toString();
     final String separatorWithText = newValue.text.replaceAll(separator, '');

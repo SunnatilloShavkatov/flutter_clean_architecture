@@ -1,3 +1,4 @@
+import 'package:chuck_interceptor/chuck.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -5,8 +6,10 @@ import 'package:package_info_plus/package_info_plus.dart';
 
 import '../core/local_source/local_source.dart';
 import '../core/platform/network_info.dart';
-import '../features/auth/presentation/bloc/login/login_bloc.dart';
+import '../features/auth/presentation/bloc/confirm/confirm_code_bloc.dart';
+import '../features/auth/presentation/bloc/login/auth_bloc.dart';
 import '../features/auth/presentation/pages/auth/auth_page.dart';
+import '../features/auth/presentation/pages/confirm/confirm_code_page.dart';
 import '../features/catalog/presentation/pages/catalog_page.dart';
 import '../features/home/presentation/pages/home_page.dart';
 import '../features/main/presentation/pages/main_page.dart';
@@ -29,7 +32,7 @@ final location = sl<LocationService>();
 
 final scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
-// final Chuck chuck = Chuck(navigatorKey: rootNavigatorKey);
+final Chuck chuck = Chuck(navigatorKey: rootNavigatorKey);
 
 final GoRouter router = GoRouter(
   navigatorKey: rootNavigatorKey,
@@ -95,21 +98,42 @@ final GoRouter router = GoRouter(
       ],
     ),
 
+    GoRoute(
+      path: Routes.settings,
+      name: Routes.settings,
+      parentNavigatorKey: rootNavigatorKey,
+      builder: (_, __) => const SettingsPage(),
+    ),
+
     /// auth
     GoRoute(
       path: Routes.auth,
       name: Routes.auth,
       parentNavigatorKey: rootNavigatorKey,
       builder: (_, __) => BlocProvider(
-        create: (_) => sl<LoginBloc>(),
+        create: (_) => sl<AuthBloc>(),
         child: const AuthPage(),
       ),
     ),
     GoRoute(
-      path: Routes.settings,
-      name: Routes.settings,
+      path: Routes.confirmCode,
+      name: Routes.confirmCode,
       parentNavigatorKey: rootNavigatorKey,
-      builder: (_, __) => const SettingsPage(),
+      builder: (_, state) => BlocProvider(
+        create: (_) => sl<ConfirmCodeBloc>(),
+        child: ConfirmCodePage(
+          authState: state.extra! as AuthSuccessState,
+        ),
+      ),
+    ),
+    GoRoute(
+      path: Routes.register,
+      name: Routes.register,
+      parentNavigatorKey: rootNavigatorKey,
+      builder: (_, __) => BlocProvider(
+        create: (_) => sl<AuthBloc>(),
+        child: const AuthPage(),
+      ),
     ),
   ],
 );

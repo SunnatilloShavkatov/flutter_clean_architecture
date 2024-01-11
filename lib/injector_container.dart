@@ -16,12 +16,9 @@ import 'constants/constants.dart';
 import 'core/connectivity/internet_connection_checker.dart';
 import 'core/local_source/local_source.dart';
 import 'core/platform/network_info.dart';
-import 'features/auth/data/data_source/local/auth_local_data_source.dart';
-import 'features/auth/data/data_source/remote/auth_remote_data_source.dart';
 import 'features/auth/domain/repository/auth_repository.dart';
-import 'features/auth/domain/usecases/sign_in.dart';
-import 'features/auth/domain/usecases/sign_up.dart';
-import 'features/auth/presentation/bloc/login/login_bloc.dart';
+import 'features/auth/presentation/bloc/confirm/confirm_code_bloc.dart';
+import 'features/auth/presentation/bloc/login/auth_bloc.dart';
 import 'router/app_routes.dart';
 import 'services/location_service.dart';
 
@@ -67,13 +64,14 @@ Future<void> init() async {
 
   sl<Dio>().interceptors.addAll(
     [
+      chuck.getDioInterceptor(),
       RetryInterceptor(
         dio: sl<Dio>(),
         toNoInternetPageNavigator: () async =>
             rootNavigatorKey.currentContext!.pushNamed(
           Routes.noInternet,
         ),
-        accessTokenGetter: () => localSource.accessToken,
+        accessTokenGetter: () => 'Bearer ${localSource.accessToken}',
         refreshTokenFunction: () async {
           await localSource.clear().then(
             (value) {
@@ -109,26 +107,13 @@ Future<void> init() async {
 void authFeature() {
   /// use cases
   sl
-    ..registerLazySingleton<SignIn>(() => SignIn(sl()))
-    ..registerLazySingleton<SignUp>(() => SignUp(sl()))
 
     /// repositories
-    ..registerLazySingleton<AuthRepository>(
-      () => AuthRepositoryImpl(
-        networkInfo: sl(),
-        authLocalDataSource: sl(),
-        authRemoteDataSource: sl(),
-      ),
-    )
+    ..registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(dio: sl()))
 
-    /// data and network
-    ..registerLazySingleton<AuthRemoteDataSource>(
-      () => AuthRemoteDataSourceImpl(sl()),
-    )
-    ..registerLazySingleton<AuthLocalDataSource>(
-      () => AuthLocalDataSourceImpl(_box),
-    )
-    ..registerFactory(() => LoginBloc(signIn: sl()));
+    /// bloc
+    ..registerFactory(() => AuthBloc(authRepository: sl()))
+    ..registerFactory(() => ConfirmCodeBloc(sl()));
 }
 
 Future<void> initHive() async {

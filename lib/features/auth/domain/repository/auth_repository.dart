@@ -1,25 +1,30 @@
+import 'dart:developer';
+
+import 'package:dio/dio.dart';
+
+import '../../../../constants/constants.dart';
 import '../../../../core/either/either.dart';
 import '../../../../core/error/failure.dart';
-import '../../../../core/platform/network_info.dart';
-import '../../data/data_source/local/auth_local_data_source.dart';
-import '../../data/data_source/remote/auth_remote_data_source.dart';
-import '../../data/models/sign_in/sign_in_request_model.dart';
-import '../../data/models/sign_in/sign_in_response_model.dart';
-import '../../data/models/sign_up/Sign_up_request_model.dart';
-import '../../data/models/sign_up/sign_up_response_model.dart';
-import '../entities/sign_in/sign_in_request_entity.dart';
-import '../entities/sign_in/sign_in_response_entity.dart';
-import '../entities/sign_up/sign_up_request_entity.dart';
-import '../entities/sign_up/sign_up_response_entity.dart';
+import '../../../../core/error/server_error.dart';
+import '../../data/models/confirm/verify_request.dart';
+import '../../data/models/register/register_user_response.dart';
+import '../../data/models/send_message_request.dart';
+import '../../data/models/send_message_response.dart';
 
 part '../../data/repository/auth_repository_impl.dart';
 
 sealed class AuthRepository {
-  Future<Either<Failure, SignUpResponseEntity>> signUp(
-    SignUpRequestEntity requestEntity,
-  );
+  Future<Either<Failure, SendMessageResponse>> sendCode({
+    required SendCodeRequest request,
+  });
 
-  Future<Either<Failure, SignInResponseEntity>> signIn(
-    SignInRequestEntity requestEntity,
-  );
+  Future<Either<Failure, SendMessageResponse>> verifySmsCode({
+    required VerifyRequest request,
+  });
+
+  Future<Either<Failure, RegisterUserResponse>> registerUser({
+    required Map<String, dynamic> request,
+  });
+
+  Future<Either<Failure, User>> getUserInfo({required String userId});
 }

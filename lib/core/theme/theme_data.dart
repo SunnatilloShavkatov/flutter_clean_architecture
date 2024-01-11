@@ -136,6 +136,10 @@ final ThemeData lightTheme = appTheme.copyWith(
       borderRadius: AppUtils.kBorderRadius8,
       borderSide: BorderSide(color: colorLightScheme.primary),
     ),
+    focusedErrorBorder: OutlineInputBorder(
+      borderRadius: AppUtils.kBorderRadius8,
+      borderSide: BorderSide(color: colorLightScheme.error),
+    ),
     disabledBorder: const OutlineInputBorder(
       borderRadius: AppUtils.kBorderRadius8,
       borderSide: BorderSide(color: Color(0xFFEEF0F2)),

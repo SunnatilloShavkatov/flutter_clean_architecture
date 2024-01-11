@@ -14,7 +14,7 @@ sealed class Constants {
 
   static const String clientTypeId = 'f312b956-e6b3-4b45-aa1c-c9d717b3d42f';
   static const String companyId = '07660ee4-78fc-4709-badb-bca9897070a1';
-  static const String roledId = '81a2b429-fe32-4781-adf5-aacc94c5ef45';
+  static const String roleId = '81a2b429-fe32-4781-adf5-aacc94c5ef45';
 
   static final String appLink = Platform.isIOS
       ? 'https://apps.apple.com/us/app/q-watt-powerbank-sharing/id6444178516'
@@ -56,11 +56,17 @@ sealed class AppKeys {
 sealed class Urls {
   Urls._();
 
-  static const signInUrl = '/v1/users/sign_in/';
-  static const signUpUrl = '/v1/users/sign_up/';
-  static const getCategoryListUrl = '/v1/categories/';
-  static const getGuidListUrl = '/v1/guides/';
-  static const getArticleUrl = '/v1/articles/';
+  static const String sendCode = '/v2/send-code';
+  static const String loginWithOption = '/v2/login/with-option';
+  static const String register = '/v2/register';
+
+  static const String objectSlim = '/v1/object-slim';
+}
+
+sealed class Slugs {
+  Slugs._();
+
+  static const String patients = '/patients';
 }
 
 sealed class DatabaseKeys {
