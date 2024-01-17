@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import '../utils/utils.dart';
 import '../widgets/cupertino_back/cupertino_back_gesture.dart';
 import '../widgets/shape/custom_rectangle_border.dart';
+import '../widgets/shape/tab_indicator.dart';
 
 part 'colors/theme_colors.dart';
 

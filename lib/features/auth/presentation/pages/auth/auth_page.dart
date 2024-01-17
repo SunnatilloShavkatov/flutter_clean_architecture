@@ -31,7 +31,7 @@ class _AuthPageState extends State<AuthPage> with AuthMixin {
           body: Form(
             key: _formKey,
             child: SafeArea(
-              minimum: AppUtils.kPaddingHorizontal16,
+              minimum: AppUtils.kPaddingHor16,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

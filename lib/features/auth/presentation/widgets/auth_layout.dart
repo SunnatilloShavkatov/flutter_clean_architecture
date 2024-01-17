@@ -13,7 +13,7 @@ class AuthLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: AppUtils.kPaddingHorizontal16,
+        padding: AppUtils.kPaddingHor16,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

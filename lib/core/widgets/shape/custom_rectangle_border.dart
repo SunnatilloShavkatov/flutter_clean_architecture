@@ -43,18 +43,12 @@ class CustomRectangleBorder extends OutlinedBorder {
     return super.lerpTo(b, t)!;
   }
 
-  Path _getPath(Rect rrect) {
-    final double top = rrect.top;
-    final double left = rrect.left;
-    final double right = rrect.right;
-    final double bottom = rrect.bottom;
-    return Path()
-      ..moveTo(left, top)
-      ..lineTo(right, top)
-      ..lineTo(right, bottom)
-      ..lineTo(left, bottom)
-      ..close();
-  }
+  Path _getPath(Rect rect) => Path()
+    ..moveTo(rect.left, rect.top)
+    ..lineTo(rect.right, rect.top)
+    ..lineTo(rect.right, rect.bottom)
+    ..lineTo(rect.left, rect.bottom)
+    ..close();
 
   @override
   Path getInnerPath(Rect rect, {TextDirection? textDirection}) =>
@@ -77,31 +71,20 @@ class CustomRectangleBorder extends OutlinedBorder {
       case BorderStyle.none:
         break;
       case BorderStyle.solid:
-        late Path path;
-        final double top = rect.top;
-        final double left = rect.left;
-        final double right = rect.right;
-        final double bottom = rect.bottom;
+        Path? path;
         if (isBottom) {
           path = Path()
-            ..moveTo(left, bottom)
-            ..lineTo(right, bottom)
+            ..moveTo(rect.left, rect.bottom)
+            ..lineTo(rect.right, rect.bottom)
             ..close();
         } else if (isTop) {
           path = Path()
-            ..moveTo(left, top)
-            ..lineTo(right, top)
-            ..close();
-        } else {
-          path = Path()
-            ..moveTo(left, top)
-            ..lineTo(right, top)
-            ..lineTo(right, bottom)
-            ..lineTo(left, bottom)
+            ..moveTo(rect.left, rect.top)
+            ..lineTo(rect.right, rect.top)
             ..close();
         }
         canvas.drawPath(
-          path,
+          path ?? _getPath(rect),
           side.toPaint(),
         );
     }
@@ -122,5 +105,6 @@ class CustomRectangleBorder extends OutlinedBorder {
   int get hashCode => side.hashCode ^ isTop.hashCode ^ isBottom.hashCode;
 
   @override
-  String toString() => '${(this, 'ContinuousRectangleBorder')}($side,)';
+  String toString() =>
+      '${(this, 'ContinuousRectangleBorder')}($side,$isTop,$isBottom)';
 }

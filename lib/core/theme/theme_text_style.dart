@@ -177,9 +177,10 @@ class ThemeTextStyles extends ThemeExtension<ThemeTextStyles> {
   );
   static const ThemeTextStyles dark = ThemeTextStyles(
     appBarTitle: TextStyle(
-      color: Colors.black,
       fontSize: 20,
-      fontWeight: FontWeight.w600,
+      height: 20 / 20,
+      color: Colors.white,
+      fontWeight: FontWeight.w700,
     ),
     buttonStyle: TextStyle(
       color: Colors.white,

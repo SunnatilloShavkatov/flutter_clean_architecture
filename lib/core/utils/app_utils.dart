@@ -33,11 +33,15 @@ sealed class AppUtils {
   static const kPaddingAll4 = EdgeInsets.all(4);
   static const kPaddingAll6 = EdgeInsets.all(6);
   static const kPaddingAll8 = EdgeInsets.all(8);
+  static const kPaddingAll10 = EdgeInsets.all(10);
   static const kPaddingAll12 = EdgeInsets.all(12);
   static const kPaddingAll16 = EdgeInsets.all(16);
   static const kPaddingAllB16 = EdgeInsets.fromLTRB(16, 16, 16, 0);
   static const kPaddingAll24 = EdgeInsets.all(24);
-  static const kPaddingHorizontal16 = EdgeInsets.symmetric(horizontal: 16);
+  static const kPaddingHor4 = EdgeInsets.symmetric(horizontal: 4);
+  static const kPaddingHor6 = EdgeInsets.symmetric(horizontal: 6);
+  static const kPaddingHor10 = EdgeInsets.symmetric(horizontal: 10);
+  static const kPaddingHor16 = EdgeInsets.symmetric(horizontal: 16);
   static const kPaddingVertical16 = EdgeInsets.symmetric(vertical: 16);
   static const kPaddingHor32Ver20 =
       EdgeInsets.symmetric(horizontal: 32, vertical: 20);
@@ -70,6 +74,19 @@ sealed class AppUtils {
   static const kBorderRadius24 = BorderRadius.all(Radius.circular(24));
   static const kBorderRadius48 = BorderRadius.all(Radius.circular(48));
   static const kBorderRadius64 = BorderRadius.all(Radius.circular(64));
+
+  static const kShapeTop8 = RoundedRectangleBorder(
+    borderRadius: BorderRadius.only(
+      topLeft: Radius.circular(8),
+      topRight: Radius.circular(8),
+    ),
+  );
+  static const kShapeBottom8 = RoundedRectangleBorder(
+    borderRadius: BorderRadius.only(
+      bottomLeft: Radius.circular(8),
+      bottomRight: Radius.circular(8),
+    ),
+  );
 
   // static const kTabBarBoxDecoration = BoxDecoration(
   //   color: AppColors.bgGrey2,

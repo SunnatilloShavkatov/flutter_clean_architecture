@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/extension/extension.dart';
+
 class TvPage extends StatelessWidget {
   const TvPage({super.key});
 
@@ -8,6 +10,7 @@ class TvPage extends StatelessWidget {
         appBar: AppBar(
           centerTitle: false,
           title: const Text('Телевидение'),
+          titleTextStyle: context.textStyle.appBarTitle,
         ),
       );
 }

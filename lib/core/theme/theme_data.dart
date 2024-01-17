@@ -307,11 +307,6 @@ final ThemeData darkTheme = ThemeData(
       Platform.isAndroid ? InkRipple.splashFactory : NoSplash.splashFactory,
   visualDensity: VisualDensity.standard,
   materialTapTargetSize: MaterialTapTargetSize.padded,
-  textButtonTheme: const TextButtonThemeData(
-    style: ButtonStyle(
-      padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(EdgeInsets.zero),
-    ),
-  ),
   primaryColor: colorDarkScheme.primary,
   colorScheme: colorDarkScheme,
   dialogBackgroundColor: colorDarkScheme.surface,
@@ -328,6 +323,11 @@ final ThemeData darkTheme = ThemeData(
     surfaceTintColor: colorDarkScheme.surface,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(10)),
+    ),
+  ),
+  textButtonTheme: const TextButtonThemeData(
+    style: ButtonStyle(
+      padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(EdgeInsets.zero),
     ),
   ),
   scrollbarTheme: ScrollbarThemeData(
@@ -451,24 +451,26 @@ final ThemeData darkTheme = ThemeData(
   ),
   tabBarTheme: TabBarTheme(
     indicatorColor: colorDarkScheme.primary,
-    labelColor: const Color(0xFF17171C),
-    unselectedLabelColor: const Color(0xFFB3BBCD),
+    labelColor: Colors.white,
+    dividerHeight: 0,
+    unselectedLabelColor: const Color(0xFFBFBFBF),
+    tabAlignment: TabAlignment.start,
+    labelPadding: AppUtils.kPaddingHor6,
     dividerColor: Colors.transparent,
     overlayColor: const MaterialStatePropertyAll(Colors.transparent),
     labelStyle: const TextStyle(
-      fontSize: 14,
+      fontSize: 13,
       fontWeight: FontWeight.w500,
     ),
     unselectedLabelStyle: const TextStyle(
-      fontSize: 14,
+      fontSize: 13,
       fontWeight: FontWeight.w500,
     ),
-    indicator: UnderlineTabIndicator(
-      borderSide: BorderSide(
-        width: 2.5,
-        color: colorDarkScheme.primary,
-      ),
+    indicator: TabBarIndicator(
+      color: colorDarkScheme.primary,
+      radius: 3,
     ),
+    indicatorSize: TabBarIndicatorSize.label,
   ),
   navigationBarTheme: NavigationBarThemeData(
     elevation: 0,
@@ -488,9 +490,9 @@ final ThemeData darkTheme = ThemeData(
     scrolledUnderElevation: 0,
     systemOverlayStyle: systemUiOverlayStyle,
     iconTheme: const IconThemeData(color: Colors.white),
-    shadowColor: const Color(0xFF343434),
     titleTextStyle: const TextStyle(
-      fontSize: 18,
+      fontSize: 15,
+      height: 20 / 15,
       color: Colors.white,
       fontWeight: FontWeight.w500,
     ),
@@ -508,9 +510,18 @@ final ThemeData darkTheme = ThemeData(
     ),
   ),
   listTileTheme: const ListTileThemeData(
-    tileColor: Color.fromRGBO(28, 30, 33, 0.95),
+    minVerticalPadding: 0,
+    horizontalTitleGap: 10,
+    contentPadding: AppUtils.kPaddingHor10,
+    tileColor: Color(0xFF27292C),
+    style: ListTileStyle.list,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(8)),
+    ),
+    titleTextStyle: TextStyle(
+      fontSize: 14,
+      color: Colors.white,
+      fontWeight: FontWeight.w500,
     ),
   ),
   textTheme: const TextTheme(

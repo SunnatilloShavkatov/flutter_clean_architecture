@@ -46,13 +46,13 @@ class ThemeColors extends ThemeExtension<ThemeColors> {
   final Color green;
 
   static const ThemeColors light = ThemeColors(
-    main: Color(0xFF2B2B30),
+    main: Color(0xFF27292C),
     green: Color(0xFF32B141),
     cardColor: Colors.white,
   );
 
   static const ThemeColors dark = ThemeColors(
-    main: Color(0xFF2B2B30),
+    main: Color(0xFF27292C),
     green: Color(0xFF32B141),
     cardColor: Color(0xFF1E1E1E),
   );
