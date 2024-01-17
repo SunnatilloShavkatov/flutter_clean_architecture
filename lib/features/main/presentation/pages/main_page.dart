@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/extension/extension.dart';
 import '../../../../core/theme/themes.dart';
-import '../../../../router/app_routes.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({
@@ -18,27 +18,34 @@ class MainPage extends StatelessWidget {
         onPopInvoked: (v) => navigationShell.goBranch(0),
         child: Scaffold(
           body: navigationShell,
-          bottomNavigationBar: BottomNavigationBar(
-            currentIndex: navigationShell.currentIndex,
-            onTap: (index) => changeTap(index, context),
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(AppIcons.home),
-                label: 'Главная',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(AppIcons.grid),
-                label: 'Каталог',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(AppIcons.clipboard),
-                label: 'Мои записи',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(AppIcons.user),
-                label: 'Профиль',
-              ),
-            ],
+          bottomNavigationBar: Material(
+            shape: context.shapes.topRectangleBorder,
+            child: BottomNavigationBar(
+              currentIndex: navigationShell.currentIndex,
+              onTap: (index) => changeTap(index, context),
+              items: const [
+                BottomNavigationBarItem(
+                  icon: Icon(AppIcons.home),
+                  label: 'Главная',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(AppIcons.device_tv),
+                  label: 'ТВ',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(AppIcons.movie),
+                  label: 'Каталог',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(AppIcons.favorites),
+                  label: 'Избранное',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(AppIcons.user_circle),
+                  label: 'Профиль',
+                ),
+              ],
+            ),
           ),
         ),
       );
@@ -47,11 +54,6 @@ class MainPage extends StatelessWidget {
     int index,
     BuildContext context,
   ) {
-    if (index == 3 && !localSource.hasProfile) {
-      // ignore: discarded_futures
-      context.pushNamed(Routes.auth);
-      return;
-    }
     navigationShell.goBranch(
       index,
       initialLocation: index == navigationShell.currentIndex,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../../../../core/extension/extension.dart';
 import '../../../../../core/theme/themes.dart';
-import '../../../../../core/utils/utils.dart';
+import '../../../../../core/widgets/painter/logo_painter.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});
@@ -8,15 +9,15 @@ class HomeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SliverAppBar(
         pinned: true,
-        expandedHeight: kToolbarHeight * 2,
         centerTitle: false,
         systemOverlayStyle: systemUiOverlayStyle,
-        title: const Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Location'),
-            Text('Ташкент (Ташкент)'),
-          ],
+        elevation: context.theme.appBarTheme.elevation,
+        scrolledUnderElevation:
+            context.theme.appBarTheme.scrolledUnderElevation,
+        shadowColor: context.theme.appBarTheme.shadowColor,
+        title: const CustomPaint(
+          painter: LogoPainter(color: Colors.white),
+          size: Size(98, 28),
         ),
         actions: [
           IconButton(
@@ -24,18 +25,5 @@ class HomeAppBar extends StatelessWidget {
             onPressed: () {},
           ),
         ],
-        bottom: const PreferredSize(
-          preferredSize: Size.fromHeight(kToolbarHeight),
-          child: Padding(
-            padding: AppUtils.kPaddingAll12,
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'Услуга, специалист или место',
-                prefixIcon: Icon(AppIcons.search),
-                suffixIcon: Icon(AppIcons.marker_pin),
-              ),
-            ),
-          ),
-        ),
       );
 }

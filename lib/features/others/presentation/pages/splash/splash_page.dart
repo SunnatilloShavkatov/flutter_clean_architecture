@@ -43,7 +43,7 @@ class _SplashPageState extends State<SplashPage> with SplashMixin {
                 child: Center(
                   child: CustomPaint(
                     painter: LogoPainter(),
-                    size: Size(160, 160),
+                    size: Size(175, 50),
                   ),
                 ),
               ),

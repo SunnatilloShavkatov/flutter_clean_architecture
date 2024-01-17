@@ -3,32 +3,35 @@ part of 'package:flutter_clean_architecture/core/theme/themes.dart';
 /// A set of colors for the entire app.
 const colorLightScheme = ColorScheme(
   brightness: Brightness.light,
-  primary: Color(0xFF007AFF),
+  primary: Color(0xFF2277F6),
   onPrimary: Colors.white,
-  surface: Colors.white,
-  onSurface: Color(0xFF020000),
+  surface: Color(0xFF27292C),
+  onSurface: Colors.white,
   secondary: Color(0xFF69D7C7),
   onSecondary: Color(0xFF020000),
-  error: Color(0xFFE30021),
+  error: Color(0xFFFF6C6C),
   onError: Colors.white,
   surfaceVariant: Color(0xFFF5F5F5),
-  background: Color(0xFFF3F6FB),
-  onBackground: Color(0xFF020000),
+  background: Color(0xFF1C1E21),
+  onBackground: Color(0xFF909090),
+  secondaryContainer: Color(0xFF343434),
 );
 
 ///
 const colorDarkScheme = ColorScheme(
   brightness: Brightness.dark,
-  primary: Color(0xFF007AFF),
+  primary: Color(0xFF2277F6),
   onPrimary: Colors.white,
-  surface: Color(0xFFF7F9FC),
-  onSurface: Color(0xFF020000),
+  surface: Color(0xFF27292C),
+  onSurface: Colors.white,
   secondary: Color(0xFF69D7C7),
   onSecondary: Color(0xFF020000),
-  error: Color(0xFFD93F2F),
+  error: Color(0xFFFF6C6C),
   onError: Colors.white,
-  background: Color(0xFFF3F6FB),
-  onBackground: Color(0xFF020000),
+  surfaceVariant: Color(0xFFF5F5F5),
+  background: Color(0xFF1C1E21),
+  onBackground: Color(0xFF909090),
+  secondaryContainer: Color(0xFF343434),
 );
 
 class ThemeColors extends ThemeExtension<ThemeColors> {

@@ -11,15 +11,15 @@ import '../features/auth/presentation/bloc/login/auth_bloc.dart';
 import '../features/auth/presentation/pages/auth/auth_page.dart';
 import '../features/auth/presentation/pages/confirm/confirm_code_page.dart';
 import '../features/catalog/presentation/pages/catalog_page.dart';
+import '../features/favorites/presentation/pages/favorites_page.dart';
 import '../features/home/presentation/pages/home_page.dart';
 import '../features/main/presentation/pages/main_page.dart';
-import '../features/my_notes/presentation/pages/my_notes_page.dart';
 import '../features/others/presentation/pages/internet_connection/internet_connection_page.dart';
 import '../features/others/presentation/pages/splash/splash_page.dart';
 import '../features/profile/presentation/pages/profile_page.dart';
 import '../features/profile/presentation/pages/settings/settings_page.dart';
+import '../features/tv/presentation/pages/tv_page.dart';
 import '../injector_container.dart';
-import '../services/location_service.dart';
 
 part 'name_routes.dart';
 
@@ -28,7 +28,6 @@ final rootNavigatorKey = GlobalKey<NavigatorState>();
 final packageInfo = sl<PackageInfo>();
 final networkInfo = sl<NetworkInfo>();
 final localSource = sl<LocalSource>();
-final location = sl<LocationService>();
 
 final scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
@@ -66,6 +65,16 @@ final GoRouter router = GoRouter(
           ],
         ),
         StatefulShellBranch(
+          initialLocation: Routes.tv,
+          routes: <RouteBase>[
+            GoRoute(
+              path: Routes.tv,
+              name: Routes.tv,
+              builder: (_, __) => const TvPage(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
           initialLocation: Routes.catalog,
           routes: <RouteBase>[
             GoRoute(
@@ -76,12 +85,12 @@ final GoRouter router = GoRouter(
           ],
         ),
         StatefulShellBranch(
-          initialLocation: Routes.myNotes,
+          initialLocation: Routes.favorites,
           routes: <RouteBase>[
             GoRoute(
-              path: Routes.myNotes,
-              name: Routes.myNotes,
-              builder: (_, __) => const MyNotesPage(),
+              path: Routes.favorites,
+              name: Routes.favorites,
+              builder: (_, __) => const FavoritesPage(),
             ),
           ],
         ),

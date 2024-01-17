@@ -14,11 +14,14 @@ sealed class Routes {
   static const String home = '/home';
   static const String payments = '/payments';
 
+  /// TV
+  static const String tv = '/tv';
+
   /// Catalog
   static const String catalog = '/catalog';
 
-  /// my notes
-  static const String myNotes = '/my-notes';
+  /// Favorites
+  static const String favorites = '/favorites';
 
   /// Profile
   static const String profile = '/profile';

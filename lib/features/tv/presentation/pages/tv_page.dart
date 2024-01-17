@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class CatalogPage extends StatelessWidget {
-  const CatalogPage({super.key});
+class TvPage extends StatelessWidget {
+  const TvPage({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           centerTitle: false,
-          title: const Text('Каталог'),
+          title: const Text('Телевидение'),
         ),
       );
 }

@@ -29,7 +29,7 @@ void main() async {
   runApp(
     ModelBinding(
       initialModel: AppOptions(
-        themeMode: ThemeMode.light,
+        themeMode: ThemeMode.dark,
         // themeMode: localSource.themeMode,
         locale: Locale(localSource.locale),
       ),

@@ -20,7 +20,6 @@ import 'features/auth/domain/repository/auth_repository.dart';
 import 'features/auth/presentation/bloc/confirm/confirm_code_bloc.dart';
 import 'features/auth/presentation/bloc/login/auth_bloc.dart';
 import 'router/app_routes.dart';
-import 'services/location_service.dart';
 
 final sl = GetIt.instance;
 late Box<dynamic> _box;
@@ -67,10 +66,11 @@ Future<void> init() async {
       chuck.getDioInterceptor(),
       RetryInterceptor(
         dio: sl<Dio>(),
-        toNoInternetPageNavigator: () async =>
-            rootNavigatorKey.currentContext!.pushNamed(
-          Routes.noInternet,
-        ),
+        toNoInternetPageNavigator: () async {
+          await rootNavigatorKey.currentContext!.pushNamed(
+            Routes.noInternet,
+          );
+        },
         accessTokenGetter: () => 'Bearer ${localSource.accessToken}',
         refreshTokenFunction: () async {
           await localSource.clear().then(
@@ -91,7 +91,6 @@ Future<void> init() async {
   /// Core
   sl
     ..registerSingleton<LocalSource>(LocalSource(_box))
-    ..registerLazySingleton<LocationService>(LocationServiceImpl.new)
     ..registerLazySingleton(
       () => InternetConnectionChecker.createInstance(
         checkInterval: const Duration(seconds: 3),
