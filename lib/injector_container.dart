@@ -13,9 +13,8 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'constants/constants.dart';
-import 'core/connectivity/internet_connection_checker.dart';
+import 'core/connectivity/network_info.dart';
 import 'core/local_source/local_source.dart';
-import 'core/platform/network_info.dart';
 import 'features/auth/domain/repository/auth_repository.dart';
 import 'features/auth/presentation/bloc/confirm/confirm_code_bloc.dart';
 import 'features/auth/presentation/bloc/login/auth_bloc.dart';

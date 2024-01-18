@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../core/local_source/local_source.dart';
-import '../core/platform/network_info.dart';
+import '../core/connectivity/network_info.dart';
 import '../features/auth/presentation/bloc/confirm/confirm_code_bloc.dart';
 import '../features/auth/presentation/bloc/login/auth_bloc.dart';
 import '../features/auth/presentation/pages/auth/auth_page.dart';

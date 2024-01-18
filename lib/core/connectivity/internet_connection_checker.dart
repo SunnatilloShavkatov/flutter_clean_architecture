@@ -1,5 +1,4 @@
-import 'dart:async';
-import 'dart:io';
+part of 'network_info.dart';
 
 class AddressCheckResult {
   const AddressCheckResult(

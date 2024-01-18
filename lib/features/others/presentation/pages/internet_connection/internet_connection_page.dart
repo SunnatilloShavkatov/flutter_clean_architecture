@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/connectivity/internet_connection_checker.dart';
+import '../../../../../core/connectivity/network_info.dart';
 import '../../../../../router/app_routes.dart';
 
 class InternetConnectionPage extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter_clean_architecture/core/connectivity/internet_connection_checker.dart';
-import 'package:flutter_clean_architecture/core/platform/network_info.dart';
+import 'package:flutter_clean_architecture/core/connectivity/network_info.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';

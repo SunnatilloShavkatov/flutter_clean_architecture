@@ -5,7 +5,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i6;
 
-import 'package:flutter_clean_architecture/core/platform/network_info.dart' as _i8;
+import 'package:flutter_clean_architecture/core/connectivity/network_info.dart' as _i8;
 import 'package:flutter_clean_architecture/features/advices/data/data_source/local/advice_local_data_source.dart'
     as _i7;
 import 'package:flutter_clean_architecture/features/advices/data/data_source/remote/advice_remote_data_source.dart'

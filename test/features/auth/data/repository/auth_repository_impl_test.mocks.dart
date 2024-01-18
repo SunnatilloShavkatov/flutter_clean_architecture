@@ -5,7 +5,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i5;
 
-import 'package:flutter_clean_architecture/core/platform/network_info.dart' as _i8;
+import 'package:flutter_clean_architecture/core/connectivity/network_info.dart' as _i8;
 import 'package:flutter_clean_architecture/features/auth/data/data_source/local/auth_local_data_source.dart'
     as _i7;
 import 'package:flutter_clean_architecture/features/auth/data/data_source/remote/auth_remote_data_source.dart'

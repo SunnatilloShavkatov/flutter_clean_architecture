@@ -14,7 +14,7 @@ dependencies:
     sdk: flutter
   intl: ^0.18.1
   # di
-  get_it: ^7.6.6
+  get_it: ^7.6.7
   # equatable
   equatable: ^2.0.5
   # state manager
