@@ -39,22 +39,26 @@ class ThemeColors extends ThemeExtension<ThemeColors> {
     required this.main,
     required this.cardColor,
     required this.green,
+    required this.whiteOpacity05,
   });
 
   final Color main;
   final Color cardColor;
   final Color green;
+  final Color whiteOpacity05;
 
   static const ThemeColors light = ThemeColors(
     main: Color(0xFF27292C),
     green: Color(0xFF32B141),
     cardColor: Colors.white,
+    whiteOpacity05: Color.fromRGBO(255, 255, 255, 0.05),
   );
 
   static const ThemeColors dark = ThemeColors(
     main: Color(0xFF27292C),
     green: Color(0xFF32B141),
     cardColor: Color(0xFF1E1E1E),
+    whiteOpacity05: Color.fromRGBO(255, 255, 255, 0.05),
   );
 
   @override
@@ -62,11 +66,13 @@ class ThemeColors extends ThemeExtension<ThemeColors> {
     Color? cardColor,
     Color? main,
     Color? green,
+    Color? whiteOpacity05,
   }) =>
       ThemeColors(
         green: green ?? this.green,
         cardColor: cardColor ?? this.cardColor,
         main: main ?? this.main,
+        whiteOpacity05: whiteOpacity05 ?? this.whiteOpacity05,
       );
 
   @override
@@ -81,6 +87,7 @@ class ThemeColors extends ThemeExtension<ThemeColors> {
       green: Color.lerp(green, other.green, t)!,
       main: Color.lerp(main, other.main, t)!,
       cardColor: Color.lerp(cardColor, other.cardColor, t)!,
+      whiteOpacity05: Color.lerp(whiteOpacity05, other.whiteOpacity05, t)!,
     );
   }
 }

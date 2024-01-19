@@ -6,14 +6,20 @@ class ThemeCustomShapes extends ThemeExtension<ThemeCustomShapes> {
     this.bottomRectangleBorder,
     required this.buttonDecoration,
     required this.buttonsShadowDecoration,
+    this.circleBorder,
   });
 
   final OutlinedBorder? topRectangleBorder;
+  final OutlinedBorder? circleBorder;
   final OutlinedBorder? bottomRectangleBorder;
   final Decoration buttonDecoration;
   final Decoration buttonsShadowDecoration;
 
   static const ThemeCustomShapes light = ThemeCustomShapes(
+    circleBorder: RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(32)),
+      side: BorderSide(color: Color.fromRGBO(255, 255, 255, 0.05)),
+    ),
     topRectangleBorder: CustomRectangleBorder(
       isTop: true,
       side: BorderSide(color: Color(0xFF343434)),
@@ -55,6 +61,10 @@ class ThemeCustomShapes extends ThemeExtension<ThemeCustomShapes> {
   );
 
   static const ThemeCustomShapes dark = ThemeCustomShapes(
+    circleBorder: RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(32)),
+      side: BorderSide(color: Color.fromRGBO(255, 255, 255, 0.05)),
+    ),
     topRectangleBorder: CustomRectangleBorder(
       isTop: true,
       side: BorderSide(color: Color(0xFF343434)),

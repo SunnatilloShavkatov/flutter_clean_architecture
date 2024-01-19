@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 
 part 'internet_connection_checker.dart';
 
-abstract class NetworkInfo {
+sealed class NetworkInfo {
   const NetworkInfo();
 
   Future<bool> get isConnected;

@@ -47,6 +47,8 @@ sealed class AppUtils {
       EdgeInsets.symmetric(horizontal: 32, vertical: 20);
   static const kPaddingHor16Ver12 =
       EdgeInsets.symmetric(horizontal: 16, vertical: 12);
+  static const kPaddingHor16Ver4 =
+      EdgeInsets.symmetric(horizontal: 16, vertical: 4);
   static const kPaddingHor16Ver8 =
       EdgeInsets.symmetric(horizontal: 16, vertical: 8);
   static const kPaddingHor12Ver8 =
