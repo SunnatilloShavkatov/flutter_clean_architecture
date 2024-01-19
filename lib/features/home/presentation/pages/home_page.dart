@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/extension/extension.dart';
 import '../../../../core/theme/themes.dart';
+import '../../../../core/widgets/buttons/custom_button.dart';
 import '../../../../core/widgets/painter/logo_painter.dart';
 
 part 'mixin/home_mixin.dart';
@@ -33,14 +34,28 @@ class _HomePageState extends State<HomePage> with HomeMixin {
         body: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
-              child: CachedNetworkImage(
-                height: context.kSize.width * 576 / 1024,
-                imageUrl:
-                    'https://tv7.kz/wp-content/uploads/2022/01/sj-1024x576.jpg?x56526',
-                placeholder: (context, url) => const Center(
-                  child: CircularProgressIndicator.adaptive(),
-                ),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
+              child: Stack(
+                children: [
+                  CachedNetworkImage(
+                    height: context.kSize.width * 576 / 1024,
+                    imageUrl:
+                        'https://tv7.kz/wp-content/uploads/2022/01/sj-1024x576.jpg?x56526',
+                    placeholder: (context, url) => const Center(
+                      child: CircularProgressIndicator.adaptive(),
+                    ),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                  ),
+                  Positioned(
+                    right: 16,
+                    bottom: 16,
+                    child: CustomButton(
+                      onPressed: () {},
+                      label: const Text('Смотреть'),
+                      icon: const Icon(AppIcons.player_play_filled),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

@@ -15,6 +15,7 @@ final ThemeData lightTheme = ThemeData(
   applyElevationOverlayColor: true,
   extensions: const <ThemeExtension<dynamic>>[
     ThemeColors.light,
+    ThemeGradients.light,
     ThemeTextStyles.light,
     ThemeCustomShapes.light,
   ],
@@ -292,6 +293,7 @@ final ThemeData darkTheme = ThemeData(
   applyElevationOverlayColor: true,
   extensions: const <ThemeExtension<dynamic>>[
     ThemeColors.dark,
+    ThemeGradients.dark,
     ThemeTextStyles.dark,
     ThemeCustomShapes.dark,
   ],
