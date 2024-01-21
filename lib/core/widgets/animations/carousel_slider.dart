@@ -115,7 +115,7 @@ class CarouselSliderController {
 }
 
 class _CarouselSliderState extends State<CarouselSlider> {
-  PageController? _pageController;
+  late final PageController _pageController;
   Timer? _timer;
   int? _currentPage;
   double _pageDelta = 0;
@@ -123,44 +123,48 @@ class _CarouselSliderState extends State<CarouselSlider> {
 
   @override
   Widget build(BuildContext context) =>
-      NotificationListener<ScrollNotification>(
-        onNotification: (notification) {
-          if (notification is ScrollStartNotification) {
-            widget.onSlideStart?.call();
-          } else if (notification is ScrollEndNotification) {
-            widget.onSlideEnd?.call();
-          }
-          return true;
-        },
-        child: PageView.builder(
-          onPageChanged: (val) {
-            widget.onSlideChanged?.call(val);
-          },
-          clipBehavior: widget.clipBehavior,
-          scrollBehavior: ScrollConfiguration.of(context).copyWith(
-            scrollbars: false,
-            overscroll: false,
-            dragDevices: {PointerDeviceKind.touch, PointerDeviceKind.mouse},
+      Stack(
+        children: [
+          NotificationListener<ScrollNotification>(
+            onNotification: (notification) {
+              if (notification is ScrollStartNotification) {
+                widget.onSlideStart?.call();
+              } else if (notification is ScrollEndNotification) {
+                widget.onSlideEnd?.call();
+              }
+              return true;
+            },
+            child: PageView.builder(
+              onPageChanged: (val) {
+                widget.onSlideChanged?.call(val);
+              },
+              clipBehavior: widget.clipBehavior,
+              scrollBehavior: ScrollConfiguration.of(context).copyWith(
+                scrollbars: false,
+                overscroll: false,
+                dragDevices: {PointerDeviceKind.touch, PointerDeviceKind.mouse},
+              ),
+              itemCount: widget.unlimitedMode ? _kMaxValue : widget.itemCount,
+              controller: _pageController,
+              scrollDirection: widget.scrollDirection,
+              physics: widget.scrollPhysics,
+              itemBuilder: (context, index) {
+                final slideIndex = index % widget.itemCount;
+                final Widget slide = widget.children == null
+                    ? widget.slideBuilder!(slideIndex)
+                    : widget.children![slideIndex];
+                return widget.slideTransform.transform(
+                  context,
+                  slide,
+                  index,
+                  _currentPage,
+                  _pageDelta,
+                  widget.itemCount,
+                );
+              },
+            ),
           ),
-          itemCount: widget.unlimitedMode ? _kMaxValue : widget.itemCount,
-          controller: _pageController,
-          scrollDirection: widget.scrollDirection,
-          physics: widget.scrollPhysics,
-          itemBuilder: (context, index) {
-            final slideIndex = index % widget.itemCount;
-            final Widget slide = widget.children == null
-                ? widget.slideBuilder!(slideIndex)
-                : widget.children![slideIndex];
-            return widget.slideTransform.transform(
-              context,
-              slide,
-              index,
-              _currentPage,
-              _pageDelta,
-              widget.itemCount,
-            );
-          },
-        ),
+        ],
       );
 
   @override
@@ -179,7 +183,7 @@ class _CarouselSliderState extends State<CarouselSlider> {
   void dispose() {
     super.dispose();
     _timer?.cancel();
-    _pageController?.dispose();
+    _pageController.dispose();
   }
 
   @override
@@ -199,7 +203,6 @@ class _CarouselSliderState extends State<CarouselSlider> {
   }
 
   void _initPageController() {
-    _pageController?.dispose();
     _pageController = PageController(
       viewportFraction: widget.viewportFraction,
       keepPage: widget.keepPage,
@@ -207,23 +210,25 @@ class _CarouselSliderState extends State<CarouselSlider> {
           ? _kMiddleValue * widget.itemCount + _currentPage!
           : _currentPage!,
     );
-    _pageController!.addListener(() {
-      setState(() {
-        _currentPage = _pageController!.page!.floor();
-        _pageDelta = _pageController!.page! - _pageController!.page!.floor();
-      });
-    });
+    _pageController.addListener(
+      () {
+        setState(() {
+          _currentPage = _pageController.page!.floor();
+          _pageDelta = _pageController.page! - _pageController.page!.floor();
+        });
+      },
+    );
   }
 
   Future<void> _nextPage(Duration? transitionDuration) async {
-    await _pageController!.nextPage(
+    await _pageController.nextPage(
       duration: transitionDuration ?? widget.autoSliderTransitionTime,
       curve: widget.autoSliderTransitionCurve,
     );
   }
 
   Future<void> _previousPage(Duration? transitionDuration) async {
-    await _pageController!.previousPage(
+    await _pageController.previousPage(
       duration: transitionDuration ?? widget.autoSliderTransitionTime,
       curve: widget.autoSliderTransitionCurve,
     );
@@ -231,15 +236,18 @@ class _CarouselSliderState extends State<CarouselSlider> {
 
   void _setAutoSliderEnabled(bool isEnabled) {
     if (_timer != null) {
-      _timer!.cancel();
+      _timer?.cancel();
     }
     if (isEnabled) {
-      _timer = Timer.periodic(widget.autoSliderDelay, (timer) async {
-        await _pageController!.nextPage(
-          duration: widget.autoSliderTransitionTime,
-          curve: widget.autoSliderTransitionCurve,
-        );
-      });
+      _timer = Timer.periodic(
+        widget.autoSliderDelay,
+        (timer) async {
+          await _pageController.nextPage(
+            duration: widget.autoSliderTransitionTime,
+            curve: widget.autoSliderTransitionCurve,
+          );
+        },
+      );
     }
   }
 }

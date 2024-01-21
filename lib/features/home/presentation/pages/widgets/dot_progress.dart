@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/widgets/anim/simple_circular_progress_bar.dart';
+import '../../../../../core/widgets/animations/simple_circular_progress_bar.dart';
 
 class DotProgress extends StatelessWidget {
   const DotProgress({

@@ -2,6 +2,16 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+const slideTransforms = [
+  CubeTransform(),
+  DepthTransform(),
+  StackTransform(),
+  AccordionTransform(),
+  ZoomOutSlideTransform(),
+  ForegroundToBackgroundTransform(),
+  BackgroundToForegroundTransform(),
+];
+
 class CubeTransform implements SlideTransform {
   final double perspectiveScale;
   final AlignmentGeometry rightPageAlignment;
@@ -115,9 +125,7 @@ class BackgroundToForegroundTransform implements SlideTransform {
 class ForegroundToBackgroundTransform implements SlideTransform {
   final double endScale;
 
-  const ForegroundToBackgroundTransform({
-    this.endScale = 0.4,
-  });
+  const ForegroundToBackgroundTransform({this.endScale = 0.4});
 
   @override
   Widget transform(
@@ -142,6 +150,8 @@ class ForegroundToBackgroundTransform implements SlideTransform {
 }
 
 class DefaultTransform implements SlideTransform {
+  const DefaultTransform();
+
   @override
   Widget transform(
     BuildContext context,
@@ -152,8 +162,6 @@ class DefaultTransform implements SlideTransform {
     int itemCount,
   ) =>
       page;
-
-  const DefaultTransform();
 }
 
 class DepthTransform implements SlideTransform {
@@ -489,7 +497,7 @@ class ZoomOutSlideTransform implements SlideTransform {
   }
 }
 
-abstract class SlideTransform {
+sealed class SlideTransform {
   Widget transform(
     BuildContext context,
     Widget page,

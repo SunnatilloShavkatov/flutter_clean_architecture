@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/extension/extension.dart';
 import '../../../../../core/utils/utils.dart';
-import '../../../../../core/widgets/anim/carousel_slider.dart';
+import '../../../../../core/widgets/animations/carousel_slider.dart';
 import 'banner_item.dart';
 import 'dot_progress.dart';
 
@@ -21,18 +21,11 @@ class BannersWidget extends StatelessWidget {
         children: [
           SizedBox(
             height: context.kSize.width * 576 / 1024 + 92,
+            width: context.kSize.width,
             child: CarouselSlider.builder(
               unlimitedMode: true,
               enableAutoSlider: true,
-              slideTransform: const [
-                CubeTransform(),
-                DepthTransform(),
-                StackTransform(),
-                AccordionTransform(),
-                ZoomOutSlideTransform(),
-                ForegroundToBackgroundTransform(),
-                BackgroundToForegroundTransform(),
-              ][DateTime.now().weekday - 1],
+              slideTransform: slideTransforms[DateTime.now().weekday - 1],
               controller: controller,
               slideBuilder: (index) => BannerItem(
                 key: ValueKey(index),
