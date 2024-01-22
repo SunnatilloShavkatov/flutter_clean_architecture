@@ -66,9 +66,16 @@ Future<void> init() async {
       RetryInterceptor(
         dio: sl<Dio>(),
         toNoInternetPageNavigator: () async {
-          await rootNavigatorKey.currentContext!.pushNamed(
-            Routes.noInternet,
-          );
+          final router = GoRouter.of(rootNavigatorKey.currentContext!);
+          final lastMatch = router.routerDelegate.currentConfiguration.last;
+          final matchList = lastMatch is ImperativeRouteMatch
+              ? lastMatch.matches
+              : router.routerDelegate.currentConfiguration;
+          final String location = matchList.uri.toString();
+          if (location.contains(Routes.noInternet)) {
+            return;
+          }
+          await rootNavigatorKey.currentContext!.pushNamed(Routes.noInternet);
         },
         accessTokenGetter: () => 'Bearer ${localSource.accessToken}',
         refreshTokenFunction: () async {

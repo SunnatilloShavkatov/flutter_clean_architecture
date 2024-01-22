@@ -70,12 +70,15 @@ class InternetConnectionPageState extends State<InternetConnectionPage> {
             child: ElevatedButton(
               child: const Text('Попробовать снова'),
               onPressed: () async {
-                await Future<void>.delayed(const Duration(milliseconds: 300));
-                final isConnected = await networkInfo.isConnected;
-                if (isConnected) {
-                  if (!mounted) return;
-                  Navigator.of(context).pop();
-                }
+                Future<void>.delayed(
+                  const Duration(milliseconds: 300),
+                  () async {
+                    final isConnected = await networkInfo.isConnected;
+                    if (isConnected && context.mounted) {
+                      Navigator.of(context).pop();
+                    }
+                  },
+                );
               },
             ),
           ),
