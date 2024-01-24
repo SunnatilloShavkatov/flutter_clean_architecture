@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 const slideTransforms = [
   CubeTransform(),
   DepthTransform(),
-  StackTransform(),
   AccordionTransform(),
   ZoomOutSlideTransform(),
   ForegroundToBackgroundTransform(),

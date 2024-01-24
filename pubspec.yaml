@@ -34,7 +34,7 @@ dependencies:
   # svg
   flutter_svg: ^2.0.9
   # url launchers
-  url_launcher: ^6.2.3
+  url_launcher: ^6.2.4
   # sms autofill
   sms_autofill:
     git:
@@ -52,7 +52,7 @@ dependencies:
   firebase_messaging: ^14.7.10
   firebase_remote_config: ^4.3.8
   # local notification
-  flutter_local_notifications: ^16.3.1+1
+  flutter_local_notifications: ^16.3.2
 
 dev_dependencies:
   flutter_test:

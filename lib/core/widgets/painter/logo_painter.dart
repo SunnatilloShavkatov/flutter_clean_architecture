@@ -1,9 +1,24 @@
 import 'package:flutter/material.dart';
 
-class LogoPainter extends CustomPainter {
-  const LogoPainter({
+class Logo extends StatelessWidget {
+  const Logo({
+    super.key,
     this.color = const Color(0xFF2277F6),
+    this.size = 14,
   });
+
+  final Color color;
+  final double size;
+
+  @override
+  Widget build(BuildContext context) => CustomPaint(
+        painter: _LogoPainter(color: color),
+        size: Size(7 * size, 2 * size),
+      );
+}
+
+class _LogoPainter extends CustomPainter {
+  const _LogoPainter({required this.color});
 
   final Color color;
 

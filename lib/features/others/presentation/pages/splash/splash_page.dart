@@ -39,14 +39,7 @@ class _SplashPageState extends State<SplashPage> with SplashMixin {
                   child: CircularProgressIndicator(),
                 ),
               ),
-              const Positioned.fill(
-                child: Center(
-                  child: CustomPaint(
-                    painter: LogoPainter(),
-                    size: Size(175, 50),
-                  ),
-                ),
-              ),
+              const Positioned.fill(child: Center(child: Logo(size: 25))),
             ],
           ),
         ),

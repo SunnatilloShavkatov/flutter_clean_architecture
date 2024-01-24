@@ -23,10 +23,7 @@ class _HomePageState extends State<HomePage> with HomeMixin {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           centerTitle: false,
-          title: const CustomPaint(
-            painter: LogoPainter(color: Colors.white),
-            size: Size(98, 28),
-          ),
+          title: const Logo(color: Colors.white),
           actions: [
             IconButton(
               icon: const Icon(AppIcons.bell),
@@ -37,10 +34,11 @@ class _HomePageState extends State<HomePage> with HomeMixin {
         body: CustomScrollView(
           slivers: [
             BannersWidget(
+              key: const ValueKey('banners'),
               controller: _pageController,
-              currentPage: _currentPage,
             ),
             SliverList.list(
+              key: const ValueKey('list'),
               children: [
                 TitleRight(
                   title: 'Разработано SalomTV',

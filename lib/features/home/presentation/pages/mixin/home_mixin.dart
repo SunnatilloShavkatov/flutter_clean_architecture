@@ -2,7 +2,6 @@ part of 'package:flutter_clean_architecture/features/home/presentation/pages/hom
 
 mixin HomeMixin on State<HomePage> {
   final CarouselSliderController _pageController = CarouselSliderController();
-  final ValueNotifier<int> _currentPage = ValueNotifier<int>(0);
 
   @override
   void initState() {

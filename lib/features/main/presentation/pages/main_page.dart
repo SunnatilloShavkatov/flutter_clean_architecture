@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../core/extension/extension.dart';
 import '../../../../core/theme/themes.dart';
+import '../../../../core/widgets/bottom_navigation/bottom_indicator_bar.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({
@@ -18,8 +18,8 @@ class MainPage extends StatelessWidget {
         onPopInvoked: (v) => navigationShell.goBranch(0),
         child: Scaffold(
           body: navigationShell,
-          bottomNavigationBar: Material(
-            shape: context.shapes.topRectangleBorder,
+          bottomNavigationBar: BottomIndicatorBar(
+            currentIndex: navigationShell.currentIndex,
             child: BottomNavigationBar(
               currentIndex: navigationShell.currentIndex,
               onTap: (index) => changeTap(index, context),

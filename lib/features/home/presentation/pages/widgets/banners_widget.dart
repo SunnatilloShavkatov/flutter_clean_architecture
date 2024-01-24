@@ -6,15 +6,15 @@ import '../../../../../core/widgets/animations/carousel_slider.dart';
 import 'banner_item.dart';
 import 'dot_progress.dart';
 
+final ValueNotifier<int> _currentPage = ValueNotifier<int>(0);
+
 class BannersWidget extends StatelessWidget {
   const BannersWidget({
     super.key,
     this.controller,
-    required this.currentPage,
   });
 
   final CarouselSliderController? controller;
-  final ValueNotifier<int> currentPage;
 
   @override
   Widget build(BuildContext context) => SliverList.list(
@@ -25,14 +25,14 @@ class BannersWidget extends StatelessWidget {
             child: CarouselSlider.builder(
               unlimitedMode: true,
               enableAutoSlider: true,
-              slideTransform: slideTransforms[DateTime.now().weekday - 1],
+              slideTransform: slideTransforms[DateTime.now().weekday % 5],
               controller: controller,
               slideBuilder: (index) => BannerItem(
                 key: ValueKey(index),
                 index: index,
               ),
               itemCount: 6,
-              onSlideChanged: (index) => currentPage.value = index,
+              onSlideChanged: (index) => _currentPage.value = index,
             ),
           ),
           AppUtils.kGap8,
@@ -40,13 +40,13 @@ class BannersWidget extends StatelessWidget {
             height: 12,
             child: Center(
               child: ValueListenableBuilder(
-                valueListenable: currentPage,
+                valueListenable: _currentPage,
                 builder: (_, value, __) => ListView.separated(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (_, index) => DotProgress(
                     key: ValueKey(index),
-                    isLoading: index == currentPage.value % 6,
+                    isLoading: index == _currentPage.value % 6,
                   ),
                   separatorBuilder: (_, __) => AppUtils.kGap8,
                   itemCount: 6,
