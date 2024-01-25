@@ -48,8 +48,8 @@ final class AppLocalizations {
 
   static const Iterable<LocalizationsDelegate> localizationsDelegates = [
     TranslationsDelegate(),
-    GlobalMaterialLocalizations.delegate,
     GlobalWidgetsLocalizations.delegate,
+    GlobalMaterialLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
   ];
 

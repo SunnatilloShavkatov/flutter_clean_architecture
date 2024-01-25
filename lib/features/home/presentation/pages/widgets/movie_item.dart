@@ -25,7 +25,7 @@ class MovieItem extends StatelessWidget {
                           borderRadius: AppUtils.kBorderRadius8,
                           child: CachedNetworkImage(
                             imageUrl:
-                                'https://thumbs.filmix.biz/posters/5937/thumbs/w220/serzhan-bratan-kinokritik-2021_152219.jpg',
+                                'https://firebasestorage.googleapis.com/v0/b/sample-bloc-5b8b9.appspot.com/o/movie_photo.webp?alt=media',
                             width: 128,
                             fit: BoxFit.cover,
                           ),

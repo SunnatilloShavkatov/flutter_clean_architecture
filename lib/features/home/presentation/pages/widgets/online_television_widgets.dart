@@ -42,9 +42,11 @@ class OnlineTelevisionItem extends StatelessWidget {
                     borderRadius: AppUtils.kBorderRadius8,
                     child: CachedNetworkImage(
                       imageUrl:
-                          'http://storage.kun.uz/source/1/-lCIaFS7aamAeX9VVtntWPRDkPsJCZ8M.jpg',
+                          'https://firebasestorage.googleapis.com/v0/b/sample-bloc-5b8b9.appspot.com/o/movie_photo%20(1).webp?alt=media',
                       width: 108,
                       height: 108,
+                      // memCacheWidth: 108,
+                      // memCacheHeight: 108,
                       fit: BoxFit.cover,
                     ),
                   ),

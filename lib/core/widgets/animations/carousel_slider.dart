@@ -127,7 +127,6 @@ class _CarouselSliderState extends State<CarouselSlider> {
           overscroll: false,
           dragDevices: {PointerDeviceKind.touch, PointerDeviceKind.mouse},
         ),
-
         itemCount: widget.unlimitedMode ? _kMaxValue : widget.itemCount,
         controller: _pageController,
         scrollDirection: widget.scrollDirection,

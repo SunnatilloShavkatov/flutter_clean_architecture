@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-import '../core/local_source/local_source.dart';
 import '../core/connectivity/network_info.dart';
+import '../core/local_source/local_source.dart';
 import '../features/auth/presentation/bloc/confirm/confirm_code_bloc.dart';
 import '../features/auth/presentation/bloc/login/auth_bloc.dart';
 import '../features/auth/presentation/pages/auth/auth_page.dart';
@@ -13,6 +13,7 @@ import '../features/auth/presentation/pages/confirm/confirm_code_page.dart';
 import '../features/catalog/presentation/pages/catalog_page.dart';
 import '../features/favorites/presentation/pages/favorites_page.dart';
 import '../features/home/presentation/pages/home_page.dart';
+import '../features/main/presentation/bloc/main_bloc.dart';
 import '../features/main/presentation/pages/main_page.dart';
 import '../features/others/presentation/pages/internet_connection/internet_connection_page.dart';
 import '../features/others/presentation/pages/splash/splash_page.dart';
@@ -50,8 +51,14 @@ final GoRouter router = GoRouter(
       builder: (_, __) => const InternetConnectionPage(),
     ),
     StatefulShellRoute.indexedStack(
-      builder: (_, __, navigationShell) => MainPage(
-        navigationShell: navigationShell,
+      parentNavigatorKey: rootNavigatorKey,
+      builder: (_, state, navigationShell) => BlocProvider(
+        key: state.pageKey,
+        create: (_) => sl<MainBloc>(),
+        child: MainPage(
+          key: state.pageKey,
+          navigationShell: navigationShell,
+        ),
       ),
       branches: <StatefulShellBranch>[
         StatefulShellBranch(

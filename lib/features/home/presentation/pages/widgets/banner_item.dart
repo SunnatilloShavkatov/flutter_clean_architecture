@@ -23,13 +23,16 @@ class BannerItem extends StatelessWidget {
           Stack(
             children: [
               CachedNetworkImage(
+                // memCacheHeight: context.kSize.width * 576 ~/ 1024,
+                // memCacheWidth: context.kSize.width.toInt(),
                 height: context.kSize.width * 576 / 1024,
                 imageUrl:
-                    'https://tv7.kz/wp-content/uploads/2022/01/sj-1024x576.jpg?x56526',
+                    'https://firebasestorage.googleapis.com/v0/b/sample-bloc-5b8b9.appspot.com/o/banner.webp?alt=media',
                 placeholder: (context, url) => const Center(
                   child: CircularProgressIndicator.adaptive(),
                 ),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
+                fit: BoxFit.cover,
               ),
               Positioned(
                 right: 16,

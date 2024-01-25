@@ -18,6 +18,7 @@ import 'core/local_source/local_source.dart';
 import 'features/auth/domain/repository/auth_repository.dart';
 import 'features/auth/presentation/bloc/confirm/confirm_code_bloc.dart';
 import 'features/auth/presentation/bloc/login/auth_bloc.dart';
+import 'features/main/presentation/bloc/main_bloc.dart';
 import 'router/app_routes.dart';
 
 final sl = GetIt.instance;
@@ -104,6 +105,9 @@ Future<void> init() async {
     )
     ..registerSingletonAsync<PackageInfo>(PackageInfo.fromPlatform)
     ..registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
+
+  /// main
+  sl.registerFactory(MainBloc.new);
 
   /// features
   authFeature();
