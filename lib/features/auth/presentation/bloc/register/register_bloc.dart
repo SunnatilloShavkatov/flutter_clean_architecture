@@ -1,8 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../constants/constants.dart';
-import '../../../../../core/error/failure.dart';
 import '../../../../../core/mixins/cache_mixin.dart';
 import '../../../domain/entities/sign_up/sign_up_request_entity.dart';
 

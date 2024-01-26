@@ -23,7 +23,7 @@ class ConfirmCodeBloc extends Bloc<ConfirmCodeEvent, ConfirmCodeState>
   final AuthRepository authRepository;
 
   void _onInitial(
-      ConfirmCodeEventInitial event, Emitter<ConfirmCodeState> emit) {
+      ConfirmCodeEventInitial event, Emitter<ConfirmCodeState> emit,) {
     if (state.confirmCodeStatus.isError) {
       emit(state.copyWith(confirmCodeStatus: ConfirmCodeStatus.initial));
     }
@@ -126,7 +126,7 @@ class ConfirmCodeBloc extends Bloc<ConfirmCodeEvent, ConfirmCodeState>
         emit(state.copyWith(
           confirmCodeStatus: ConfirmCodeStatus.error,
           errorMessage: (l as ServerFailure).message,
-        ));
+        ),);
       },
       (r) {
         emit(

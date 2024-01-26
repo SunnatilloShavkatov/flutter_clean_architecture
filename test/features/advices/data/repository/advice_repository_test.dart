@@ -1,9 +1,9 @@
 import 'dart:convert';
 
+import 'package:flutter_clean_architecture/core/connectivity/network_info.dart';
 import 'package:flutter_clean_architecture/core/either/either.dart';
 import 'package:flutter_clean_architecture/core/error/exceptions.dart';
 import 'package:flutter_clean_architecture/core/error/failure.dart';
-import 'package:flutter_clean_architecture/core/connectivity/network_info.dart';
 import 'package:flutter_clean_architecture/features/advices/data/data_source/local/advice_local_data_source.dart';
 import 'package:flutter_clean_architecture/features/advices/data/data_source/remote/advice_remote_data_source.dart';
 import 'package:flutter_clean_architecture/features/advices/data/models/article/article_response.dart';

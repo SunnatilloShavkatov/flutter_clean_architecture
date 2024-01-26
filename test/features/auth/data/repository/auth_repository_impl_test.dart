@@ -1,9 +1,9 @@
 import 'dart:convert';
 
+import 'package:flutter_clean_architecture/core/connectivity/network_info.dart';
 import 'package:flutter_clean_architecture/core/either/either.dart';
 import 'package:flutter_clean_architecture/core/error/exceptions.dart';
 import 'package:flutter_clean_architecture/core/error/failure.dart';
-import 'package:flutter_clean_architecture/core/connectivity/network_info.dart';
 import 'package:flutter_clean_architecture/features/auth/data/data_source/local/auth_local_data_source.dart';
 import 'package:flutter_clean_architecture/features/auth/data/data_source/remote/auth_remote_data_source.dart';
 import 'package:flutter_clean_architecture/features/auth/data/models/sign_in/sign_in_request_model.dart';

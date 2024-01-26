@@ -25,7 +25,7 @@ void main() async {
   await di.init();
 
   /// global CERTIFICATE_VERIFY_FAILEd_KEY
-  HttpOverrides.global = MyHttpOverrides();
+  HttpOverrides.global = _HttpOverrides();
   runApp(
     ModelBinding(
       initialModel: AppOptions(
@@ -39,7 +39,7 @@ void main() async {
   FlutterNativeSplash.remove();
 }
 
-class MyHttpOverrides extends HttpOverrides {
+class _HttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) =>
       super.createHttpClient(context)
