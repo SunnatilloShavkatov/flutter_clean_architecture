@@ -33,28 +33,27 @@ class ProfilePage extends StatelessWidget {
                         // ignore: discarded_futures
                         context.pushNamed(Routes.auth);
                       },
-                      title: const Text('Войти в приложение'),
+                      shape: AppUtils.kShapeAll8,
+                      title: 'Войти в приложение',
                       leading: const Icon(AppIcons.login),
                     ),
                     AppUtils.kGap24,
                     ProfileItemWidget(
                       shape: AppUtils.kShapeTop8,
                       onTap: () {},
-                      title: const Text('Данные профиля'),
+                      title: 'Данные профиля',
                       leading: const Icon(AppIcons.user_circle),
                     ),
                     AppUtils.kDivider,
                     ProfileItemWidget(
-                      shape: AppUtils.kShapeZero,
                       onTap: () {},
-                      title: const Text('Оплата и подписка'),
+                      title: 'Оплата и подписка',
                       leading: const Icon(AppIcons.credit_card),
                     ),
                     AppUtils.kDivider,
                     ProfileItemWidget(
-                      shape: AppUtils.kShapeZero,
                       onTap: () {},
-                      title: const Text('История платежей'),
+                      title: 'История платежей',
                       leading: const Icon(AppIcons.file_invoice),
                     ),
                     AppUtils.kDivider,
@@ -64,28 +63,26 @@ class ProfilePage extends StatelessWidget {
                         // ignore: discarded_futures
                         context.pushNamed(Routes.devices);
                       },
-                      title: const Text('Устройства'),
+                      title: 'Устройства',
                       leading: const Icon(AppIcons.devices),
                     ),
                     AppUtils.kGap24,
                     ProfileItemWidget(
                       shape: AppUtils.kShapeTop8,
                       onTap: () {},
-                      title: const Text('Промокод'),
+                      title: 'Промокод',
                       leading: const Icon(AppIcons.gift),
                     ),
                     AppUtils.kDivider,
                     ProfileItemWidget(
-                      shape: AppUtils.kShapeZero,
                       onTap: () {},
-                      title: const Text('Поддержка'),
+                      title: 'Поддержка',
                       leading: const Icon(AppIcons.phone_call),
                     ),
                     AppUtils.kDivider,
                     ProfileItemWidget(
-                      shape: AppUtils.kShapeZero,
                       onTap: () {},
-                      title: const Text('Пользовательское соглашение'),
+                      title: 'Пользовательское соглашение',
                       leading: const Icon(AppIcons.file_check),
                     ),
                     AppUtils.kDivider,
@@ -95,7 +92,7 @@ class ProfilePage extends StatelessWidget {
                         // ignore: discarded_futures
                         context.pushNamed(Routes.aboutUs);
                       },
-                      title: const Text('О нас'),
+                      title: 'О нас',
                       leading: const Icon(AppIcons.info_circle),
                     ),
                   ],

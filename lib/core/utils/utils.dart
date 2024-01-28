@@ -6,6 +6,8 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
+import '../widgets/painter/logo_painter.dart';
+
 part 'app_utils.dart';
 
 part 'base_functions.dart';

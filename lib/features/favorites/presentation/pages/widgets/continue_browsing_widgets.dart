@@ -5,6 +5,7 @@ import '../../../../../core/extension/extension.dart';
 import '../../../../../core/theme/themes.dart';
 import '../../../../../core/utils/utils.dart';
 import '../../../../../core/widgets/animations/custom_linear_progress.dart';
+import '../../../../../core/widgets/painter/dot_painter.dart';
 
 class ContinueBrowsingWidgets extends StatefulWidget {
   const ContinueBrowsingWidgets({super.key});
@@ -50,62 +51,69 @@ class ContinueBrowsing extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Expanded(
-            child: Container(
-              clipBehavior: Clip.antiAlias,
-              decoration: const ShapeDecoration(
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(color: Color(0xFF343434)),
-                  borderRadius: AppUtils.kBorderRadius8,
-                ),
-              ),
-              child: Stack(
-                children: [
-                  ClipRRect(
-                    borderRadius: AppUtils.kBorderRadius8,
-                    child: CachedNetworkImage(
-                      width: context.width / 2 + 22,
-                      memCacheWidth: (context.width - 44) ~/ 2,
-                      imageUrl:
-                          'https://oneplatform.uz/wp-content/uploads/2023/09/1-%D1%81%D0%B5%D1%80%D0%B8%D1%8F.jpg',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  const Positioned(
-                    right: 4,
-                    bottom: 12,
-                    child: Text(
-                      '22 мин',
-                      textAlign: TextAlign.right,
-                      style: TextStyle(
-                        color: Color(0xFFBFBFBF),
-                        fontSize: 10,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                  const Align(child: Icon(AppIcons.player_play_filled)),
-                  const Positioned(
-                    bottom: 6,
-                    left: 6,
-                    right: 6,
-                    child: CustomLinearProgress(
-                      percent: 50,
-                      isAnimate: true,
-                    ),
-                  ),
-                ],
+          Container(
+            clipBehavior: Clip.antiAlias,
+            decoration: const ShapeDecoration(
+              shape: RoundedRectangleBorder(
+                side: BorderSide(color: Color(0xFF343434)),
+                borderRadius: AppUtils.kBorderRadius8,
               ),
             ),
+            child: Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: AppUtils.kBorderRadius8,
+                  child: CachedNetworkImage(
+                    height: 94,
+                    width: (context.width - 44) / 2,
+                    memCacheWidth: (context.width - 44) ~/ 2,
+                    imageUrl:
+                        'https://oneplatform.uz/wp-content/uploads/2023/09/1-%D1%81%D0%B5%D1%80%D0%B8%D1%8F.jpg',
+                    fit: BoxFit.cover,
+                    placeholder: (_, __) => alignLogo,
+                    errorWidget: (_, __, ___) => alignLogo,
+                  ),
+                ),
+                const Positioned(
+                  right: 4,
+                  bottom: 14,
+                  child: Text(
+                    '22 мин',
+                    textAlign: TextAlign.right,
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                const Positioned.fill(
+                  child: Center(
+                    child: Icon(
+                      AppIcons.player_play_filled,
+                    ),
+                  ),
+                ),
+                const Positioned(
+                  bottom: 6,
+                  left: 6,
+                  right: 6,
+                  child: CustomLinearProgress(
+                    percent: 50,
+                    isAnimate: true,
+                  ),
+                ),
+              ],
+            ),
           ),
-          AppUtils.kGap8,
+          AppUtils.kGap6,
           const Text(
             'Nega menga uylandingiz?',
             style: TextStyle(
-              color: Colors.white,
               fontSize: 12,
               fontWeight: FontWeight.w500,
             ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
           AppUtils.kGap2,
           Row(
@@ -114,25 +122,18 @@ class ContinueBrowsing extends StatelessWidget {
               Text(
                 '1 сезон',
                 style: TextStyle(
-                  color: Colors.white.withOpacity(0.5),
+                  color: context.color.whiteOpacity5,
                   fontSize: 11,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               AppUtils.kGap4,
-              Container(
-                width: 2,
-                height: 2,
-                decoration: ShapeDecoration(
-                  color: Colors.white.withOpacity(0.5),
-                  shape: const OvalBorder(),
-                ),
-              ),
+              const Dot(),
               AppUtils.kGap4,
               Text(
                 '1 серия',
                 style: TextStyle(
-                  color: Colors.white.withOpacity(0.5),
+                  color: context.color.whiteOpacity5,
                   fontSize: 11,
                   fontWeight: FontWeight.w500,
                 ),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../../core/extension/extension.dart';
 import '../../../../../core/theme/themes.dart';
 import '../../../../../core/utils/utils.dart';
+import '../../../../../core/widgets/painter/dot_painter.dart';
 
 class SavedWidgets extends StatefulWidget {
   const SavedWidgets({super.key});
@@ -49,88 +50,87 @@ class SavedItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Expanded(
-            child: Stack(
-              children: [
-                ClipRRect(
-                  borderRadius: AppUtils.kBorderRadius8,
-                  child: CachedNetworkImage(
-                    width: (context.width - 48) / 3,
-                    memCacheWidth: (context.width - 48) ~/ 2,
-                    imageUrl: 'https://kinolar.tv/_ld/1/63943269.jpg',
-                    fit: BoxFit.cover,
-                  ),
+          Stack(
+            children: [
+              ClipRRect(
+                borderRadius: AppUtils.kBorderRadius8,
+                child: CachedNetworkImage(
+                  height: 130,
+                  width: (context.width - 48) / 3,
+                  memCacheHeight: 130 * 2,
+                  memCacheWidth: (context.width - 48) ~/ 2,
+                  imageUrl: 'https://kinolar.tv/_ld/1/63943269.jpg',
+                  placeholder: (_, __) => alignLogo,
+                  errorWidget: (_, __, ___) => alignLogo,
+                  fit: BoxFit.cover,
                 ),
-                Positioned(
-                  left: 0,
-                  top: 20,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 6,
-                      vertical: 2,
-                    ),
-                    decoration: const ShapeDecoration(
-                      color: Color(0xFFAA00A3),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(24),
-                          bottomRight: Radius.circular(24),
-                        ),
-                      ),
-                    ),
-                    child: const Text(
-                      '9,0',
-                      style: TextStyle(
-                        fontSize: 11,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
+              ),
+              Positioned(
+                left: 0,
+                top: 20,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 6,
+                    vertical: 2,
+                  ),
+                  decoration: const ShapeDecoration(
+                    color: Color(0xFFAA00A3),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(24),
+                        bottomRight: Radius.circular(24),
                       ),
                     ),
                   ),
-                ),
-                Positioned(
-                  right: 6,
-                  bottom: 6,
-                  child: Container(
-                    padding: const EdgeInsets.all(2),
-                    decoration: ShapeDecoration(
-                      color: Colors.black.withOpacity(0.30000001192092896),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                    ),
-                    child: const Text(
-                      '+16',
-                      textAlign: TextAlign.right,
-                      style: TextStyle(
-                        fontSize: 11,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                      ),
+                  child: const Text(
+                    '9,0',
+                    style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
-                Positioned(
-                  top: 6,
-                  right: 6,
-                  child: IconButton(
-                    onPressed: () {},
-                    constraints: AppUtils.kBoxConstraints24,
-                    style: context.shapes.favoriteButtonStyle,
-                    icon: const Icon(AppIcons.favorites_fill),
-                    iconSize: 16,
+              ),
+              Positioned(
+                right: 6,
+                bottom: 6,
+                child: Container(
+                  padding: const EdgeInsets.all(2),
+                  decoration: ShapeDecoration(
+                    color: Colors.black.withOpacity(0.3),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                  ),
+                  child: const Text(
+                    '+16',
+                    textAlign: TextAlign.right,
+                    style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
-              ],
-            ),
+              ),
+              Positioned(
+                top: 6,
+                right: 6,
+                child: IconButton(
+                  onPressed: () {},
+                  constraints: AppUtils.kBoxConstraints24,
+                  style: context.shapes.favoriteButtonStyle,
+                  icon: const Icon(AppIcons.favorites_fill),
+                  iconSize: 16,
+                ),
+              ),
+            ],
           ),
-          AppUtils.kGap8,
+          AppUtils.kGap6,
           const Text(
             'Побег из Шоушенка',
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
-              color: Colors.white,
               fontSize: 11,
               fontWeight: FontWeight.w500,
             ),
@@ -148,14 +148,7 @@ class SavedItem extends StatelessWidget {
                 ),
               ),
               AppUtils.kGap4,
-              Container(
-                width: 2,
-                height: 2,
-                decoration: ShapeDecoration(
-                  color: Colors.white.withOpacity(0.5),
-                  shape: const OvalBorder(),
-                ),
-              ),
+              const Dot(),
               AppUtils.kGap4,
               Text(
                 '1994',

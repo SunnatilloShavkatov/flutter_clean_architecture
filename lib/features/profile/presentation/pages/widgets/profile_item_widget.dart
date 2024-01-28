@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/extension/extension.dart';
 import '../../../../../core/theme/themes.dart';
+import '../../../../../core/utils/utils.dart';
 
 class ProfileItemWidget extends StatelessWidget {
   const ProfileItemWidget({
@@ -13,25 +14,40 @@ class ProfileItemWidget extends StatelessWidget {
   });
 
   final Widget leading;
-  final Widget title;
+  final String title;
   final GestureTapCallback? onTap;
   final ShapeBorder? shape;
 
   @override
-  Widget build(BuildContext context) => ListTile(
-    onTap: onTap,
-    shape: shape,
-    title: title,
-    style: ListTileStyle.list,
-    leading: IconTheme(
-      data: context.theme.iconTheme.copyWith(
-        color: context.colorScheme.primary,
-      ),
-      child: leading,
-    ),
-    trailing: Icon(
-      AppIcons.arrow_right,
-      color: context.colorScheme.onBackground,
-    ),
-  );
+  Widget build(BuildContext context) => Material(
+        shape: shape,
+        child: InkWell(
+          onTap: onTap,
+          customBorder: shape,
+          child: Padding(
+            padding: AppUtils.kPaddingAll12,
+            child: Row(
+              children: [
+                IconTheme(
+                  data: context.theme.iconTheme.copyWith(
+                    color: context.colorScheme.primary,
+                  ),
+                  child: leading,
+                ),
+                AppUtils.kGap8,
+                Expanded(
+                  child: Text(
+                    title,
+                    style: context.theme.listTileTheme.titleTextStyle,
+                  ),
+                ),
+                Icon(
+                  AppIcons.arrow_right,
+                  color: context.colorScheme.onBackground,
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
 }

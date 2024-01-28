@@ -28,6 +28,8 @@ class MovieItem extends StatelessWidget {
                                 'https://firebasestorage.googleapis.com/v0/b/sample-bloc-5b8b9.appspot.com/o/movie_photo.webp?alt=media',
                             width: 128,
                             fit: BoxFit.cover,
+                            placeholder: (_, __) => alignLogo,
+                            errorWidget: (_, __, ___) => alignLogo,
                           ),
                         ),
                       ],
@@ -53,7 +55,6 @@ class MovieItem extends StatelessWidget {
             ),
           ),
           const Positioned(
-            top: 0,
             left: 0,
             child: BlurText(text: 'Экслюзив'),
           ),

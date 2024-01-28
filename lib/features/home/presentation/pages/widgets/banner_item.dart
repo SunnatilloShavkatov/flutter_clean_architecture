@@ -28,10 +28,8 @@ class BannerItem extends StatelessWidget {
                 height: context.kSize.width * 576 / 1024,
                 imageUrl:
                     'https://firebasestorage.googleapis.com/v0/b/sample-bloc-5b8b9.appspot.com/o/banner.webp?alt=media',
-                placeholder: (context, url) => const Center(
-                  child: CircularProgressIndicator.adaptive(),
-                ),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
+                placeholder: (_, __) => alignLogo,
+                errorWidget: (_, __, ___) => alignLogo,
                 fit: BoxFit.cover,
               ),
               Positioned(

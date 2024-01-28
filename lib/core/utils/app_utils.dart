@@ -1,5 +1,8 @@
 part of 'utils.dart';
 
+/// logo
+const alignLogo = Align(child: Logo());
+
 sealed class AppUtils {
   AppUtils._();
 
