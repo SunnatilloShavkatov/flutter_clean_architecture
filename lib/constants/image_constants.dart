@@ -1,5 +1,5 @@
-class PngImage {
-  PngImage._();
+sealed class Images {
+  Images._();
 
-  static const String icSplashLogo = 'assets/png/ic_splash_logo.png';
+  static const String icBoxEmpty = 'assets/images/ic_box_empty.webp';
 }

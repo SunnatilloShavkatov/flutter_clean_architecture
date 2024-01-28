@@ -25,7 +25,7 @@ class BannersWidget extends StatelessWidget {
             child: CarouselSlider.builder(
               unlimitedMode: true,
               enableAutoSlider: true,
-              slideTransform: slideTransforms[DateTime.now().weekday % 5],
+              slideTransform: slideTransforms[DateTime.now().weekday % 6],
               controller: controller,
               slideBuilder: (index) => BannerItem(
                 key: ValueKey(index),

@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> with HomeMixin {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           centerTitle: false,
-          title: const Logo(color: Colors.white),
+          title: const Logo(),
           actions: [
             IconButton(
               icon: const Icon(AppIcons.bell),

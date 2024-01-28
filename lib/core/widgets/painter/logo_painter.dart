@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Logo extends StatelessWidget {
   const Logo({
     super.key,
-    this.color = const Color(0xFF2277F6),
+    this.color = Colors.white,
     this.size = 14,
   });
 
@@ -11,7 +11,8 @@ class Logo extends StatelessWidget {
   final double size;
 
   @override
-  Widget build(BuildContext context) => CustomPaint(
+  Widget build(BuildContext context) =>
+      CustomPaint(
         painter: _LogoPainter(color: color),
         size: Size(7 * size, 2 * size),
       );
@@ -120,7 +121,8 @@ class _LogoPainter extends CustomPainter {
     );
     path_0.close();
 
-    final Paint paint0Fill = Paint()..style = PaintingStyle.fill;
+    final Paint paint0Fill = Paint()
+      ..style = PaintingStyle.fill;
     paint0Fill.color = color;
     canvas.drawPath(path_0, paint0Fill);
 
@@ -192,7 +194,8 @@ class _LogoPainter extends CustomPainter {
     );
     path_1.close();
 
-    final Paint paint1Fill = Paint()..style = PaintingStyle.fill;
+    final Paint paint1Fill = Paint()
+      ..style = PaintingStyle.fill;
     paint1Fill.color = color;
     canvas.drawPath(path_1, paint1Fill);
 
@@ -325,7 +328,8 @@ class _LogoPainter extends CustomPainter {
     path_2.lineTo(size.width * 0.4224400, size.height * 0.5835590);
     path_2.close();
 
-    final Paint paint2Fill = Paint()..style = PaintingStyle.fill;
+    final Paint paint2Fill = Paint()
+      ..style = PaintingStyle.fill;
     paint2Fill.color = color;
     canvas.drawPath(path_2, paint2Fill);
 
@@ -463,7 +467,8 @@ class _LogoPainter extends CustomPainter {
     );
     path_3.close();
 
-    final Paint paint3Fill = Paint()..style = PaintingStyle.fill;
+    final Paint paint3Fill = Paint()
+      ..style = PaintingStyle.fill;
     paint3Fill.color = color;
     canvas.drawPath(path_3, paint3Fill);
 
@@ -475,7 +480,8 @@ class _LogoPainter extends CustomPainter {
     path_4.lineTo(size.width * 0.2345246, size.height * 0.5843080);
     path_4.close();
 
-    final Paint paint4Fill = Paint()..style = PaintingStyle.fill;
+    final Paint paint4Fill = Paint()
+      ..style = PaintingStyle.fill;
     paint4Fill.color = color;
     canvas.drawPath(path_4, paint4Fill);
 
@@ -637,7 +643,8 @@ class _LogoPainter extends CustomPainter {
     );
     path_5.close();
 
-    final Paint paint5Fill = Paint()..style = PaintingStyle.fill;
+    final Paint paint5Fill = Paint()
+      ..style = PaintingStyle.fill;
     paint5Fill.color = color;
     canvas.drawPath(path_5, paint5Fill);
 
@@ -831,7 +838,8 @@ class _LogoPainter extends CustomPainter {
     );
     path_6.close();
 
-    final Paint paint6Fill = Paint()..style = PaintingStyle.fill;
+    final Paint paint6Fill = Paint()
+      ..style = PaintingStyle.fill;
     paint6Fill.color = color;
     canvas.drawPath(path_6, paint6Fill);
 
@@ -847,7 +855,8 @@ class _LogoPainter extends CustomPainter {
     path_7.lineTo(size.width * 0.7353000, size.height * 0.1904770);
     path_7.close();
 
-    final Paint paint7Fill = Paint()..style = PaintingStyle.fill;
+    final Paint paint7Fill = Paint()
+      ..style = PaintingStyle.fill;
     paint7Fill.color = color;
     canvas.drawPath(path_7, paint7Fill);
 
@@ -1118,7 +1127,8 @@ class _LogoPainter extends CustomPainter {
     path_8.lineTo(size.width * 0.9881857, size.height * 0.3954350);
     path_8.close();
 
-    final Paint paint8Fill = Paint()..style = PaintingStyle.fill;
+    final Paint paint8Fill = Paint()
+      ..style = PaintingStyle.fill;
     paint8Fill.color = color;
     canvas.drawPath(path_8, paint8Fill);
   }

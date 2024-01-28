@@ -17,6 +17,8 @@ import '../features/main/presentation/bloc/main_bloc.dart';
 import '../features/main/presentation/pages/main_page.dart';
 import '../features/others/presentation/pages/internet_connection/internet_connection_page.dart';
 import '../features/others/presentation/pages/splash/splash_page.dart';
+import '../features/profile/presentation/pages/about_us/about_us_page.dart';
+import '../features/profile/presentation/pages/devices/devices_page.dart';
 import '../features/profile/presentation/pages/profile_page.dart';
 import '../features/profile/presentation/pages/settings/settings_page.dart';
 import '../features/tv/presentation/pages/tv_page.dart';
@@ -114,11 +116,24 @@ final GoRouter router = GoRouter(
       ],
     ),
 
+    /// profile features
     GoRoute(
       path: Routes.settings,
       name: Routes.settings,
       parentNavigatorKey: rootNavigatorKey,
       builder: (_, __) => const SettingsPage(),
+    ),
+    GoRoute(
+      path: Routes.devices,
+      name: Routes.devices,
+      parentNavigatorKey: rootNavigatorKey,
+      builder: (_, __) => const DevicesPage(),
+    ),
+    GoRoute(
+      path: Routes.aboutUs,
+      name: Routes.aboutUs,
+      parentNavigatorKey: rootNavigatorKey,
+      builder: (_, __) => const AboutUsPage(),
     ),
 
     /// auth

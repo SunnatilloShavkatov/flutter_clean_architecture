@@ -9,6 +9,12 @@ extension SizeExtension on BuildContext {
 
   Size get kSize => MediaQuery.sizeOf(this);
 
+  double get width => MediaQuery.sizeOf(this).width;
+
+  double get height => MediaQuery.sizeOf(this).height;
+
+  double get aspectRatio => height / width;
+
   EdgeInsets get viewPadding => MediaQuery.viewPaddingOf(this);
 
   EdgeInsets get viewInsets => MediaQuery.viewInsetsOf(this);

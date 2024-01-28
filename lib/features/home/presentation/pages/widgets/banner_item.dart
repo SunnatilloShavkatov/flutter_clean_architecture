@@ -38,9 +38,10 @@ class BannerItem extends StatelessWidget {
                 right: 16,
                 bottom: 16,
                 child: CustomButton(
+                  height: 40,
                   onPressed: () {},
                   label: const Text('Смотреть'),
-                  icon: const Icon(AppIcons.player_play_filled),
+                  rightIcon: const Icon(AppIcons.player_play_filled),
                 ),
               ),
               const Positioned(

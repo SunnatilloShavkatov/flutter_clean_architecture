@@ -82,6 +82,7 @@ sealed class AppUtils {
   static const kBorderRadius48 = BorderRadius.all(Radius.circular(48));
   static const kBorderRadius64 = BorderRadius.all(Radius.circular(64));
 
+  static const kShapeZero = RoundedRectangleBorder();
   static const kShapeTop8 = RoundedRectangleBorder(
     borderRadius: BorderRadius.only(
       topLeft: Radius.circular(8),
@@ -93,6 +94,9 @@ sealed class AppUtils {
       bottomLeft: Radius.circular(8),
       bottomRight: Radius.circular(8),
     ),
+  );
+  static const kShapeAll8 = RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(8)),
   );
 
   // static const kTabBarBoxDecoration = BoxDecoration(
@@ -107,6 +111,12 @@ sealed class AppUtils {
   //   color: AppColors.white,
   //   borderRadius: kBorderRadius8,
   // );
+
+  ///
+  static const kBoxConstraints24 = BoxConstraints.tightFor(
+    width: 24,
+    height: 24,
+  );
 
   static void showSnackBar(BuildContext context, String text) {
     final snackBar = SnackBar(

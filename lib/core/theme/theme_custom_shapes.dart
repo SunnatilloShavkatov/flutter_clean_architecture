@@ -7,6 +7,7 @@ class ThemeCustomShapes extends ThemeExtension<ThemeCustomShapes> {
     required this.buttonDecoration,
     required this.buttonsShadowDecoration,
     this.circleBorder,
+    required this.favoriteButtonStyle,
   });
 
   final OutlinedBorder? topRectangleBorder;
@@ -14,6 +15,7 @@ class ThemeCustomShapes extends ThemeExtension<ThemeCustomShapes> {
   final OutlinedBorder? bottomRectangleBorder;
   final Decoration buttonDecoration;
   final Decoration buttonsShadowDecoration;
+  final ButtonStyle favoriteButtonStyle;
 
   static const ThemeCustomShapes light = ThemeCustomShapes(
     circleBorder: RoundedRectangleBorder(
@@ -57,6 +59,16 @@ class ThemeCustomShapes extends ThemeExtension<ThemeCustomShapes> {
           blurStyle: BlurStyle.inner,
         ),
       ],
+    ),
+    favoriteButtonStyle: ButtonStyle(
+      backgroundColor: MaterialStatePropertyAll(
+        Color.fromRGBO(0, 0, 0, 0.4),
+      ),
+      fixedSize: MaterialStatePropertyAll(
+        Size.square(24),
+      ),
+      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      padding: MaterialStatePropertyAll(EdgeInsets.zero),
     ),
   );
 
@@ -103,6 +115,16 @@ class ThemeCustomShapes extends ThemeExtension<ThemeCustomShapes> {
         ),
       ],
     ),
+    favoriteButtonStyle: ButtonStyle(
+      backgroundColor: MaterialStatePropertyAll(
+        Color.fromRGBO(0, 0, 0, 0.4),
+      ),
+      fixedSize: MaterialStatePropertyAll(
+        Size.square(24),
+      ),
+      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      padding: MaterialStatePropertyAll(EdgeInsets.zero),
+    ),
   );
 
   @override
@@ -111,6 +133,7 @@ class ThemeCustomShapes extends ThemeExtension<ThemeCustomShapes> {
     CustomRectangleBorder? bottomRectangleBorder,
     Decoration? buttonDecoration,
     Decoration? buttonsShadowDecoration,
+    ButtonStyle? favoriteButtonStyle,
   }) =>
       ThemeCustomShapes(
         topRectangleBorder: topRectangleBorder ?? this.topRectangleBorder,
@@ -119,6 +142,7 @@ class ThemeCustomShapes extends ThemeExtension<ThemeCustomShapes> {
         buttonDecoration: buttonDecoration ?? this.buttonDecoration,
         buttonsShadowDecoration:
             buttonsShadowDecoration ?? this.buttonsShadowDecoration,
+        favoriteButtonStyle: favoriteButtonStyle ?? this.favoriteButtonStyle,
       );
 
   @override
@@ -130,6 +154,12 @@ class ThemeCustomShapes extends ThemeExtension<ThemeCustomShapes> {
       return this;
     }
     return ThemeCustomShapes(
+      circleBorder: OutlinedBorder.lerp(other.circleBorder, circleBorder, t),
+      favoriteButtonStyle: ButtonStyle.lerp(
+        other.favoriteButtonStyle,
+        favoriteButtonStyle,
+        t,
+      )!,
       topRectangleBorder: OutlinedBorder.lerp(
         other.topRectangleBorder,
         topRectangleBorder,

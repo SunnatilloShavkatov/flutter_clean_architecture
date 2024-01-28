@@ -8,13 +8,17 @@ class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
     required this.label,
-    this.icon,
+    this.leftIcon,
+    this.rightIcon,
     this.onPressed,
+    this.height = 48,
   });
 
   final Widget label;
-  final Widget? icon;
+  final Widget? leftIcon;
+  final Widget? rightIcon;
   final VoidCallback? onPressed;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
@@ -33,17 +37,24 @@ class CustomButton extends StatelessWidget {
 
     /// Icon
     final Widget childA;
-    if (icon != null) {
+    if (leftIcon != null || rightIcon != null) {
       childA = Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          if (leftIcon != null)
+            IconTheme(
+              data: const IconThemeData(color: Colors.white, size: 20),
+              child: leftIcon!,
+            ),
+          if (leftIcon != null) const SizedBox(width: 8),
           labelA,
-          const SizedBox(width: 8),
-          IconTheme(
-            data: const IconThemeData(color: Colors.white, size: 20),
-            child: icon!,
-          ),
+          if (rightIcon != null) const SizedBox(width: 8),
+          if (rightIcon != null)
+            IconTheme(
+              data: const IconThemeData(color: Colors.white, size: 20),
+              child: rightIcon!,
+            ),
         ],
       );
     } else {
@@ -58,6 +69,7 @@ class CustomButton extends StatelessWidget {
         decoration: context.shapes.buttonDecoration,
         child: Container(
           margin: const EdgeInsets.all(1),
+          height: height - 1,
           decoration: context.shapes.buttonsShadowDecoration,
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
           child: childA,

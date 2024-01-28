@@ -22,6 +22,7 @@ class ProfileItemWidget extends StatelessWidget {
     onTap: onTap,
     shape: shape,
     title: title,
+    style: ListTileStyle.list,
     leading: IconTheme(
       data: context.theme.iconTheme.copyWith(
         color: context.colorScheme.primary,

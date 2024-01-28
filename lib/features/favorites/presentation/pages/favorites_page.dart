@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/extension/extension.dart';
 import '../../../../core/utils/utils.dart';
+import 'widgets/continue_browsing_widgets.dart';
+import 'widgets/saved_widgets.dart';
 
 part 'mixin/favorites_mixin.dart';
 
@@ -28,24 +30,26 @@ class _FavoritesPageState extends State<FavoritesPage>
           titleTextStyle: context.textStyle.appBarTitle,
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(45),
-            child: TabBar(
-              controller: _tabController,
-              isScrollable: true,
-              padding: AppUtils.kPaddingHor10,
-              indicatorWeight: 4,
-              tabs: const [
-                Tab(text: 'Сохраненные', height: 45),
-                Tab(text: 'Продолжить просмотр', height: 45),
-                Tab(text: 'Вы искали', height: 45),
-              ],
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: TabBar(
+                controller: _tabController,
+                isScrollable: true,
+                padding: AppUtils.kPaddingHor10,
+                tabs: const [
+                  Tab(text: 'Сохраненные', height: 45),
+                  Tab(text: 'Продолжить просмотр', height: 45),
+                  Tab(text: 'Вы искали', height: 45),
+                ],
+              ),
             ),
           ),
         ),
         body: TabBarView(
           controller: _tabController,
           children: const [
-            Center(child: Text('Сохраненные')),
-            Center(child: Text('Продолжить просмотр')),
+            SavedWidgets(),
+            ContinueBrowsingWidgets(),
             Center(child: Text('Вы искали')),
           ],
         ),

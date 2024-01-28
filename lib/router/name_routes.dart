@@ -26,6 +26,8 @@ sealed class Routes {
   /// Profile
   static const String profile = '/profile';
   static const String settings = '/settings';
+  static const String devices = '/devices';
+  static const String aboutUs = '/about-us';
 
   /// internet connection
   static const String noInternet = '/no-internet';

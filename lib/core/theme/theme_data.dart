@@ -43,6 +43,12 @@ final ThemeData lightTheme = ThemeData(
   cardColor: colorLightScheme.surface,
   canvasColor: colorLightScheme.surface,
   shadowColor: const Color(0xFF343434),
+  progressIndicatorTheme: ProgressIndicatorThemeData(
+    color: colorLightScheme.primary,
+    linearMinHeight: 3,
+    linearTrackColor: const Color(0xFF343434),
+    circularTrackColor: Colors.white,
+  ),
   dividerTheme: const DividerThemeData(
     thickness: 1,
     color: Color(0xFF343434),
