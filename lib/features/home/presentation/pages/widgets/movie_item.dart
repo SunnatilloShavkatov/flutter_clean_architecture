@@ -1,8 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/utils.dart';
 import '../../../../../core/widgets/blur_text.dart';
+import '../../../../../core/widgets/custom_cached_network_image.dart';
 
 class MovieItem extends StatelessWidget {
   const MovieItem({super.key});
@@ -23,7 +23,7 @@ class MovieItem extends StatelessWidget {
                       children: [
                         ClipRRect(
                           borderRadius: AppUtils.kBorderRadius8,
-                          child: CachedNetworkImage(
+                          child: CustomCachedNetworkImage(
                             imageUrl:
                                 'https://firebasestorage.googleapis.com/v0/b/sample-bloc-5b8b9.appspot.com/o/movie_photo.webp?alt=media',
                             width: 128,

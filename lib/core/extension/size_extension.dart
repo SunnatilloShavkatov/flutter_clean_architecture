@@ -15,6 +15,8 @@ extension SizeExtension on BuildContext {
 
   double get aspectRatio => height / width;
 
+  double get devicePixelRatio => MediaQuery.of(this).devicePixelRatio;
+
   EdgeInsets get viewPadding => MediaQuery.viewPaddingOf(this);
 
   EdgeInsets get viewInsets => MediaQuery.viewInsetsOf(this);

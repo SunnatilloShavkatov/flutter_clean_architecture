@@ -5,6 +5,7 @@ import '../../../../../core/extension/extension.dart';
 import '../../../../../core/theme/themes.dart';
 import '../../../../../core/utils/utils.dart';
 import '../../../../../core/widgets/animations/custom_linear_progress.dart';
+import '../../../../../core/widgets/custom_cached_network_image.dart';
 import '../../../../../core/widgets/painter/dot_painter.dart';
 
 class ContinueBrowsingWidgets extends StatefulWidget {
@@ -63,10 +64,9 @@ class ContinueBrowsing extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: AppUtils.kBorderRadius8,
-                  child: CachedNetworkImage(
+                  child: CustomCachedNetworkImage(
                     height: 94,
                     width: (context.width - 44) / 2,
-                    memCacheWidth: (context.width - 44) ~/ 2,
                     imageUrl:
                         'https://oneplatform.uz/wp-content/uploads/2023/09/1-%D1%81%D0%B5%D1%80%D0%B8%D1%8F.jpg',
                     fit: BoxFit.cover,

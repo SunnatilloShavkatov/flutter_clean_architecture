@@ -1,10 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/extension/extension.dart';
 import '../../../../../core/theme/themes.dart';
 import '../../../../../core/utils/utils.dart';
 import '../../../../../core/widgets/buttons/custom_button.dart';
+import '../../../../../core/widgets/custom_cached_network_image.dart';
 import 'tag_item.dart';
 
 class BannerItem extends StatelessWidget {
@@ -22,9 +22,7 @@ class BannerItem extends StatelessWidget {
         children: [
           Stack(
             children: [
-              CachedNetworkImage(
-                // memCacheHeight: context.kSize.width * 576 ~/ 1024,
-                // memCacheWidth: context.kSize.width.toInt(),
+              CustomCachedNetworkImage(
                 height: context.kSize.width * 576 / 1024,
                 imageUrl:
                     'https://firebasestorage.googleapis.com/v0/b/sample-bloc-5b8b9.appspot.com/o/banner.webp?alt=media',

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../../core/extension/extension.dart';
 import '../../../../../core/theme/themes.dart';
 import '../../../../../core/utils/utils.dart';
+import '../../../../../core/widgets/custom_cached_network_image.dart';
 import '../../../../../core/widgets/painter/dot_painter.dart';
 
 class SavedWidgets extends StatefulWidget {
@@ -54,15 +55,13 @@ class SavedItem extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: AppUtils.kBorderRadius8,
-                child: CachedNetworkImage(
+                child: CustomCachedNetworkImage(
                   height: 130,
                   width: (context.width - 48) / 3,
-                  memCacheHeight: 130 * 2,
-                  memCacheWidth: (context.width - 48) ~/ 2,
                   imageUrl: 'https://kinolar.tv/_ld/1/63943269.jpg',
                   placeholder: (_, __) => alignLogo,
                   errorWidget: (_, __, ___) => alignLogo,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.contain,
                 ),
               ),
               Positioned(
