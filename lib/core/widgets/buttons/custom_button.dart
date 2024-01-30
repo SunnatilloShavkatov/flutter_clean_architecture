@@ -70,6 +70,7 @@ class CustomButton extends StatelessWidget {
         child: Container(
           margin: const EdgeInsets.all(1),
           height: height - 1,
+          alignment: Alignment.center,
           decoration: context.shapes.buttonsShadowDecoration,
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
           child: childA,

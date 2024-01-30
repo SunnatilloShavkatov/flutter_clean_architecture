@@ -13,6 +13,7 @@ import '../features/auth/presentation/pages/confirm/confirm_code_page.dart';
 import '../features/catalog/presentation/pages/catalog_page.dart';
 import '../features/favorites/presentation/pages/favorites_page.dart';
 import '../features/home/presentation/pages/home_page.dart';
+import '../features/home/presentation/pages/story/story_page.dart';
 import '../features/main/presentation/bloc/main_bloc.dart';
 import '../features/main/presentation/pages/main_page.dart';
 import '../features/others/presentation/pages/internet_connection/internet_connection_page.dart';
@@ -114,6 +115,14 @@ final GoRouter router = GoRouter(
           ],
         ),
       ],
+    ),
+
+    /// home features
+    GoRoute(
+      path: Routes.story,
+      name: Routes.story,
+      parentNavigatorKey: rootNavigatorKey,
+      builder: (_, __) => const StoryPage(),
     ),
 
     /// profile features

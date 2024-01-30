@@ -1,10 +1,14 @@
+// ignore_for_file: discarded_futures
+
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../core/extension/extension.dart';
 import '../../../../../core/theme/themes.dart';
 import '../../../../../core/utils/utils.dart';
 import '../../../../../core/widgets/buttons/custom_button.dart';
 import '../../../../../core/widgets/custom_cached_network_image.dart';
+import '../../../../../router/app_routes.dart';
 import 'tag_item.dart';
 
 class BannerItem extends StatelessWidget {
@@ -35,7 +39,9 @@ class BannerItem extends StatelessWidget {
                 bottom: 16,
                 child: CustomButton(
                   height: 40,
-                  onPressed: () {},
+                  onPressed: () {
+                    context.pushNamed(Routes.story);
+                  },
                   label: const Text('Смотреть'),
                   rightIcon: const Icon(AppIcons.player_play_filled),
                 ),
