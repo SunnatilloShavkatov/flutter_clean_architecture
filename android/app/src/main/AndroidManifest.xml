@@ -15,7 +15,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="Clean"
         android:networkSecurityConfig="@xml/network_security_config"
-        android:usesCleartextTraffic="false"
+        android:usesCleartextTraffic="true"
         tools:ignore="DataExtractionRules"
         tools:targetApi="s">
         <activity
