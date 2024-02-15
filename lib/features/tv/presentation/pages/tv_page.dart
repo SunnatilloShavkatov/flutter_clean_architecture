@@ -23,7 +23,6 @@ class _TvPageState extends State<TvPage> with TvMixin {
           titleTextStyle: context.textStyle.appBarTitle,
         ),
         body: const ModalProgressHUD(
-          inAsyncCall: true,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
