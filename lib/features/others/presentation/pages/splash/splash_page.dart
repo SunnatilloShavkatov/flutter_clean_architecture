@@ -10,6 +10,7 @@ import '../../../../../core/extension/extension.dart';
 import '../../../../../core/theme/themes.dart';
 import '../../../../../core/widgets/bottom_sheet/custom_bottom_sheet.dart';
 import '../../../../../core/widgets/bottom_sheet/update_app_sheet.dart';
+import '../../../../../core/widgets/loading/circular_progress_indicator.dart';
 import '../../../../../core/widgets/painter/logo_painter.dart';
 import '../../../../../router/app_routes.dart';
 import '../../../../../services/remote_config_service.dart';
@@ -36,7 +37,7 @@ class _SplashPageState extends State<SplashPage> with SplashMixin {
                 right: 0,
                 bottom: context.padding.bottom + 24,
                 child: const Center(
-                  child: CircularProgressIndicator(),
+                  child: CustomCircularProgressIndicator(),
                 ),
               ),
               const Positioned.fill(child: Center(child: Logo(size: 25))),

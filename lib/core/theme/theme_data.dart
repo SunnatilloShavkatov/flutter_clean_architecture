@@ -322,6 +322,12 @@ final ThemeData darkTheme = ThemeData(
   cardColor: colorDarkScheme.surface,
   canvasColor: colorDarkScheme.surface,
   shadowColor: const Color(0xFF343434),
+  progressIndicatorTheme: const ProgressIndicatorThemeData(
+    color: Colors.white,
+    linearMinHeight: 2,
+    linearTrackColor: Colors.transparent,
+    circularTrackColor: Colors.transparent,
+  ),
   dividerTheme: const DividerThemeData(
     thickness: 1,
     color: Color(0xFF343434),

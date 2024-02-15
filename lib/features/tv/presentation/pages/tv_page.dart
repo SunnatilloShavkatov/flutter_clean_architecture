@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../constants/image_constants.dart';
 import '../../../../core/extension/extension.dart';
 import '../../../../core/utils/utils.dart';
+import '../../../../core/widgets/loading/modal_progress_hud.dart';
 
 part 'mixin/tv_mixin.dart';
 
@@ -21,21 +22,24 @@ class _TvPageState extends State<TvPage> with TvMixin {
           title: const Text('Телевидение'),
           titleTextStyle: context.textStyle.appBarTitle,
         ),
-        body: const Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image(
-              image: AssetImage(Images.icBoxEmpty),
-              width: 135,
-              height: 135,
-            ),
-            AppUtils.kGap40,
-            Text(
-              'Пока нет телеканалов в этой категории',
-              textAlign: TextAlign.center,
-            ),
-          ],
+        body: const ModalProgressHUD(
+          inAsyncCall: true,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image(
+                image: AssetImage(Images.icBoxEmpty),
+                width: 135,
+                height: 135,
+              ),
+              AppUtils.kGap40,
+              Text(
+                'Пока нет телеканалов в этой категории',
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
         ),
       );
 }
