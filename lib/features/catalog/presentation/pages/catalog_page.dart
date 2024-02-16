@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import '../../../../core/extension/extension.dart';
-import '../../../../core/theme/themes.dart';
-import '../../../../core/utils/utils.dart';
+import "package:flutter_clean_architecture/core/extension/extension.dart";
+import "package:flutter_clean_architecture/core/theme/themes.dart";
+import "package:flutter_clean_architecture/core/utils/utils.dart";
 
-part 'mixin/catalog_mixin.dart';
+part "mixin/catalog_mixin.dart";
 
 class CatalogPage extends StatefulWidget {
   const CatalogPage({super.key});
@@ -25,9 +25,9 @@ class _CatalogPageState extends State<CatalogPage>
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           centerTitle: false,
-          title: const Text('Каталог'),
+          title: const Text("Каталог"),
           titleTextStyle: context.textStyle.appBarTitle,
-          actions: [
+          actions: <Widget>[
             IconButton(
               onPressed: () {},
               icon: const Icon(AppIcons.search),
@@ -40,24 +40,24 @@ class _CatalogPageState extends State<CatalogPage>
               isScrollable: true,
               padding: AppUtils.kPaddingHor10,
               indicatorWeight: 4,
-              tabs: const [
-                Tab(text: 'Эксклюзив', height: 45),
-                Tab(text: 'Фильмы', height: 45),
-                Tab(text: 'ТВ', height: 45),
-                Tab(text: 'Спорт', height: 45),
-                Tab(text: 'Сериалы', height: 45),
+              tabs: const <Widget>[
+                Tab(text: "Эксклюзив", height: 45),
+                Tab(text: "Фильмы", height: 45),
+                Tab(text: "ТВ", height: 45),
+                Tab(text: "Спорт", height: 45),
+                Tab(text: "Сериалы", height: 45),
               ],
             ),
           ),
         ),
         body: TabBarView(
           controller: _tabController,
-          children: const [
-            Center(child: Text('Эксклюзив')),
-            Center(child: Text('Фильмы')),
-            Center(child: Text('ТВ')),
-            Center(child: Text('Спорт')),
-            Center(child: Text('Сериалы')),
+          children: const <Widget>[
+            Center(child: Text("Эксклюзив")),
+            Center(child: Text("Фильмы")),
+            Center(child: Text("ТВ")),
+            Center(child: Text("Спорт")),
+            Center(child: Text("Сериалы")),
           ],
         ),
       );

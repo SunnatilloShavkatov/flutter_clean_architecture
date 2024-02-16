@@ -1,21 +1,22 @@
-import 'dart:async';
+import "dart:async";
 
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
+import "package:flutter/foundation.dart";
+import "package:flutter/gestures.dart";
+import "package:flutter/material.dart";
 
-import 'carousel_slider_transforms.dart';
+import "package:flutter_clean_architecture/core/widgets/animations/carousel_slider_transforms.dart";
 
-export 'carousel_slider_transforms.dart';
+export "carousel_slider_transforms.dart";
 
-const _kMaxValue = 200000000000;
-const _kMiddleValue = 100000;
+const int _kMaxValue = 200000000000;
+const int _kMiddleValue = 100000;
 
 typedef CarouselSlideBuilder = Widget Function(int index);
 
 class CarouselSlider extends StatefulWidget {
   const CarouselSlider({
-    super.key,
     required List<Widget> this.children,
+    super.key,
     this.slideTransform = const DefaultTransform(),
     this.viewportFraction = 1,
     this.enableAutoSlider = false,
@@ -34,10 +35,10 @@ class CarouselSlider extends StatefulWidget {
         itemCount = children.length;
 
   const CarouselSlider.builder({
-    super.key,
     required this.slideBuilder,
-    this.slideTransform = const DefaultTransform(),
     required this.itemCount,
+    super.key,
+    this.slideTransform = const DefaultTransform(),
     this.viewportFraction = 1,
     this.enableAutoSlider = false,
     this.autoSliderDelay = const Duration(seconds: 5),
@@ -76,6 +77,55 @@ class CarouselSlider extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => _CarouselSliderState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(
+        ObjectFlagProperty<CarouselSlideBuilder?>.has(
+          "slideBuilder",
+          slideBuilder,
+        ),
+      )
+      ..add(IntProperty("itemCount", itemCount))
+      ..add(
+        DiagnosticsProperty<SlideTransform>("slideTransform", slideTransform),
+      )
+      ..add(DoubleProperty("viewportFraction", viewportFraction))
+      ..add(DiagnosticsProperty<bool>("enableAutoSlider", enableAutoSlider))
+      ..add(DiagnosticsProperty<Duration>("autoSliderDelay", autoSliderDelay))
+      ..add(
+        DiagnosticsProperty<Duration>(
+          "autoSliderTransitionTime",
+          autoSliderTransitionTime,
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<Curve>(
+          "autoSliderTransitionCurve",
+          autoSliderTransitionCurve,
+        ),
+      )
+      ..add(DiagnosticsProperty<bool>("unlimitedMode", unlimitedMode))
+      ..add(DiagnosticsProperty<bool>("keepPage", keepPage))
+      ..add(DiagnosticsProperty<ScrollPhysics>("scrollPhysics", scrollPhysics))
+      ..add(EnumProperty<Axis>("scrollDirection", scrollDirection))
+      ..add(IntProperty("initialPage", initialPage))
+      ..add(
+        ObjectFlagProperty<ValueChanged<int>?>.has(
+          "onSlideChanged",
+          onSlideChanged,
+        ),
+      )
+      ..add(EnumProperty<Clip>("clipBehavior", clipBehavior))
+      ..add(
+        DiagnosticsProperty<CarouselSliderController?>(
+          "controller",
+          controller,
+        ),
+      );
+  }
 }
 
 class CarouselSliderController {
@@ -116,23 +166,25 @@ class _CarouselSliderState extends State<CarouselSlider> {
   late bool _isPlaying;
 
   @override
-  Widget build(BuildContext context) =>
-      PageView.builder(
-        onPageChanged: (val) {
+  Widget build(BuildContext context) => PageView.builder(
+        onPageChanged: (int val) {
           widget.onSlideChanged?.call(val);
         },
         clipBehavior: widget.clipBehavior,
         scrollBehavior: ScrollConfiguration.of(context).copyWith(
           scrollbars: false,
           overscroll: false,
-          dragDevices: {PointerDeviceKind.touch, PointerDeviceKind.mouse},
+          dragDevices: <PointerDeviceKind>{
+            PointerDeviceKind.touch,
+            PointerDeviceKind.mouse,
+          },
         ),
         itemCount: widget.unlimitedMode ? _kMaxValue : widget.itemCount,
         controller: _pageController,
         scrollDirection: widget.scrollDirection,
         physics: widget.scrollPhysics,
-        itemBuilder: (context, index) {
-          final slideIndex = index % widget.itemCount;
+        itemBuilder: (BuildContext context, int index) {
+          final int slideIndex = index % widget.itemCount;
           final Widget slide = widget.children == null
               ? widget.slideBuilder!(slideIndex)
               : widget.children![slideIndex];
@@ -221,7 +273,7 @@ class _CarouselSliderState extends State<CarouselSlider> {
     if (isEnabled) {
       _timer = Timer.periodic(
         widget.autoSliderDelay,
-        (timer) async {
+        (Timer timer) async {
           await _pageController.nextPage(
             duration: widget.autoSliderTransitionTime,
             curve: widget.autoSliderTransitionCurve,

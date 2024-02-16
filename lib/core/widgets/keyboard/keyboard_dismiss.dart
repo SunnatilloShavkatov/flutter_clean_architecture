@@ -1,5 +1,6 @@
-import 'package:flutter/gestures.dart';
-import 'package:flutter/widgets.dart';
+import "package:flutter/foundation.dart";
+import "package:flutter/gestures.dart";
+import "package:flutter/widgets.dart";
 
 enum GestureType {
   /// A [GestureType] that represents the event in which a pointer that might
@@ -189,7 +190,7 @@ class KeyboardDismiss extends StatelessWidget {
     super.key,
     this.child,
     this.behavior,
-    this.gestures = const [GestureType.onTap],
+    this.gestures = const <GestureType>[GestureType.onTap],
     this.dragStartBehavior = DragStartBehavior.start,
     this.excludeFromSemantics = false,
   });
@@ -281,7 +282,8 @@ class KeyboardDismiss extends StatelessWidget {
             ? (_) => _unFocus(context)
             : null,
         onVerticalDragUpdate: _gesturesContainsDirectionalPanUpdate()
-            ? (details) => _unFocusWithDetails(context, details)
+            ? (DragUpdateDetails details) =>
+                _unFocusWithDetails(context, details)
             : null,
         onVerticalDragEnd: gestures.contains(GestureType.onVerticalDragEnd)
             ? (_) => _unFocus(context)
@@ -299,7 +301,8 @@ class KeyboardDismiss extends StatelessWidget {
                 ? (_) => _unFocus(context)
                 : null,
         onHorizontalDragUpdate: _gesturesContainsDirectionalPanUpdate()
-            ? (details) => _unFocusWithDetails(context, details)
+            ? (DragUpdateDetails details) =>
+                _unFocusWithDetails(context, details)
             : null,
         onHorizontalDragEnd: gestures.contains(GestureType.onHorizontalDragEnd)
             ? (_) => _unFocus(context)
@@ -351,9 +354,9 @@ class KeyboardDismiss extends StatelessWidget {
     BuildContext context,
     DragUpdateDetails details,
   ) {
-    final dy = details.delta.dy;
-    final dx = details.delta.dx;
-    final isDragMainlyHorizontal = dx.abs() - dy.abs() > 0;
+    final double dy = details.delta.dy;
+    final double dx = details.delta.dx;
+    final bool isDragMainlyHorizontal = dx.abs() - dy.abs() > 0;
     if (gestures.contains(GestureType.onPanUpdateDownDirection) &&
         dy > 0 &&
         !isDragMainlyHorizontal) {
@@ -378,4 +381,16 @@ class KeyboardDismiss extends StatelessWidget {
       gestures.contains(GestureType.onPanUpdateUpDirection) ||
       gestures.contains(GestureType.onPanUpdateRightDirection) ||
       gestures.contains(GestureType.onPanUpdateLeftDirection);
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(IterableProperty<GestureType>("gestures", gestures))
+      ..add(EnumProperty<DragStartBehavior>(
+          "dragStartBehavior", dragStartBehavior,),)
+      ..add(EnumProperty<HitTestBehavior?>("behavior", behavior))
+      ..add(DiagnosticsProperty<bool>(
+          "excludeFromSemantics", excludeFromSemantics,),);
+  }
 }

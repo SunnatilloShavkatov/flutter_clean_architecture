@@ -1,7 +1,7 @@
-part of 'package:flutter_clean_architecture/core/theme/themes.dart';
+part of "package:flutter_clean_architecture/core/theme/themes.dart";
 
 /// A set of colors for the entire app.
-const colorLightScheme = ColorScheme(
+const ColorScheme colorLightScheme = ColorScheme(
   brightness: Brightness.light,
   primary: Color(0xFF2277F6),
   onPrimary: Colors.white,
@@ -18,7 +18,7 @@ const colorLightScheme = ColorScheme(
 );
 
 ///
-const colorDarkScheme = ColorScheme(
+const ColorScheme colorDarkScheme = ColorScheme(
   brightness: Brightness.dark,
   primary: Color(0xFF2277F6),
   onPrimary: Colors.white,

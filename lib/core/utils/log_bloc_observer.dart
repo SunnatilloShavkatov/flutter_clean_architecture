@@ -1,4 +1,4 @@
-part of 'utils.dart';
+part of "utils.dart";
 
 class LogBlocObserver extends BlocObserver {
   @override
@@ -12,7 +12,7 @@ class LogBlocObserver extends BlocObserver {
   @override
   void onClose(BlocBase bloc) {
     if (kDebugMode) {
-      print('$bloc closed');
+      print("$bloc closed");
     }
     super.onClose(bloc);
   }
@@ -21,7 +21,7 @@ class LogBlocObserver extends BlocObserver {
   void onCreate(BlocBase bloc) {
     super.onCreate(bloc);
     if (kDebugMode) {
-      print('$bloc created');
+      print("$bloc created");
     }
   }
 
@@ -29,14 +29,14 @@ class LogBlocObserver extends BlocObserver {
   void onEvent(Bloc bloc, Object? event) {
     super.onEvent(bloc, event);
     if (kDebugMode) {
-      print('${bloc.runtimeType} $event');
+      print("${bloc.runtimeType} $event");
     }
   }
 
   @override
   void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
     if (kDebugMode) {
-      print('${bloc.runtimeType} $error');
+      print("${bloc.runtimeType} $error");
     }
     super.onError(bloc, error, stackTrace);
   }

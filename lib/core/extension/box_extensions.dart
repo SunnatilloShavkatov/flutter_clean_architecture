@@ -1,4 +1,4 @@
-part of 'extension.dart';
+part of "extension.dart";
 
 /// Flutter extensions for boxes.
 extension BoxX<T> on Box<T> {
@@ -29,7 +29,7 @@ class _BoxListenable<B extends BoxBase> extends ValueListenable<B> {
 
   final Set<dynamic>? keys;
 
-  final List<VoidCallback> _listeners = [];
+  final List<VoidCallback> _listeners = <VoidCallback>[];
 
   StreamSubscription? _subscription;
 
@@ -37,16 +37,16 @@ class _BoxListenable<B extends BoxBase> extends ValueListenable<B> {
   void addListener(VoidCallback listener) {
     if (_listeners.isEmpty) {
       if (keys != null) {
-        _subscription = box.watch().listen((event) {
+        _subscription = box.watch().listen((BoxEvent event) {
           if (keys!.contains(event.key)) {
-            for (final listener in _listeners) {
+            for (final VoidCallback listener in _listeners) {
               listener();
             }
           }
         });
       } else {
         _subscription = box.watch().listen((_) {
-          for (final listener in _listeners) {
+          for (final VoidCallback listener in _listeners) {
             listener();
           }
         });

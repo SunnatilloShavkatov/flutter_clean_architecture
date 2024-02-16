@@ -1,17 +1,17 @@
-import 'dart:developer';
+import "dart:developer";
 
-import 'package:dio/dio.dart';
+import "package:dio/dio.dart";
 
-import '../../../../constants/constants.dart';
-import '../../../../core/either/either.dart';
-import '../../../../core/error/failure.dart';
-import '../../../../core/error/server_error.dart';
-import '../../data/models/confirm/verify_request.dart';
-import '../../data/models/register/register_user_response.dart';
-import '../../data/models/send_message_request.dart';
-import '../../data/models/send_message_response.dart';
+import "package:flutter_clean_architecture/constants/constants.dart";
+import "package:flutter_clean_architecture/core/either/either.dart";
+import "package:flutter_clean_architecture/core/error/failure.dart";
+import "package:flutter_clean_architecture/core/error/server_error.dart";
+import "package:flutter_clean_architecture/features/auth/data/models/confirm/verify_request.dart";
+import "package:flutter_clean_architecture/features/auth/data/models/register/register_user_response.dart";
+import "package:flutter_clean_architecture/features/auth/data/models/send_message_request.dart";
+import "package:flutter_clean_architecture/features/auth/data/models/send_message_response.dart";
 
-part '../../data/repository/auth_repository_impl.dart';
+part "../../data/repository/auth_repository_impl.dart";
 
 sealed class AuthRepository {
   Future<Either<Failure, SendMessageResponse>> sendCode({

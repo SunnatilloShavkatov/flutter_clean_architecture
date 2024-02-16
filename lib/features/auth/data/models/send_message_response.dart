@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import "package:flutter/foundation.dart";
 
 @immutable
 class SendMessageResponse {
@@ -11,10 +11,12 @@ class SendMessageResponse {
 
   factory SendMessageResponse.fromJson(Map<String, dynamic> json) =>
       SendMessageResponse(
-        status: json['message'],
-        description: json['error'],
-        data: json['data'] is Map<String, dynamic> ? json['data'] : {},
-        message: json['data'] is String ? json['data'] : '',
+        status: json["message"],
+        description: json["error"],
+        data: json["data"] is Map<String, dynamic>
+            ? json["data"]
+            : <String, dynamic>{},
+        message: json["data"] is String ? json["data"] : "",
       );
 
   final String? status;
@@ -24,7 +26,9 @@ class SendMessageResponse {
 
   @override
   bool operator ==(Object other) {
-    if (identical(this, other)) return true;
+    if (identical(this, other)) {
+      return true;
+    }
 
     return other is SendMessageResponse &&
         other.status == status &&

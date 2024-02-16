@@ -1,9 +1,10 @@
-import 'package:flutter/material.dart';
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
 
 class RotateLoading extends StatelessWidget {
   const RotateLoading({
-    super.key,
     required this.child,
+    super.key,
   });
 
   final Widget child;
@@ -17,13 +18,19 @@ class RotateLoading extends StatelessWidget {
 
 /// Class use to render an animated icon with rotation
 class RotateIcon extends StatefulWidget {
+  const RotateIcon({required this.child, required this.duration, super.key});
+
   final Widget child;
   final Duration duration;
 
-  const RotateIcon({super.key, required this.child, required this.duration});
-
   @override
   State<RotateIcon> createState() => _RotateIconState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Duration>("duration", duration));
+  }
 }
 
 class _RotateIconState extends State<RotateIcon>

@@ -1,32 +1,40 @@
-import 'dart:async';
+import "dart:async";
 
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:sms_autofill/sms_autofill.dart';
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_clean_architecture/constants/constants.dart";
+import "package:flutter_clean_architecture/core/extension/extension.dart";
+import "package:flutter_clean_architecture/core/utils/utils.dart";
+import "package:flutter_clean_architecture/core/widgets/buttons/bottom_navigation_button.dart";
+import "package:flutter_clean_architecture/features/auth/data/models/confirm/verify_request.dart";
+import "package:flutter_clean_architecture/features/auth/presentation/bloc/confirm/confirm_code_bloc.dart";
+import "package:flutter_clean_architecture/features/auth/presentation/bloc/login/auth_bloc.dart";
+import "package:flutter_clean_architecture/features/auth/presentation/pages/register/args/register_args.dart";
+import "package:flutter_clean_architecture/router/app_routes.dart";
+import "package:go_router/go_router.dart";
+import "package:sms_autofill/sms_autofill.dart";
 
-import '../../../../../constants/constants.dart';
-import '../../../../../core/extension/extension.dart';
-import '../../../../../core/utils/utils.dart';
-import '../../../../../core/widgets/buttons/bottom_navigation_button.dart';
-import '../../../../../router/app_routes.dart';
-import '../../../data/models/confirm/verify_request.dart';
-import '../../bloc/confirm/confirm_code_bloc.dart';
-import '../../bloc/login/auth_bloc.dart';
-import '../register/args/register_args.dart';
-
-part 'mixin/confirm_code_mixin.dart';
+part "mixin/confirm_code_mixin.dart";
 
 class ConfirmCodePage extends StatefulWidget {
   const ConfirmCodePage({
-    super.key,
     required this.authState,
+    super.key,
   });
 
   final AuthSuccessState authState;
 
   @override
   State<ConfirmCodePage> createState() => _ConfirmCodePageState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+      DiagnosticsProperty<AuthSuccessState>("authState", authState),
+    );
+  }
 }
 
 class _ConfirmCodePageState extends State<ConfirmCodePage>
@@ -34,13 +42,13 @@ class _ConfirmCodePageState extends State<ConfirmCodePage>
   @override
   Widget build(BuildContext context) =>
       BlocListener<ConfirmCodeBloc, ConfirmCodeState>(
-        listener: (_, state) async {
+        listener: (_, ConfirmCodeState state) async {
           if (state.confirmCodeStatus.isConfirmed) {
             if (state.isUserFound) {
               unawaited(localSource.setHasProfile(value: true));
               context.pop(true);
             } else {
-              final result = await context.pushNamed(
+              final Object? result = await context.pushNamed(
                 Routes.register,
                 extra: RegisterArgs(
                   isUserAgree: true,
@@ -48,7 +56,9 @@ class _ConfirmCodePageState extends State<ConfirmCodePage>
                 ),
               );
               if (result != null) {
-                if (!context.mounted) return;
+                if (!context.mounted) {
+                  return;
+                }
                 context.pop(true);
               }
             }
@@ -56,21 +66,21 @@ class _ConfirmCodePageState extends State<ConfirmCodePage>
         },
         child: Scaffold(
           appBar: AppBar(
-            title: const Text('Введите код подтверждения'),
+            title: const Text("Введите код подтверждения"),
           ),
           body: BlocBuilder<ConfirmCodeBloc, ConfirmCodeState>(
-            builder: (context, state) => Padding(
+            builder: (BuildContext context, ConfirmCodeState state) => Padding(
               padding: AppUtils.kPaddingAll16,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
+                children: <Widget>[
                   RichText(
                     text: TextSpan(
                       style: context.textTheme.titleMedium,
-                      text: 'Мы отправили код подтверждения\nна номер ',
-                      children: [
+                      text: "Мы отправили код подтверждения\nна номер ",
+                      children: <InlineSpan>[
                         TextSpan(
-                          text: '+998 ${widget.authState.uiPhone}',
+                          text: "+998 ${widget.authState.uiPhone}",
                         ),
                       ],
                     ),
@@ -88,8 +98,8 @@ class _ConfirmCodePageState extends State<ConfirmCodePage>
                       controller: controller,
                       autoFocus: true,
                       currentCode: controller.text.trim(),
-                      onCodeSubmitted: (code) {},
-                      onCodeChanged: (v) {},
+                      onCodeSubmitted: (String code) {},
+                      onCodeChanged: (String? v) {},
                       decoration: BoxLooseDecoration(
                         textStyle: context.textTheme.titleMedium,
                         strokeColorBuilder: FixedColorBuilder(
@@ -103,7 +113,7 @@ class _ConfirmCodePageState extends State<ConfirmCodePage>
             ),
           ),
           bottomNavigationBar: BlocBuilder<ConfirmCodeBloc, ConfirmCodeState>(
-            builder: (_, state) => BottomNavigationButton(
+            builder: (_, ConfirmCodeState state) => BottomNavigationButton(
               child: ElevatedButton(
                 onPressed: () {
                   context.read<ConfirmCodeBloc>().add(
@@ -118,7 +128,7 @@ class _ConfirmCodePageState extends State<ConfirmCodePage>
                         ),
                       );
                 },
-                child: const Text('Продолжить'),
+                child: const Text("Продолжить"),
               ),
             ),
           ),

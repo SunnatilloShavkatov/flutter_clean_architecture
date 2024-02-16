@@ -1,22 +1,22 @@
-import 'dart:convert';
+import "dart:convert";
 
-import 'package:bloc_test/bloc_test.dart';
-import 'package:flutter_clean_architecture/constants/constants.dart';
-import 'package:flutter_clean_architecture/core/either/either.dart';
-import 'package:flutter_clean_architecture/core/error/failure.dart';
-import 'package:flutter_clean_architecture/features/auth/data/models/sign_in/sign_in_response_model.dart';
-import 'package:flutter_clean_architecture/features/auth/domain/entities/sign_in/sign_in_request_entity.dart';
-import 'package:flutter_clean_architecture/features/auth/domain/entities/sign_in/sign_in_response_entity.dart';
-import 'package:flutter_clean_architecture/features/auth/domain/usecases/sign_in.dart';
-import 'package:flutter_clean_architecture/features/auth/presentation/bloc/login/login_bloc.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
+import "package:bloc_test/bloc_test.dart";
+import "package:flutter_clean_architecture/constants/constants.dart";
+import "package:flutter_clean_architecture/core/either/either.dart";
+import "package:flutter_clean_architecture/core/error/failure.dart";
+import "package:flutter_clean_architecture/features/auth/data/models/sign_in/sign_in_response_model.dart";
+import "package:flutter_clean_architecture/features/auth/domain/entities/sign_in/sign_in_request_entity.dart";
+import "package:flutter_clean_architecture/features/auth/domain/entities/sign_in/sign_in_response_entity.dart";
+import "package:flutter_clean_architecture/features/auth/domain/usecases/sign_in.dart";
+import "package:flutter_clean_architecture/features/auth/presentation/bloc/login/login_bloc.dart";
+import "package:flutter_test/flutter_test.dart";
+import "package:mockito/annotations.dart";
+import "package:mockito/mockito.dart";
 
-import '../../../../../fixtures/fixture_reader.dart';
-import 'login_bloc_test.mocks.dart';
+import "../../../../../fixtures/fixture_reader.dart";
+import "login_bloc_test.mocks.dart";
 
-@GenerateMocks([SignIn])
+@GenerateMocks(<Type>[SignIn])
 void main() {
   late SignIn signIn;
   late LoginBloc loginBloc;
@@ -28,12 +28,12 @@ void main() {
     );
   });
 
-  group('test email login bloc', () {
-    const email1 = 'azimdjan18gmail.com';
+  group("test email login bloc", () {
+    const String email1 = "azimdjan18gmail.com";
     blocTest<LoginBloc, LoginState>(
-      'email validation',
+      "email validation",
       build: () => loginBloc,
-      act: (bloc) => bloc.add(
+      act: (Object? bloc) => bloc.add(
         LoginEmailTyped(
           email: email1,
         ),
@@ -44,11 +44,11 @@ void main() {
       ],
     );
 
-    const email2 = '';
+    const String email2 = "";
     blocTest<LoginBloc, LoginState>(
-      'email validation',
+      "email validation",
       build: () => loginBloc,
-      act: (bloc) => bloc.add(
+      act: (Object? bloc) => bloc.add(
         LoginEmailTyped(
           email: email2,
         ),
@@ -59,11 +59,11 @@ void main() {
       ],
     );
 
-    const email3 = 'azimdjan18@gmail.com';
+    const String email3 = "azimdjan18@gmail.com";
     blocTest<LoginBloc, LoginState>(
-      'email validation',
+      "email validation",
       build: () => loginBloc,
-      act: (bloc) => bloc.add(
+      act: (Object? bloc) => bloc.add(
         LoginEmailTyped(
           email: email3,
         ),
@@ -74,12 +74,12 @@ void main() {
     );
   });
 
-  group('test password login bloc', () {
-    const password1 = 'a3332';
+  group("test password login bloc", () {
+    const String password1 = "a3332";
     blocTest<LoginBloc, LoginState>(
-      'password validation',
+      "password validation",
       build: () => loginBloc,
-      act: (bloc) => bloc.add(
+      act: (Object? bloc) => bloc.add(
         LoginPasswordTyped(
           password: password1,
         ),
@@ -90,11 +90,11 @@ void main() {
       ],
     );
 
-    const password2 = '';
+    const String password2 = "";
     blocTest<LoginBloc, LoginState>(
-      'password validation',
+      "password validation",
       build: () => loginBloc,
-      act: (bloc) => bloc.add(
+      act: (Object? bloc) => bloc.add(
         LoginPasswordTyped(
           password: password2,
         ),
@@ -105,11 +105,11 @@ void main() {
       ],
     );
 
-    const password3 = 'dfkdjakfljdsaklfjdslak;fjlkadjfjfldkjl';
+    const String password3 = "dfkdjakfljdsaklfjdslak;fjlkadjfjfldkjl";
     blocTest<LoginBloc, LoginState>(
-      'password validation',
+      "password validation",
       build: () => loginBloc,
-      act: (bloc) => bloc.add(
+      act: (Object? bloc) => bloc.add(
         LoginPasswordTyped(
           password: password3,
         ),
@@ -120,11 +120,11 @@ void main() {
       ],
     );
 
-    const password4 = 'dfkdjakfljds';
+    const String password4 = "dfkdjakfljds";
     blocTest<LoginBloc, LoginState>(
-      'password validation',
+      "password validation",
       build: () => loginBloc,
-      act: (bloc) => bloc.add(
+      act: (Object? bloc) => bloc.add(
         LoginPasswordTyped(
           password: password4,
         ),
@@ -135,59 +135,59 @@ void main() {
     );
   });
 
-  group('test sign in function', () {
+  group("test sign in function", () {
     late SignInRequestEntity signInRequestEntity;
     late SignInResponseEntity signInResponseEntity;
     setUp(() {
       signInRequestEntity = const SignInRequestEntity(
-        email: 'azimdjan18@gmail.com',
-        password: 'a3213354',
+        email: "azimdjan18@gmail.com",
+        password: "a3213354",
       );
       signInResponseEntity = SignInResponseModel.fromJson(
         jsonDecode(
-          fixture('sign_in_response_fixture'),
+          fixture("sign_in_response_fixture"),
         ),
       ).toEntity();
     });
 
     blocTest<LoginBloc, LoginState>(
-      'sign in error',
+      "sign in error",
       build: () {
         when(signIn.call(Params(signInRequestEntity: signInRequestEntity)))
             .thenAnswer(
-          (realInvocation) async => const Left(
-            ServerFailure(message: 'Some thing went wrong'),
+          (Invocation realInvocation) async => const Left(
+            ServerFailure(message: "Some thing went wrong"),
           ),
         );
         return loginBloc;
       },
-      act: (bloc) => bloc.add(
+      act: (Object? bloc) => bloc.add(
         LoginButtonPressed(
-          email: signInRequestEntity.email ?? '',
-          password: signInRequestEntity.password ?? '',
+          email: signInRequestEntity.email ?? "",
+          password: signInRequestEntity.password ?? "",
         ),
       ),
       expect: () => <LoginState>[
         const LoginLoading(),
-        const LoginError(message: 'Some thing went wrong'),
+        const LoginError(message: "Some thing went wrong"),
       ],
     );
 
     blocTest<LoginBloc, LoginState>(
-      'test sign in no internet',
+      "test sign in no internet",
       build: () {
         when(signIn.call(Params(signInRequestEntity: signInRequestEntity)))
             .thenAnswer(
-          (realInvocation) async => Left(
+          (Invocation realInvocation) async => Left(
             NoInternetFailure(),
           ),
         );
         return loginBloc;
       },
-      act: (bloc) => bloc.add(
+      act: (Object? bloc) => bloc.add(
         LoginButtonPressed(
-            email: signInRequestEntity.email ?? '',
-            password: signInRequestEntity.password ?? '',),
+            email: signInRequestEntity.email ?? "",
+            password: signInRequestEntity.password ?? "",),
       ),
       expect: () => <LoginState>[
         const LoginLoading(),
@@ -196,20 +196,20 @@ void main() {
     );
 
     blocTest<LoginBloc, LoginState>(
-      'test sign in successfully',
+      "test sign in successfully",
       build: () {
         when(signIn.call(Params(signInRequestEntity: signInRequestEntity)))
             .thenAnswer(
-          (realInvocation) async => Right(
+          (Invocation realInvocation) async => Right(
             signInResponseEntity,
           ),
         );
         return loginBloc;
       },
-      act: (bloc) => bloc.add(
+      act: (Object? bloc) => bloc.add(
         LoginButtonPressed(
-            email: signInRequestEntity.email ?? '',
-            password: signInRequestEntity.password ?? '',),
+            email: signInRequestEntity.email ?? "",
+            password: signInRequestEntity.password ?? "",),
       ),
       expect: () => <LoginState>[
         const LoginLoading(),

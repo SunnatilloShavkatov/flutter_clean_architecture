@@ -108,7 +108,6 @@ analyzer:
     tearoff_of_generative_constructor_of_abstract_class: error
     prefer_spread_collections: error
     prefer_int_literals: error
-    prefer_single_quotes: error
     prefer_is_empty: error
     prefer_is_not_empty: error
     prefer_iterable_whereType: error
@@ -208,15 +207,22 @@ analyzer:
 linter:
   rules:
     - always_declare_return_types
+    - always_put_control_body_on_new_line
+    - always_put_required_named_parameters_first
+    - always_specify_types
+    - always_use_package_imports
     - annotate_overrides
     - annotate_redeclares
+    - avoid_annotating_with_dynamic
     - avoid_bool_literals_in_conditional_expressions
     - avoid_catches_without_on_clauses
     - avoid_catching_errors
+    - avoid_classes_with_only_static_members
     - avoid_double_and_int_checks
     - avoid_dynamic_calls
     - avoid_empty_else
     - avoid_equals_and_hash_code_on_mutable_classes
+    - avoid_escaping_inner_quotes
     - avoid_field_initializers_in_const_classes
     - avoid_final_parameters
     - avoid_function_literals_in_foreach_calls
@@ -248,6 +254,7 @@ linter:
     - camel_case_extensions
     - camel_case_types
     - cancel_subscriptions
+    - cascade_invocations
     - cast_nullable_to_non_nullable
     - close_sinks
     - collection_methods_unrelated_type
@@ -261,6 +268,7 @@ linter:
     - depend_on_referenced_packages
     - deprecated_consistency
     - deprecated_member_use_from_same_package
+    - diagnostic_describe_all_properties
     - directives_ordering
     - discarded_futures
     - do_not_use_environment
@@ -292,6 +300,7 @@ linter:
     - no_leading_underscores_for_library_prefixes
     - no_leading_underscores_for_local_identifiers
     - no_literal_bool_comparisons
+    - no_logic_in_create_state
     - no_runtimeType_toString
     - no_self_assignments
     - no_wildcard_variable_uses
@@ -299,6 +308,7 @@ linter:
     - noop_primitive_operations
     - null_check_on_nullable_type_parameter
     - null_closures
+    - one_member_abstracts
     - only_throw_errors
     - overridden_fields
     - package_api_docs
@@ -316,6 +326,8 @@ linter:
     - prefer_const_literals_to_create_immutables
     - prefer_constructors_over_static_methods
     - prefer_contains
+    - prefer_double_quotes
+    - prefer_expression_function_bodies
     - prefer_final_fields
     - prefer_final_in_for_each
     - prefer_final_locals
@@ -336,13 +348,11 @@ linter:
     - prefer_mixin
     - prefer_null_aware_method_calls
     - prefer_null_aware_operators
-    - prefer_relative_imports
-    - prefer_single_quotes
     - prefer_spread_collections
     - prefer_typing_uninitialized_variables
     - prefer_void_to_null
     - provide_deprecation_message
-    - prefer_expression_function_bodies
+    #    - public_member_api_docs
     - recursive_getters
     - require_trailing_commas
     - secure_pubspec_urls
@@ -350,6 +360,8 @@ linter:
     - sized_box_shrink_expand
     - slash_for_doc_comments
     - sort_child_properties_last
+    - sort_constructors_first
+    - sort_pub_dependencies
     - sort_unnamed_constructors_first
     - test_types_in_equals
     - throw_in_finally
@@ -392,6 +404,7 @@ linter:
     - use_function_type_syntax_for_parameters
     - use_if_null_to_convert_nulls_to_bools
     - use_is_even_rather_than_modulo
+    - use_key_in_widget_constructors
     - use_late_for_private_fields_and_variables
     - use_named_constants
     - use_raw_strings

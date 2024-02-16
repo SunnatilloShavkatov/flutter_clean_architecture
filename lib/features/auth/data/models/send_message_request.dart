@@ -6,9 +6,9 @@ class SendCodeRequest {
   });
 
   SendCodeRequest.fromJson(Map json) {
-    recipient = json['recipient'];
-    text = json['text'];
-    registerType = json['type'];
+    recipient = json["recipient"];
+    text = json["text"];
+    registerType = json["type"];
   }
 
   String? recipient;
@@ -16,10 +16,10 @@ class SendCodeRequest {
   String? registerType;
 
   Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['recipient'] = recipient;
-    map['text'] = text;
-    map['type'] = registerType;
+    final Map<String, dynamic> map = <String, dynamic>{};
+    map["recipient"] = recipient;
+    map["text"] = text;
+    map["type"] = registerType;
     return map;
   }
 }

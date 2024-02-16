@@ -1,4 +1,4 @@
-part of '../favorites_page.dart';
+part of "../favorites_page.dart";
 
 mixin FavoritesMixin on State<FavoritesPage> {
   late final TabController _tabController;

@@ -1,20 +1,20 @@
 // ignore_for_file: discarded_futures
 
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-
-import '../../../../../core/extension/extension.dart';
-import '../../../../../core/theme/themes.dart';
-import '../../../../../core/utils/utils.dart';
-import '../../../../../core/widgets/buttons/custom_button.dart';
-import '../../../../../core/widgets/custom_cached_network_image.dart';
-import '../../../../../router/app_routes.dart';
-import 'tag_item.dart';
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
+import "package:flutter_clean_architecture/core/extension/extension.dart";
+import "package:flutter_clean_architecture/core/theme/themes.dart";
+import "package:flutter_clean_architecture/core/utils/utils.dart";
+import "package:flutter_clean_architecture/core/widgets/buttons/custom_button.dart";
+import "package:flutter_clean_architecture/core/widgets/custom_cached_network_image.dart";
+import "package:flutter_clean_architecture/features/home/presentation/pages/widgets/tag_item.dart";
+import "package:flutter_clean_architecture/router/app_routes.dart";
+import "package:go_router/go_router.dart";
 
 class BannerItem extends StatelessWidget {
   const BannerItem({
-    super.key,
     required this.index,
+    super.key,
   });
 
   final int index;
@@ -23,13 +23,13 @@ class BannerItem extends StatelessWidget {
   Widget build(BuildContext context) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
-        children: [
+        children: <Widget>[
           Stack(
-            children: [
+            children: <Widget>[
               CustomCachedNetworkImage(
                 height: context.kSize.width * 576 / 1024,
                 imageUrl:
-                    'https://firebasestorage.googleapis.com/v0/b/sample-bloc-5b8b9.appspot.com/o/banner.webp?alt=media',
+                    "https://firebasestorage.googleapis.com/v0/b/sample-bloc-5b8b9.appspot.com/o/banner.webp?alt=media",
                 placeholder: (_, __) => alignLogo,
                 errorWidget: (_, __, ___) => alignLogo,
                 fit: BoxFit.cover,
@@ -42,14 +42,14 @@ class BannerItem extends StatelessWidget {
                   onPressed: () {
                     context.pushNamed(Routes.story);
                   },
-                  label: const Text('Смотреть'),
+                  label: const Text("Смотреть"),
                   rightIcon: const Icon(AppIcons.player_play_filled),
                 ),
               ),
               const Positioned(
                 left: 16,
                 bottom: 16,
-                child: Text('Serjan Bratan'),
+                child: Text("Serjan Bratan"),
               ),
             ],
           ),
@@ -58,7 +58,7 @@ class BannerItem extends StatelessWidget {
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               padding: AppUtils.kPaddingAll16,
-              itemBuilder: (_, index) => const TagItem(text: 'Сериал'),
+              itemBuilder: (_, int index) => const TagItem(text: "Сериал"),
               separatorBuilder: (_, __) => AppUtils.kGap8,
               itemCount: 6,
             ),
@@ -66,12 +66,12 @@ class BannerItem extends StatelessWidget {
           const Padding(
             padding: AppUtils.kPaddingHor16,
             child: Text(
-              'Авторитетный алматинский рэкетир, пролежав в коме 23 года,'
-              ' неожиданно приходит в сознание. К своему ужасу он '
-              'осознает, что на дворе 2021 год, его дети выросли, '
-              'сам он постарел, а мир изменился до неузнаваемости. '
-              'Теперь ему надо адаптироваться к реальности и наладить'
-              ' отношения с семьей.',
+              "Авторитетный алматинский рэкетир, пролежав в коме 23 года,"
+              " неожиданно приходит в сознание. К своему ужасу он "
+              "осознает, что на дворе 2021 год, его дети выросли, "
+              "сам он постарел, а мир изменился до неузнаваемости. "
+              "Теперь ему надо адаптироваться к реальности и наладить"
+              " отношения с семьей.",
               maxLines: 2,
               style: TextStyle(
                 fontSize: 11,
@@ -82,4 +82,10 @@ class BannerItem extends StatelessWidget {
           ),
         ],
       );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty("index", index));
+  }
 }

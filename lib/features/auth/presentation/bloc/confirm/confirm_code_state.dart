@@ -1,12 +1,12 @@
-part of 'confirm_code_bloc.dart';
+part of "confirm_code_bloc.dart";
 
 class ConfirmCodeState extends Equatable {
   const ConfirmCodeState({
     this.isUserFound = false,
     this.isReverseSendCode = false,
     this.confirmCodeStatus = ConfirmCodeStatus.initial,
-    this.smsId = '',
-    this.errorMessage = '',
+    this.smsId = "",
+    this.errorMessage = "",
   });
 
   final bool isUserFound;
@@ -16,7 +16,7 @@ class ConfirmCodeState extends Equatable {
   final String errorMessage;
 
   @override
-  List<Object?> get props => [
+  List<Object?> get props => <Object?>[
         isReverseSendCode,
         isUserFound,
         confirmCodeStatus,

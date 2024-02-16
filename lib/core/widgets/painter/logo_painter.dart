@@ -1,4 +1,7 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: cascade_invocations
+
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
 
 class Logo extends StatelessWidget {
   const Logo({
@@ -11,11 +14,18 @@ class Logo extends StatelessWidget {
   final double size;
 
   @override
-  Widget build(BuildContext context) =>
-      CustomPaint(
+  Widget build(BuildContext context) => CustomPaint(
         painter: _LogoPainter(color: color),
         size: Size(7 * size, 2 * size),
       );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(ColorProperty("color", color))
+      ..add(DoubleProperty("size", size));
+  }
 }
 
 class _LogoPainter extends CustomPainter {
@@ -25,105 +35,105 @@ class _LogoPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final Path path_0 = Path();
-    path_0.moveTo(size.width * 0.6732086, size.height * 0.4446980);
-    path_0.lineTo(size.width * 0.6732086, size.height * 0.2935840);
-    path_0.lineTo(size.width * 0.6527143, size.height * 0.2935840);
-    path_0.lineTo(size.width * 0.6527143, size.height * 0.1904750);
-    path_0.lineTo(size.width * 0.6635657, size.height * 0.1904750);
-    path_0.cubicTo(
-      size.width * 0.6724057,
-      size.height * 0.1904750,
-      size.width * 0.6768257,
-      size.height * 0.1751440,
-      size.width * 0.6768257,
-      size.height * 0.1424710,
-    );
-    path_0.lineTo(size.width * 0.6768257, size.height * 0.06895690);
-    path_0.lineTo(size.width * 0.7057600, size.height * 0.06895690);
-    path_0.lineTo(size.width * 0.7057600, size.height * 0.1904750);
-    path_0.lineTo(size.width * 0.7322829, size.height * 0.1904750);
-    path_0.lineTo(size.width * 0.7322829, size.height * 0.2935840);
-    path_0.lineTo(size.width * 0.7057600, size.height * 0.2935840);
-    path_0.lineTo(size.width * 0.7057600, size.height * 0.4283610);
-    path_0.cubicTo(
-      size.width * 0.7057600,
-      size.height * 0.4463310,
-      size.width * 0.7071257,
-      size.height * 0.4604900,
-      size.width * 0.7098600,
-      size.height * 0.4708360,
-    );
-    path_0.cubicTo(
-      size.width * 0.7127514,
-      size.height * 0.4806380,
-      size.width * 0.7166114,
-      size.height * 0.4855390,
-      size.width * 0.7214314,
-      size.height * 0.4855390,
-    );
-    path_0.cubicTo(
-      size.width * 0.7248086,
-      size.height * 0.4855390,
-      size.width * 0.7279429,
-      size.height * 0.4841780,
-      size.width * 0.7308371,
-      size.height * 0.4814550,
-    );
-    path_0.cubicTo(
-      size.width * 0.7318000,
-      size.height * 0.4809100,
-      size.width * 0.7330857,
-      size.height * 0.4795490,
-      size.width * 0.7346943,
-      size.height * 0.4773710,
-    );
-    path_0.lineTo(size.width * 0.7346943, size.height * 0.5794740);
-    path_0.cubicTo(
-      size.width * 0.7340514,
-      size.height * 0.5805630,
-      size.width * 0.7330057,
-      size.height * 0.5819250,
-      size.width * 0.7315600,
-      size.height * 0.5835580,
-    );
-    path_0.cubicTo(
-      size.width * 0.7301143,
-      size.height * 0.5846470,
-      size.width * 0.7290686,
-      size.height * 0.5854640,
-      size.width * 0.7284257,
-      size.height * 0.5860090,
-    );
-    path_0.cubicTo(
-      size.width * 0.7239229,
-      size.height * 0.5898210,
-      size.width * 0.7187800,
-      size.height * 0.5917270,
-      size.width * 0.7129943,
-      size.height * 0.5917270,
-    );
-    path_0.cubicTo(
-      size.width * 0.7007771,
-      size.height * 0.5917270,
-      size.width * 0.6910514,
-      size.height * 0.5789300,
-      size.width * 0.6838171,
-      size.height * 0.5533360,
-    );
-    path_0.cubicTo(
-      size.width * 0.6767457,
-      size.height * 0.5277420,
-      size.width * 0.6732086,
-      size.height * 0.4915290,
-      size.width * 0.6732086,
-      size.height * 0.4446980,
-    );
-    path_0.close();
+    final Path path_0 = Path()
+      ..moveTo(size.width * 0.6732086, size.height * 0.4446980)
+      ..lineTo(size.width * 0.6732086, size.height * 0.2935840)
+      ..lineTo(size.width * 0.6527143, size.height * 0.2935840)
+      ..lineTo(size.width * 0.6527143, size.height * 0.1904750)
+      ..lineTo(size.width * 0.6635657, size.height * 0.1904750)
+      ..cubicTo(
+        size.width * 0.6724057,
+        size.height * 0.1904750,
+        size.width * 0.6768257,
+        size.height * 0.1751440,
+        size.width * 0.6768257,
+        size.height * 0.1424710,
+      )
+      ..lineTo(size.width * 0.6768257, size.height * 0.06895690)
+      ..lineTo(size.width * 0.7057600, size.height * 0.06895690)
+      ..lineTo(size.width * 0.7057600, size.height * 0.1904750)
+      ..lineTo(size.width * 0.7322829, size.height * 0.1904750)
+      ..lineTo(size.width * 0.7322829, size.height * 0.2935840)
+      ..lineTo(size.width * 0.7057600, size.height * 0.2935840)
+      ..lineTo(size.width * 0.7057600, size.height * 0.4283610)
+      ..cubicTo(
+        size.width * 0.7057600,
+        size.height * 0.4463310,
+        size.width * 0.7071257,
+        size.height * 0.4604900,
+        size.width * 0.7098600,
+        size.height * 0.4708360,
+      )
+      ..cubicTo(
+        size.width * 0.7127514,
+        size.height * 0.4806380,
+        size.width * 0.7166114,
+        size.height * 0.4855390,
+        size.width * 0.7214314,
+        size.height * 0.4855390,
+      )
+      ..cubicTo(
+        size.width * 0.7248086,
+        size.height * 0.4855390,
+        size.width * 0.7279429,
+        size.height * 0.4841780,
+        size.width * 0.7308371,
+        size.height * 0.4814550,
+      )
+      ..cubicTo(
+        size.width * 0.7318000,
+        size.height * 0.4809100,
+        size.width * 0.7330857,
+        size.height * 0.4795490,
+        size.width * 0.7346943,
+        size.height * 0.4773710,
+      )
+      ..lineTo(size.width * 0.7346943, size.height * 0.5794740)
+      ..cubicTo(
+        size.width * 0.7340514,
+        size.height * 0.5805630,
+        size.width * 0.7330057,
+        size.height * 0.5819250,
+        size.width * 0.7315600,
+        size.height * 0.5835580,
+      )
+      ..cubicTo(
+        size.width * 0.7301143,
+        size.height * 0.5846470,
+        size.width * 0.7290686,
+        size.height * 0.5854640,
+        size.width * 0.7284257,
+        size.height * 0.5860090,
+      )
+      ..cubicTo(
+        size.width * 0.7239229,
+        size.height * 0.5898210,
+        size.width * 0.7187800,
+        size.height * 0.5917270,
+        size.width * 0.7129943,
+        size.height * 0.5917270,
+      )
+      ..cubicTo(
+        size.width * 0.7007771,
+        size.height * 0.5917270,
+        size.width * 0.6910514,
+        size.height * 0.5789300,
+        size.width * 0.6838171,
+        size.height * 0.5533360,
+      )
+      ..cubicTo(
+        size.width * 0.6767457,
+        size.height * 0.5277420,
+        size.width * 0.6732086,
+        size.height * 0.4915290,
+        size.width * 0.6732086,
+        size.height * 0.4446980,
+      )
+      ..close();
 
     final Paint paint0Fill = Paint()
-      ..style = PaintingStyle.fill;
-    paint0Fill.color = color;
+      ..style = PaintingStyle.fill
+      ..color = color;
     canvas.drawPath(path_0, paint0Fill);
 
     final Path path_1 = Path();
@@ -194,8 +204,7 @@ class _LogoPainter extends CustomPainter {
     );
     path_1.close();
 
-    final Paint paint1Fill = Paint()
-      ..style = PaintingStyle.fill;
+    final Paint paint1Fill = Paint()..style = PaintingStyle.fill;
     paint1Fill.color = color;
     canvas.drawPath(path_1, paint1Fill);
 
@@ -328,8 +337,7 @@ class _LogoPainter extends CustomPainter {
     path_2.lineTo(size.width * 0.4224400, size.height * 0.5835590);
     path_2.close();
 
-    final Paint paint2Fill = Paint()
-      ..style = PaintingStyle.fill;
+    final Paint paint2Fill = Paint()..style = PaintingStyle.fill;
     paint2Fill.color = color;
     canvas.drawPath(path_2, paint2Fill);
 
@@ -467,8 +475,7 @@ class _LogoPainter extends CustomPainter {
     );
     path_3.close();
 
-    final Paint paint3Fill = Paint()
-      ..style = PaintingStyle.fill;
+    final Paint paint3Fill = Paint()..style = PaintingStyle.fill;
     paint3Fill.color = color;
     canvas.drawPath(path_3, paint3Fill);
 
@@ -480,8 +487,7 @@ class _LogoPainter extends CustomPainter {
     path_4.lineTo(size.width * 0.2345246, size.height * 0.5843080);
     path_4.close();
 
-    final Paint paint4Fill = Paint()
-      ..style = PaintingStyle.fill;
+    final Paint paint4Fill = Paint()..style = PaintingStyle.fill;
     paint4Fill.color = color;
     canvas.drawPath(path_4, paint4Fill);
 
@@ -643,8 +649,7 @@ class _LogoPainter extends CustomPainter {
     );
     path_5.close();
 
-    final Paint paint5Fill = Paint()
-      ..style = PaintingStyle.fill;
+    final Paint paint5Fill = Paint()..style = PaintingStyle.fill;
     paint5Fill.color = color;
     canvas.drawPath(path_5, paint5Fill);
 
@@ -838,8 +843,7 @@ class _LogoPainter extends CustomPainter {
     );
     path_6.close();
 
-    final Paint paint6Fill = Paint()
-      ..style = PaintingStyle.fill;
+    final Paint paint6Fill = Paint()..style = PaintingStyle.fill;
     paint6Fill.color = color;
     canvas.drawPath(path_6, paint6Fill);
 
@@ -855,8 +859,7 @@ class _LogoPainter extends CustomPainter {
     path_7.lineTo(size.width * 0.7353000, size.height * 0.1904770);
     path_7.close();
 
-    final Paint paint7Fill = Paint()
-      ..style = PaintingStyle.fill;
+    final Paint paint7Fill = Paint()..style = PaintingStyle.fill;
     paint7Fill.color = color;
     canvas.drawPath(path_7, paint7Fill);
 
@@ -1127,8 +1130,7 @@ class _LogoPainter extends CustomPainter {
     path_8.lineTo(size.width * 0.9881857, size.height * 0.3954350);
     path_8.close();
 
-    final Paint paint8Fill = Paint()
-      ..style = PaintingStyle.fill;
+    final Paint paint8Fill = Paint()..style = PaintingStyle.fill;
     paint8Fill.color = color;
     canvas.drawPath(path_8, paint8Fill);
   }

@@ -1,10 +1,11 @@
-import 'package:flutter/material.dart';
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
 
 class KeepAliveWidget extends StatefulWidget {
   const KeepAliveWidget({
+    required this.child,
     super.key,
     this.keepAlive = true,
-    required this.child,
   });
 
   final bool keepAlive;
@@ -12,6 +13,12 @@ class KeepAliveWidget extends StatefulWidget {
 
   @override
   State<KeepAliveWidget> createState() => _KeepAliveWidgetState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>("keepAlive", keepAlive));
+  }
 }
 
 class _KeepAliveWidgetState extends State<KeepAliveWidget>

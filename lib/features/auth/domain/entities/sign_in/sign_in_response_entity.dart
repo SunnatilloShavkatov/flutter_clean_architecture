@@ -1,4 +1,4 @@
-import 'package:equatable/equatable.dart';
+import "package:equatable/equatable.dart";
 
 class SignInResponseEntity extends Equatable {
   const SignInResponseEntity({
@@ -12,7 +12,7 @@ class SignInResponseEntity extends Equatable {
   final String? lastName;
 
   @override
-  List<Object?> get props => [
+  List<Object?> get props => <Object?>[
         token,
         firstName,
         lastName,

@@ -1,9 +1,9 @@
-import 'dart:async';
-import 'dart:convert';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
-import 'package:flutter_localizations/flutter_localizations.dart';
+import "dart:async";
+import "dart:convert";
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
+import "package:flutter/services.dart" show rootBundle;
+import "package:flutter_localizations/flutter_localizations.dart";
 
 final class AppLocalizations {
   AppLocalizations();
@@ -13,27 +13,27 @@ final class AppLocalizations {
   static final AppLocalizations _instance = AppLocalizations();
 
   static AppLocalizations get instance => _instance;
-  static Map<String, dynamic> _localizedValues = {};
+  static Map<String, dynamic> _localizedValues = <String, dynamic>{};
 
   String translate(String key, {Map<String, String>? namedArgs}) {
     if (_localizedValues.isNotEmpty) {
       if (namedArgs != null) {
         String text = _localizedValues[key] ?? key;
         namedArgs.forEach(
-          (key, value) {
-            text = text.replaceAll('{$key}', value);
+          (String key, String value) {
+            text = text.replaceAll("{$key}", value);
           },
         );
         return text;
       }
       return _localizedValues[key] ?? key;
     }
-    return '';
+    return "";
   }
 
   static Future<AppLocalizations> load(Locale locale) async {
     final String jsonContent = await rootBundle.loadString(
-      'assets/locale/${locale.languageCode}.json',
+      "assets/locale/${locale.languageCode}.json",
     );
     _localizedValues = jsonDecode(jsonContent);
 
@@ -46,17 +46,18 @@ final class AppLocalizations {
     return instance;
   }
 
-  static const Iterable<LocalizationsDelegate> localizationsDelegates = [
+  static const Iterable<LocalizationsDelegate> localizationsDelegates =
+      <LocalizationsDelegate>[
     TranslationsDelegate(),
     GlobalWidgetsLocalizations.delegate,
     GlobalMaterialLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
   ];
 
-  static const List<Locale> supportedLocales = [
-    Locale('en'),
-    Locale('ru'),
-    Locale('uz'),
+  static const List<Locale> supportedLocales = <Locale>[
+    Locale("en"),
+    Locale("ru"),
+    Locale("uz"),
   ];
 }
 
@@ -65,7 +66,7 @@ class TranslationsDelegate extends LocalizationsDelegate<AppLocalizations> {
 
   @override
   bool isSupported(Locale locale) =>
-      ['ru', 'uz', 'en'].contains(locale.languageCode);
+      <String>["ru", "uz", "en"].contains(locale.languageCode);
 
   @override
   Future<AppLocalizations> load(Locale locale) async =>

@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
 
-import '../../extension/extension.dart';
+import "package:flutter_clean_architecture/core/extension/extension.dart";
 
 class Line extends StatelessWidget {
   const Line({
@@ -22,6 +23,15 @@ class Line extends StatelessWidget {
         ),
         size: Size(width, strokeHeight),
       );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(ColorProperty("color", color))
+      ..add(DoubleProperty("strokeHeight", strokeHeight))
+      ..add(DoubleProperty("width", width));
+  }
 }
 
 class _LinePainter extends CustomPainter {
@@ -35,12 +45,12 @@ class _LinePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
+    final Paint paint = Paint()
       ..color = color
       ..strokeWidth = strokeWidth
       ..style = PaintingStyle.stroke;
 
-    final path = Path()
+    final Path path = Path()
       ..moveTo(0, 0)
       ..lineTo(size.width, 0);
     canvas.drawPath(path, paint);

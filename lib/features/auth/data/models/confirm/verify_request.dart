@@ -11,9 +11,9 @@ class VerifyRequest {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['data'] = verifyData.toJson();
-    data['login_strategy'] = loginStrategy;
-    data['tables'] = tables;
+    data["data"] = verifyData.toJson();
+    data["login_strategy"] = loginStrategy;
+    data["tables"] = tables;
     return data;
   }
 }
@@ -34,10 +34,10 @@ class VerifyRequestData {
   final String clientTypeId;
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-        'sms_id': smsId,
-        'phone': phone,
-        'role_id': roleId,
-        'otp': otp,
-        'client_type_id': clientTypeId,
+        "sms_id": smsId,
+        "phone": phone,
+        "role_id": roleId,
+        "otp": otp,
+        "client_type_id": clientTypeId,
       };
 }

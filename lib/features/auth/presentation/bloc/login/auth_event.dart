@@ -1,4 +1,4 @@
-part of 'auth_bloc.dart';
+part of "auth_bloc.dart";
 
 sealed class AuthEvent extends Equatable {
   const AuthEvent();
@@ -10,7 +10,7 @@ class LoginEnterPhoneNumberEvent extends AuthEvent {
   final String phoneNumber;
 
   @override
-  List<Object?> get props => [phoneNumber];
+  List<Object?> get props => <Object?>[phoneNumber];
 }
 
 class LoginPhoneButtonPressedEvent extends AuthEvent {
@@ -19,7 +19,7 @@ class LoginPhoneButtonPressedEvent extends AuthEvent {
   final String phoneNumber;
 
   @override
-  List<Object?> get props => [phoneNumber];
+  List<Object?> get props => <Object?>[phoneNumber];
 }
 
 class LoginEnterCodeEvent extends AuthEvent {
@@ -28,7 +28,7 @@ class LoginEnterCodeEvent extends AuthEvent {
   final String code;
 
   @override
-  List<Object?> get props => [code];
+  List<Object?> get props => <Object?>[code];
 }
 
 class LoginCodeButtonPressedEvent extends AuthEvent {
@@ -37,5 +37,5 @@ class LoginCodeButtonPressedEvent extends AuthEvent {
   final String code;
 
   @override
-  List<Object?> get props => [code];
+  List<Object?> get props => <Object?>[code];
 }

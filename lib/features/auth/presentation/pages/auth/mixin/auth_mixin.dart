@@ -1,9 +1,9 @@
-part of '../auth_page.dart';
+part of "../auth_page.dart";
 
 mixin AuthMixin on State<AuthPage> {
   late TextEditingController phoneNumberController;
   late FocusNode phoneNumberFocus;
-  late final _formKey = GlobalKey<FormState>();
+  late final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {

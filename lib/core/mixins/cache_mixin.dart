@@ -1,4 +1,4 @@
-import '../../router/app_routes.dart';
+import "package:flutter_clean_architecture/router/app_routes.dart";
 
 mixin CacheMixin {
   Future<void> setUserInfo({

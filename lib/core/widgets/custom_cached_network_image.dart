@@ -1,12 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
+import "package:cached_network_image/cached_network_image.dart";
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
 
-import '../extension/extension.dart';
+import "package:flutter_clean_architecture/core/extension/extension.dart";
 
 class CustomCachedNetworkImage extends StatelessWidget {
   const CustomCachedNetworkImage({
-    super.key,
     required this.imageUrl,
+    super.key,
     this.imageBuilder,
     this.placeholder,
     this.progressIndicatorBuilder,
@@ -41,4 +42,22 @@ class CustomCachedNetworkImage extends StatelessWidget {
         progressIndicatorBuilder: progressIndicatorBuilder,
         imageBuilder: imageBuilder,
       );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(StringProperty("imageUrl", imageUrl))
+      ..add(ObjectFlagProperty<ImageWidgetBuilder?>.has(
+          "imageBuilder", imageBuilder,),)
+      ..add(ObjectFlagProperty<PlaceholderWidgetBuilder?>.has(
+          "placeholder", placeholder,),)
+      ..add(ObjectFlagProperty<ProgressIndicatorBuilder?>.has(
+          "progressIndicatorBuilder", progressIndicatorBuilder,),)
+      ..add(ObjectFlagProperty<LoadingErrorWidgetBuilder?>.has(
+          "errorWidget", errorWidget,),)
+      ..add(DoubleProperty("width", width))
+      ..add(DoubleProperty("height", height))
+      ..add(EnumProperty<BoxFit?>("fit", fit));
+  }
 }

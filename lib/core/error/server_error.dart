@@ -1,6 +1,6 @@
-import 'package:dio/dio.dart' hide Headers;
+import "package:dio/dio.dart" hide Headers;
 
-import 'failure.dart';
+import "package:flutter_clean_architecture/core/error/failure.dart";
 
 final class ServerError implements Exception {
   ServerError.withDioError({required DioException error}) {
@@ -16,7 +16,7 @@ final class ServerError implements Exception {
   }
 
   int? _errorCode;
-  String _errorMessage = '';
+  String _errorMessage = "";
 
   int get errorCode => _errorCode ?? 0;
 
@@ -25,53 +25,53 @@ final class ServerError implements Exception {
   void _handleError(DioException error) {
     _errorCode = error.response?.statusCode ?? 500;
     if (_errorCode == 500) {
-      _errorMessage = 'Server error';
+      _errorMessage = "Server error";
       return;
     }
     if (_errorCode == 502) {
-      _errorMessage = 'Server down';
+      _errorMessage = "Server down";
       return;
     }
     if (_errorCode == 404) {
-      _errorMessage = 'Not Found';
+      _errorMessage = "Not Found";
       return;
     }
     if (_errorCode == 413) {
-      _errorMessage = 'Request Entity Too Large';
+      _errorMessage = "Request Entity Too Large";
       return;
     }
     if (_errorCode == 401) {
-      _errorMessage = 'Token expired';
+      _errorMessage = "Token expired";
       return;
     }
     if (_errorCode == 403) {
-      _errorMessage = 'Token expired';
+      _errorMessage = "Token expired";
       return;
     }
     switch (error.type) {
       case DioExceptionType.connectionTimeout:
-        _errorMessage = 'Connection timeout';
+        _errorMessage = "Connection timeout";
       case DioExceptionType.sendTimeout:
-        _errorMessage = 'Connection timeout';
+        _errorMessage = "Connection timeout";
       case DioExceptionType.receiveTimeout:
-        _errorMessage = 'Connection timeout';
+        _errorMessage = "Connection timeout";
       case DioExceptionType.badResponse:
         {
-          if (error.response?.data['Error'] is Map<String, dynamic>) {
-            _errorMessage = error.response!.data['Error']['message'].toString();
+          if (error.response?.data["Error"] is Map<String, dynamic>) {
+            _errorMessage = error.response!.data["Error"]["message"].toString();
           } else {
-            _errorMessage = error.response!.data['message'].toString();
+            _errorMessage = error.response!.data["message"].toString();
           }
           break;
         }
       case DioExceptionType.cancel:
-        _errorMessage = 'Canceled';
+        _errorMessage = "Canceled";
       case DioExceptionType.unknown:
-        _errorMessage = 'Something wrong';
+        _errorMessage = "Something wrong";
       case DioExceptionType.badCertificate:
-        _errorMessage = 'Bad certificate';
+        _errorMessage = "Bad certificate";
       case DioExceptionType.connectionError:
-        _errorMessage = 'Connection error';
+        _errorMessage = "Connection error";
     }
     return;
   }

@@ -1,8 +1,9 @@
-import 'dart:async';
-import 'package:flutter/material.dart';
+import "dart:async";
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
 
-import '../../../../../core/connectivity/network_info.dart';
-import '../../../../../router/app_routes.dart';
+import "package:flutter_clean_architecture/core/connectivity/network_info.dart";
+import "package:flutter_clean_architecture/router/app_routes.dart";
 
 class InternetConnectionPage extends StatefulWidget {
   const InternetConnectionPage({super.key});
@@ -43,9 +44,9 @@ class InternetConnectionPageState extends State<InternetConnectionPage> {
           body: const Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: <Widget>[
               Text(
-                'Нет доступа к интернету',
+                "Нет доступа к интернету",
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 20,
@@ -55,7 +56,7 @@ class InternetConnectionPageState extends State<InternetConnectionPage> {
               ),
               SizedBox(height: 12),
               Text(
-                'Проверьте подключение к интернету',
+                "Проверьте подключение к интернету",
                 style: TextStyle(
                   color: Color(0xff818C99),
                   fontSize: 17,
@@ -68,12 +69,12 @@ class InternetConnectionPageState extends State<InternetConnectionPage> {
           bottomNavigationBar: SafeArea(
             minimum: const EdgeInsets.all(16),
             child: ElevatedButton(
-              child: const Text('Попробовать снова'),
+              child: const Text("Попробовать снова"),
               onPressed: () async {
                 Future<void>.delayed(
                   const Duration(milliseconds: 300),
                   () async {
-                    final isConnected = await networkInfo.isConnected;
+                    final bool isConnected = await networkInfo.isConnected;
                     if (isConnected && context.mounted) {
                       Navigator.of(context).pop();
                     }
@@ -84,4 +85,15 @@ class InternetConnectionPageState extends State<InternetConnectionPage> {
           ),
         ),
       );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+      DiagnosticsProperty<StreamSubscription<InternetConnectionStatus>>(
+        "listener",
+        listener,
+      ),
+    );
+  }
 }

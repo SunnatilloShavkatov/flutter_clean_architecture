@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import '../../../../../core/extension/extension.dart';
-import '../../../../../core/theme/themes.dart';
-import '../../../../../core/utils/utils.dart';
-import '../../../../../core/widgets/custom_cached_network_image.dart';
-import '../../../../../core/widgets/painter/dot_painter.dart';
+import "package:flutter_clean_architecture/core/extension/extension.dart";
+import "package:flutter_clean_architecture/core/theme/themes.dart";
+import "package:flutter_clean_architecture/core/utils/utils.dart";
+import "package:flutter_clean_architecture/core/widgets/custom_cached_network_image.dart";
+import "package:flutter_clean_architecture/core/widgets/painter/dot_painter.dart";
 
 class SavedWidgets extends StatefulWidget {
   const SavedWidgets({super.key});
@@ -19,12 +19,12 @@ class _SavedWidgetsState extends State<SavedWidgets>
   Widget build(BuildContext context) {
     super.build(context);
     return CustomScrollView(
-      slivers: [
+      slivers: <Widget>[
         SliverSafeArea(
           minimum: AppUtils.kPaddingAll16,
           sliver: SliverGrid.builder(
             itemCount: 16,
-            itemBuilder: (_, index) => SavedItem(key: ValueKey(index)),
+            itemBuilder: (_, int index) => SavedItem(key: ValueKey(index)),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
               mainAxisSpacing: 12,
@@ -49,15 +49,15 @@ class SavedItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
-        children: [
+        children: <Widget>[
           Stack(
-            children: [
+            children: <Widget>[
               ClipRRect(
                 borderRadius: AppUtils.kBorderRadius8,
                 child: CustomCachedNetworkImage(
                   height: 130,
                   width: (context.width - 48) / 3,
-                  imageUrl: 'https://kinolar.tv/_ld/1/63943269.jpg',
+                  imageUrl: "https://kinolar.tv/_ld/1/63943269.jpg",
                   placeholder: (_, __) => alignLogo,
                   errorWidget: (_, __, ___) => alignLogo,
                   fit: BoxFit.contain,
@@ -81,7 +81,7 @@ class SavedItem extends StatelessWidget {
                     ),
                   ),
                   child: const Text(
-                    '9,0',
+                    "9,0",
                     style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w500,
@@ -101,7 +101,7 @@ class SavedItem extends StatelessWidget {
                     ),
                   ),
                   child: const Text(
-                    '+16',
+                    "+16",
                     textAlign: TextAlign.right,
                     style: TextStyle(
                       fontSize: 11,
@@ -125,7 +125,7 @@ class SavedItem extends StatelessWidget {
           ),
           AppUtils.kGap6,
           const Text(
-            'Побег из Шоушенка',
+            "Побег из Шоушенка",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
@@ -136,9 +136,9 @@ class SavedItem extends StatelessWidget {
           AppUtils.kGap2,
           Row(
             mainAxisSize: MainAxisSize.min,
-            children: [
+            children: <Widget>[
               Text(
-                'Фильм',
+                "Фильм",
                 style: TextStyle(
                   fontSize: 10,
                   color: Colors.white.withOpacity(0.5),
@@ -149,7 +149,7 @@ class SavedItem extends StatelessWidget {
               const Dot(),
               AppUtils.kGap4,
               Text(
-                '1994',
+                "1994",
                 style: TextStyle(
                   color: Colors.white.withOpacity(0.5),
                   fontSize: 10,

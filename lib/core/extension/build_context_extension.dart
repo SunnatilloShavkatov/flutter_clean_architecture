@@ -1,4 +1,4 @@
-part of 'extension.dart';
+part of "extension.dart";
 
 extension BuildContextExt on BuildContext {
   Locale get locale => Localizations.localeOf(this);

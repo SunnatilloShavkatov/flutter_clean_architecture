@@ -1,20 +1,18 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import '../../../core/extension/extension.dart';
+import "package:flutter/cupertino.dart";
+import "package:flutter/material.dart";
+import "package:flutter_clean_architecture/core/extension/extension.dart";
 
 Future<T?> customCupertinoModalPopup<T>(
   BuildContext context, {
-  String title = '',
-  String actionTitleOne = '',
-  String actionTitleTwo = '',
-  required void Function() actionOne,
-  required void Function() actionTwo,
+  required void Function() actionOne, required void Function() actionTwo, String title = "",
+  String actionTitleOne = "",
+  String actionTitleTwo = "",
 }) async =>
     showCupertinoModalPopup(
       context: context,
       builder: (_) => CupertinoActionSheet(
         title: Text(title),
-        actions: [
+        actions: <Widget>[
           CupertinoActionSheetAction(
             onPressed: actionOne,
             child: Text(actionTitleOne),
@@ -25,7 +23,7 @@ Future<T?> customCupertinoModalPopup<T>(
           ),
         ],
         cancelButton: CupertinoActionSheetAction(
-          child: const Text('Cancel'),
+          child: const Text("Cancel"),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -59,7 +57,7 @@ Future<T?> customModalBottomSheet<T>({
             minChildSize: 0.5,
             expand: false,
             snap: true,
-            builder: (context, controller) => builder(context, controller),
+            builder: (BuildContext context, ScrollController controller) => builder(context, controller),
           );
         } else {
           return builder(context, null);

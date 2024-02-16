@@ -1,9 +1,10 @@
-import 'dart:ui';
+import "dart:ui";
 
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
+import "package:cached_network_image/cached_network_image.dart";
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
 
-import '../../../../../core/utils/utils.dart';
+import "package:flutter_clean_architecture/core/utils/utils.dart";
 
 class ProfileInfoWidget extends StatelessWidget {
   const ProfileInfoWidget({super.key});
@@ -20,7 +21,7 @@ class ProfileInfoWidget extends StatelessWidget {
           ),
         ),
         child: Stack(
-          children: [
+          children: <Widget>[
             Positioned(
               left: 56,
               top: -81,
@@ -28,7 +29,7 @@ class ProfileInfoWidget extends StatelessWidget {
                 borderRadius: AppUtils.kBorderRadius8,
                 child: CachedNetworkImage(
                   imageUrl:
-                      'https://firebasestorage.googleapis.com/v0/b/sample-bloc-5b8b9.appspot.com/o/image_29.webp?alt=media',
+                      "https://firebasestorage.googleapis.com/v0/b/sample-bloc-5b8b9.appspot.com/o/image_29.webp?alt=media",
                   width: 342,
                   height: 237,
                 ),
@@ -43,7 +44,7 @@ class ProfileInfoWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: AppUtils.kBorderRadius8,
                   gradient: LinearGradient(
-                    colors: [
+                    colors: <Color>[
                       Color(0xFF002358),
                       Color(0xFF171249),
                       Color(0xB91E0D45),
@@ -58,9 +59,9 @@ class ProfileInfoWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
-                children: [
+                children: <Widget>[
                   Text(
-                    'Неизвестный пользователь',
+                    "Неизвестный пользователь",
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
@@ -69,10 +70,10 @@ class ProfileInfoWidget extends StatelessWidget {
                   SizedBox(height: 4),
                   Row(
                     mainAxisSize: MainAxisSize.min,
-                    children: [
-                      _Item('Ваш тариф: Неизвестно'),
+                    children: <Widget>[
+                      _Item("Ваш тариф: Неизвестно"),
                       SizedBox(width: 6),
-                      _Item('Баланс: Неизвестно'),
+                      _Item("Баланс: Неизвестно"),
                     ],
                   ),
                 ],
@@ -121,4 +122,9 @@ class _Item extends StatelessWidget {
           ),
         ),
       );
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty("text", text));
+  }
 }

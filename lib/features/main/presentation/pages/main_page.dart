@@ -1,13 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-
-import '../../../../core/theme/themes.dart';
-import '../../../../core/widgets/bottom_navigation/bottom_indicator_bar.dart';
+import "package:flutter/material.dart";
+import "package:flutter_clean_architecture/core/theme/themes.dart";
+import "package:flutter_clean_architecture/core/widgets/bottom_navigation/bottom_indicator_bar.dart";
+import "package:go_router/go_router.dart";
 
 class MainPage extends StatelessWidget {
   const MainPage({
-    super.key,
-    required this.navigationShell,
+    required this.navigationShell, super.key,
   });
 
   final StatefulNavigationShell navigationShell;
@@ -15,34 +13,34 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => PopScope(
         canPop: navigationShell.currentIndex != 0,
-        onPopInvoked: (v) => navigationShell.goBranch(0),
+        onPopInvoked: (bool v) => navigationShell.goBranch(0),
         child: Scaffold(
           body: navigationShell,
           bottomNavigationBar: BottomIndicatorBar(
             currentIndex: navigationShell.currentIndex,
             child: BottomNavigationBar(
               currentIndex: navigationShell.currentIndex,
-              onTap: (index) => changeTap(index, context),
-              items: const [
+              onTap: (int index) => changeTap(index, context),
+              items: const <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
                   icon: Icon(AppIcons.home),
-                  label: 'Главная',
+                  label: "Главная",
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(AppIcons.device_tv),
-                  label: 'ТВ',
+                  label: "ТВ",
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(AppIcons.movie),
-                  label: 'Каталог',
+                  label: "Каталог",
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(AppIcons.favorites),
-                  label: 'Избранное',
+                  label: "Избранное",
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(AppIcons.user_circle),
-                  label: 'Профиль',
+                  label: "Профиль",
                 ),
               ],
             ),

@@ -1,4 +1,4 @@
-part of 'package:flutter_clean_architecture/features/home/presentation/pages/home_page.dart';
+part of "package:flutter_clean_architecture/features/home/presentation/pages/home_page.dart";
 
 mixin HomeMixin on State<HomePage> {
   final CarouselSliderController _pageController = CarouselSliderController();
@@ -6,7 +6,7 @@ mixin HomeMixin on State<HomePage> {
   @override
   void initState() {
     super.initState();
-    print('HomePage init');
+    print("HomePage init");
   }
 
   @override

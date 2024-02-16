@@ -1,4 +1,4 @@
-part of '../../domain/repository/auth_repository.dart';
+part of "../../domain/repository/auth_repository.dart";
 
 class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl({
@@ -18,10 +18,10 @@ class AuthRepositoryImpl implements AuthRepository {
       );
       return Right(SendMessageResponse.fromJson(response.data));
     } on DioException catch (error, stacktrace) {
-      log('Exception occurred: $error stacktrace: $stacktrace');
+      log("Exception occurred: $error stacktrace: $stacktrace");
       return Left(ServerError.withDioError(error: error).failure);
     } on Exception catch (error, stacktrace) {
-      log('Exception occurred: $error stacktrace: $stacktrace');
+      log("Exception occurred: $error stacktrace: $stacktrace");
       return Left(ServerError.withError(message: error.toString()).failure);
     }
   }
@@ -37,10 +37,10 @@ class AuthRepositoryImpl implements AuthRepository {
       );
       return Right(SendMessageResponse.fromJson(response.data));
     } on DioException catch (error, stacktrace) {
-      log('Exception occurred: $error stacktrace: $stacktrace');
+      log("Exception occurred: $error stacktrace: $stacktrace");
       return Left(ServerError.withDioError(error: error).failure);
     } on Exception catch (error, stacktrace) {
-      log('Exception occurred: $error stacktrace: $stacktrace');
+      log("Exception occurred: $error stacktrace: $stacktrace");
       return Left(ServerError.withError(message: error.toString()).failure);
     }
   }
@@ -52,15 +52,15 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       final Response response = await dio.get(
         '${Constants.baseUrl}${Urls.objectSlim}${Slugs.patients}/$userId',
-        data: {},
+        data: <String, String>{},
       );
       final Map<String, dynamic> data = response.data;
-      return Right(User.fromJson(data['data']?['data']?['response']));
+      return Right(User.fromJson(data["data"]?["data"]?["response"]));
     } on DioException catch (error, stacktrace) {
-      log('Exception occurred: $error stacktrace: $stacktrace');
+      log("Exception occurred: $error stacktrace: $stacktrace");
       return Left(ServerError.withDioError(error: error).failure);
     } on Exception catch (error, stacktrace) {
-      log('Exception occurred: $error stacktrace: $stacktrace');
+      log("Exception occurred: $error stacktrace: $stacktrace");
       return Left(ServerError.withError(message: error.toString()).failure);
     }
   }
@@ -76,10 +76,10 @@ class AuthRepositoryImpl implements AuthRepository {
       );
       return Right(RegisterUserResponse.fromJson(response.data));
     } on DioException catch (error, stacktrace) {
-      log('Exception occurred: $error stacktrace: $stacktrace');
+      log("Exception occurred: $error stacktrace: $stacktrace");
       return Left(ServerError.withDioError(error: error).failure);
     } on Exception catch (error, stacktrace) {
-      log('Exception occurred: $error stacktrace: $stacktrace');
+      log("Exception occurred: $error stacktrace: $stacktrace");
       return Left(ServerError.withError(message: error.toString()).failure);
     }
   }

@@ -1,21 +1,22 @@
-import 'dart:ui' show lerpDouble;
+import "dart:ui" show lerpDouble;
 
-import 'package:flutter/material.dart';
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
 
-import '../../extension/extension.dart';
-import '../painter/line_painter.dart';
+import "package:flutter_clean_architecture/core/extension/extension.dart";
+import "package:flutter_clean_architecture/core/widgets/painter/line_painter.dart";
 
 class BottomIndicatorBar extends StatelessWidget {
-  final int currentIndex;
-  final Widget child;
-  final int length;
-
   const BottomIndicatorBar({
+    required this.child,
     super.key,
     this.currentIndex = 0,
     this.length = 5,
-    required this.child,
   });
+
+  final int currentIndex;
+  final Widget child;
+  final int length;
 
   @override
   Widget build(BuildContext context) => Stack(
@@ -42,11 +43,19 @@ class BottomIndicatorBar extends StatelessWidget {
       );
 
   double _getIndicatorPosition(int index, BuildContext context) {
-    final isLtr = Directionality.of(context) == TextDirection.ltr;
+    final bool isLtr = Directionality.of(context) == TextDirection.ltr;
     if (isLtr) {
       return lerpDouble(-1.0, 1.0, index / (length - 1)) ?? 0;
     } else {
       return lerpDouble(1.0, -1.0, index / (length - 1)) ?? 0;
     }
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(IntProperty("currentIndex", currentIndex))
+      ..add(IntProperty("length", length));
   }
 }

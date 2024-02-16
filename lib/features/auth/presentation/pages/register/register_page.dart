@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import '../../bloc/register/register_bloc.dart';
+import "package:flutter/material.dart";
+import "package:flutter_clean_architecture/features/auth/presentation/bloc/register/register_bloc.dart";
 
-part 'mixin/register_mixin.dart';
+part "mixin/register_mixin.dart";
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});

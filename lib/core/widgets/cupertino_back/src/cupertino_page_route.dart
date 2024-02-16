@@ -1,4 +1,4 @@
-part of 'package:flutter_clean_architecture/core/widgets/cupertino_back/cupertino_back_gesture.dart';
+part of "package:flutter_clean_architecture/core/widgets/cupertino_back/cupertino_back_gesture.dart";
 
 const double _kMinFlingVelocity = 1; // Screen widths per second.
 
@@ -92,7 +92,7 @@ mixin CupertinoRouteTransitionMixin<T> on PageRoute<T> {
   ValueListenable<String?> get previousTitle {
     assert(
       _previousTitle != null,
-      'Cannot read the previousTitle for a route that has not yet been installed',
+      "Cannot read the previousTitle for a route that has not yet been installed",
     );
     return _previousTitle!;
   }
@@ -156,17 +156,27 @@ mixin CupertinoRouteTransitionMixin<T> on PageRoute<T> {
   static bool _isPopGestureEnabled<T>(PageRoute<T> route) {
     // If there's nothing to go back to, then obviously we don't support
     // the back gesture.
-    if (route.isFirst) return false;
+    if (route.isFirst) {
+      return false;
+    }
     // If the route wouldn't actually pop if we popped it, then the gesture
     // would be really confusing (or would skip internal routes), so disallow it.
-    if (route.willHandlePopInternally) return false;
+    if (route.willHandlePopInternally) {
+      return false;
+    }
     // If attempts to dismiss this route might be vetoed such as in a page
     // with forms, then do not allow the user to dismiss the route with a swipe.
-    if (route.popDisposition == RoutePopDisposition.doNotPop) return false;
+    if (route.popDisposition == RoutePopDisposition.doNotPop) {
+      return false;
+    }
     // Fullscreen dialogs aren't dismissible by back swipe.
-    if (route.fullscreenDialog) return false;
+    if (route.fullscreenDialog) {
+      return false;
+    }
     // If we're in an animation already, we cannot be manually swiped.
-    if (route.animation!.status != AnimationStatus.completed) return false;
+    if (route.animation!.status != AnimationStatus.completed) {
+      return false;
+    }
     // If we're being popped into, we also cannot be swiped until the pop above
     // it completes. This translates to our secondary animation being
     // dismissed.
@@ -174,15 +184,20 @@ mixin CupertinoRouteTransitionMixin<T> on PageRoute<T> {
       return false;
     }
     // If we're in a gesture already, we cannot start another.
-    if (isPopGestureInProgress(route)) return false;
+    if (isPopGestureInProgress(route)) {
+      return false;
+    }
 
     // Looks like a back gesture would be welcome!
     return true;
   }
 
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation) {
+  Widget buildPage(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+  ) {
     final Widget child = buildContent(context);
     final Widget result = Semantics(
       scopesRoute: true,
@@ -196,9 +211,12 @@ mixin CupertinoRouteTransitionMixin<T> on PageRoute<T> {
   // gesture is detected. The returned controller handles all of the subsequent
   // drag events.
   static _CupertinoBackGestureController<T> _startPopGesture<T>(
-      PageRoute<T> route) {
-    assert(_isPopGestureEnabled(route),
-        'Cannot start a pop gesture on route $route');
+    PageRoute<T> route,
+  ) {
+    assert(
+      _isPopGestureEnabled(route),
+      "Cannot start a pop gesture on route $route",
+    );
 
     return _CupertinoBackGestureController<T>(
       navigator: route.navigator!,
@@ -236,10 +254,19 @@ mixin CupertinoRouteTransitionMixin<T> on PageRoute<T> {
   }
 
   @override
-  Widget buildTransitions(BuildContext context, Animation<double> animation,
-          Animation<double> secondaryAnimation, Widget child) =>
+  Widget buildTransitions(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) =>
       buildPageTransitions<T>(
-          this, context, animation, secondaryAnimation, child);
+        this,
+        context,
+        animation,
+        secondaryAnimation,
+        child,
+      );
 }
 
 /// Provides an iOS-style page transition animation.
@@ -256,11 +283,11 @@ class CupertinoPageTransition extends StatelessWidget {
   ///  * `linearTransition` is whether to perform the transitions linearly.
   ///    Used to precisely track back gesture drags.
   CupertinoPageTransition({
-    super.key,
     required Animation<double> primaryRouteAnimation,
     required Animation<double> secondaryRouteAnimation,
     required this.child,
     required bool linearTransition,
+    super.key,
   })  : _primaryPositionAnimation = (linearTransition
                 ? primaryRouteAnimation
                 : CurvedAnimation(
@@ -297,7 +324,7 @@ class CupertinoPageTransition extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    assert(debugCheckHasDirectionality(context), 'Must have a Directionality');
+    assert(debugCheckHasDirectionality(context), "Must have a Directionality");
     final TextDirection textDirection = Directionality.of(context);
     return SlideTransition(
       position: _secondaryPositionAnimation,
@@ -317,11 +344,11 @@ class CupertinoPageTransition extends StatelessWidget {
 
 class CupertinoFullscreenDialogTransition extends StatelessWidget {
   CupertinoFullscreenDialogTransition({
-    super.key,
     required Animation<double> primaryRouteAnimation,
     required Animation<double> secondaryRouteAnimation,
     required this.child,
     required bool linearTransition,
+    super.key,
   })  : _positionAnimation = CurvedAnimation(
           parent: primaryRouteAnimation,
           curve: Curves.linearToEaseOut,
@@ -348,7 +375,7 @@ class CupertinoFullscreenDialogTransition extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    assert(debugCheckHasDirectionality(context), 'Must have a Directionality');
+    assert(debugCheckHasDirectionality(context), "Must have a Directionality");
     final TextDirection textDirection = Directionality.of(context);
     return SlideTransition(
       position: _secondaryPositionAnimation,
@@ -364,10 +391,10 @@ class CupertinoFullscreenDialogTransition extends StatelessWidget {
 
 class _CupertinoBackGestureDetector<T> extends StatefulWidget {
   const _CupertinoBackGestureDetector({
-    super.key,
     required this.enabledCallback,
     required this.onStartPopGesture,
     required this.child,
+    super.key,
   });
 
   final Widget child;
@@ -379,6 +406,24 @@ class _CupertinoBackGestureDetector<T> extends StatefulWidget {
   @override
   _CupertinoBackGestureDetectorState<T> createState() =>
       _CupertinoBackGestureDetectorState<T>();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(
+        ObjectFlagProperty<ValueGetter<bool>>.has(
+          "enabledCallback",
+          enabledCallback,
+        ),
+      )
+      ..add(
+        ObjectFlagProperty<ValueGetter<_CupertinoBackGestureController<T>>>.has(
+          "onStartPopGesture",
+          onStartPopGesture,
+        ),
+      );
+  }
 }
 
 class _CupertinoBackGestureDetectorState<T>
@@ -404,35 +449,53 @@ class _CupertinoBackGestureDetectorState<T>
   }
 
   void _handleDragStart(DragStartDetails details) {
-    assert(mounted,
-        'Tried to start a gesture on a disposed CupertinoRouteBackGestureDetector');
-    assert(_backGestureController == null,
-        'Started a gesture before ending the previous one.');
+    assert(
+      mounted,
+      "Tried to start a gesture on a disposed CupertinoRouteBackGestureDetector",
+    );
+    assert(
+      _backGestureController == null,
+      "Started a gesture before ending the previous one.",
+    );
     _backGestureController = widget.onStartPopGesture();
   }
 
   void _handleDragUpdate(DragUpdateDetails details) {
-    assert(mounted,
-        'Tried to update a gesture on a disposed CupertinoRouteBackGestureDetector');
-    assert(_backGestureController != null,
-        'Updated a gesture that has not started.');
+    assert(
+      mounted,
+      "Tried to update a gesture on a disposed CupertinoRouteBackGestureDetector",
+    );
+    assert(
+      _backGestureController != null,
+      "Updated a gesture that has not started.",
+    );
     _backGestureController!.dragUpdate(
-        _convertToLogical(details.primaryDelta! / context.size!.width));
+      _convertToLogical(details.primaryDelta! / context.size!.width),
+    );
   }
 
   void _handleDragEnd(DragEndDetails details) {
-    assert(mounted,
-        'Tried to end a gesture on a disposed CupertinoRouteBackGestureDetector');
-    assert(_backGestureController != null,
-        'Ended a gesture that has not started.');
-    _backGestureController!.dragEnd(_convertToLogical(
-        details.velocity.pixelsPerSecond.dx / context.size!.width));
+    assert(
+      mounted,
+      "Tried to end a gesture on a disposed CupertinoRouteBackGestureDetector",
+    );
+    assert(
+      _backGestureController != null,
+      "Ended a gesture that has not started.",
+    );
+    _backGestureController!.dragEnd(
+      _convertToLogical(
+        details.velocity.pixelsPerSecond.dx / context.size!.width,
+      ),
+    );
     _backGestureController = null;
   }
 
   void _handleDragCancel() {
-    assert(mounted,
-        'Tried to cancel a gesture on a disposed CupertinoRouteBackGestureDetector');
+    assert(
+      mounted,
+      "Tried to cancel a gesture on a disposed CupertinoRouteBackGestureDetector",
+    );
     // This can be called even if start is not called, paired with the "down" event
     // that we don't consider here.
     _backGestureController?.dragEnd(0);
@@ -440,7 +503,9 @@ class _CupertinoBackGestureDetectorState<T>
   }
 
   void _handlePointerDown(PointerDownEvent event) {
-    if (widget.enabledCallback()) _recognizer.addPointer(event);
+    if (widget.enabledCallback()) {
+      _recognizer.addPointer(event);
+    }
   }
 
   double _convertToLogical(double value) {
@@ -454,13 +519,14 @@ class _CupertinoBackGestureDetectorState<T>
 
   /// Width of the area where start of back swipe gesture should be recognised
   double get _backGestureWidth {
-    final backGestureWidth = BackGestureWidthTheme.of(context);
+    final BackGestureWidthGetter backGestureWidth =
+        BackGestureWidthTheme.of(context);
     return backGestureWidth(() => MediaQuery.of(context).size);
   }
 
   @override
   Widget build(BuildContext context) {
-    assert(debugCheckHasDirectionality(context), 'Must have a Directionality');
+    assert(debugCheckHasDirectionality(context), "Must have a Directionality");
     // For devices with notches, the drag area needs to be larger on the side
     // that has the notch.
     double dragAreaWidth = Directionality.of(context) == TextDirection.ltr
@@ -529,13 +595,18 @@ class _CupertinoBackGestureController<T> {
       // to determine it.
       final int droppedPageForwardAnimationTime = min(
         lerpDouble(
-                _kMaxDroppedSwipePageForwardAnimationTime, 0, controller.value)!
+          _kMaxDroppedSwipePageForwardAnimationTime,
+          0,
+          controller.value,
+        )!
             .floor(),
         _kMaxPageBackAnimationTime,
       );
-      controller.animateTo(1,
-          duration: Duration(milliseconds: droppedPageForwardAnimationTime),
-          curve: animationCurve);
+      controller.animateTo(
+        1,
+        duration: Duration(milliseconds: droppedPageForwardAnimationTime),
+        curve: animationCurve,
+      );
     } else {
       // This route is destined to pop at this point. Reuse navigator's pop.
       navigator.pop();
@@ -544,11 +615,16 @@ class _CupertinoBackGestureController<T> {
       if (controller.isAnimating) {
         // Otherwise, use a custom popping animation duration and curve.
         final int droppedPageBackAnimationTime = lerpDouble(
-                0, _kMaxDroppedSwipePageForwardAnimationTime, controller.value)!
+          0,
+          _kMaxDroppedSwipePageForwardAnimationTime,
+          controller.value,
+        )!
             .floor();
-        controller.animateBack(0,
-            duration: Duration(milliseconds: droppedPageBackAnimationTime),
-            curve: animationCurve);
+        controller.animateBack(
+          0,
+          duration: Duration(milliseconds: droppedPageBackAnimationTime),
+          curve: animationCurve,
+        );
       }
     }
 
@@ -557,7 +633,7 @@ class _CupertinoBackGestureController<T> {
       // curve of the page transition mid-flight since CupertinoPageTransition
       // depends on userGestureInProgress.
       late AnimationStatusListener animationStatusCallback;
-      animationStatusCallback = (status) {
+      animationStatusCallback = (AnimationStatus status) {
         navigator.didStopUserGesture();
         controller.removeStatusListener(animationStatusCallback);
       };
@@ -603,7 +679,9 @@ class _CupertinoEdgeShadowDecoration extends Decoration {
     _CupertinoEdgeShadowDecoration? b,
     double t,
   ) {
-    if (a == null && b == null) return null;
+    if (a == null && b == null) {
+      return null;
+    }
     return _CupertinoEdgeShadowDecoration(
       edgeGradient: LinearGradient.lerp(a?.edgeGradient, b?.edgeGradient, t),
     );
@@ -631,7 +709,9 @@ class _CupertinoEdgeShadowDecoration extends Decoration {
 
   @override
   bool operator ==(Object other) {
-    if (other.runtimeType != runtimeType) return false;
+    if (other.runtimeType != runtimeType) {
+      return false;
+    }
     return other is _CupertinoEdgeShadowDecoration &&
         other.edgeGradient == edgeGradient;
   }
@@ -643,7 +723,7 @@ class _CupertinoEdgeShadowDecoration extends Decoration {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-        .add(DiagnosticsProperty<LinearGradient>('edgeGradient', edgeGradient));
+        .add(DiagnosticsProperty<LinearGradient>("edgeGradient", edgeGradient));
   }
 }
 
@@ -659,11 +739,13 @@ class _CupertinoEdgeShadowPainter extends BoxPainter {
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
     final LinearGradient? gradient = _decoration.edgeGradient;
-    if (gradient == null) return;
+    if (gradient == null) {
+      return;
+    }
     // The drawable space for the gradient is a rect with the same size as
     // its parent box one box width on the start side of the box.
     final TextDirection? textDirection = configuration.textDirection;
-    assert(textDirection != null, 'textDirection must not be null.');
+    assert(textDirection != null, "textDirection must not be null.");
     final double deltaX;
     switch (textDirection!) {
       case TextDirection.rtl:
@@ -684,9 +766,9 @@ class _CupertinoModalPopupRoute<T> extends PopupRoute<T> {
     required this.barrierColor,
     required this.barrierLabel,
     required this.builder,
+    required super.filter,
     bool? barrierDismissible,
     bool? semanticsDismissible,
-    required super.filter,
     super.settings,
   }) {
     _barrierDismissible = barrierDismissible;
@@ -720,8 +802,10 @@ class _CupertinoModalPopupRoute<T> extends PopupRoute<T> {
 
   @override
   Animation<double> createAnimation() {
-    assert(_animation == null,
-        'Cannot reuse _CupertinoModalPopupRoute animations.');
+    assert(
+      _animation == null,
+      "Cannot reuse _CupertinoModalPopupRoute animations.",
+    );
     _animation = CurvedAnimation(
       parent: super.createAnimation(),
 
@@ -738,16 +822,23 @@ class _CupertinoModalPopupRoute<T> extends PopupRoute<T> {
   }
 
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation,
-          Animation<double> secondaryAnimation) =>
+  Widget buildPage(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+  ) =>
       CupertinoUserInterfaceLevel(
         data: CupertinoUserInterfaceLevelData.elevated,
         child: Builder(builder: builder),
       );
 
   @override
-  Widget buildTransitions(BuildContext context, Animation<double> animation,
-          Animation<double> secondaryAnimation, Widget child) =>
+  Widget buildTransitions(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) =>
       Align(
         alignment: Alignment.bottomCenter,
         child: FractionalTranslation(
@@ -771,7 +862,7 @@ Future<T?> showCupertinoModalPopup<T>({
       _CupertinoModalPopupRoute<T>(
         barrierColor: CupertinoDynamicColor.resolve(barrierColor, context),
         barrierDismissible: barrierDismissible,
-        barrierLabel: 'Dismiss',
+        barrierLabel: "Dismiss",
         builder: builder,
         filter: filter,
         semanticsDismissible: semanticsDismissible,
@@ -783,10 +874,11 @@ final Animatable<double> _dialogScaleTween = Tween<double>(begin: 1.3, end: 1)
     .chain(CurveTween(curve: Curves.linearToEaseOut));
 
 Widget _buildCupertinoDialogTransitions(
-    BuildContext context,
-    Animation<double> animation,
-    Animation<double> secondaryAnimation,
-    Widget child) {
+  BuildContext context,
+  Animation<double> animation,
+  Animation<double> secondaryAnimation,
+  Widget child,
+) {
   final CurvedAnimation fadeAnimation = CurvedAnimation(
     parent: animation,
     curve: Curves.easeInOut,
@@ -839,7 +931,11 @@ class CupertinoDialogRoute<T> extends RawDialogRoute<T> {
     super.transitionBuilder = _buildCupertinoDialogTransitions,
     super.settings,
   }) : super(
-          pageBuilder: (context, animation, secondaryAnimation) =>
+          pageBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+          ) =>
               builder(context),
           barrierLabel: barrierLabel ??
               CupertinoLocalizations.of(context).modalBarrierDismissLabel,

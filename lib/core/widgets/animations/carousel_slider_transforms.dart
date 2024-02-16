@@ -1,8 +1,8 @@
-import 'dart:math' as math;
+import "dart:math" as math;
 
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-const slideTransforms = [
+const List<SlideTransform> slideTransforms = <SlideTransform>[
   CubeTransform(),
   DepthTransform(),
   AccordionTransform(),
@@ -12,10 +12,6 @@ const slideTransforms = [
 ];
 
 class CubeTransform implements SlideTransform {
-  final double perspectiveScale;
-  final AlignmentGeometry rightPageAlignment;
-  final AlignmentGeometry leftPageAlignment;
-  final double rotationAngle;
 
   const CubeTransform({
     this.perspectiveScale = 0.0014,
@@ -23,6 +19,10 @@ class CubeTransform implements SlideTransform {
     this.leftPageAlignment = Alignment.centerRight,
     double rotationAngle = 90,
   }) : rotationAngle = math.pi / 180 * rotationAngle;
+  final double perspectiveScale;
+  final AlignmentGeometry rightPageAlignment;
+  final AlignmentGeometry leftPageAlignment;
+  final double rotationAngle;
 
   @override
   Widget transform(
@@ -56,13 +56,13 @@ class CubeTransform implements SlideTransform {
 }
 
 class AccordionTransform implements SlideTransform {
-  final bool transformRight;
-  final bool transformLeft;
 
   const AccordionTransform({
     this.transformRight = true,
     this.transformLeft = true,
   });
+  final bool transformRight;
+  final bool transformLeft;
 
   @override
   Widget transform(
@@ -93,11 +93,11 @@ class AccordionTransform implements SlideTransform {
 }
 
 class BackgroundToForegroundTransform implements SlideTransform {
-  final double startScale;
 
   const BackgroundToForegroundTransform({
     this.startScale = 0.4,
   });
+  final double startScale;
 
   @override
   Widget transform(
@@ -122,9 +122,9 @@ class BackgroundToForegroundTransform implements SlideTransform {
 }
 
 class ForegroundToBackgroundTransform implements SlideTransform {
-  final double endScale;
 
   const ForegroundToBackgroundTransform({this.endScale = 0.4});
+  final double endScale;
 
   @override
   Widget transform(
@@ -164,11 +164,11 @@ class DefaultTransform implements SlideTransform {
 }
 
 class DepthTransform implements SlideTransform {
-  final double startScale;
 
   const DepthTransform({
     this.startScale = 0.4,
   });
+  final double startScale;
 
   @override
   Widget transform(
@@ -199,11 +199,11 @@ class DepthTransform implements SlideTransform {
 }
 
 class FlipHorizontalTransform implements SlideTransform {
-  final double perspectiveScale;
 
   const FlipHorizontalTransform({
     this.perspectiveScale = 0.002,
   });
+  final double perspectiveScale;
 
   @override
   Widget transform(
@@ -242,11 +242,11 @@ class FlipHorizontalTransform implements SlideTransform {
 }
 
 class FlipVerticalTransform implements SlideTransform {
-  final double perspectiveScale;
 
   const FlipVerticalTransform({
     this.perspectiveScale = 0.002,
   });
+  final double perspectiveScale;
 
   @override
   Widget transform(
@@ -285,11 +285,11 @@ class FlipVerticalTransform implements SlideTransform {
 }
 
 class ParallaxTransform implements SlideTransform {
-  final double clipAmount;
 
   const ParallaxTransform({
     this.clipAmount = 200,
   });
+  final double clipAmount;
 
   @override
   Widget transform(
@@ -315,9 +315,9 @@ class ParallaxTransform implements SlideTransform {
 }
 
 class RectClipper extends CustomClipper<Rect> {
-  final double leftClip;
 
   const RectClipper(this.leftClip);
+  final double leftClip;
 
   @override
   Rect getClip(Size size) =>
@@ -386,11 +386,11 @@ class TabletTransform implements SlideTransform {
 }
 
 class RotateDownTransform implements SlideTransform {
-  final double rotationAngle;
 
   const RotateDownTransform({
     double rotationAngle = 45,
   }) : rotationAngle = math.pi / 180 * rotationAngle;
+  final double rotationAngle;
 
   @override
   Widget transform(
@@ -420,11 +420,11 @@ class RotateDownTransform implements SlideTransform {
 }
 
 class RotateUpTransform implements SlideTransform {
-  final double rotationAngle;
 
   const RotateUpTransform({
     double rotationAngle = 45,
   }) : rotationAngle = math.pi / 180 * rotationAngle;
+  final double rotationAngle;
 
   @override
   Widget transform(
@@ -455,13 +455,13 @@ class RotateUpTransform implements SlideTransform {
 }
 
 class ZoomOutSlideTransform implements SlideTransform {
-  final double zoomOutScale;
-  final bool enableOpacity;
 
   const ZoomOutSlideTransform({
     this.zoomOutScale = 0.8,
     this.enableOpacity = true,
   });
+  final double zoomOutScale;
+  final bool enableOpacity;
 
   @override
   Widget transform(

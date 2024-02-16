@@ -1,6 +1,6 @@
-import 'dart:async';
+import "dart:async";
 
-import 'package:flutter/foundation.dart';
+import "package:flutter/foundation.dart";
 
 typedef Lazy<T> = T Function();
 
@@ -23,12 +23,12 @@ sealed class Either<L, R> {
   L get left => this.fold<L>(
       (value) => value,
       (right) => throw Exception(
-          'Illegal use. You should check isLeft before calling',),);
+          "Illegal use. You should check isLeft before calling",),);
 
   /// Get [Right] value, may throw an exception when the value is [Left]
   R get right => this.fold<R>(
       (left) => throw Exception(
-          'Illegal use. You should check isRight before calling',),
+          "Illegal use. You should check isRight before calling",),
       (value) => value,);
 
   /// Transform values of [Left] and [Right]

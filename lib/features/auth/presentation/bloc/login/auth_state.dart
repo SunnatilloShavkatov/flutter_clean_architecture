@@ -1,4 +1,4 @@
-part of 'auth_bloc.dart';
+part of "auth_bloc.dart";
 
 sealed class AuthState extends Equatable {
   const AuthState();
@@ -8,14 +8,14 @@ class AuthInitial extends AuthState {
   const AuthInitial();
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => <Object?>[];
 }
 
 class AuthLoadingState extends AuthState {
   const AuthLoadingState();
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => <Object?>[];
 }
 
 class AuthSuccessState extends AuthState {
@@ -32,7 +32,7 @@ class AuthSuccessState extends AuthState {
   final Map<String, dynamic> data;
 
   @override
-  List<Object?> get props => [smsId, phone, uiPhone, data];
+  List<Object?> get props => <Object?>[smsId, phone, uiPhone, data];
 }
 
 class AuthFailure extends AuthState {
@@ -41,7 +41,7 @@ class AuthFailure extends AuthState {
   final String message;
 
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => <Object?>[message];
 }
 
 enum LoginStatus { initial, loading, success, error }

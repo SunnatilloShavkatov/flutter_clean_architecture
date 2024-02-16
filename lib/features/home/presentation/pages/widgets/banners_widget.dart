@@ -1,10 +1,11 @@
-import 'package:flutter/material.dart';
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
 
-import '../../../../../core/extension/extension.dart';
-import '../../../../../core/utils/utils.dart';
-import '../../../../../core/widgets/animations/carousel_slider.dart';
-import 'banner_item.dart';
-import 'dot_progress.dart';
+import "package:flutter_clean_architecture/core/extension/extension.dart";
+import "package:flutter_clean_architecture/core/utils/utils.dart";
+import "package:flutter_clean_architecture/core/widgets/animations/carousel_slider.dart";
+import "package:flutter_clean_architecture/features/home/presentation/pages/widgets/banner_item.dart";
+import "package:flutter_clean_architecture/features/home/presentation/pages/widgets/dot_progress.dart";
 
 final ValueNotifier<int> _currentPage = ValueNotifier<int>(0);
 
@@ -18,7 +19,7 @@ class BannersWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SliverList.list(
-        children: [
+        children: <Widget>[
           SizedBox(
             height: context.kSize.width * 576 / 1024 + 92,
             width: context.kSize.width,
@@ -27,12 +28,12 @@ class BannersWidget extends StatelessWidget {
               enableAutoSlider: true,
               slideTransform: slideTransforms[DateTime.now().weekday % 6],
               controller: controller,
-              slideBuilder: (index) => BannerItem(
+              slideBuilder: (int index) => BannerItem(
                 key: ValueKey(index),
                 index: index,
               ),
               itemCount: 6,
-              onSlideChanged: (index) => _currentPage.value = index,
+              onSlideChanged: (int index) => _currentPage.value = index,
             ),
           ),
           AppUtils.kGap8,
@@ -41,10 +42,10 @@ class BannersWidget extends StatelessWidget {
             child: Center(
               child: ValueListenableBuilder(
                 valueListenable: _currentPage,
-                builder: (_, value, __) => ListView.separated(
+                builder: (_, int value, __) => ListView.separated(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
-                  itemBuilder: (_, index) => DotProgress(
+                  itemBuilder: (_, int index) => DotProgress(
                     key: ValueKey(index),
                     isLoading: index == _currentPage.value % 6,
                   ),
@@ -56,4 +57,11 @@ class BannersWidget extends StatelessWidget {
           ),
         ],
       );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<CarouselSliderController?>(
+        "controller", controller,),);
+  }
 }

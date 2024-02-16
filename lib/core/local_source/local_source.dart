@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-
-import '../../constants/constants.dart';
-import '../utils/utils.dart';
+import "package:flutter/material.dart";
+import "package:flutter_clean_architecture/constants/constants.dart";
+import "package:flutter_clean_architecture/core/utils/utils.dart";
+import "package:hive/hive.dart";
 
 final class LocalSource {
   LocalSource(this.box);
@@ -22,9 +21,9 @@ final class LocalSource {
   String get locale => box.get(AppKeys.locale, defaultValue: defaultLocale);
 
   ThemeMode get themeMode => switch (box.get(AppKeys.themeMode)) {
-        'system' => ThemeMode.system,
-        'light' => ThemeMode.light,
-        'dark' => ThemeMode.dark,
+        "system" => ThemeMode.system,
+        "light" => ThemeMode.light,
+        "dark" => ThemeMode.dark,
         _ => ThemeMode.system,
       };
 
@@ -36,25 +35,25 @@ final class LocalSource {
     await box.put(AppKeys.accessToken, accessToken);
   }
 
-  String get accessToken => box.get(AppKeys.accessToken, defaultValue: '');
+  String get accessToken => box.get(AppKeys.accessToken, defaultValue: "");
 
   Future<void> setFirstName(String firstName) async {
     await box.put(AppKeys.firstname, firstName);
   }
 
-  String getFirstName() => box.get(AppKeys.firstname, defaultValue: '');
+  String getFirstName() => box.get(AppKeys.firstname, defaultValue: "");
 
   Future<void> setLastName(String lastName) async {
     await box.put(AppKeys.lastname, lastName);
   }
 
-  String getLastName() => box.get(AppKeys.lastname, defaultValue: '');
+  String getLastName() => box.get(AppKeys.lastname, defaultValue: "");
 
   Future<void> setEmail(String email) async {
     await box.put(AppKeys.email, email);
   }
 
-  String get email => box.get(AppKeys.email, defaultValue: '');
+  String get email => box.get(AppKeys.email, defaultValue: "");
 
   Future<void> setPassword(String password) async {
     await box.put(AppKeys.password, password);

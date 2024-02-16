@@ -1,15 +1,15 @@
-import 'package:equatable/equatable.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import "package:equatable/equatable.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_clean_architecture/core/either/either.dart";
+import "package:flutter_clean_architecture/core/error/failure.dart";
+import "package:flutter_clean_architecture/core/mixins/cache_mixin.dart";
+import "package:flutter_clean_architecture/features/auth/data/models/confirm/verify_request.dart";
+import "package:flutter_clean_architecture/features/auth/data/models/send_message_request.dart";
+import "package:flutter_clean_architecture/features/auth/data/models/send_message_response.dart";
+import "package:flutter_clean_architecture/features/auth/domain/repository/auth_repository.dart";
 
-import '../../../../../core/error/failure.dart';
-import '../../../../../core/mixins/cache_mixin.dart';
-import '../../../data/models/confirm/verify_request.dart';
-import '../../../data/models/send_message_request.dart';
-import '../../../domain/repository/auth_repository.dart';
-
-part 'confirm_code_state.dart';
-
-part 'confirm_code_event.dart';
+part "confirm_code_event.dart";
+part "confirm_code_state.dart";
 
 class ConfirmCodeBloc extends Bloc<ConfirmCodeEvent, ConfirmCodeState>
     with CacheMixin {
@@ -114,24 +114,24 @@ class ConfirmCodeBloc extends Bloc<ConfirmCodeEvent, ConfirmCodeState>
     ConfirmCodeSendAgainEvent event,
     Emitter<ConfirmCodeState> emit,
   ) async {
-    final result = await authRepository.sendCode(
+    final Either<Failure, SendMessageResponse> result = await authRepository.sendCode(
       request: SendCodeRequest(
         recipient: event.value,
-        text: 'code',
-        registerType: 'PHONE',
+        text: "code",
+        registerType: "PHONE",
       ),
     );
     result.fold(
-      (l) {
+      (Failure l) {
         emit(state.copyWith(
           confirmCodeStatus: ConfirmCodeStatus.error,
           errorMessage: (l as ServerFailure).message,
         ),);
       },
-      (r) {
+      (SendMessageResponse r) {
         emit(
           state.copyWith(
-            smsId: r.data?['sms_id'],
+            smsId: r.data?["sms_id"],
             confirmCodeStatus: ConfirmCodeStatus.success,
             isReverseSendCode: true,
           ),
@@ -144,8 +144,8 @@ class ConfirmCodeBloc extends Bloc<ConfirmCodeEvent, ConfirmCodeState>
     CreatePatientOrderAfterNamedEvent event,
     Emitter<ConfirmCodeState> emit,
   ) async {
-    final name = event.name;
-    final surname = event.surname;
+    final String name = event.name;
+    final String surname = event.surname;
     // await authRepository.createPatientOrderNamedAfter(
     //   request: OrderNamedAfterRequest(
     //     patientsId: localSource.userId,

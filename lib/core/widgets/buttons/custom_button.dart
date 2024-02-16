@@ -1,13 +1,14 @@
-import 'package:flutter/material.dart';
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
 
-import '../../extension/extension.dart';
+import "package:flutter_clean_architecture/core/extension/extension.dart";
 
 enum CustomLabelButton { label, icon }
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
-    super.key,
     required this.label,
+    super.key,
     this.leftIcon,
     this.rightIcon,
     this.onPressed,
@@ -22,7 +23,7 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const borderRadius = BorderRadius.all(Radius.circular(8));
+    const BorderRadius borderRadius = BorderRadius.all(Radius.circular(8));
 
     /// Label
     final Widget labelA = DefaultTextStyle(
@@ -41,7 +42,7 @@ class CustomButton extends StatelessWidget {
       childA = Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+        children: <Widget>[
           if (leftIcon != null)
             IconTheme(
               data: const IconThemeData(color: Colors.white, size: 20),
@@ -77,5 +78,13 @@ class CustomButton extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(ObjectFlagProperty<VoidCallback?>.has("onPressed", onPressed))
+      ..add(DoubleProperty("height", height));
   }
 }

@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import '../../extension/extension.dart';
-import '../../utils/utils.dart';
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
+import "package:flutter/services.dart";
+import "package:flutter_clean_architecture/core/extension/extension.dart";
+import "package:flutter_clean_architecture/core/utils/utils.dart";
 
 typedef Validator = String? Function(String?);
 typedef OnChanged = void Function(String);
@@ -9,12 +10,13 @@ typedef OnFieldSubmitted = void Function(String);
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
-    super.key,
     required this.controller,
-    this.validator,
     required this.onChanged,
-    this.textInputType = TextInputType.name,
     required this.focusNode,
+    required this.hintText,
+    super.key,
+    this.validator,
+    this.textInputType = TextInputType.name,
     this.textCapitalization = TextCapitalization.none,
     this.cursorColor,
     this.enabled = true,
@@ -22,7 +24,6 @@ class CustomTextField extends StatelessWidget {
     this.textInputFormatter,
     this.textInputAction = TextInputAction.done,
     this.nextFocusNode,
-    required this.hintText,
     this.errorText,
     this.suffix,
     this.suffixIcon,
@@ -73,7 +74,7 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
-        children: [
+        children: <Widget>[
           if (labelText != null && !labelInTextField)
             Text(
               labelText!,
@@ -101,7 +102,7 @@ class CustomTextField extends StatelessWidget {
                 focusNode.unfocus();
               }
             },
-            onFieldSubmitted: (value) {
+            onFieldSubmitted: (String value) {
               if (onFieldSubmitted != null) {
                 onFieldSubmitted?.call(value);
               }
@@ -112,9 +113,7 @@ class CustomTextField extends StatelessWidget {
               }
             },
             inputFormatters: textInputFormatter != null
-                ? [
-                    textInputFormatter!,
-                  ]
+                ? <TextInputFormatter>[textInputFormatter!]
                 : null,
             decoration: InputDecoration(
               labelText: labelInTextField ? labelText : null,
@@ -135,4 +134,56 @@ class CustomTextField extends StatelessWidget {
           ),
         ],
       );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(
+        DiagnosticsProperty<TextEditingController>("controller", controller),
+      )
+      ..add(
+        DiagnosticsProperty<EdgeInsetsGeometry?>(
+          "contentPadding",
+          contentPadding,
+        ),
+      )
+      ..add(ObjectFlagProperty<Validator?>.has("validator", validator))
+      ..add(ObjectFlagProperty<OnChanged>.has("onChanged", onChanged))
+      ..add(DiagnosticsProperty<TextInputType>("textInputType", textInputType))
+      ..add(DiagnosticsProperty<FocusNode>("focusNode", focusNode))
+      ..add(DiagnosticsProperty<FocusNode?>("nextFocusNode", nextFocusNode))
+      ..add(
+        EnumProperty<TextCapitalization>(
+          "textCapitalization",
+          textCapitalization,
+        ),
+      )
+      ..add(ColorProperty("cursorColor", cursorColor))
+      ..add(DiagnosticsProperty<bool>("enabled", enabled))
+      ..add(DiagnosticsProperty<bool>("obscure", obscure))
+      ..add(
+        DiagnosticsProperty<TextInputFormatter?>(
+          "textInputFormatter",
+          textInputFormatter,
+        ),
+      )
+      ..add(EnumProperty<TextInputAction>("textInputAction", textInputAction))
+      ..add(StringProperty("hintText", hintText))
+      ..add(StringProperty("errorText", errorText))
+      ..add(DiagnosticsProperty<TextStyle?>("prefixTextStyle", prefixTextStyle))
+      ..add(DiagnosticsProperty<TextStyle?>("suffixTextStyle", suffixTextStyle))
+      ..add(DiagnosticsProperty<TextStyle?>("labelTextStyle", labelTextStyle))
+      ..add(StringProperty("labelText", labelText))
+      ..add(StringProperty("prefixText", prefixText))
+      ..add(StringProperty("suffixText", suffixText))
+      ..add(DiagnosticsProperty<bool>("labelInTextField", labelInTextField))
+      ..add(DoubleProperty("cursorHeight", cursorHeight))
+      ..add(
+        ObjectFlagProperty<OnFieldSubmitted?>.has(
+          "onFieldSubmitted",
+          onFieldSubmitted,
+        ),
+      );
+  }
 }

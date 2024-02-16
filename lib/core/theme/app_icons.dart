@@ -1,9 +1,9 @@
-part of 'themes.dart';
+part of "themes.dart";
 
 sealed class AppIcons {
   AppIcons._();
 
-  static const String _fontFamily = 'AppIcons';
+  static const String _fontFamily = "AppIcons";
 
   static const IconData qrcode = IconData(0xe900, fontFamily: _fontFamily);
   static const IconData alert_circle =

@@ -1,13 +1,15 @@
-import 'package:equatable/equatable.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../core/mixins/cache_mixin.dart';
+import "package:equatable/equatable.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_clean_architecture/core/either/either.dart";
+import "package:flutter_clean_architecture/core/error/failure.dart";
+import "package:flutter_clean_architecture/core/mixins/cache_mixin.dart";
+import "package:flutter_clean_architecture/features/auth/data/models/send_message_request.dart";
+import "package:flutter_clean_architecture/features/auth/data/models/send_message_response.dart";
+import "package:flutter_clean_architecture/features/auth/domain/repository/auth_repository.dart";
 
-import '../../../data/models/send_message_request.dart';
-import '../../../domain/repository/auth_repository.dart';
+part "auth_event.dart";
 
-part 'auth_event.dart';
-
-part 'auth_state.dart';
+part "auth_state.dart";
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> with CacheMixin {
   AuthBloc({
@@ -31,24 +33,27 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with CacheMixin {
     Emitter<AuthState> emit,
   ) async {
     emit(const AuthLoadingState());
-    final result = await authRepository.sendCode(
+    final Either<Failure, SendMessageResponse> result =
+        await authRepository.sendCode(
       request: SendCodeRequest(
-        text: 'code',
+        text: "code",
         recipient: "+998${event.phoneNumber.replaceAll(" ", "")}",
-        registerType: 'PHONE',
+        registerType: "PHONE",
       ),
     );
     result.fold(
-      (left) {
-        emit(const AuthFailure(message: 'Error occured! Try again later!'));
+      (Failure left) {
+        emit(const AuthFailure(message: "Error occured! Try again later!"));
       },
-      (right) {
+      (SendMessageResponse right) {
         emit(
           AuthSuccessState(
-            smsId: right.data?['sms_id'] as String? ?? '',
+            smsId: right.data?["sms_id"] as String? ?? "",
             phone: "+998${event.phoneNumber.replaceAll(" ", "")}",
             uiPhone: event.phoneNumber,
-            data: right.data?['data'] is Map ? right.data!['data'] : {},
+            data: right.data?["data"] is Map
+                ? right.data!["data"]
+                : <String, String>{},
           ),
         );
       },

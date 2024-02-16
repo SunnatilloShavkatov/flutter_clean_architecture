@@ -1,24 +1,26 @@
-import 'package:flutter/material.dart';
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
 
 class CustomLinearProgress extends StatelessWidget {
+  const CustomLinearProgress({
+    required this.percent,
+    super.key,
+    this.valueColor = Colors.white,
+    this.strokeWidth = 3,
+    this.backgroundColor,
+    this.isAnimate = false,
+  });
+
   final Color valueColor;
   final Color? backgroundColor;
   final double percent;
   final double strokeWidth;
   final bool isAnimate;
 
-  const CustomLinearProgress({
-    super.key,
-    this.valueColor = Colors.white,
-    required this.percent,
-    this.strokeWidth = 3,
-    this.backgroundColor,
-    this.isAnimate = false,
-  });
-
   @override
   Widget build(BuildContext context) {
-    final indicatorTheme = ProgressIndicatorTheme.of(context);
+    final ProgressIndicatorThemeData indicatorTheme =
+        ProgressIndicatorTheme.of(context);
     final Color trackColor =
         backgroundColor ?? indicatorTheme.linearTrackColor ?? Colors.grey;
     if (isAnimate) {
@@ -26,7 +28,7 @@ class CustomLinearProgress extends StatelessWidget {
         duration: const Duration(milliseconds: 1000),
         curve: Curves.easeInOut,
         tween: Tween<double>(begin: 0, end: percent),
-        builder: (_, value, __) => ConstrainedBox(
+        builder: (_, double value, __) => ConstrainedBox(
           constraints: BoxConstraints(minHeight: strokeWidth),
           child: CustomPaint(
             painter: LinearProgressPainter(
@@ -52,14 +54,20 @@ class CustomLinearProgress extends StatelessWidget {
       );
     }
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(ColorProperty("valueColor", valueColor))
+      ..add(ColorProperty("backgroundColor", backgroundColor))
+      ..add(DoubleProperty("percent", percent))
+      ..add(DoubleProperty("strokeWidth", strokeWidth))
+      ..add(DiagnosticsProperty<bool>("isAnimate", isAnimate));
+  }
 }
 
 class LinearProgressPainter extends CustomPainter {
-  final Color backgroundColor;
-  final Color valueColor;
-  final double percent;
-  final double strokeWidth;
-
   const LinearProgressPainter({
     required this.backgroundColor,
     required this.valueColor,
@@ -67,10 +75,15 @@ class LinearProgressPainter extends CustomPainter {
     required this.strokeWidth,
   });
 
+  final Color backgroundColor;
+  final Color valueColor;
+  final double percent;
+  final double strokeWidth;
+
   @override
   void paint(Canvas canvas, Size size) {
     /// background
-    final paint = Paint()
+    final Paint paint = Paint()
       ..strokeCap = StrokeCap.round
       ..strokeWidth = strokeWidth
       ..color = backgroundColor;
@@ -81,7 +94,7 @@ class LinearProgressPainter extends CustomPainter {
     );
 
     /// progress
-    final progress = Paint()
+    final Paint progress = Paint()
       ..strokeCap = StrokeCap.round
       ..strokeWidth = strokeWidth
       ..color = valueColor;

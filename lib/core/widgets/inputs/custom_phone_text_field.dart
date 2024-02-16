@@ -1,13 +1,15 @@
-import 'package:flutter/material.dart';
-import '../../../core/extension/extension.dart';
-import 'masked_text_input_formatter.dart';
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
+import "package:flutter/services.dart";
+import "package:flutter_clean_architecture/core/extension/extension.dart";
+import "package:flutter_clean_architecture/core/widgets/inputs/masked_text_input_formatter.dart";
 
 class CustomPhoneTextField extends StatefulWidget {
   const CustomPhoneTextField({
+    this.controller,
     super.key,
     this.titleText,
     this.showError,
-    required this.controller,
     this.autoFocus = false,
     this.onChanged,
     this.prefixText,
@@ -41,7 +43,7 @@ class CustomPhoneTextField extends StatefulWidget {
   final String? titleText;
   final String? labelText;
   final bool? showError;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final bool autoFocus;
   final void Function(String value)? onChanged;
   final String? prefixText;
@@ -72,6 +74,58 @@ class CustomPhoneTextField extends StatefulWidget {
 
   @override
   State<CustomPhoneTextField> createState() => _CustomPhoneTextFieldState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(StringProperty("titleText", titleText))
+      ..add(
+        ObjectFlagProperty<String? Function(String? p1)?>.has(
+          "validator",
+          validator,
+        ),
+      )
+      ..add(StringProperty("labelText", labelText))
+      ..add(DiagnosticsProperty<bool?>("showError", showError))
+      ..add(
+        DiagnosticsProperty<TextEditingController?>("controller", controller),
+      )
+      ..add(DiagnosticsProperty<bool>("autoFocus", autoFocus))
+      ..add(
+        ObjectFlagProperty<void Function(String value)?>.has(
+          "onChanged",
+          onChanged,
+        ),
+      )
+      ..add(StringProperty("prefixText", prefixText))
+      ..add(StringProperty("errorText", errorText))
+      ..add(EnumProperty<TextInputAction?>("inputAction", inputAction))
+      ..add(DiagnosticsProperty<FocusNode?>("currentFocus", currentFocus))
+      ..add(DiagnosticsProperty<FocusNode?>("nextFocus", nextFocus))
+      ..add(StringProperty("hintText", hintText))
+      ..add(DiagnosticsProperty<bool?>("obscureText", obscureText))
+      ..add(DiagnosticsProperty<BuildContext?>("context", context))
+      ..add(ObjectFlagProperty<void Function()?>.has("onTap", onTap))
+      ..add(ObjectFlagProperty<void Function()?>.has("onComplete", onComplete))
+      ..add(DiagnosticsProperty<bool>("readOnly", readOnly))
+      ..add(StringProperty("suffixText", suffixText))
+      ..add(DiagnosticsProperty<TextStyle?>("suffixStyle", suffixStyle))
+      ..add(ColorProperty("fillColor", fillColor))
+      ..add(DiagnosticsProperty<EdgeInsets?>("contentPadding", contentPadding))
+      ..add(DiagnosticsProperty<InputBorder?>("focusedBorder", focusedBorder))
+      ..add(DiagnosticsProperty<InputBorder?>("enabledBorder", enabledBorder))
+      ..add(DiagnosticsProperty<InputBorder?>("errorBorder", errorBorder))
+      ..add(
+        DiagnosticsProperty<InputBorder?>(
+          "focusedErrorBorder",
+          focusedErrorBorder,
+        ),
+      )
+      ..add(DiagnosticsProperty<bool>("required", required))
+      ..add(DiagnosticsProperty<bool?>("filled", filled))
+      ..add(DiagnosticsProperty<bool>("haveBorder", haveBorder));
+  }
 }
 
 class _CustomPhoneTextFieldState extends State<CustomPhoneTextField> {
@@ -81,31 +135,33 @@ class _CustomPhoneTextFieldState extends State<CustomPhoneTextField> {
   @override
   void initState() {
     super.initState();
-    focusNode.addListener(() {
-      if (focusNode.hasFocus) {
-        setState(() {
-          _prefixText = '+998 ';
-        });
-      } else {
-        if (widget.controller.text.isEmpty) {
+    if (widget.controller != null) {
+      focusNode.addListener(() {
+        if (focusNode.hasFocus) {
           setState(() {
-            _prefixText = null;
+            _prefixText = "+998 ";
           });
+        } else {
+          if (widget.controller!.text.isEmpty) {
+            setState(() {
+              _prefixText = null;
+            });
+          }
         }
-      }
-    });
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
-        children: [
+        children: <Widget>[
           if (widget.titleText != null)
             Padding(
               padding: const EdgeInsets.only(bottom: 4),
               child: Text(
-                '${widget.titleText}',
+                "${widget.titleText}",
                 style: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
@@ -115,11 +171,11 @@ class _CustomPhoneTextFieldState extends State<CustomPhoneTextField> {
           TextFormField(
             validator: widget.validator,
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            inputFormatters: [
+            inputFormatters: <TextInputFormatter>[
               MaskedTextInputFormatter(
-                mask: '## ### ## ##',
-                separator: ' ',
-                filter: RegExp('[0-9]'),
+                mask: "## ### ## ##",
+                separator: " ",
+                filter: RegExp("[0-9]"),
               ),
             ],
             style: const TextStyle(
@@ -135,12 +191,12 @@ class _CustomPhoneTextFieldState extends State<CustomPhoneTextField> {
             scrollPadding: EdgeInsets.zero,
             autofocus: widget.autoFocus,
             onChanged: widget.onChanged,
-            onFieldSubmitted: (term) => _fieldFocusChange(
+            onFieldSubmitted: (String term) => _fieldFocusChange(
               context,
               focusNode,
               widget.nextFocus,
             ),
-            obscuringCharacter: '*',
+            obscuringCharacter: "*",
             textInputAction: widget.inputAction,
             textAlignVertical: TextAlignVertical.center,
             decoration: InputDecoration(
@@ -153,7 +209,7 @@ class _CustomPhoneTextFieldState extends State<CustomPhoneTextField> {
                 maxWidth: _prefixText != null ? 56 : 12,
                 minWidth: _prefixText != null ? 48 : 12,
               ),
-              hintText: _prefixText == null ? widget.hintText : '',
+              hintText: _prefixText == null ? widget.hintText : "",
               errorText: widget.showError ?? false ? widget.errorText : null,
             ),
             cursorColor: context.theme.colorScheme.primary,
@@ -172,5 +228,11 @@ class _CustomPhoneTextFieldState extends State<CustomPhoneTextField> {
       currentFocus.unfocus();
       FocusScope.of(context).requestFocus(nextFocus);
     }
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<FocusNode>("focusNode", focusNode));
   }
 }

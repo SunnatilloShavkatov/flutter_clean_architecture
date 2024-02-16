@@ -1,9 +1,11 @@
-import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show SystemUiOverlayStyle;
+import "package:equatable/equatable.dart";
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
+import "package:flutter/services.dart"
+    show DiagnosticPropertiesBuilder, SystemUiOverlayStyle;
 
-import 'core/widgets/cupertino_back/cupertino_back_gesture.dart';
-import 'core/widgets/keyboard/keyboard_dismiss.dart';
+import "package:flutter_clean_architecture/core/widgets/cupertino_back/cupertino_back_gesture.dart";
+import "package:flutter_clean_architecture/core/widgets/keyboard/keyboard_dismiss.dart";
 
 class AppOptions extends Equatable {
   const AppOptions({
@@ -29,7 +31,7 @@ class AppOptions extends Equatable {
             WidgetsBinding.instance.platformDispatcher.platformBrightness;
     }
 
-    final overlayStyle = brightness == Brightness.dark
+    final SystemUiOverlayStyle overlayStyle = brightness == Brightness.dark
         ? SystemUiOverlayStyle.light
         : SystemUiOverlayStyle.dark;
 
@@ -46,19 +48,19 @@ class AppOptions extends Equatable {
       );
 
   static AppOptions of(BuildContext context) {
-    final scope =
+    final _ModelBindingScope scope =
         context.dependOnInheritedWidgetOfExactType<_ModelBindingScope>()!;
     return scope.modelBindingState.currentModel;
   }
 
   static void update(BuildContext context, AppOptions newModel) {
-    final scope =
+    final _ModelBindingScope scope =
         context.dependOnInheritedWidgetOfExactType<_ModelBindingScope>()!;
     scope.modelBindingState.updateModel(newModel);
   }
 
   @override
-  List<Object> get props => [themeMode, locale];
+  List<Object> get props => <Object>[themeMode, locale];
 }
 
 class _ModelBindingScope extends InheritedWidget {
@@ -71,13 +73,22 @@ class _ModelBindingScope extends InheritedWidget {
 
   @override
   bool updateShouldNotify(_ModelBindingScope oldWidget) => true;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+      DiagnosticsProperty<_ModelBindingState>(
+        "modelBindingState",
+        modelBindingState,
+      ),
+    );
+  }
 }
 
 class ModelBinding extends StatefulWidget {
   const ModelBinding({
-    super.key,
-    required this.initialModel,
-    required this.child,
+    required this.initialModel, required this.child, super.key,
   });
 
   final AppOptions initialModel;
@@ -85,6 +96,14 @@ class ModelBinding extends StatefulWidget {
 
   @override
   State<ModelBinding> createState() => _ModelBindingState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+      DiagnosticsProperty<AppOptions>("initialModel", initialModel),
+    );
+  }
 }
 
 class _ModelBindingState extends State<ModelBinding> {
@@ -114,4 +133,12 @@ class _ModelBindingState extends State<ModelBinding> {
           ),
         ),
       );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+      DiagnosticsProperty<AppOptions>("currentModel", currentModel),
+    );
+  }
 }

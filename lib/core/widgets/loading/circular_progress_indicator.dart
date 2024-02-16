@@ -1,8 +1,8 @@
-import 'dart:math' as math;
+import "dart:math" as math;
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import "package:flutter/cupertino.dart";
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
 
 const double _kMinCircularProgressIndicatorSize = 36;
 const int _kIndeterminateLinearDuration = 1800;
@@ -38,14 +38,20 @@ abstract class _CircularProgressIndicator extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(
-      PercentProperty(
-        'value',
-        value,
-        showName: false,
-        ifNull: '<indeterminate>',
-      ),
-    );
+    properties
+      ..add(
+        PercentProperty(
+          "value",
+          value,
+          showName: false,
+          ifNull: "<indeterminate>",
+        ),
+      )
+      ..add(ColorProperty("backgroundColor", backgroundColor))
+      ..add(ColorProperty("color", color))
+      ..add(DiagnosticsProperty<Animation<Color?>?>("valueColor", valueColor))
+      ..add(StringProperty("semanticsLabel", semanticsLabel))
+      ..add(StringProperty("semanticsValue", semanticsValue));
   }
 
   Widget _buildSemanticsWrapper({
@@ -54,7 +60,7 @@ abstract class _CircularProgressIndicator extends StatefulWidget {
   }) {
     String? expandedSemanticsValue = semanticsValue;
     if (value != null) {
-      expandedSemanticsValue ??= '${(value! * 100).round()}%';
+      expandedSemanticsValue ??= "${(value! * 100).round()}%";
     }
     return Semantics(
       label: semanticsLabel,
@@ -68,10 +74,10 @@ class _LinearCappedProgressIndicatorPainter extends CustomPainter {
   const _LinearCappedProgressIndicatorPainter({
     required this.backgroundColor,
     required this.valueColor,
-    this.value,
-    this.cornerRadius,
     required this.animationValue,
     required this.textDirection,
+    this.value,
+    this.cornerRadius,
   });
 
   final Color backgroundColor;
@@ -180,7 +186,7 @@ class LinearCappedProgressIndicator extends _CircularProgressIndicator {
     super.semanticsValue,
   }) : assert(
           minHeight == null || minHeight > 0,
-          'minHeight must be null or positive',
+          "minHeight must be null or positive",
         );
 
   /// Color of the track being filled by the linear indicator.
@@ -208,6 +214,14 @@ class LinearCappedProgressIndicator extends _CircularProgressIndicator {
   @override
   State<LinearCappedProgressIndicator> createState() =>
       _LinearCappedProgressIndicatorState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DoubleProperty("minHeight", minHeight))
+      ..add(DoubleProperty("cornerRadius", cornerRadius));
+  }
 }
 
 class _LinearCappedProgressIndicatorState
@@ -297,7 +311,6 @@ class _LinearCappedProgressIndicatorState
 
 class _CircularCappedProgressIndicatorPainter extends CustomPainter {
   _CircularCappedProgressIndicatorPainter({
-    this.backgroundColor,
     required this.valueColor,
     required this.value,
     required this.headValue,
@@ -306,6 +319,7 @@ class _CircularCappedProgressIndicatorPainter extends CustomPainter {
     required this.rotationValue,
     required this.strokeWidth,
     required this.strokeCap,
+    this.backgroundColor,
   })  : arcStart = value != null
             ? _startAngle
             : _startAngle +
@@ -444,6 +458,14 @@ class CustomCircularProgressIndicator extends _CircularProgressIndicator {
   @override
   State<CustomCircularProgressIndicator> createState() =>
       _CircularCappedProgressIndicatorState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DoubleProperty("strokeWidth", strokeWidth))
+      ..add(EnumProperty<StrokeCap>("strokeCap", strokeCap));
+  }
 }
 
 class _CircularCappedProgressIndicatorState
@@ -544,7 +566,8 @@ class _CircularCappedProgressIndicatorState
 
   Widget _buildAnimation() => AnimatedBuilder(
         animation: _controller,
-        builder: (context, child) => _buildMaterialIndicator(
+        builder: (BuildContext context, Widget? child) =>
+            _buildMaterialIndicator(
           context,
           _strokeHeadTween.evaluate(_controller),
           _strokeTailTween.evaluate(_controller),

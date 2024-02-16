@@ -1,4 +1,4 @@
-import 'package:equatable/equatable.dart';
+import "package:equatable/equatable.dart";
 
 class SignInRequestEntity extends Equatable {
   const SignInRequestEntity({
@@ -10,7 +10,7 @@ class SignInRequestEntity extends Equatable {
   final String? password;
 
   @override
-  List<Object?> get props => [
+  List<Object?> get props => <Object?>[
         email,
         password,
       ];

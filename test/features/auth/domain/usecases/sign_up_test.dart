@@ -1,11 +1,11 @@
-import 'package:flutter_clean_architecture/core/either/either.dart';
-import 'package:flutter_clean_architecture/features/auth/domain/entities/sign_up/sign_up_request_entity.dart';
-import 'package:flutter_clean_architecture/features/auth/domain/entities/sign_up/sign_up_response_entity.dart';
-import 'package:flutter_clean_architecture/features/auth/domain/usecases/sign_up.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
+import "package:flutter_clean_architecture/core/either/either.dart";
+import "package:flutter_clean_architecture/features/auth/domain/entities/sign_up/sign_up_request_entity.dart";
+import "package:flutter_clean_architecture/features/auth/domain/entities/sign_up/sign_up_response_entity.dart";
+import "package:flutter_clean_architecture/features/auth/domain/usecases/sign_up.dart";
+import "package:flutter_test/flutter_test.dart";
+import "package:mockito/mockito.dart";
 
-import 'sign_in_test.mocks.dart';
+import "sign_in_test.mocks.dart";
 
 void main() {
   late SignUp useCase;
@@ -16,20 +16,20 @@ void main() {
     useCase = SignUp(mockAuthRepository);
   });
 
-  const signUpRequest = SignUpRequestEntity(
-    firstName: 'firstName',
-    lastName: 'lastName',
-    email: 'email',
-    password: 'password',
-    language: 'uz',
+  const SignUpRequestEntity signUpRequest = SignUpRequestEntity(
+    firstName: "firstName",
+    lastName: "lastName",
+    email: "email",
+    password: "password",
+    language: "uz",
   );
-  const signUpResponse = SignUpResponseEntity(
-    token: 'token',
+  const SignUpResponseEntity signUpResponse = SignUpResponseEntity(
+    token: "token",
   );
 
-  test('should sign up for given request for repository', () async {
+  test("should sign up for given request for repository", () async {
     when(mockAuthRepository.signUp(signUpRequest)).thenAnswer(
-      (realInvocation) async => const Right(signUpResponse),
+      (Invocation realInvocation) async => const Right(signUpResponse),
     );
 
     final result = await useCase(const Params(signUpRequest));

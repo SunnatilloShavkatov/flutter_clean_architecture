@@ -1,11 +1,14 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: diagnostic_describe_all_properties
+
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
 
 class BouncingButton extends StatefulWidget {
   /// BouncingWidget constructor
   const BouncingButton({
-    super.key,
     required this.child,
     required this.onPressed,
+    super.key,
     this.scaleFactor = 1,
     this.duration = const Duration(milliseconds: 300),
     this.stayOnBottom = false,
@@ -31,6 +34,16 @@ class BouncingButton extends StatefulWidget {
 
   @override
   State<BouncingButton> createState() => _BouncingButtonState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(ObjectFlagProperty<VoidCallback>.has("onPressed", onPressed))
+      ..add(DiagnosticsProperty<Duration>("duration", duration))
+      ..add(DoubleProperty("scaleFactor", scaleFactor))
+      ..add(DiagnosticsProperty<bool>("stayOnBottom", stayOnBottom));
+  }
 }
 
 class _BouncingButtonState extends State<BouncingButton>
@@ -105,11 +118,14 @@ class _BouncingButtonState extends State<BouncingButton>
     return GestureDetector(
       onTapDown: _onTapDown,
       onTapUp: _onTapUp,
-      onLongPressEnd: (details) => _onLongPressEnd(details, context),
+      onLongPressEnd: (LongPressEndDetails details) =>
+          _onLongPressEnd(details, context),
       onHorizontalDragEnd: _onDragEnd,
       onVerticalDragEnd: _onDragEnd,
-      onHorizontalDragUpdate: (details) => _onDragUpdate(details, context),
-      onVerticalDragUpdate: (details) => _onDragUpdate(details, context),
+      onHorizontalDragUpdate: (DragUpdateDetails details) =>
+          _onDragUpdate(details, context),
+      onVerticalDragUpdate: (DragUpdateDetails details) =>
+          _onDragUpdate(details, context),
       child: Transform.scale(
         key: _childKey,
         scale: _scale,
@@ -189,5 +205,12 @@ class _BouncingButtonState extends State<BouncingButton>
         touchPosition.dx > childPosition.dx + childSize.width ||
         touchPosition.dy < childPosition.dy ||
         touchPosition.dy > childPosition.dy + childSize.height;
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(ObjectFlagProperty<VoidCallback>.has("onPressed", onPressed));
   }
 }

@@ -1,15 +1,15 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import '../../../../../core/utils/utils.dart';
-import '../../../../../core/widgets/blur_text.dart';
-import '../../../../../core/widgets/custom_cached_network_image.dart';
+import "package:flutter_clean_architecture/core/utils/utils.dart";
+import "package:flutter_clean_architecture/core/widgets/blur_text.dart";
+import "package:flutter_clean_architecture/core/widgets/custom_cached_network_image.dart";
 
 class MovieItem extends StatelessWidget {
   const MovieItem({super.key});
 
   @override
   Widget build(BuildContext context) => Stack(
-        children: [
+        children: <Widget>[
           Padding(
             padding: const EdgeInsets.only(top: 4, left: 4),
             child: SizedBox(
@@ -17,15 +17,15 @@ class MovieItem extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisSize: MainAxisSize.min,
-                children: [
+                children: <Widget>[
                   Expanded(
                     child: Stack(
-                      children: [
+                      children: <Widget>[
                         ClipRRect(
                           borderRadius: AppUtils.kBorderRadius8,
                           child: CustomCachedNetworkImage(
                             imageUrl:
-                                'https://firebasestorage.googleapis.com/v0/b/sample-bloc-5b8b9.appspot.com/o/movie_photo.webp?alt=media',
+                                "https://firebasestorage.googleapis.com/v0/b/sample-bloc-5b8b9.appspot.com/o/movie_photo.webp?alt=media",
                             width: 128,
                             fit: BoxFit.cover,
                             placeholder: (_, __) => alignLogo,
@@ -37,14 +37,14 @@ class MovieItem extends StatelessWidget {
                   ),
                   AppUtils.kGap6,
                   const Text(
-                    'Oliftaxon',
+                    "Oliftaxon",
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   const Text(
-                    'Сериал',
+                    "Сериал",
                     style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w500,
@@ -56,7 +56,7 @@ class MovieItem extends StatelessWidget {
           ),
           const Positioned(
             left: 0,
-            child: BlurText(text: 'Экслюзив'),
+            child: BlurText(text: "Экслюзив"),
           ),
         ],
       );

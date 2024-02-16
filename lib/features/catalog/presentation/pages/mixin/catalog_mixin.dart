@@ -1,4 +1,4 @@
-part of '../catalog_page.dart';
+part of "../catalog_page.dart";
 
 mixin CatalogMixin on State<CatalogPage> {
   late final TabController _tabController;

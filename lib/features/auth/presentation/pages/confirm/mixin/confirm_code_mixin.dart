@@ -1,4 +1,4 @@
-part of '../confirm_code_page.dart';
+part of "../confirm_code_page.dart";
 
 mixin ConfirmCodeMixin on State<ConfirmCodePage> {
   late final TextEditingController controller;

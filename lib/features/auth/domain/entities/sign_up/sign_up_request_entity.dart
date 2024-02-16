@@ -1,4 +1,4 @@
-import 'package:equatable/equatable.dart';
+import "package:equatable/equatable.dart";
 
 class SignUpRequestEntity extends Equatable {
   const SignUpRequestEntity({
@@ -16,7 +16,7 @@ class SignUpRequestEntity extends Equatable {
   final String? language;
 
   @override
-  List<Object?> get props => [
+  List<Object?> get props => <Object?>[
         firstName,
         lastName,
         email,

@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import 'core/extension/extension.dart';
-import 'core/l10n/app_localizations.dart';
-import 'core/theme/themes.dart';
-import 'router/app_routes.dart';
+import "package:flutter_clean_architecture/core/extension/extension.dart";
+import "package:flutter_clean_architecture/core/l10n/app_localizations.dart";
+import "package:flutter_clean_architecture/core/theme/themes.dart";
+import "package:flutter_clean_architecture/router/app_routes.dart";
 
 class App extends StatelessWidget {
   const App({super.key});

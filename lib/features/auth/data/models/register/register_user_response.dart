@@ -6,9 +6,9 @@ class RegisterUserResponse {
   });
 
   RegisterUserResponse.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
-    description = json['description'] as String?;
-    status = json['status'] as String?;
+    data = json["data"] != null ? Data.fromJson(json["data"]) : null;
+    description = json["description"] as String?;
+    status = json["status"] as String?;
   }
 
   Data? data;
@@ -16,12 +16,12 @@ class RegisterUserResponse {
   String? status;
 
   Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
+    final Map<String, dynamic> map = <String, dynamic>{};
     if (data != null) {
-      map['data'] = data?.toJson();
+      map["data"] = data?.toJson();
     }
-    map['description'] = description;
-    map['status'] = status;
+    map["description"] = description;
+    map["status"] = status;
     return map;
   }
 }
@@ -38,15 +38,15 @@ class Data {
   });
 
   Data.fromJson(Map json) {
-    environmentId = json['environment_id'] as String?;
-    loginTableSlug = json['login_table_slug'] as String?;
+    environmentId = json["environment_id"] as String?;
+    loginTableSlug = json["login_table_slug"] as String?;
 
-    resourceId = json['resource_id'] as String?;
+    resourceId = json["resource_id"] as String?;
 
-    token = json['token'] != null ? Token.fromJson(json['token']) : null;
-    user = json['user'] != null ? User.fromJson(json['user']) : null;
-    userFound = json['user_found'] as bool?;
-    userId = json['user_id'] as String?;
+    token = json["token"] != null ? Token.fromJson(json["token"]) : null;
+    user = json["user"] != null ? User.fromJson(json["user"]) : null;
+    userFound = json["user_found"] as bool?;
+    userId = json["user_id"] as String?;
   }
 
   String? environmentId;
@@ -58,21 +58,21 @@ class Data {
   String? userId;
 
   Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
+    final Map<String, dynamic> map = <String, dynamic>{};
 
-    map['environment_id'] = environmentId;
-    map['login_table_slug'] = loginTableSlug;
+    map["environment_id"] = environmentId;
+    map["login_table_slug"] = loginTableSlug;
 
-    map['resource_id'] = resourceId;
+    map["resource_id"] = resourceId;
 
     if (token != null) {
-      map['token'] = token?.toJson();
+      map["token"] = token?.toJson();
     }
     if (user != null) {
-      map['user'] = user?.toJson();
+      map["user"] = user?.toJson();
     }
-    map['user_found'] = userFound;
-    map['user_id'] = userId;
+    map["user_found"] = userFound;
+    map["user_id"] = userId;
     return map;
   }
 }
@@ -93,17 +93,17 @@ class User {
   });
 
   User.fromJson(Map<String, dynamic> json) {
-    agreed = json['agreed'];
-    clientTypeId = json['client_type_id'];
-    guid = json['guid'];
-    login = json['login'];
-    name = json['name'];
-    password = json['password'];
-    phone = json['phone'];
-    roleId = json['role_id'];
-    surname = json['surname'];
-    photo = json['photo'];
-    patronymic = json['patronymic'];
+    agreed = json["agreed"];
+    clientTypeId = json["client_type_id"];
+    guid = json["guid"];
+    login = json["login"];
+    name = json["name"];
+    password = json["password"];
+    phone = json["phone"];
+    roleId = json["role_id"];
+    surname = json["surname"];
+    photo = json["photo"];
+    patronymic = json["patronymic"];
   }
 
   bool? agreed;
@@ -119,18 +119,18 @@ class User {
   String? photo;
 
   Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['agreed'] = agreed;
-    map['client_type_id'] = clientTypeId;
-    map['guid'] = guid;
-    map['login'] = login;
-    map['name'] = name;
-    map['password'] = password;
-    map['phone'] = phone;
-    map['role_id'] = roleId;
-    map['surname'] = surname;
-    map['patronymic'] = patronymic;
-    map['photo'] = photo;
+    final Map<String, dynamic> map = <String, dynamic>{};
+    map["agreed"] = agreed;
+    map["client_type_id"] = clientTypeId;
+    map["guid"] = guid;
+    map["login"] = login;
+    map["name"] = name;
+    map["password"] = password;
+    map["phone"] = phone;
+    map["role_id"] = roleId;
+    map["surname"] = surname;
+    map["patronymic"] = patronymic;
+    map["photo"] = photo;
     return map;
   }
 }
@@ -146,12 +146,12 @@ class Token {
   });
 
   Token.fromJson(Map<String, dynamic> json) {
-    accessToken = json['access_token'];
-    createdAt = json['created_at'];
-    expiresAt = json['expires_at'];
-    refreshInSeconds = json['refresh_in_seconds'];
-    refreshToken = json['refresh_token'];
-    updatedAt = json['updated_at'];
+    accessToken = json["access_token"];
+    createdAt = json["created_at"];
+    expiresAt = json["expires_at"];
+    refreshInSeconds = json["refresh_in_seconds"];
+    refreshToken = json["refresh_token"];
+    updatedAt = json["updated_at"];
   }
 
   String? accessToken;
@@ -162,13 +162,13 @@ class Token {
   String? updatedAt;
 
   Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['access_token'] = accessToken;
-    map['created_at'] = createdAt;
-    map['expires_at'] = expiresAt;
-    map['refresh_in_seconds'] = refreshInSeconds;
-    map['refresh_token'] = refreshToken;
-    map['updated_at'] = updatedAt;
+    final Map<String, dynamic> map = <String, dynamic>{};
+    map["access_token"] = accessToken;
+    map["created_at"] = createdAt;
+    map["expires_at"] = expiresAt;
+    map["refresh_in_seconds"] = refreshInSeconds;
+    map["refresh_token"] = refreshToken;
+    map["updated_at"] = updatedAt;
     return map;
   }
 }

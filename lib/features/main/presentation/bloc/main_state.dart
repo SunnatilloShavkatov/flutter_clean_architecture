@@ -1,4 +1,4 @@
-part of 'main_bloc.dart';
+part of "main_bloc.dart";
 
 enum MainMenu { home, tv, catalog, favorites, profile }
 
@@ -15,5 +15,5 @@ class MainState extends Equatable {
       MainState(menu: menu ?? this.menu);
 
   @override
-  List<Object?> get props => [menu];
+  List<Object?> get props => <Object?>[menu];
 }

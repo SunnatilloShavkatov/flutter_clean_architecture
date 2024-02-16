@@ -1,17 +1,18 @@
-import 'dart:async';
-import 'dart:developer';
-import 'dart:io';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import '../../../firebase_options.dart';
-import '../router/app_routes.dart';
+import "dart:async";
+import "dart:developer";
+import "dart:io";
+
+import "package:firebase_core/firebase_core.dart";
+import "package:firebase_messaging/firebase_messaging.dart";
+import "package:flutter/foundation.dart";
+import "package:flutter_clean_architecture/firebase_options.dart";
+import "package:flutter_clean_architecture/router/app_routes.dart";
+import "package:flutter_local_notifications/flutter_local_notifications.dart";
 
 late AndroidNotificationChannel channel;
 late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 InitializationSettings initializationSettings = const InitializationSettings(
-  android: AndroidInitializationSettings('@mipmap/ic_launcher'),
+  android: AndroidInitializationSettings("@mipmap/ic_launcher"),
   iOS: DarwinInitializationSettings(),
 );
 
@@ -24,7 +25,7 @@ sealed class NotificationService {
     );
     unawaited(
       FirebaseMessaging.instance.getToken().then(
-            (token) => log('FCM TOKEN: $token'),
+            (String? token) => log("FCM TOKEN: $token"),
           ),
     );
     await setupFlutterNotifications();
@@ -46,9 +47,9 @@ sealed class NotificationService {
       );
     }
     channel = const AndroidNotificationChannel(
-      'high_importance_channel',
-      'High Importance Notifications',
-      description: 'This channel is used for important notifications.',
+      "high_importance_channel",
+      "High Importance Notifications",
+      description: "This channel is used for important notifications.",
       importance: Importance.high,
     );
 
@@ -71,18 +72,18 @@ sealed class NotificationService {
       unawaited(
         flutterLocalNotificationsPlugin.show(
           message.hashCode,
-          message.data['title'],
-          message.data['body'],
+          message.data["title"],
+          message.data["body"],
           NotificationDetails(
             android: AndroidNotificationDetails(
               channel.id,
               channel.name,
               channelDescription: channel.description,
               styleInformation: BigTextStyleInformation(
-                message.data['body'] ?? '',
-                contentTitle: message.data['title'],
+                message.data["body"] ?? "",
+                contentTitle: message.data["title"],
               ),
-              icon: '@mipmap/ic_launcher',
+              icon: "@mipmap/ic_launcher",
               priority: Priority.high,
               importance: Importance.high,
               visibility: NotificationVisibility.public,
@@ -91,10 +92,10 @@ sealed class NotificationService {
               presentAlert: true,
               presentBadge: true,
               presentSound: true,
-              sound: 'default',
+              sound: "default",
             ),
           ),
-          payload: message.data['route'],
+          payload: message.data["route"],
         ),
       );
     }
@@ -106,9 +107,9 @@ sealed class NotificationService {
     ///When tapped
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
-      onDidReceiveNotificationResponse: (response) async {
-        debugPrint('foreground notification tapped');
-        debugPrint('$response');
+      onDidReceiveNotificationResponse: (NotificationResponse response) async {
+        debugPrint("foreground notification tapped");
+        debugPrint("$response");
         chuck.showInspector();
       },
     );
@@ -116,15 +117,15 @@ sealed class NotificationService {
 
   static void backgroundNotification() {
     FirebaseMessaging.onMessageOpenedApp.listen(
-      (message) {
-        debugPrint('A new onMessageOpenedApp event was published!');
+      (RemoteMessage message) {
+        debugPrint("A new onMessageOpenedApp event was published!");
         showFlutterNotification(message);
       },
     );
   }
 
   static Future<void> terminateNotification() async {
-    final remoteMessage = await FirebaseMessaging.instance.getInitialMessage();
+    final RemoteMessage? remoteMessage = await FirebaseMessaging.instance.getInitialMessage();
     if (remoteMessage == null) {
       FirebaseMessaging.onBackgroundMessage(
         _firebaseMessagingBackgroundHandler,
@@ -135,7 +136,7 @@ sealed class NotificationService {
   }
 }
 
-@pragma('vm:entry-point')
+@pragma("vm:entry-point")
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await NotificationService.setupFlutterNotifications();

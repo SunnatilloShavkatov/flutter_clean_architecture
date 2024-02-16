@@ -1,5 +1,6 @@
-import 'dart:math';
-import 'package:flutter/material.dart';
+import "dart:math";
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
 
 /// Double pi.
 const double _doublePi = 2 * pi;
@@ -21,45 +22,6 @@ typedef OnGetCenterText = Text Function(double);
 /// redrawing of the widget. Animation transition to a new value already built
 /// into the widget. Progress bar can be either with or without a gradient.
 class SimpleCircularProgressBar extends StatefulWidget {
-  /// Widget size. Equals the height and width of the widget.
-  final double size;
-
-  /// The maximum value of the progress bar.
-  final double maxValue;
-
-  /// Start angle. In this position there will be a zero value.
-  final double startAngle;
-
-  /// Progress line thickness.
-  final double progressStrokeWidth;
-
-  /// Background circle line thickness.
-  final double backStrokeWidth;
-
-  /// The list of colors of the main line (one and more).
-  final List<Color> progressColors;
-
-  /// The color of the circle at 100% value.
-  /// It only works when [mergeMode] equal to true.
-  final Color? fullProgressColor;
-
-  /// The color of the background circle.
-  final Color backColor;
-
-  /// Animation speed.
-  final int animationDuration;
-
-  /// When this mode is enabled the progress bar with a 100% value forms a full
-  /// circle.
-  final bool mergeMode;
-
-  /// The object designed to update the value of the progress bar.
-  final ValueNotifier<double>? valueNotifier;
-
-  /// Callback to generate a new Text widget located in the center of the
-  /// progress bar. The callback input is the current value of the bar progress.
-  final OnGetCenterText? onGetText;
-
   /// Create simple circular progress bar.
   ///
   /// Main params. Create simple circular progress bar with size equal to [size]
@@ -100,7 +62,7 @@ class SimpleCircularProgressBar extends StatefulWidget {
     this.startAngle = 0,
     this.progressStrokeWidth = 15,
     this.backStrokeWidth = 15,
-    this.progressColors = const [Colors.blueAccent, Colors.greenAccent],
+    this.progressColors = const <Color>[Colors.blueAccent, Colors.greenAccent],
     this.fullProgressColor,
     this.backColor = const Color(0xFF16262D),
     this.animationDuration = 6,
@@ -109,9 +71,67 @@ class SimpleCircularProgressBar extends StatefulWidget {
     this.onGetText,
   });
 
+  /// Widget size. Equals the height and width of the widget.
+  final double size;
+
+  /// The maximum value of the progress bar.
+  final double maxValue;
+
+  /// Start angle. In this position there will be a zero value.
+  final double startAngle;
+
+  /// Progress line thickness.
+  final double progressStrokeWidth;
+
+  /// Background circle line thickness.
+  final double backStrokeWidth;
+
+  /// The list of colors of the main line (one and more).
+  final List<Color> progressColors;
+
+  /// The color of the circle at 100% value.
+  /// It only works when [mergeMode] equal to true.
+  final Color? fullProgressColor;
+
+  /// The color of the background circle.
+  final Color backColor;
+
+  /// Animation speed.
+  final int animationDuration;
+
+  /// When this mode is enabled the progress bar with a 100% value forms a full
+  /// circle.
+  final bool mergeMode;
+
+  /// The object designed to update the value of the progress bar.
+  final ValueNotifier<double>? valueNotifier;
+
+  /// Callback to generate a new Text widget located in the center of the
+  /// progress bar. The callback input is the current value of the bar progress.
+  final OnGetCenterText? onGetText;
+
   @override
   State<SimpleCircularProgressBar> createState() =>
       _SimpleCircularProgressBarState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DoubleProperty("size", size))
+      ..add(DoubleProperty("maxValue", maxValue))
+      ..add(DoubleProperty("startAngle", startAngle))
+      ..add(DoubleProperty("progressStrokeWidth", progressStrokeWidth))
+      ..add(DoubleProperty("backStrokeWidth", backStrokeWidth))
+      ..add(IterableProperty<Color>("progressColors", progressColors))
+      ..add(ColorProperty("fullProgressColor", fullProgressColor))
+      ..add(ColorProperty("backColor", backColor))
+      ..add(IntProperty("animationDuration", animationDuration))
+      ..add(DiagnosticsProperty<bool>("mergeMode", mergeMode))
+      ..add(DiagnosticsProperty<ValueNotifier<double>?>(
+          "valueNotifier", valueNotifier,),)
+      ..add(ObjectFlagProperty<OnGetCenterText?>.has("onGetText", onGetText));
+  }
 }
 
 class _SimpleCircularProgressBarState extends State<SimpleCircularProgressBar>
@@ -154,19 +174,21 @@ class _SimpleCircularProgressBarState extends State<SimpleCircularProgressBar>
     // Correction angle - the angle to which the main line should be
     // shifted in order for the SweepGradient to be displayed correctly.
     circleLength = pi * widgetSize;
-    final k = _doublePi / circleLength;
+    final double k = _doublePi / circleLength;
 
     correctAngle = widget.progressStrokeWidth * k;
     startAngle = correctAngle / 2;
 
     // Adjusting the colors.
-    final List<Color> progressColors = [];
+    final List<Color> progressColors = <Color>[];
     if (widget.progressColors.isEmpty) {
-      progressColors.add(Colors.blueAccent);
-      progressColors.add(Colors.greenAccent);
+      progressColors
+        ..add(Colors.blueAccent)
+        ..add(Colors.greenAccent);
     } else if (widget.progressColors.length == 1) {
-      progressColors.add(widget.progressColors[0]);
-      progressColors.add(widget.progressColors[0]);
+      progressColors
+        ..add(widget.progressColors[0])
+        ..add(widget.progressColors[0]);
     } else {
       progressColors.addAll(widget.progressColors);
     }
@@ -181,7 +203,7 @@ class _SimpleCircularProgressBarState extends State<SimpleCircularProgressBar>
         : widget.fullProgressColor!;
 
     // Create animation.
-    final animationDuration =
+    final int animationDuration =
         (widget.animationDuration < 0) ? 0 : widget.animationDuration;
 
     animationController = AnimationController(
@@ -213,7 +235,7 @@ class _SimpleCircularProgressBarState extends State<SimpleCircularProgressBar>
 
           return AnimatedBuilder(
             animation: animationController,
-            builder: (context, snapshot) {
+            builder: (BuildContext context, Widget? snapshot) {
               // [MAIN LOGIC]
               //
               // If [value] >= [animation.value]:
@@ -227,14 +249,15 @@ class _SimpleCircularProgressBarState extends State<SimpleCircularProgressBar>
               if ((value != animationController.upperBound) &&
                   (animationController.value >=
                       animationController.upperBound)) {
-                animationController.reset();
-                animationController.animateTo(value);
+                animationController
+                  ..reset()
+                  ..animateTo(value);
               }
 
               double sweepAngle;
 
               // Reduce the value to a range of 0.0 to 1.0.
-              final reducedValue = animationController.value / maxValue;
+              final double reducedValue = animationController.value / maxValue;
 
               if (animationController.value == 0) {
                 sweepAngle = 0;
@@ -246,12 +269,12 @@ class _SimpleCircularProgressBarState extends State<SimpleCircularProgressBar>
                 }
               }
 
-              final currentLength = reducedValue * circleLength;
+              final double currentLength = reducedValue * circleLength;
 
               // If mergeMode is on and the current value is equal to the
               //maximum value, we should draw a full circle with the specified
               // color.
-              final isFullProgress = widget.mergeMode &
+              final bool isFullProgress = widget.mergeMode &
                   (animationController.value == animationController.upperBound);
 
               // Create center text widget.
@@ -266,7 +289,7 @@ class _SimpleCircularProgressBarState extends State<SimpleCircularProgressBar>
               // Repaint progress bar.
               return Stack(
                 alignment: Alignment.center,
-                children: [
+                children: <Widget>[
                   centerTextWidget,
                   Transform.rotate(
                     angle: _degToRad(widget.startAngle - 90),
@@ -302,20 +325,30 @@ class _SimpleCircularProgressBarState extends State<SimpleCircularProgressBar>
 
     super.dispose();
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DoubleProperty("minSweepAngle", minSweepAngle))
+      ..add(DoubleProperty("circleLength", circleLength))
+      ..add(DoubleProperty("maxValue", maxValue))
+      ..add(DoubleProperty("widgetSize", widgetSize))
+      ..add(DoubleProperty("startAngle", startAngle))
+      ..add(DoubleProperty("correctAngle", correctAngle))
+      ..add(DiagnosticsProperty<SweepGradient>("sweepGradient", sweepGradient))
+      ..add(DiagnosticsProperty<AnimationController>(
+          "animationController", animationController,),)
+      ..add(ColorProperty("fullProgressColor", fullProgressColor))
+      ..add(DiagnosticsProperty<ValueNotifier<double>>(
+          "valueNotifier", valueNotifier,),)
+      ..add(DiagnosticsProperty<ValueNotifier<double>?>(
+          "defaultValueNotifier", defaultValueNotifier,),);
+  }
 }
 
 /// Painter to draw the progress bar.
 class _SimpleCircularProgressBarPainter extends CustomPainter {
-  final double progressStrokeWidth;
-  final double backStrokeWidth;
-  final double startAngle;
-  final double sweepAngle;
-  final double currentLength;
-  final SweepGradient frontGradient;
-  final Color backColor;
-  final Color fullProgressColor;
-  final bool isFullProgress;
-
   _SimpleCircularProgressBarPainter({
     required this.progressStrokeWidth,
     required this.backStrokeWidth,
@@ -327,6 +360,16 @@ class _SimpleCircularProgressBarPainter extends CustomPainter {
     required this.fullProgressColor,
     required this.isFullProgress,
   });
+
+  final double progressStrokeWidth;
+  final double backStrokeWidth;
+  final double startAngle;
+  final double sweepAngle;
+  final double currentLength;
+  final SweepGradient frontGradient;
+  final Color backColor;
+  final Color fullProgressColor;
+  final bool isFullProgress;
 
   /// Draw background circle for progress bar
   void _drawBack(Canvas canvas, Size size) {

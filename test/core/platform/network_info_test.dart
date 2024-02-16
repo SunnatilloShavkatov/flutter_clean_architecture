@@ -1,12 +1,11 @@
-import 'package:flutter_clean_architecture/core/connectivity/internet_connection_checker.dart';
-import 'package:flutter_clean_architecture/core/connectivity/network_info.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
+import "package:flutter_clean_architecture/core/connectivity/network_info.dart";
+import "package:flutter_test/flutter_test.dart";
+import "package:mockito/annotations.dart";
+import "package:mockito/mockito.dart";
 
-import 'network_info_test.mocks.dart';
+import "network_info_test.mocks.dart";
 
-@GenerateMocks([InternetConnectionChecker])
+@GenerateMocks(<Type>[InternetConnectionChecker])
 void main() {
   late InternetConnectionChecker internetConnectionCheckerPlus;
   late NetworkInfo networkInfo;
@@ -17,11 +16,11 @@ void main() {
   });
 
   test(
-    'check net connection',
+    "check net connection",
     () async {
       when(internetConnectionCheckerPlus.hasConnection)
-          .thenAnswer((realInvocation) async => true);
-      final result = await networkInfo.isConnected;
+          .thenAnswer((Invocation realInvocation) async => true);
+      final bool result = await networkInfo.isConnected;
       verify(internetConnectionCheckerPlus.hasConnection);
       verifyNoMoreInteractions(internetConnectionCheckerPlus);
       expect(result, true);

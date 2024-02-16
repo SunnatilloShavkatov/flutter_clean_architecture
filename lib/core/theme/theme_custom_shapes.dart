@@ -1,13 +1,10 @@
-part of 'themes.dart';
+part of "themes.dart";
 
 class ThemeCustomShapes extends ThemeExtension<ThemeCustomShapes> {
   const ThemeCustomShapes({
-    this.topRectangleBorder,
+    required this.buttonDecoration, required this.buttonsShadowDecoration, required this.favoriteButtonStyle, this.topRectangleBorder,
     this.bottomRectangleBorder,
-    required this.buttonDecoration,
-    required this.buttonsShadowDecoration,
     this.circleBorder,
-    required this.favoriteButtonStyle,
   });
 
   final OutlinedBorder? topRectangleBorder;
@@ -33,8 +30,8 @@ class ThemeCustomShapes extends ThemeExtension<ThemeCustomShapes> {
     buttonDecoration: BoxDecoration(
       borderRadius: BorderRadius.all(Radius.circular(8)),
       gradient: LinearGradient(
-        colors: [Color(0xFF2277F6), Color(0xFF1364DD)],
-        stops: [0.0, 1.0],
+        colors: <Color>[Color(0xFF2277F6), Color(0xFF1364DD)],
+        stops: <double>[0, 1],
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
       ),
@@ -42,12 +39,12 @@ class ThemeCustomShapes extends ThemeExtension<ThemeCustomShapes> {
     buttonsShadowDecoration: BoxDecoration(
       borderRadius: BorderRadius.all(Radius.circular(8)),
       gradient: LinearGradient(
-        colors: [Color(0xFF2277F6), Color(0xFF1364DD)],
-        stops: [0.0, 1.0],
+        colors: <Color>[Color(0xFF2277F6), Color(0xFF1364DD)],
+        stops: <double>[0, 1],
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
       ),
-      boxShadow: [
+      boxShadow: <BoxShadow>[
         BoxShadow(
           color: Color.fromRGBO(255, 255, 255, 0.25),
           offset: Offset(0, 1),
@@ -88,8 +85,8 @@ class ThemeCustomShapes extends ThemeExtension<ThemeCustomShapes> {
     buttonDecoration: BoxDecoration(
       borderRadius: BorderRadius.all(Radius.circular(8)),
       gradient: LinearGradient(
-        colors: [Color(0xFF2277F6), Color(0xFF1364DD)],
-        stops: [0.0, 1.0],
+        colors: <Color>[Color(0xFF2277F6), Color(0xFF1364DD)],
+        stops: <double>[0, 1],
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
       ),
@@ -97,12 +94,12 @@ class ThemeCustomShapes extends ThemeExtension<ThemeCustomShapes> {
     buttonsShadowDecoration: BoxDecoration(
       borderRadius: BorderRadius.all(Radius.circular(8)),
       gradient: LinearGradient(
-        colors: [Color(0xFF2277F6), Color(0xFF1364DD)],
-        stops: [0.0, 1.0],
+        colors: <Color>[Color(0xFF2277F6), Color(0xFF1364DD)],
+        stops: <double>[0, 1],
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
       ),
-      boxShadow: [
+      boxShadow: <BoxShadow>[
         BoxShadow(
           color: Color.fromRGBO(255, 255, 255, 0.25),
           offset: Offset(0, 1),

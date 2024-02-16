@@ -1,19 +1,20 @@
-import 'dart:io';
+import "dart:io";
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 
-import 'app.dart';
-import 'app_options.dart';
-import 'core/utils/utils.dart';
-import 'core/widgets/native_splash/flutter_native_splash.dart';
-import 'injector_container.dart' as di;
-import 'router/app_routes.dart';
-import 'services/notification_service.dart';
+import "package:flutter_clean_architecture/app.dart";
+import "package:flutter_clean_architecture/app_options.dart";
+import "package:flutter_clean_architecture/core/utils/utils.dart";
+import "package:flutter_clean_architecture/core/widgets/native_splash/flutter_native_splash.dart";
+import "package:flutter_clean_architecture/injector_container.dart" as di;
+import "package:flutter_clean_architecture/router/app_routes.dart";
+import "package:flutter_clean_architecture/services/notification_service.dart";
 
 void main() async {
-  final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  final WidgetsBinding widgetsBinding =
+      WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   await NotificationService.initialize();
@@ -43,7 +44,7 @@ class _HttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) =>
       super.createHttpClient(context)
-        ..badCertificateCallback = (cert, host, port) => true;
+        ..badCertificateCallback = (_, __, ___) => true;
 }
 
 /// flutter pub run flutter_launcher_icons:main

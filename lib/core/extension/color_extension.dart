@@ -1,4 +1,4 @@
-part of 'extension.dart';
+part of "extension.dart";
 
 extension ColorJson on String {
   Color? get color => isNotEmpty
@@ -9,9 +9,11 @@ extension ColorJson on String {
 extension HexColor on Color {
   /// String is in the format "aabbcc" or "ffaabbcc" with an optional leading "#".
   static Color fromHex(String hexString) {
-    final buffer = StringBuffer();
-    if (hexString.length == 6 || hexString.length == 7) buffer.write('FF');
-    buffer.write(hexString.replaceFirst('#', ''));
+    final StringBuffer buffer = StringBuffer();
+    if (hexString.length == 6 || hexString.length == 7) {
+      buffer.write("FF");
+    }
+    buffer.write(hexString.replaceFirst("#", ""));
     return Color(int.parse(buffer.toString(), radix: 16));
   }
 

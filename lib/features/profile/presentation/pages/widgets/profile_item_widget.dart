@@ -1,14 +1,15 @@
-import 'package:flutter/material.dart';
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
 
-import '../../../../../core/extension/extension.dart';
-import '../../../../../core/theme/themes.dart';
-import '../../../../../core/utils/utils.dart';
+import "package:flutter_clean_architecture/core/extension/extension.dart";
+import "package:flutter_clean_architecture/core/theme/themes.dart";
+import "package:flutter_clean_architecture/core/utils/utils.dart";
 
 class ProfileItemWidget extends StatelessWidget {
   const ProfileItemWidget({
-    super.key,
     required this.leading,
     required this.title,
+    super.key,
     this.onTap,
     this.shape,
   });
@@ -27,7 +28,7 @@ class ProfileItemWidget extends StatelessWidget {
           child: Padding(
             padding: AppUtils.kPaddingAll12,
             child: Row(
-              children: [
+              children: <Widget>[
                 IconTheme(
                   data: context.theme.iconTheme.copyWith(
                     color: context.colorScheme.primary,
@@ -50,4 +51,13 @@ class ProfileItemWidget extends StatelessWidget {
           ),
         ),
       );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(StringProperty("title", title))
+      ..add(ObjectFlagProperty<GestureTapCallback?>.has("onTap", onTap))
+      ..add(DiagnosticsProperty<ShapeBorder?>("shape", shape));
+  }
 }

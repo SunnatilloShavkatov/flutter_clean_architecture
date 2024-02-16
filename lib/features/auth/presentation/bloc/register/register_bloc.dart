@@ -1,12 +1,12 @@
-import 'package:equatable/equatable.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import "package:equatable/equatable.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 
-import '../../../../../core/mixins/cache_mixin.dart';
-import '../../../domain/entities/sign_up/sign_up_request_entity.dart';
+import "package:flutter_clean_architecture/core/mixins/cache_mixin.dart";
+import "package:flutter_clean_architecture/features/auth/domain/entities/sign_up/sign_up_request_entity.dart";
 
-part 'register_event.dart';
+part "register_event.dart";
 
-part 'register_state.dart';
+part "register_state.dart";
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> with CacheMixin {
   RegisterBloc()
@@ -20,12 +20,12 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> with CacheMixin {
     Emitter<RegisterState> emit,
   ) async {
     emit(const RegisterState(status: RegisterStatus.loading));
-    const request = SignUpRequestEntity(
-      firstName: 'firstName.value',
-      lastName: 'lastName.value',
-      email: 'email.value',
-      password: 'password.value',
-      language: 'en',
+    const SignUpRequestEntity request = SignUpRequestEntity(
+      firstName: "firstName.value",
+      lastName: "lastName.value",
+      email: "email.value",
+      password: "password.value",
+      language: "en",
     );
     // final response = await signUp(const Params(request));
     // response.fold(

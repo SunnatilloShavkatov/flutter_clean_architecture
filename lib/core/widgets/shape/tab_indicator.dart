@@ -1,25 +1,25 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
 class TabBarIndicator extends Decoration {
-  final BoxPainter _painter;
 
   TabBarIndicator({
     required Color color,
     required double radius,
   }) : _painter = _TabBarIndicator(color, radius);
+  final BoxPainter _painter;
 
   @override
   BoxPainter createBoxPainter([VoidCallback? onChanged]) => _painter;
 }
 
 class _TabBarIndicator extends BoxPainter {
-  final Paint _paint;
-  final double radius;
 
   _TabBarIndicator(Color color, this.radius)
       : _paint = Paint()
           ..color = color
           ..isAntiAlias = true;
+  final Paint _paint;
+  final double radius;
 
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {

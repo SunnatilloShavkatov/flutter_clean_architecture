@@ -1,4 +1,4 @@
-part of 'package:flutter_clean_architecture/core/widgets/cupertino_back/cupertino_back_gesture.dart';
+part of "package:flutter_clean_architecture/core/widgets/cupertino_back/cupertino_back_gesture.dart";
 
 // from cupertino_page_route.dart
 const double kDefaultBackGestureWidth = 20;
@@ -23,9 +23,7 @@ class BackGestureWidth {
 /// Applies a [backGestureWidth] to descendant widgets.
 class BackGestureWidthTheme extends InheritedWidget {
   const BackGestureWidthTheme({
-    super.key,
-    required this.backGestureWidth,
-    required super.child,
+    required this.backGestureWidth, required super.child, super.key,
   });
 
   final BackGestureWidthGetter backGestureWidth;
@@ -34,7 +32,7 @@ class BackGestureWidthTheme extends InheritedWidget {
       BackGestureWidth.fixed(kDefaultBackGestureWidth);
 
   static BackGestureWidthGetter of(BuildContext context) {
-    final inheritedTheme =
+    final BackGestureWidthTheme? inheritedTheme =
         context.dependOnInheritedWidgetOfExactType<BackGestureWidthTheme>();
     return inheritedTheme?.backGestureWidth ?? _kDefaultTheme;
   }
@@ -42,4 +40,9 @@ class BackGestureWidthTheme extends InheritedWidget {
   @override
   bool updateShouldNotify(BackGestureWidthTheme oldWidget) =>
       backGestureWidth != oldWidget.backGestureWidth;
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ObjectFlagProperty<BackGestureWidthGetter>.has('backGestureWidth', backGestureWidth));
+  }
 }

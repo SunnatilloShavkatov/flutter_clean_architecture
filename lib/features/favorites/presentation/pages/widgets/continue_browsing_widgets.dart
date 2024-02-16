@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import '../../../../../core/extension/extension.dart';
-import '../../../../../core/theme/themes.dart';
-import '../../../../../core/utils/utils.dart';
-import '../../../../../core/widgets/animations/custom_linear_progress.dart';
-import '../../../../../core/widgets/custom_cached_network_image.dart';
-import '../../../../../core/widgets/painter/dot_painter.dart';
+import "package:flutter_clean_architecture/core/extension/extension.dart";
+import "package:flutter_clean_architecture/core/theme/themes.dart";
+import "package:flutter_clean_architecture/core/utils/utils.dart";
+import "package:flutter_clean_architecture/core/widgets/animations/custom_linear_progress.dart";
+import "package:flutter_clean_architecture/core/widgets/custom_cached_network_image.dart";
+import "package:flutter_clean_architecture/core/widgets/painter/dot_painter.dart";
 
 class ContinueBrowsingWidgets extends StatefulWidget {
   const ContinueBrowsingWidgets({super.key});
@@ -21,12 +21,12 @@ class _ContinueBrowsingWidgetsState extends State<ContinueBrowsingWidgets>
   Widget build(BuildContext context) {
     super.build(context);
     return CustomScrollView(
-      slivers: [
+      slivers: <Widget>[
         SliverSafeArea(
           minimum: AppUtils.kPaddingAll16,
           sliver: SliverGrid.builder(
             itemCount: 16,
-            itemBuilder: (_, index) => ContinueBrowsing(key: ValueKey(index)),
+            itemBuilder: (_, int index) => ContinueBrowsing(key: ValueKey(index)),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               mainAxisSpacing: 12,
@@ -50,7 +50,7 @@ class ContinueBrowsing extends StatelessWidget {
   Widget build(BuildContext context) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
-        children: [
+        children: <Widget>[
           Container(
             clipBehavior: Clip.antiAlias,
             decoration: const ShapeDecoration(
@@ -60,14 +60,14 @@ class ContinueBrowsing extends StatelessWidget {
               ),
             ),
             child: Stack(
-              children: [
+              children: <Widget>[
                 ClipRRect(
                   borderRadius: AppUtils.kBorderRadius8,
                   child: CustomCachedNetworkImage(
                     height: 94,
                     width: (context.width - 44) / 2,
                     imageUrl:
-                        'https://oneplatform.uz/wp-content/uploads/2023/09/1-%D1%81%D0%B5%D1%80%D0%B8%D1%8F.jpg',
+                        "https://oneplatform.uz/wp-content/uploads/2023/09/1-%D1%81%D0%B5%D1%80%D0%B8%D1%8F.jpg",
                     fit: BoxFit.cover,
                     placeholder: (_, __) => alignLogo,
                     errorWidget: (_, __, ___) => alignLogo,
@@ -77,7 +77,7 @@ class ContinueBrowsing extends StatelessWidget {
                   right: 4,
                   bottom: 14,
                   child: Text(
-                    '22 мин',
+                    "22 мин",
                     textAlign: TextAlign.right,
                     style: TextStyle(
                       fontSize: 10,
@@ -106,7 +106,7 @@ class ContinueBrowsing extends StatelessWidget {
           ),
           AppUtils.kGap6,
           const Text(
-            'Nega menga uylandingiz?',
+            "Nega menga uylandingiz?",
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w500,
@@ -117,9 +117,9 @@ class ContinueBrowsing extends StatelessWidget {
           AppUtils.kGap2,
           Row(
             mainAxisSize: MainAxisSize.min,
-            children: [
+            children: <Widget>[
               Text(
-                '1 сезон',
+                "1 сезон",
                 style: TextStyle(
                   color: context.color.whiteOpacity5,
                   fontSize: 11,
@@ -130,7 +130,7 @@ class ContinueBrowsing extends StatelessWidget {
               const Dot(),
               AppUtils.kGap4,
               Text(
-                '1 серия',
+                "1 серия",
                 style: TextStyle(
                   color: context.color.whiteOpacity5,
                   fontSize: 11,

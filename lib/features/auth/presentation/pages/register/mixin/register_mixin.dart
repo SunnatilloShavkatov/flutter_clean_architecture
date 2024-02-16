@@ -1,4 +1,4 @@
-part of '../register_page.dart';
+part of "../register_page.dart";
 
 mixin RegisterMixin on State<RegisterPage> {
   late TextEditingController firstNameController;

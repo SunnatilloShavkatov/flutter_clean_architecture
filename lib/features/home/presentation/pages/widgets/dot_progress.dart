@@ -1,18 +1,18 @@
-import 'package:flutter/material.dart';
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
 
-import '../../../../../core/widgets/animations/simple_circular_progress_bar.dart';
+import "package:flutter_clean_architecture/core/widgets/animations/simple_circular_progress_bar.dart";
 
 class DotProgress extends StatelessWidget {
   const DotProgress({
-    super.key,
-    required this.isLoading,
+    required this.isLoading, super.key,
   });
 
   final bool isLoading;
 
   @override
   Widget build(BuildContext context) => Stack(
-        children: [
+        children: <Widget>[
           AnimatedContainer(
             margin: const EdgeInsets.all(3),
             duration: const Duration(milliseconds: 500),
@@ -35,7 +35,7 @@ class DotProgress extends StatelessWidget {
                 size: 12,
                 backStrokeWidth: 1,
                 progressStrokeWidth: 1,
-                progressColors: [Colors.white],
+                progressColors: <Color>[Colors.white],
                 fullProgressColor: Colors.white,
                 mergeMode: true,
               ),
@@ -43,4 +43,9 @@ class DotProgress extends StatelessWidget {
           ),
         ],
       );
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>("isLoading", isLoading));
+  }
 }

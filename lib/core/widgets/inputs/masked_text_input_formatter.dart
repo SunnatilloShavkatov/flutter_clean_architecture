@@ -1,4 +1,4 @@
-import 'package:flutter/services.dart';
+import "package:flutter/services.dart";
 
 class MaskedTextInputFormatter extends TextInputFormatter {
   MaskedTextInputFormatter({
@@ -17,13 +17,17 @@ class MaskedTextInputFormatter extends TextInputFormatter {
     TextEditingValue newValue,
   ) {
     final String text = newValue.text;
-    final String newText = newValue.toJSON()['text'].toString();
-    final String separatorWithText = newValue.text.replaceAll(separator, '');
+    final String newText = newValue.toJSON()["text"].toString();
+    final String separatorWithText = newValue.text.replaceAll(separator, "");
     final Iterable<Match> matches = filter.allMatches(separatorWithText);
-    if (matches.length != separatorWithText.length) return oldValue;
+    if (matches.length != separatorWithText.length) {
+      return oldValue;
+    }
     if (text.isNotEmpty) {
       if (text.length > oldValue.text.length) {
-        if (text.length > mask.length) return oldValue;
+        if (text.length > mask.length) {
+          return oldValue;
+        }
         if (text.length < mask.length && mask[text.length - 1] == separator) {
           return TextEditingValue(
             text:
@@ -33,7 +37,7 @@ class MaskedTextInputFormatter extends TextInputFormatter {
             ),
           );
         }
-        if (text.length == mask.replaceAll(separator, '').length &&
+        if (text.length == mask.replaceAll(separator, "").length &&
             oldValue.text.isEmpty) {
           final StringBuffer bufferText = StringBuffer();
           int t = 0;

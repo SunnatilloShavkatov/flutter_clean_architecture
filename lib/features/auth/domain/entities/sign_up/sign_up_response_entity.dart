@@ -1,4 +1,4 @@
-import 'package:equatable/equatable.dart';
+import "package:equatable/equatable.dart";
 
 class SignUpResponseEntity extends Equatable {
   const SignUpResponseEntity({required this.token});
@@ -6,5 +6,5 @@ class SignUpResponseEntity extends Equatable {
   final String? token;
 
   @override
-  List<Object?> get props => [token];
+  List<Object?> get props => <Object?>[token];
 }

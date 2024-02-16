@@ -1,12 +1,13 @@
-import 'package:flutter/material.dart';
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
 
-import '../../../../../core/extension/extension.dart';
-import '../../../../../core/utils/utils.dart';
+import "package:flutter_clean_architecture/core/extension/extension.dart";
+import "package:flutter_clean_architecture/core/utils/utils.dart";
 
 class TagItem extends StatelessWidget {
   const TagItem({
-    super.key,
     required this.text,
+    super.key,
   });
 
   final String text;
@@ -32,4 +33,10 @@ class TagItem extends StatelessWidget {
           ),
         ),
       );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty("text", text));
+  }
 }

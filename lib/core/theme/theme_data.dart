@@ -1,6 +1,6 @@
-part of 'themes.dart';
+part of "themes.dart";
 
-const systemUiOverlayStyle = SystemUiOverlayStyle(
+const SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
   statusBarColor: Colors.transparent,
   systemNavigationBarColor: Color.fromRGBO(28, 30, 33, 0.95),
   // ios
@@ -20,7 +20,7 @@ final ThemeData lightTheme = ThemeData(
     ThemeCustomShapes.light,
   ],
   pageTransitionsTheme: const PageTransitionsTheme(
-    builders: {
+    builders: <TargetPlatform, PageTransitionsBuilder>{
       TargetPlatform.android:
           CupertinoPageTransitionsBuilderCustomBackGestureWidth(),
       TargetPlatform.iOS:
@@ -86,10 +86,10 @@ final ThemeData lightTheme = ThemeData(
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
       foregroundColor: MaterialStateProperty.resolveWith(
-        (states) => Colors.white,
+        (Set<MaterialState> states) => Colors.white,
       ),
       backgroundColor: MaterialStateProperty.resolveWith(
-        (states) {
+        (Set<MaterialState> states) {
           if (states.contains(MaterialState.disabled)) {
             return colorLightScheme.primary.withOpacity(0.4);
           }
@@ -109,7 +109,7 @@ final ThemeData lightTheme = ThemeData(
   outlinedButtonTheme: OutlinedButtonThemeData(
     style: ButtonStyle(
       foregroundColor: MaterialStateProperty.resolveWith(
-        (states) => Colors.black,
+        (Set<MaterialState> states) => Colors.black,
       ),
       textStyle: MaterialStatePropertyAll(ThemeTextStyles.light.buttonStyle),
       elevation: const MaterialStatePropertyAll(0),
@@ -205,12 +205,12 @@ final ThemeData lightTheme = ThemeData(
     backgroundColor: Colors.white,
     height: kToolbarHeight,
     iconTheme: MaterialStateProperty.resolveWith<IconThemeData>(
-      (states) => const IconThemeData(
+      (Set<MaterialState> states) => const IconThemeData(
         color: Colors.black,
       ),
     ),
     labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
-      (states) => ThemeTextStyles.light.appBarTitle,
+      (Set<MaterialState> states) => ThemeTextStyles.light.appBarTitle,
     ),
   ),
   appBarTheme: AppBarTheme(
@@ -230,7 +230,7 @@ final ThemeData lightTheme = ThemeData(
     surfaceTintColor: const Color.fromRGBO(28, 30, 33, 0.95),
   ),
   actionIconTheme: ActionIconThemeData(
-    backButtonIconBuilder: (context) => IconButton(
+    backButtonIconBuilder: (BuildContext context) => IconButton(
       onPressed: () => Navigator.maybePop(context),
       icon: Platform.isAndroid
           ? const Icon(Icons.arrow_back)
@@ -304,7 +304,7 @@ final ThemeData darkTheme = ThemeData(
     ThemeCustomShapes.dark,
   ],
   pageTransitionsTheme: const PageTransitionsTheme(
-    builders: {
+    builders: <TargetPlatform, PageTransitionsBuilder>{
       TargetPlatform.android:
           CupertinoPageTransitionsBuilderCustomBackGestureWidth(),
       TargetPlatform.iOS:
@@ -370,10 +370,10 @@ final ThemeData darkTheme = ThemeData(
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
       foregroundColor: MaterialStateProperty.resolveWith(
-        (states) => Colors.white,
+        (Set<MaterialState> states) => Colors.white,
       ),
       backgroundColor: MaterialStateProperty.resolveWith(
-        (states) {
+        (Set<MaterialState> states) {
           if (states.contains(MaterialState.disabled)) {
             return colorDarkScheme.primary.withOpacity(0.4);
           }
@@ -393,7 +393,7 @@ final ThemeData darkTheme = ThemeData(
   outlinedButtonTheme: OutlinedButtonThemeData(
     style: ButtonStyle(
       foregroundColor: MaterialStateProperty.resolveWith(
-        (states) => Colors.black,
+        (Set<MaterialState> states) => Colors.black,
       ),
       textStyle: MaterialStatePropertyAll(ThemeTextStyles.dark.buttonStyle),
       elevation: const MaterialStatePropertyAll(0),
@@ -491,12 +491,12 @@ final ThemeData darkTheme = ThemeData(
     backgroundColor: Colors.white,
     height: kToolbarHeight,
     iconTheme: MaterialStateProperty.resolveWith<IconThemeData>(
-      (states) => const IconThemeData(
+      (Set<MaterialState> states) => const IconThemeData(
         color: Colors.black,
       ),
     ),
     labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
-      (states) => ThemeTextStyles.dark.appBarTitle,
+      (Set<MaterialState> states) => ThemeTextStyles.dark.appBarTitle,
     ),
   ),
   appBarTheme: AppBarTheme(
@@ -516,7 +516,7 @@ final ThemeData darkTheme = ThemeData(
     surfaceTintColor: const Color.fromRGBO(28, 30, 33, 0.95),
   ),
   actionIconTheme: ActionIconThemeData(
-    backButtonIconBuilder: (context) => IconButton(
+    backButtonIconBuilder: (BuildContext context) => IconButton(
       onPressed: () => Navigator.maybePop(context),
       icon: Platform.isAndroid
           ? const Icon(Icons.arrow_back)

@@ -1,25 +1,25 @@
-import 'dart:convert';
+import "dart:convert";
 
-import 'package:flutter_clean_architecture/core/connectivity/network_info.dart';
-import 'package:flutter_clean_architecture/core/either/either.dart';
-import 'package:flutter_clean_architecture/core/error/exceptions.dart';
-import 'package:flutter_clean_architecture/core/error/failure.dart';
-import 'package:flutter_clean_architecture/features/auth/data/data_source/local/auth_local_data_source.dart';
-import 'package:flutter_clean_architecture/features/auth/data/data_source/remote/auth_remote_data_source.dart';
-import 'package:flutter_clean_architecture/features/auth/data/models/sign_in/sign_in_request_model.dart';
-import 'package:flutter_clean_architecture/features/auth/data/models/sign_in/sign_in_response_model.dart';
-import 'package:flutter_clean_architecture/features/auth/data/models/sign_up/Sign_up_request_model.dart';
-import 'package:flutter_clean_architecture/features/auth/data/models/sign_up/sign_up_response_model.dart';
-import 'package:flutter_clean_architecture/features/auth/data/repository/auth_repository_impl.dart';
-import 'package:flutter_clean_architecture/features/auth/domain/entities/sign_in/sign_in_response_entity.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
+import "package:flutter_clean_architecture/core/connectivity/network_info.dart";
+import "package:flutter_clean_architecture/core/either/either.dart";
+import "package:flutter_clean_architecture/core/error/exceptions.dart";
+import "package:flutter_clean_architecture/core/error/failure.dart";
+import "package:flutter_clean_architecture/features/auth/data/data_source/local/auth_local_data_source.dart";
+import "package:flutter_clean_architecture/features/auth/data/data_source/remote/auth_remote_data_source.dart";
+import "package:flutter_clean_architecture/features/auth/data/models/sign_in/sign_in_request_model.dart";
+import "package:flutter_clean_architecture/features/auth/data/models/sign_in/sign_in_response_model.dart";
+import "package:flutter_clean_architecture/features/auth/data/models/sign_up/Sign_up_request_model.dart";
+import "package:flutter_clean_architecture/features/auth/data/models/sign_up/sign_up_response_model.dart";
+import "package:flutter_clean_architecture/features/auth/data/repository/auth_repository_impl.dart";
+import "package:flutter_clean_architecture/features/auth/domain/entities/sign_in/sign_in_response_entity.dart";
+import "package:flutter_test/flutter_test.dart";
+import "package:mockito/annotations.dart";
+import "package:mockito/mockito.dart";
 
-import '../../../../fixtures/fixture_reader.dart';
-import 'auth_repository_impl_test.mocks.dart';
+import "../../../../fixtures/fixture_reader.dart";
+import "auth_repository_impl_test.mocks.dart";
 
-@GenerateMocks([
+@GenerateMocks(<Type>[
   AuthRemoteDataSource,
   AuthLocalDataSource,
   NetworkInfo,
@@ -41,26 +41,26 @@ void main() {
     );
   });
 
-  group('sign in online', () {
+  group("sign in online", () {
     const signInRequestModel = SignInRequestModel(
-      email: 'email',
-      password: 'password',
+      email: "email",
+      password: "password",
     );
     const signInResponseModel = SignInResponseModel(
-      token: 'token',
-      firstName: 'firstName',
-      lastName: 'lastName',
+      token: "token",
+      firstName: "firstName",
+      lastName: "lastName",
     );
     final SignInResponseEntity signInResponseEntity =
         signInResponseModel.toEntity();
 
     setUp(() {
-      when(networkInfo.isConnected).thenAnswer((realInvocation) async => true);
+      when(networkInfo.isConnected).thenAnswer((Invocation realInvocation) async => true);
     });
 
-    test('should return right sign in entity', () async {
+    test("should return right sign in entity", () async {
       when(authRemoteDataSource.signIn(signInRequestModel))
-          .thenAnswer((realInvocation) async => signInResponseModel);
+          .thenAnswer((Invocation realInvocation) async => signInResponseModel);
       final result =
           await authRepositoryImpl.signIn(signInRequestModel.toEntity());
       verify(authRemoteDataSource.signIn(signInRequestModel));
@@ -70,9 +70,9 @@ void main() {
       );
     });
 
-    test('should return left failure', () async {
+    test("should return left failure", () async {
       when(authRemoteDataSource.signIn(signInRequestModel))
-          .thenThrow(const ServerException(message: 'Something went wrong'));
+          .thenThrow(const ServerException(message: "Something went wrong"));
       final result =
           await authRepositoryImpl.signIn(signInRequestModel.toEntity());
       verify(authRemoteDataSource.signIn(signInRequestModel));
@@ -80,22 +80,22 @@ void main() {
       expect(
         result,
         const Left(
-          ServerFailure(message: 'Something went wrong'),
+          ServerFailure(message: "Something went wrong"),
         ),
       );
     });
   });
 
-  group('sign in online', () {
+  group("sign in online", () {
     const signInRequestModel = SignInRequestModel(
-      email: 'email',
-      password: 'password',
+      email: "email",
+      password: "password",
     );
 
     setUp(() => when(networkInfo.isConnected)
-        .thenAnswer((realInvocation) async => false),);
+        .thenAnswer((Invocation realInvocation) async => false),);
 
-    test('should return no internet failure', () async {
+    test("should return no internet failure", () async {
       when(authRemoteDataSource.signIn(signInRequestModel))
           .thenThrow(const NoInternetException());
       final result =
@@ -106,24 +106,24 @@ void main() {
     });
   });
 
-  group('sign up online', () {
+  group("sign up online", () {
     final signUpRequestModel = SignUpRequestModel.fromJson(
       jsonDecode(
-        fixture('sign_up_request_fixture'),
+        fixture("sign_up_request_fixture"),
       ),
     );
     final signUpResponseModel = SignUpResponseModel.fromJson(
       jsonDecode(
-        fixture('sign_up_response_fixture'),
+        fixture("sign_up_response_fixture"),
       ),
     );
 
     setUp(() => when(networkInfo.isConnected)
-        .thenAnswer((realInvocation) async => true),);
+        .thenAnswer((Invocation realInvocation) async => true),);
 
-    test('should return correct model', () async {
+    test("should return correct model", () async {
       when(authRemoteDataSource.signUp(signUpRequestModel))
-          .thenAnswer((realInvocation) async => signUpResponseModel);
+          .thenAnswer((Invocation realInvocation) async => signUpResponseModel);
       final result =
           await authRepositoryImpl.signUp(signUpRequestModel.toEntity());
       verify(authRemoteDataSource.signUp(signUpRequestModel));
@@ -131,31 +131,31 @@ void main() {
       expect(result, Right(signUpResponseModel));
     });
 
-    test('should return failure', () async {
+    test("should return failure", () async {
       when(authRemoteDataSource.signUp(signUpRequestModel)).thenThrow(
-        const ServerException(message: 'Something went wrong'),
+        const ServerException(message: "Something went wrong"),
       );
       final result =
           await authRepositoryImpl.signUp(signUpRequestModel.toEntity());
       verify(authRemoteDataSource.signUp(signUpRequestModel));
       verifyNoMoreInteractions(authRemoteDataSource);
-      expect(result, const Left(ServerFailure(message: 'Something went wrong')));
+      expect(result, const Left(ServerFailure(message: "Something went wrong")));
     });
   });
 
-  group('sign up offline', () {
+  group("sign up offline", () {
     final signUpRequestModel = SignUpRequestModel.fromJson(
       jsonDecode(
-        fixture('sign_up_request_fixture'),
+        fixture("sign_up_request_fixture"),
       ),
     );
 
     setUp(
       () => when(networkInfo.isConnected)
-          .thenAnswer((realInvocation) async => false),
+          .thenAnswer((Invocation realInvocation) async => false),
     );
 
-    test('should return no internet failure', () async {
+    test("should return no internet failure", () async {
       when(authRemoteDataSource.signUp(signUpRequestModel))
           .thenThrow(const NoInternetException());
       final result =

@@ -1,42 +1,42 @@
-import 'package:flutter_clean_architecture/core/either/either.dart';
-import 'package:flutter_clean_architecture/features/advices/domain/entities/category_list_entity.dart';
-import 'package:flutter_clean_architecture/features/advices/domain/repository/advices_repository.dart';
-import 'package:flutter_clean_architecture/features/advices/domain/usecases/get_category_list.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
+import "package:flutter_clean_architecture/core/either/either.dart";
+import "package:flutter_clean_architecture/features/advices/domain/entities/category_list_entity.dart";
+import "package:flutter_clean_architecture/features/advices/domain/repository/advices_repository.dart";
+import "package:flutter_clean_architecture/features/advices/domain/usecases/get_category_list.dart";
+import "package:flutter_test/flutter_test.dart";
+import "package:mockito/annotations.dart";
+import "package:mockito/mockito.dart";
 
-import 'get_category_list_test.mocks.dart';
+import "get_category_list_test.mocks.dart";
 
-@GenerateMocks([AdvicesRepository])
+@GenerateMocks(<Type>[AdvicesRepository])
 void main() {
   late final AdvicesRepository advicesRepository;
   late final GetCategoryList getCategoryList;
   late final CategoryListEntity categoryListEntity;
   setUp(() {
     categoryListEntity = const CategoryListEntity(
-      [
+      <>[
         Category(
-          'hello',
+          "hello",
           1,
-          'uz',
-          [
+          "uz",
+          <>[
             Guid(
-              'hello',
+              "hello",
               1,
-              'uz',
+              "uz",
             ),
           ],
         ),
         Category(
-          'hello',
+          "hello",
           2,
-          'uz',
-          [
+          "uz",
+          <>[
             Guid(
-              'hello',
+              "hello",
               2,
-              'uz',
+              "uz",
             ),
           ],
         ),
@@ -47,10 +47,10 @@ void main() {
   });
 
   test(
-    'verify that it gets from advice repository',
+    "verify that it gets from advice repository",
     () async {
       when(advicesRepository.getCategoryList(false)).thenAnswer(
-        (realInvocation) async => Right(
+        (Invocation realInvocation) async => Right(
           categoryListEntity,
         ),
       );

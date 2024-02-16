@@ -1,10 +1,10 @@
-part of 'main_bloc.dart';
+part of "main_bloc.dart";
 
 sealed class MainEvent extends Equatable {
   const MainEvent();
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => <Object?>[];
 }
 
 class MainEventChangeMenu extends MainEvent {
@@ -13,5 +13,5 @@ class MainEventChangeMenu extends MainEvent {
   final MainMenu menu;
 
   @override
-  List<Object?> get props => [menu];
+  List<Object?> get props => <Object?>[menu];
 }

@@ -1,4 +1,4 @@
-part of 'network_info.dart';
+part of "network_info.dart";
 
 class AddressCheckResult {
   const AddressCheckResult(
@@ -10,7 +10,7 @@ class AddressCheckResult {
   final bool isSuccess;
 
   @override
-  String toString() => 'AddressCheckResult($options, $isSuccess)';
+  String toString() => "AddressCheckResult($options, $isSuccess)";
 }
 
 class AddressCheckOptions {
@@ -22,7 +22,7 @@ class AddressCheckOptions {
   }) : assert(
           (address != null || hostname != null) &&
               ((address != null) != (hostname != null)),
-          'Either address or hostname must be provided, but not both.',
+          "Either address or hostname must be provided, but not both.",
         );
 
   final InternetAddress? address;
@@ -31,7 +31,7 @@ class AddressCheckOptions {
   final Duration timeout;
 
   @override
-  String toString() => 'AddressCheckOptions($address, $port, $timeout)';
+  String toString() => "AddressCheckOptions($address, $port, $timeout)";
 }
 
 enum InternetConnectionStatus {
@@ -50,7 +50,7 @@ class InternetConnectionChecker {
     this.addresses = addresses ??
         defaultAddresses
             .map(
-              (e) => AddressCheckOptions(
+              (AddressCheckOptions e) => AddressCheckOptions(
                 address: e.address,
                 hostname: e.hostname,
                 port: e.port,
@@ -104,37 +104,37 @@ class InternetConnectionChecker {
     <AddressCheckOptions>[
       AddressCheckOptions(
         address: InternetAddress(
-          '1.1.1.1', // CloudFlare
+          "1.1.1.1", // CloudFlare
           type: InternetAddressType.IPv4,
         ),
       ),
       AddressCheckOptions(
         address: InternetAddress(
-          '2606:4700:4700::1111', // CloudFlare
+          "2606:4700:4700::1111", // CloudFlare
           type: InternetAddressType.IPv6,
         ),
       ),
       AddressCheckOptions(
         address: InternetAddress(
-          '8.8.4.4', // Google
+          "8.8.4.4", // Google
           type: InternetAddressType.IPv4,
         ),
       ),
       AddressCheckOptions(
         address: InternetAddress(
-          '2001:4860:4860::8888', // Google
+          "2001:4860:4860::8888", // Google
           type: InternetAddressType.IPv6,
         ),
       ),
       AddressCheckOptions(
         address: InternetAddress(
-          '208.67.222.222', // OpenDNS
+          "208.67.222.222", // OpenDNS
           type: InternetAddressType.IPv4,
         ), // OpenDNS
       ),
       AddressCheckOptions(
         address: InternetAddress(
-          '2620:0:ccc::2', // OpenDNS
+          "2620:0:ccc::2", // OpenDNS
           type: InternetAddressType.IPv6,
         ), // OpenDNS
       ),
@@ -186,7 +186,7 @@ class InternetConnectionChecker {
     for (final AddressCheckOptions addressOptions in addresses) {
       // ignore: unawaited_futures
       isHostReachable(addressOptions).then(
-        (request) {
+        (AddressCheckResult request) {
           length -= 1;
           if (!result.isCompleted) {
             if (request.isSuccess) {
@@ -226,7 +226,9 @@ class InternetConnectionChecker {
     }
 
     // start new timer only if there are listeners
-    if (!_statusController.hasListener) return;
+    if (!_statusController.hasListener) {
+      return;
+    }
     _timerHandle = Timer(checkInterval, _maybeEmitStatusUpdate);
 
     // update last status

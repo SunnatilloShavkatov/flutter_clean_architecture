@@ -1,4 +1,4 @@
-part of 'confirm_code_bloc.dart';
+part of "confirm_code_bloc.dart";
 
 abstract class ConfirmCodeEvent extends Equatable {
   const ConfirmCodeEvent();
@@ -8,7 +8,7 @@ class ConfirmCodeEventInitial extends ConfirmCodeEvent {
   const ConfirmCodeEventInitial();
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => <Object?>[];
 }
 
 class ConfirmCodePhoneChangeEvent extends ConfirmCodeEvent {
@@ -17,7 +17,7 @@ class ConfirmCodePhoneChangeEvent extends ConfirmCodeEvent {
   final String value;
 
   @override
-  List<Object?> get props => [value];
+  List<Object?> get props => <Object?>[value];
 }
 
 class ConfirmCodeCheckMessageEvent extends ConfirmCodeEvent {
@@ -28,7 +28,7 @@ class ConfirmCodeCheckMessageEvent extends ConfirmCodeEvent {
   final VerifyRequestData data;
 
   @override
-  List<Object?> get props => [data];
+  List<Object?> get props => <Object?>[data];
 }
 
 class ConfirmCodeSendAgainEvent extends ConfirmCodeEvent {
@@ -37,7 +37,7 @@ class ConfirmCodeSendAgainEvent extends ConfirmCodeEvent {
   final String value;
 
   @override
-  List<Object?> get props => [value];
+  List<Object?> get props => <Object?>[value];
 }
 
 class CreatePatientOrderAfterNamedEvent extends ConfirmCodeEvent {
@@ -50,5 +50,5 @@ class CreatePatientOrderAfterNamedEvent extends ConfirmCodeEvent {
   final String surname;
 
   @override
-  List<Object?> get props => [name, surname];
+  List<Object?> get props => <Object?>[name, surname];
 }

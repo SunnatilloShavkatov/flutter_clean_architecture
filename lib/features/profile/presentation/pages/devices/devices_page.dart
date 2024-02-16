@@ -1,19 +1,20 @@
-import 'package:flutter/material.dart';
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
 
-import '../../../../../core/extension/extension.dart';
-import '../../../../../core/theme/themes.dart';
-import '../../../../../core/utils/utils.dart';
-import '../../../../../core/widgets/buttons/bottom_navigation_button.dart';
-import '../../../../../core/widgets/buttons/custom_button.dart';
+import "package:flutter_clean_architecture/core/extension/extension.dart";
+import "package:flutter_clean_architecture/core/theme/themes.dart";
+import "package:flutter_clean_architecture/core/utils/utils.dart";
+import "package:flutter_clean_architecture/core/widgets/buttons/bottom_navigation_button.dart";
+import "package:flutter_clean_architecture/core/widgets/buttons/custom_button.dart";
 
 class DevicesPage extends StatelessWidget {
   const DevicesPage({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: const Text('Устройства')),
+        appBar: AppBar(title: const Text("Устройства")),
         body: CustomScrollView(
-          slivers: [
+          slivers: <Widget>[
             SliverPersistentHeader(
               pinned: true,
               delegate: SliverHeaderDelegate(
@@ -24,12 +25,12 @@ class DevicesPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text('Текущее устройство'),
+                      children: <Widget>[
+                        Text("Текущее устройство"),
                         AppUtils.kGap12,
                         DeviceItem(isCurrentDevice: true),
                         AppUtils.kGap24,
-                        Text('Другие сессии'),
+                        Text("Другие сессии"),
                       ],
                     ),
                   ),
@@ -39,8 +40,8 @@ class DevicesPage extends StatelessWidget {
             SliverPadding(
               padding: const EdgeInsets.fromLTRB(16, 6, 16, 0),
               sliver: SliverList.separated(
-                itemBuilder: (_, index) => const DeviceItem(),
-                separatorBuilder: (_, index) => AppUtils.kGap12,
+                itemBuilder: (_, int index) => const DeviceItem(),
+                separatorBuilder: (_, int index) => AppUtils.kGap12,
                 itemCount: 16,
               ),
             ),
@@ -49,7 +50,7 @@ class DevicesPage extends StatelessWidget {
         bottomNavigationBar: BottomNavigationButton(
           child: CustomButton(
             onPressed: () {},
-            label: const Text('Войти в другое устроство с QR'),
+            label: const Text("Войти в другое устроство с QR"),
             leftIcon: const Icon(AppIcons.qrcode),
           ),
         ),
@@ -77,7 +78,7 @@ class SliverHeaderDelegate extends SliverPersistentHeaderDelegate {
   double get maxExtent => height;
 
   @override
-  double get minExtent => height ;
+  double get minExtent => height;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
@@ -101,7 +102,7 @@ class DeviceItem extends StatelessWidget {
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
-          children: [
+          children: <Widget>[
             Icon(
               Icons.phone_android,
               color: context.colorScheme.primary,
@@ -112,9 +113,9 @@ class DeviceItem extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                children: <Widget>[
                   Text(
-                    'IPhone 13',
+                    "IPhone 13",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -124,9 +125,9 @@ class DeviceItem extends StatelessWidget {
                   AppUtils.kGap4,
                   Row(
                     mainAxisSize: MainAxisSize.min,
-                    children: [
+                    children: <Widget>[
                       Text(
-                        'Добавлен:',
+                        "Добавлен:",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Color(0xFF909090),
@@ -136,7 +137,7 @@ class DeviceItem extends StatelessWidget {
                       ),
                       AppUtils.kGap4,
                       Text(
-                        '4 июня 2022 | 12:25',
+                        "4 июня 2022 | 12:25",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Color(0xFF909090),
@@ -158,4 +159,11 @@ class DeviceItem extends StatelessWidget {
           ],
         ),
       );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty<bool>("isCurrentDevice", isCurrentDevice));
+  }
 }

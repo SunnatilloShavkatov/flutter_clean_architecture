@@ -1,11 +1,12 @@
-import 'dart:ui';
+import "dart:ui";
 
-import 'package:flutter/material.dart';
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
 
-import '../utils/utils.dart';
+import "package:flutter_clean_architecture/core/utils/utils.dart";
 
 class BlurText extends StatelessWidget {
-  const BlurText({super.key, required this.text});
+  const BlurText({required this.text, super.key});
 
   final String text;
 
@@ -33,4 +34,10 @@ class BlurText extends StatelessWidget {
           ),
         ),
       );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty("text", text));
+  }
 }

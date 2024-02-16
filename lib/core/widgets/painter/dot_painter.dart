@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
 
-import '../../extension/extension.dart';
+import "package:flutter_clean_architecture/core/extension/extension.dart";
 
 class Dot extends StatelessWidget {
   const Dot({
@@ -17,6 +18,14 @@ class Dot extends StatelessWidget {
         painter: _DotPainter(size / 2, color ?? context.color.whiteOpacity5),
         size: Size(size, size),
       );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DoubleProperty("size", size))
+      ..add(ColorProperty("color", color));
+  }
 }
 
 class _DotPainter extends CustomPainter {

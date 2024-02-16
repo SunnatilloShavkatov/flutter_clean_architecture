@@ -1,17 +1,19 @@
-part of '../splash_page.dart';
+part of "../splash_page.dart";
 
 mixin SplashMixin on State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    if (!mounted) return;
+    if (!mounted) {
+      return;
+    }
     // ignore: discarded_futures
     RemoteConfigService.isCallCheckAppVersion(context).then(
-      (value) async {
+      ((AppUpdate, String, String) value) async {
         if (value.$1 != AppUpdate.none) {
           await appUpdateBottomSheet(
             isForceUpdate: value.$1 == AppUpdate.forceUpdate,
-          ).then((value) => nextToNavigation());
+          ).then((_) => nextToNavigation());
         } else {
           nextToNavigation();
         }
@@ -20,7 +22,9 @@ mixin SplashMixin on State<SplashPage> {
   }
 
   void nextToNavigation() {
-    if (!mounted) return;
+    if (!mounted) {
+      return;
+    }
     context.goNamed(Routes.home);
     return;
   }
@@ -31,15 +35,17 @@ mixin SplashMixin on State<SplashPage> {
     await customModalBottomSheet<bool>(
       context: context,
       enableDrag: false,
-      builder: (_, controller) => AppUpdateBottomSheetWidget(
+      builder: (_, ScrollController? controller) => AppUpdateBottomSheetWidget(
         isForceUpdate: isForceUpdate,
         onTap: () async {
           await launchUrl(
             Uri.parse(Constants.appLink),
             mode: LaunchMode.externalApplication,
           ).then(
-            (value) async {
-              if (!mounted) return;
+            (bool value) async {
+              if (!mounted) {
+                return;
+              }
               nextToNavigation();
             },
           );

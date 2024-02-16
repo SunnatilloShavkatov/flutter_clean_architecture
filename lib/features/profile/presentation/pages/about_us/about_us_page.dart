@@ -1,23 +1,23 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import '../../../../../core/extension/extension.dart';
-import '../../../../../core/theme/themes.dart';
-import '../../../../../core/utils/utils.dart';
-import '../../../../../core/widgets/painter/logo_painter.dart';
+import "package:flutter_clean_architecture/core/extension/extension.dart";
+import "package:flutter_clean_architecture/core/theme/themes.dart";
+import "package:flutter_clean_architecture/core/utils/utils.dart";
+import "package:flutter_clean_architecture/core/widgets/painter/logo_painter.dart";
 
 class AboutUsPage extends StatelessWidget {
   const AboutUsPage({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: const Text('О нас')),
+        appBar: AppBar(title: const Text("О нас")),
         body: ListView(
           padding: AppUtils.kPaddingAll16,
-          children: const [
+          children: const <Widget>[
             Align(child: Logo(size: 26)),
             AppUtils.kGap16,
             Text(
-              'Salom TV - это онлайн-кинотеатр с производством собственных оригинальных веб-сериалов  Компания специализируется на дистрибуции иностранного контента, включая онлайн-трансляции ТВ, а также такие компании как: Start, Megogo, Videoteka, Setanta  В нашей библиотеке контента более 20 000 фильмов и сериалов ',
+              "Salom TV - это онлайн-кинотеатр с производством собственных оригинальных веб-сериалов  Компания специализируется на дистрибуции иностранного контента, включая онлайн-трансляции ТВ, а также такие компании как: Start, Megogo, Videoteka, Setanta  В нашей библиотеке контента более 20 000 фильмов и сериалов ",
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
@@ -25,7 +25,7 @@ class AboutUsPage extends StatelessWidget {
             ),
             AppUtils.kGap24,
             Text(
-              'Наши аккаунты в социальных сетях:',
+              "Наши аккаунты в социальных сетях:",
               style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w500,
@@ -37,7 +37,7 @@ class AboutUsPage extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: <Widget>[
                 Item(icon: Icon(AppIcons.brand_telegram, size: 32)),
                 AppUtils.kGap24,
                 Item(icon: Icon(AppIcons.brand_instagram, size: 32)),
@@ -53,7 +53,7 @@ class AboutUsPage extends StatelessWidget {
 }
 
 class Item extends StatelessWidget {
-  const Item({super.key, required this.icon});
+  const Item({required this.icon, super.key});
 
   final Widget icon;
 

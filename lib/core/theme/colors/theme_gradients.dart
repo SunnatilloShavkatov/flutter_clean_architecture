@@ -1,4 +1,4 @@
-part of 'package:flutter_clean_architecture/core/theme/themes.dart';
+part of "package:flutter_clean_architecture/core/theme/themes.dart";
 
 class ThemeGradients extends ThemeExtension<ThemeGradients> {
   const ThemeGradients({
@@ -7,18 +7,18 @@ class ThemeGradients extends ThemeExtension<ThemeGradients> {
 
   final LinearGradient buttonLinearGradient;
 
-  static const light = ThemeGradients(
+  static const ThemeGradients light = ThemeGradients(
     buttonLinearGradient: LinearGradient(
-      colors: [Color(0xFF2277F6), Color(0xFF1364DD)],
-      stops: [0.0, 1.0],
+      colors: <Color>[Color(0xFF2277F6), Color(0xFF1364DD)],
+      stops: <double>[0, 1],
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
     ),
   );
-  static const dark = ThemeGradients(
+  static const ThemeGradients dark = ThemeGradients(
     buttonLinearGradient: LinearGradient(
-      colors: [Color(0xFF2277F6), Color(0xFF1364DD)],
-      stops: [0.0, 1.0],
+      colors: <Color>[Color(0xFF2277F6), Color(0xFF1364DD)],
+      stops: <double>[0, 1],
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
     ),

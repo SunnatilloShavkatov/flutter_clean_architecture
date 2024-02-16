@@ -1,15 +1,15 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import '../../../../core/theme/themes.dart';
-import '../../../../core/utils/utils.dart';
-import '../../../../core/widgets/animations/carousel_slider.dart';
-import '../../../../core/widgets/painter/logo_painter.dart';
-import '../../../../core/widgets/title_right.dart';
-import 'widgets/banners_widget.dart';
-import 'widgets/movie_item.dart';
-import 'widgets/online_television_widgets.dart';
+import "package:flutter_clean_architecture/core/theme/themes.dart";
+import "package:flutter_clean_architecture/core/utils/utils.dart";
+import "package:flutter_clean_architecture/core/widgets/animations/carousel_slider.dart";
+import "package:flutter_clean_architecture/core/widgets/painter/logo_painter.dart";
+import "package:flutter_clean_architecture/core/widgets/title_right.dart";
+import "package:flutter_clean_architecture/features/home/presentation/pages/widgets/banners_widget.dart";
+import "package:flutter_clean_architecture/features/home/presentation/pages/widgets/movie_item.dart";
+import "package:flutter_clean_architecture/features/home/presentation/pages/widgets/online_television_widgets.dart";
 
-part 'mixin/home_mixin.dart';
+part "mixin/home_mixin.dart";
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> with HomeMixin {
         appBar: AppBar(
           centerTitle: false,
           title: const Logo(),
-          actions: [
+          actions: <Widget>[
             IconButton(
               icon: const Icon(AppIcons.bell),
               onPressed: () {},
@@ -32,16 +32,16 @@ class _HomePageState extends State<HomePage> with HomeMixin {
           ],
         ),
         body: CustomScrollView(
-          slivers: [
+          slivers: <Widget>[
             BannersWidget(
-              key: const ValueKey('banners'),
+              key: const ValueKey("banners"),
               controller: _pageController,
             ),
             SliverList.list(
-              key: const ValueKey('list'),
-              children: [
+              key: const ValueKey("list"),
+              children: <Widget>[
                 TitleRight(
-                  title: 'Разработано SalomTV',
+                  title: "Разработано SalomTV",
                   onPressed: () {},
                 ),
                 SizedBox(
@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> with HomeMixin {
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     padding: AppUtils.kPaddingHor12,
-                    itemBuilder: (_, index) => MovieItem(
+                    itemBuilder: (_, int index) => MovieItem(
                       key: ValueKey(index),
                     ),
                     separatorBuilder: (_, __) => AppUtils.kGap8,
@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> with HomeMixin {
                   ),
                 ),
                 TitleRight(
-                  title: 'Онлайн телевидение',
+                  title: "Онлайн телевидение",
                   onPressed: () {},
                 ),
                 const OnlineTelevisionWidgets(),

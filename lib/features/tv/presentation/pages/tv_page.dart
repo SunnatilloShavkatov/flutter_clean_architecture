@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import '../../../../constants/image_constants.dart';
-import '../../../../core/extension/extension.dart';
-import '../../../../core/utils/utils.dart';
-import '../../../../core/widgets/loading/modal_progress_hud.dart';
+import "package:flutter_clean_architecture/constants/image_constants.dart";
+import "package:flutter_clean_architecture/core/extension/extension.dart";
+import "package:flutter_clean_architecture/core/utils/utils.dart";
+import "package:flutter_clean_architecture/core/widgets/loading/modal_progress_hud.dart";
 
-part 'mixin/tv_mixin.dart';
+part "mixin/tv_mixin.dart";
 
 class TvPage extends StatefulWidget {
   const TvPage({super.key});
@@ -19,14 +19,14 @@ class _TvPageState extends State<TvPage> with TvMixin {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           centerTitle: false,
-          title: const Text('Телевидение'),
+          title: const Text("Телевидение"),
           titleTextStyle: context.textStyle.appBarTitle,
         ),
         body: const ModalProgressHUD(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: <Widget>[
               Image(
                 image: AssetImage(Images.icBoxEmpty),
                 width: 135,
@@ -34,7 +34,7 @@ class _TvPageState extends State<TvPage> with TvMixin {
               ),
               AppUtils.kGap40,
               Text(
-                'Пока нет телеканалов в этой категории',
+                "Пока нет телеканалов в этой категории",
                 textAlign: TextAlign.center,
               ),
             ],

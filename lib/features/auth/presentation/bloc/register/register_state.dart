@@ -1,16 +1,16 @@
-part of 'register_bloc.dart';
+part of "register_bloc.dart";
 
 enum RegisterStatus { initial, loading, error, success }
 
 class RegisterState extends Equatable {
-  const RegisterState({this.message, this.errors, required this.status});
+  const RegisterState({required this.status, this.message, this.errors});
 
   final String? message;
   final RegisterInputErrors? errors;
   final RegisterStatus status;
 
   @override
-  List<Object?> get props => [status, message, errors];
+  List<Object?> get props => <Object?>[status, message, errors];
 
   RegisterState copyWith({
     RegisterStatus? status,

@@ -1,22 +1,22 @@
-import 'dart:convert';
+import "dart:convert";
 
-import 'package:bloc/bloc.dart';
-import 'package:bloc_test/bloc_test.dart';
-import 'package:flutter_clean_architecture/constants/constants.dart';
-import 'package:flutter_clean_architecture/core/either/either.dart';
-import 'package:flutter_clean_architecture/core/error/failure.dart';
-import 'package:flutter_clean_architecture/features/advices/data/models/category_list/category_list_response.dart';
-import 'package:flutter_clean_architecture/features/advices/domain/entities/category_list_entity.dart';
-import 'package:flutter_clean_architecture/features/advices/domain/usecases/get_category_list.dart';
-import 'package:flutter_clean_architecture/features/advices/presentation/bloc/category_list/category_list_bloc.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
+import "package:bloc/bloc.dart";
+import "package:bloc_test/bloc_test.dart";
+import "package:flutter_clean_architecture/constants/constants.dart";
+import "package:flutter_clean_architecture/core/either/either.dart";
+import "package:flutter_clean_architecture/core/error/failure.dart";
+import "package:flutter_clean_architecture/features/advices/data/models/category_list/category_list_response.dart";
+import "package:flutter_clean_architecture/features/advices/domain/entities/category_list_entity.dart";
+import "package:flutter_clean_architecture/features/advices/domain/usecases/get_category_list.dart";
+import "package:flutter_clean_architecture/features/advices/presentation/bloc/category_list/category_list_bloc.dart";
+import "package:flutter_test/flutter_test.dart";
+import "package:mockito/annotations.dart";
+import "package:mockito/mockito.dart";
 
-import '../../../../../fixtures/fixture_reader.dart';
-import 'category_list_bloc_test.mocks.dart';
+import "../../../../../fixtures/fixture_reader.dart";
+import "category_list_bloc_test.mocks.dart";
 
-@GenerateMocks([GetCategoryList])
+@GenerateMocks(<Type>[GetCategoryList])
 void main() {
   late final GetCategoryList getCategoryList;
   late final Bloc categoryBloc;
@@ -30,34 +30,34 @@ void main() {
       getCategoryList: getCategoryList,
     );
     categoryListEntity = CategoryListResponse.fromJson(
-            jsonDecode(fixture('get_category_list_fixture_1', 'advices')),)
+            jsonDecode(fixture("get_category_list_fixture_1", "advices")),)
         .toEntity();
-    emptyCategoryListEntity = const CategoryListEntity([]);
+    emptyCategoryListEntity = const CategoryListEntity(<>[]);
     differentEntity = CategoryListResponse.fromJson(
-        jsonDecode(fixture('get_category_list_fixture_2', 'advices')),)
+        jsonDecode(fixture("get_category_list_fixture_2", "advices")),)
         .toEntity();
   });
 
   group(
-    'test category list',
+    "test category list",
     () {
       blocTest(
-        'successfully from cache and net also successful but different',
+        "successfully from cache and net also successful but different",
         build: () {
           when(getCategoryList.call(const Params(isCache: true))).thenAnswer(
-                (realInvocation) async => Right(categoryListEntity),
+                (Invocation realInvocation) async => Right(categoryListEntity),
           );
           when(getCategoryList.call(const Params(isCache: false))).thenAnswer(
-                (realInvocation) async => Right(differentEntity),
+                (Invocation realInvocation) async => Right(differentEntity),
           );
           return categoryBloc;
         },
-        act: (bloc) {
+        act: (Bloc bloc) {
           bloc.add(
             const CategoryListTopButtonTapped(showSavedAdvices: false),
           );
         },
-        expect: () => [
+        expect: () => <>[
           const CategoryListAdvices(status: CategoryStatus.loading),
           CategoryListAdvices(
             status: CategoryStatus.successfull,
@@ -71,22 +71,22 @@ void main() {
       );
 
       blocTest(
-        'successfully from cache and net also successful',
+        "successfully from cache and net also successful",
         build: () {
           when(getCategoryList.call(const Params(isCache: true))).thenAnswer(
-            (realInvocation) async => Right(categoryListEntity),
+            (Invocation realInvocation) async => Right(categoryListEntity),
           );
           when(getCategoryList.call(const Params(isCache: false))).thenAnswer(
-            (realInvocation) async => Right(categoryListEntity),
+            (Invocation realInvocation) async => Right(categoryListEntity),
           );
           return categoryBloc;
         },
-        act: (bloc) {
+        act: (Bloc bloc) {
           bloc.add(
             const CategoryListTopButtonTapped(showSavedAdvices: false),
           );
         },
-        expect: () => [
+        expect: () => <>[
           const CategoryListAdvices(status: CategoryStatus.loading),
           CategoryListAdvices(
             status: CategoryStatus.successfull,
@@ -96,24 +96,24 @@ void main() {
       );
 
       blocTest(
-        'successfully from cache and net error',
+        "successfully from cache and net error",
         build: () {
           when(getCategoryList.call(const Params(isCache: true))).thenAnswer(
-            (realInvocation) async => Right(categoryListEntity),
+            (Invocation realInvocation) async => Right(categoryListEntity),
           );
           when(getCategoryList.call(const Params(isCache: false))).thenAnswer(
-            (realInvocation) async => const Left(ServerFailure(
+            (Invocation realInvocation) async => const Left(ServerFailure(
                 message: Validations.somethingWentWrong,
               ),),
           );
           return categoryBloc;
         },
-        act: (bloc) {
+        act: (Bloc bloc) {
           bloc.add(
             const CategoryListTopButtonTapped(showSavedAdvices: false),
           );
         },
-        expect: () => [
+        expect: () => <>[
           const CategoryListAdvices(status: CategoryStatus.loading),
           CategoryListAdvices(
             status: CategoryStatus.successfull,
@@ -128,23 +128,23 @@ void main() {
       );
 
       blocTest(
-        'error from cache then net successfull',
+        "error from cache then net successfull",
         build: () {
           when(getCategoryList.call(const Params(isCache: true))).thenAnswer(
-            (realInvocation) async => const Left(
+            (Invocation realInvocation) async => const Left(
               CacheFailure(
                 message: Validations.somethingWentWrong,
               ),
             ),
           );
           when(getCategoryList.call(const Params(isCache: false))).thenAnswer(
-            (realInvocation) async => Right(
+            (Invocation realInvocation) async => Right(
               categoryListEntity,
             ),
           );
           return categoryBloc;
         },
-        act: (bloc) {
+        act: (Bloc bloc) {
           bloc.add(
             const CategoryListTopButtonTapped(showSavedAdvices: false),
           );
@@ -159,17 +159,17 @@ void main() {
       );
 
       blocTest(
-        'error from cache then net also error',
+        "error from cache then net also error",
         build: () {
           when(getCategoryList.call(const Params(isCache: true))).thenAnswer(
-            (realInvocation) async => const Left(
+            (Invocation realInvocation) async => const Left(
               CacheFailure(
                 message: Validations.somethingWentWrong,
               ),
             ),
           );
           when(getCategoryList.call(const Params(isCache: false))).thenAnswer(
-            (realInvocation) async => const Left(
+            (Invocation realInvocation) async => const Left(
               ServerFailure(
                 message: Validations.somethingWentWrong,
               ),
@@ -177,12 +177,12 @@ void main() {
           );
           return categoryBloc;
         },
-        act: (bloc) {
+        act: (Bloc bloc) {
           bloc.add(
             const CategoryListTopButtonTapped(showSavedAdvices: false),
           );
         },
-        expect: () => [
+        expect: () => <>[
           const CategoryListAdvices(status: CategoryStatus.loading),
           const CategoryListAdvices(
             status: CategoryStatus.error,
@@ -192,28 +192,28 @@ void main() {
       );
 
       blocTest(
-        'empty case',
+        "empty case",
         build: () {
           when(getCategoryList.call(const Params(isCache: true))).thenAnswer(
-            (realInvocation) async => const Left(
+            (Invocation realInvocation) async => const Left(
               CacheFailure(
                 message: Validations.somethingWentWrong,
               ),
             ),
           );
           when(getCategoryList.call(const Params(isCache: false))).thenAnswer(
-            (realInvocation) async => Right(
+            (Invocation realInvocation) async => Right(
               emptyCategoryListEntity,
             ),
           );
           return categoryBloc;
         },
-        act: (bloc) {
+        act: (Bloc bloc) {
           bloc.add(
             const CategoryListTopButtonTapped(showSavedAdvices: false),
           );
         },
-        expect: () => [
+        expect: () => <>[
           const CategoryListAdvices(status: CategoryStatus.loading),
           CategoryListAdvices(
             status: CategoryStatus.empty,

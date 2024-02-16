@@ -1,12 +1,12 @@
-import 'dart:convert';
-import 'dart:developer';
-import 'dart:io';
-import 'package:firebase_remote_config/firebase_remote_config.dart';
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import "dart:convert";
+import "dart:developer";
+import "dart:io";
 
-import '../core/extension/extension.dart';
-import '../router/app_routes.dart';
+import "package:firebase_remote_config/firebase_remote_config.dart";
+import "package:flutter/material.dart";
+import "package:flutter_clean_architecture/core/extension/extension.dart";
+import "package:flutter_clean_architecture/router/app_routes.dart";
+import "package:go_router/go_router.dart";
 
 sealed class RemoteConfigService {
   RemoteConfigService._();
@@ -32,16 +32,17 @@ sealed class RemoteConfigService {
           version = remoteConfig.getAll()[TargetPlatform.iOS.name];
         }
 
-        final isNotLast = isNotLastVersion(packageInfo.version, version);
+        final (AppUpdate, String, String) isNotLast =
+            isNotLastVersion(packageInfo.version, version);
         return isNotLast;
       } on Exception catch (e, s) {
-        log('Firebase initialize error: $e $s');
-        return (AppUpdate.none, '', '');
+        log("Firebase initialize error: $e $s");
+        return (AppUpdate.none, "", "");
       }
     } else {
       // ignore: use_build_context_synchronously
       return context.pushNamed(Routes.noInternet).then(
-            (value) => isCallCheckAppVersion(context),
+            (Object? value) => isCallCheckAppVersion(context),
           );
     }
   }
@@ -50,20 +51,22 @@ sealed class RemoteConfigService {
     String appVersion,
     RemoteConfigValue? employeeVersion,
   ) {
-    if (employeeVersion == null) return (AppUpdate.none, '', '');
+    if (employeeVersion == null) {
+      return (AppUpdate.none, "", "");
+    }
     final Map<String, dynamic> employeeVersionMap =
         jsonDecode(employeeVersion.asString());
-    final String version = employeeVersionMap['version'];
-    final bool isForce = employeeVersionMap['is_force'];
-    final int employee = version.replaceAll('.', '').toVersion;
-    final int package = appVersion.replaceAll('.', '').toVersion;
+    final String version = employeeVersionMap["version"];
+    final bool isForce = employeeVersionMap["is_force"];
+    final int employee = version.replaceAll(".", "").toVersion;
+    final int package = appVersion.replaceAll(".", "").toVersion;
     if (package < employee && isForce) {
       return (AppUpdate.forceUpdate, appVersion, version);
     }
     if (package < employee && !isForce) {
       return (AppUpdate.softUpdate, appVersion, version);
     }
-    return (AppUpdate.none, '', '');
+    return (AppUpdate.none, "", "");
   }
 }
 

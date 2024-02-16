@@ -1,12 +1,13 @@
-import 'package:flutter/material.dart';
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
 
-import '../../../../../core/theme/themes.dart';
-import '../../../../../core/utils/utils.dart';
+import "package:flutter_clean_architecture/core/theme/themes.dart";
+import "package:flutter_clean_architecture/core/utils/utils.dart";
 
 class TitleRight extends StatelessWidget {
   const TitleRight({
-    super.key,
     required this.title,
+    super.key,
     this.onPressed,
   });
 
@@ -18,7 +19,7 @@ class TitleRight extends StatelessWidget {
         padding: AppUtils.kPaddingHor16,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
+          children: <Widget>[
             Text(title),
             IconButton(
               onPressed: onPressed,
@@ -27,7 +28,7 @@ class TitleRight extends StatelessWidget {
                 height: 36,
               ),
               style: ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(
+                backgroundColor: MaterialStatePropertyAll<Color>(
                   Colors.white.withOpacity(0.1),
                 ),
                 padding: const MaterialStatePropertyAll(EdgeInsets.zero),
@@ -37,4 +38,12 @@ class TitleRight extends StatelessWidget {
           ],
         ),
       );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(StringProperty("title", title))
+      ..add(ObjectFlagProperty<VoidCallback?>.has("onPressed", onPressed));
+  }
 }
