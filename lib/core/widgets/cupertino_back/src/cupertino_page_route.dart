@@ -2,7 +2,8 @@ part of "package:flutter_clean_architecture/core/widgets/cupertino_back/cupertin
 
 const double _kMinFlingVelocity = 1; // Screen widths per second.
 
-// An eyeballed value for the maximum time it takes for a page to animate forward
+// An eyeballed value for the maximum time it takes for a page
+// to animate forward
 // if the user releases a page mid swipe.
 const int _kMaxDroppedSwipePageForwardAnimationTime = 800; // Milliseconds.
 
@@ -92,7 +93,8 @@ mixin CupertinoRouteTransitionMixin<T> on PageRoute<T> {
   ValueListenable<String?> get previousTitle {
     assert(
       _previousTitle != null,
-      "Cannot read the previousTitle for a route that has not yet been installed",
+      "Cannot read the previousTitle for a route that "
+      "has not yet been installed",
     );
     return _previousTitle!;
   }
@@ -121,7 +123,8 @@ mixin CupertinoRouteTransitionMixin<T> on PageRoute<T> {
   bool canTransitionTo(TransitionRoute<dynamic> nextRoute) =>
       nextRoute is CupertinoRouteTransitionMixin && !nextRoute.fullscreenDialog;
 
-  /// True if an iOS-style back swipe pop gesture is currently underway for [route].
+  /// True if an iOS-style back swipe pop
+  /// gesture is currently underway for [route].
   ///
   /// This just check the route's [NavigatorState.userGestureInProgress].
   ///
@@ -132,7 +135,8 @@ mixin CupertinoRouteTransitionMixin<T> on PageRoute<T> {
   static bool isPopGestureInProgress(PageRoute<dynamic> route) =>
       route.navigator!.userGestureInProgress;
 
-  /// True if an iOS-style back swipe pop gesture is currently underway for this route.
+  /// True if an iOS-style back swipe pop
+  /// gesture is currently underway for this route.
   ///
   /// See also:
   ///
@@ -160,7 +164,8 @@ mixin CupertinoRouteTransitionMixin<T> on PageRoute<T> {
       return false;
     }
     // If the route wouldn't actually pop if we popped it, then the gesture
-    // would be really confusing (or would skip internal routes), so disallow it.
+    // would be really confusing (or would skip internal routes),
+    // so disallow it.
     if (route.willHandlePopInternally) {
       return false;
     }
@@ -271,7 +276,8 @@ mixin CupertinoRouteTransitionMixin<T> on PageRoute<T> {
 
 /// Provides an iOS-style page transition animation.
 ///
-/// The page slides in from the right and exits in reverse. It also shifts to the left in
+/// The page slides in from the right and exits in reverse.
+/// It also shifts to the left in
 /// a parallax motion when another page enters to cover it.
 class CupertinoPageTransition extends StatelessWidget {
   /// Creates an iOS-style page transition.
@@ -352,7 +358,8 @@ class CupertinoFullscreenDialogTransition extends StatelessWidget {
   })  : _positionAnimation = CurvedAnimation(
           parent: primaryRouteAnimation,
           curve: Curves.linearToEaseOut,
-          // The curve must be flipped so that the reverse animation doesn't play
+          // The curve must be flipped so that
+          // the reverse animation doesn't play
           // an ease-in curve, which iOS does not use.
           reverseCurve: Curves.linearToEaseOut.flipped,
         ).drive(_kBottomUpTween),
@@ -451,7 +458,8 @@ class _CupertinoBackGestureDetectorState<T>
   void _handleDragStart(DragStartDetails details) {
     assert(
       mounted,
-      "Tried to start a gesture on a disposed CupertinoRouteBackGestureDetector",
+      "Tried to start a gesture on a "
+      "disposed CupertinoRouteBackGestureDetector",
     );
     assert(
       _backGestureController == null,
@@ -463,7 +471,8 @@ class _CupertinoBackGestureDetectorState<T>
   void _handleDragUpdate(DragUpdateDetails details) {
     assert(
       mounted,
-      "Tried to update a gesture on a disposed CupertinoRouteBackGestureDetector",
+      "Tried to update a gesture on a disposed "
+      "CupertinoRouteBackGestureDetector",
     );
     assert(
       _backGestureController != null,
@@ -494,10 +503,9 @@ class _CupertinoBackGestureDetectorState<T>
   void _handleDragCancel() {
     assert(
       mounted,
-      "Tried to cancel a gesture on a disposed CupertinoRouteBackGestureDetector",
+      "Tried to cancel a gesture on a "
+      "disposed CupertinoRouteBackGestureDetector",
     );
-    // This can be called even if start is not called, paired with the "down" event
-    // that we don't consider here.
     _backGestureController?.dragEnd(0);
     _backGestureController = null;
   }
@@ -611,7 +619,8 @@ class _CupertinoBackGestureController<T> {
       // This route is destined to pop at this point. Reuse navigator's pop.
       navigator.pop();
 
-      // The popping may have finished inline if already at the target destination.
+      // The popping may have finished inline if
+      // already at the target destination.
       if (controller.isAnimating) {
         // Otherwise, use a custom popping animation duration and curve.
         final int droppedPageBackAnimationTime = lerpDouble(

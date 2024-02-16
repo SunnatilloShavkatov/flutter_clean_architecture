@@ -37,12 +37,10 @@ class Data {
     this.userId,
   });
 
-  Data.fromJson(Map json) {
+  Data.fromJson(Map<String, dynamic> json) {
     environmentId = json["environment_id"] as String?;
     loginTableSlug = json["login_table_slug"] as String?;
-
     resourceId = json["resource_id"] as String?;
-
     token = json["token"] != null ? Token.fromJson(json["token"]) : null;
     user = json["user"] != null ? User.fromJson(json["user"]) : null;
     userFound = json["user_found"] as bool?;

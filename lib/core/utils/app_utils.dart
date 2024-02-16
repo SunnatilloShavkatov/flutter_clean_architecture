@@ -46,7 +46,8 @@ sealed class AppUtils {
   static const EdgeInsets kPaddingHor10 = EdgeInsets.symmetric(horizontal: 10);
   static const EdgeInsets kPaddingHor12 = EdgeInsets.symmetric(horizontal: 12);
   static const EdgeInsets kPaddingHor16 = EdgeInsets.symmetric(horizontal: 16);
-  static const EdgeInsets kPaddingVertical16 = EdgeInsets.symmetric(vertical: 16);
+  static const EdgeInsets kPaddingVertical16 =
+      EdgeInsets.symmetric(vertical: 16);
   static const EdgeInsets kPaddingHor32Ver20 =
       EdgeInsets.symmetric(horizontal: 32, vertical: 20);
   static const EdgeInsets kPaddingHor16Ver12 =
@@ -71,19 +72,28 @@ sealed class AppUtils {
   static const Radius kRadius8 = Radius.circular(8);
   static const Radius kRadius12 = Radius.circular(12);
   static const BorderRadius kBorderRadius = BorderRadius.zero;
-  static const BorderRadius kBorderRadius2 = BorderRadius.all(Radius.circular(2));
-  static const BorderRadius kBorderRadius4 = BorderRadius.all(Radius.circular(4));
-  static const BorderRadius kBorderRadius6 = BorderRadius.all(Radius.circular(6));
-  static const BorderRadius kBorderRadius8 = BorderRadius.all(Radius.circular(8));
-  static const BorderRadius kBorderRadius12 = BorderRadius.all(Radius.circular(12));
-  static const BorderRadius kBorderRadius16 = BorderRadius.all(Radius.circular(16));
+  static const BorderRadius kBorderRadius2 =
+      BorderRadius.all(Radius.circular(2));
+  static const BorderRadius kBorderRadius4 =
+      BorderRadius.all(Radius.circular(4));
+  static const BorderRadius kBorderRadius6 =
+      BorderRadius.all(Radius.circular(6));
+  static const BorderRadius kBorderRadius8 =
+      BorderRadius.all(Radius.circular(8));
+  static const BorderRadius kBorderRadius12 =
+      BorderRadius.all(Radius.circular(12));
+  static const BorderRadius kBorderRadius16 =
+      BorderRadius.all(Radius.circular(16));
   static const BorderRadius kBorderTopRadius24 = BorderRadius.only(
     topLeft: Radius.circular(24),
     topRight: Radius.circular(24),
   );
-  static const BorderRadius kBorderRadius24 = BorderRadius.all(Radius.circular(24));
-  static const BorderRadius kBorderRadius48 = BorderRadius.all(Radius.circular(48));
-  static const BorderRadius kBorderRadius64 = BorderRadius.all(Radius.circular(64));
+  static const BorderRadius kBorderRadius24 =
+      BorderRadius.all(Radius.circular(24));
+  static const BorderRadius kBorderRadius48 =
+      BorderRadius.all(Radius.circular(48));
+  static const BorderRadius kBorderRadius64 =
+      BorderRadius.all(Radius.circular(64));
 
   static const RoundedRectangleBorder kShapeZero = RoundedRectangleBorder();
   static const RoundedRectangleBorder kShapeTop8 = RoundedRectangleBorder(

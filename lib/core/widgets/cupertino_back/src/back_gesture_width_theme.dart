@@ -17,13 +17,15 @@ class BackGestureWidth {
 
   /// Always returns a value equals to [fraction] of screen width
   static BackGestureWidthGetter fraction(double fraction) =>
-      (sizeGetter) => sizeGetter().width * fraction;
+      (ValueGetter<Size> sizeGetter) => sizeGetter().width * fraction;
 }
 
 /// Applies a [backGestureWidth] to descendant widgets.
 class BackGestureWidthTheme extends InheritedWidget {
   const BackGestureWidthTheme({
-    required this.backGestureWidth, required super.child, super.key,
+    required this.backGestureWidth,
+    required super.child,
+    super.key,
   });
 
   final BackGestureWidthGetter backGestureWidth;
@@ -40,9 +42,15 @@ class BackGestureWidthTheme extends InheritedWidget {
   @override
   bool updateShouldNotify(BackGestureWidthTheme oldWidget) =>
       backGestureWidth != oldWidget.backGestureWidth;
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(ObjectFlagProperty<BackGestureWidthGetter>.has('backGestureWidth', backGestureWidth));
+    properties.add(
+      ObjectFlagProperty<BackGestureWidthGetter>.has(
+        "backGestureWidth",
+        backGestureWidth,
+      ),
+    );
   }
 }

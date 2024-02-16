@@ -147,7 +147,7 @@ class _BouncingButtonState extends State<BouncingButton>
   /// We reverse the animation and notify the user of a press event
   void _onTapUp(TapUpDetails details) {
     if (!_stayOnBottom) {
-      Future.delayed(duration, _reverseAnimation);
+      Future<void>.delayed(duration, _reverseAnimation);
     }
 
     _triggerOnPressed();

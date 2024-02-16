@@ -4,7 +4,9 @@ import "package:flutter_clean_architecture/core/extension/extension.dart";
 
 Future<T?> customCupertinoModalPopup<T>(
   BuildContext context, {
-  required void Function() actionOne, required void Function() actionTwo, String title = "",
+  required void Function() actionOne,
+  required void Function() actionTwo,
+  String title = "",
   String actionTitleOne = "",
   String actionTitleTwo = "",
 }) async =>
@@ -57,7 +59,8 @@ Future<T?> customModalBottomSheet<T>({
             minChildSize: 0.5,
             expand: false,
             snap: true,
-            builder: (BuildContext context, ScrollController controller) => builder(context, controller),
+            builder: (BuildContext context, ScrollController controller) =>
+                builder(context, controller),
           );
         } else {
           return builder(context, null);

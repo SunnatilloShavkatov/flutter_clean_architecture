@@ -31,7 +31,8 @@ final PackageInfo packageInfo = sl<PackageInfo>();
 final NetworkInfo networkInfo = sl<NetworkInfo>();
 final LocalSource localSource = sl<LocalSource>();
 
-final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
+final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
+    GlobalKey<ScaffoldMessengerState>();
 
 final Chuck chuck = Chuck(navigatorKey: rootNavigatorKey);
 
@@ -53,7 +54,9 @@ final GoRouter router = GoRouter(
     ),
     StatefulShellRoute.indexedStack(
       parentNavigatorKey: rootNavigatorKey,
-      builder: (_, GoRouterState state, StatefulNavigationShell navigationShell) => BlocProvider(
+      builder:
+          (_, GoRouterState state, StatefulNavigationShell navigationShell) =>
+              BlocProvider<MainBloc>(
         key: state.pageKey,
         create: (_) => sl<MainBloc>(),
         child: MainPage(
@@ -148,7 +151,7 @@ final GoRouter router = GoRouter(
       path: Routes.auth,
       name: Routes.auth,
       parentNavigatorKey: rootNavigatorKey,
-      builder: (_, __) => BlocProvider(
+      builder: (_, __) => BlocProvider<AuthBloc>(
         create: (_) => sl<AuthBloc>(),
         child: const AuthPage(),
       ),
@@ -157,7 +160,7 @@ final GoRouter router = GoRouter(
       path: Routes.confirmCode,
       name: Routes.confirmCode,
       parentNavigatorKey: rootNavigatorKey,
-      builder: (_, GoRouterState state) => BlocProvider(
+      builder: (_, GoRouterState state) => BlocProvider<ConfirmCodeBloc>(
         create: (_) => sl<ConfirmCodeBloc>(),
         child: ConfirmCodePage(
           authState: state.extra! as AuthSuccessState,
@@ -168,7 +171,7 @@ final GoRouter router = GoRouter(
       path: Routes.register,
       name: Routes.register,
       parentNavigatorKey: rootNavigatorKey,
-      builder: (_, __) => BlocProvider(
+      builder: (_, __) => BlocProvider<AuthBloc>(
         create: (_) => sl<AuthBloc>(),
         child: const AuthPage(),
       ),

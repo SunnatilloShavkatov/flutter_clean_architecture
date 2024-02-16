@@ -12,7 +12,6 @@ const List<SlideTransform> slideTransforms = <SlideTransform>[
 ];
 
 class CubeTransform implements SlideTransform {
-
   const CubeTransform({
     this.perspectiveScale = 0.0014,
     this.rightPageAlignment = Alignment.centerLeft,
@@ -56,11 +55,11 @@ class CubeTransform implements SlideTransform {
 }
 
 class AccordionTransform implements SlideTransform {
-
   const AccordionTransform({
     this.transformRight = true,
     this.transformLeft = true,
   });
+
   final bool transformRight;
   final bool transformLeft;
 
@@ -93,10 +92,10 @@ class AccordionTransform implements SlideTransform {
 }
 
 class BackgroundToForegroundTransform implements SlideTransform {
-
   const BackgroundToForegroundTransform({
     this.startScale = 0.4,
   });
+
   final double startScale;
 
   @override
@@ -122,8 +121,8 @@ class BackgroundToForegroundTransform implements SlideTransform {
 }
 
 class ForegroundToBackgroundTransform implements SlideTransform {
-
   const ForegroundToBackgroundTransform({this.endScale = 0.4});
+
   final double endScale;
 
   @override
@@ -164,10 +163,10 @@ class DefaultTransform implements SlideTransform {
 }
 
 class DepthTransform implements SlideTransform {
-
   const DepthTransform({
     this.startScale = 0.4,
   });
+
   final double startScale;
 
   @override
@@ -199,10 +198,10 @@ class DepthTransform implements SlideTransform {
 }
 
 class FlipHorizontalTransform implements SlideTransform {
-
   const FlipHorizontalTransform({
     this.perspectiveScale = 0.002,
   });
+
   final double perspectiveScale;
 
   @override
@@ -242,10 +241,10 @@ class FlipHorizontalTransform implements SlideTransform {
 }
 
 class FlipVerticalTransform implements SlideTransform {
-
   const FlipVerticalTransform({
     this.perspectiveScale = 0.002,
   });
+
   final double perspectiveScale;
 
   @override
@@ -285,10 +284,10 @@ class FlipVerticalTransform implements SlideTransform {
 }
 
 class ParallaxTransform implements SlideTransform {
-
   const ParallaxTransform({
     this.clipAmount = 200,
   });
+
   final double clipAmount;
 
   @override
@@ -315,8 +314,8 @@ class ParallaxTransform implements SlideTransform {
 }
 
 class RectClipper extends CustomClipper<Rect> {
-
   const RectClipper(this.leftClip);
+
   final double leftClip;
 
   @override
@@ -324,7 +323,7 @@ class RectClipper extends CustomClipper<Rect> {
       Rect.fromLTRB(leftClip, 0, size.width, size.height);
 
   @override
-  bool shouldReclip(CustomClipper oldClipper) => true;
+  bool shouldReclip(CustomClipper<Rect> oldClipper) => true;
 }
 
 class StackTransform implements SlideTransform {
@@ -386,7 +385,6 @@ class TabletTransform implements SlideTransform {
 }
 
 class RotateDownTransform implements SlideTransform {
-
   const RotateDownTransform({
     double rotationAngle = 45,
   }) : rotationAngle = math.pi / 180 * rotationAngle;
@@ -420,7 +418,6 @@ class RotateDownTransform implements SlideTransform {
 }
 
 class RotateUpTransform implements SlideTransform {
-
   const RotateUpTransform({
     double rotationAngle = 45,
   }) : rotationAngle = math.pi / 180 * rotationAngle;
@@ -455,11 +452,11 @@ class RotateUpTransform implements SlideTransform {
 }
 
 class ZoomOutSlideTransform implements SlideTransform {
-
   const ZoomOutSlideTransform({
     this.zoomOutScale = 0.8,
     this.enableOpacity = true,
   });
+
   final double zoomOutScale;
   final bool enableOpacity;
 

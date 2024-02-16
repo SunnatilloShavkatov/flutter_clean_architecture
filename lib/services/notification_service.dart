@@ -23,11 +23,15 @@ sealed class NotificationService {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
-    unawaited(
-      FirebaseMessaging.instance.getToken().then(
-            (String? token) => log("FCM TOKEN: $token"),
-          ),
-    );
+    try {
+      unawaited(
+        FirebaseMessaging.instance.getToken().then(
+              (String? token) => log("FCM TOKEN: $token"),
+            ),
+      );
+    } on Exception catch (e, s) {
+      log("Firebase initialize error: $e $s");
+    }
     await setupFlutterNotifications();
     await foregroundNotification();
     backgroundNotification();
@@ -125,7 +129,8 @@ sealed class NotificationService {
   }
 
   static Future<void> terminateNotification() async {
-    final RemoteMessage? remoteMessage = await FirebaseMessaging.instance.getInitialMessage();
+    final RemoteMessage? remoteMessage =
+        await FirebaseMessaging.instance.getInitialMessage();
     if (remoteMessage == null) {
       FirebaseMessaging.onBackgroundMessage(
         _firebaseMessagingBackgroundHandler,

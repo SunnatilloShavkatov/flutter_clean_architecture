@@ -5,7 +5,7 @@ class SendCodeRequest {
     this.registerType,
   });
 
-  SendCodeRequest.fromJson(Map json) {
+  SendCodeRequest.fromJson(Map<String, dynamic> json) {
     recipient = json["recipient"];
     text = json["text"];
     registerType = json["type"];

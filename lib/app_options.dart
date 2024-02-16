@@ -88,7 +88,9 @@ class _ModelBindingScope extends InheritedWidget {
 
 class ModelBinding extends StatefulWidget {
   const ModelBinding({
-    required this.initialModel, required this.child, super.key,
+    required this.initialModel,
+    required this.child,
+    super.key,
   });
 
   final AppOptions initialModel;

@@ -46,8 +46,8 @@ final class AppLocalizations {
     return instance;
   }
 
-  static const Iterable<LocalizationsDelegate> localizationsDelegates =
-      <LocalizationsDelegate>[
+  static const Iterable<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
     TranslationsDelegate(),
     GlobalWidgetsLocalizations.delegate,
     GlobalMaterialLocalizations.delegate,

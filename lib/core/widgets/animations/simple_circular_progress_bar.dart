@@ -128,8 +128,12 @@ class SimpleCircularProgressBar extends StatefulWidget {
       ..add(ColorProperty("backColor", backColor))
       ..add(IntProperty("animationDuration", animationDuration))
       ..add(DiagnosticsProperty<bool>("mergeMode", mergeMode))
-      ..add(DiagnosticsProperty<ValueNotifier<double>?>(
-          "valueNotifier", valueNotifier,),)
+      ..add(
+        DiagnosticsProperty<ValueNotifier<double>?>(
+          "valueNotifier",
+          valueNotifier,
+        ),
+      )
       ..add(ObjectFlagProperty<OnGetCenterText?>.has("onGetText", onGetText));
   }
 }
@@ -166,7 +170,7 @@ class _SimpleCircularProgressBarState extends State<SimpleCircularProgressBar>
       defaultValueNotifier = null;
       valueNotifier = widget.valueNotifier!;
     } else {
-      defaultValueNotifier = ValueNotifier(widget.maxValue);
+      defaultValueNotifier = ValueNotifier<double>(widget.maxValue);
       valueNotifier = defaultValueNotifier!;
     }
 
@@ -215,7 +219,7 @@ class _SimpleCircularProgressBarState extends State<SimpleCircularProgressBar>
   }
 
   @override
-  Widget build(BuildContext context) => ValueListenableBuilder(
+  Widget build(BuildContext context) => ValueListenableBuilder<double>(
         valueListenable: valueNotifier,
         builder: (BuildContext context, double value, Widget? child) {
           // If the set value is greater than the maximum value, we must set the
@@ -337,13 +341,25 @@ class _SimpleCircularProgressBarState extends State<SimpleCircularProgressBar>
       ..add(DoubleProperty("startAngle", startAngle))
       ..add(DoubleProperty("correctAngle", correctAngle))
       ..add(DiagnosticsProperty<SweepGradient>("sweepGradient", sweepGradient))
-      ..add(DiagnosticsProperty<AnimationController>(
-          "animationController", animationController,),)
+      ..add(
+        DiagnosticsProperty<AnimationController>(
+          "animationController",
+          animationController,
+        ),
+      )
       ..add(ColorProperty("fullProgressColor", fullProgressColor))
-      ..add(DiagnosticsProperty<ValueNotifier<double>>(
-          "valueNotifier", valueNotifier,),)
-      ..add(DiagnosticsProperty<ValueNotifier<double>?>(
-          "defaultValueNotifier", defaultValueNotifier,),);
+      ..add(
+        DiagnosticsProperty<ValueNotifier<double>>(
+          "valueNotifier",
+          valueNotifier,
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<ValueNotifier<double>?>(
+          "defaultValueNotifier",
+          defaultValueNotifier,
+        ),
+      );
   }
 }
 

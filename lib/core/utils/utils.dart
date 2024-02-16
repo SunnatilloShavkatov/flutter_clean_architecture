@@ -8,5 +8,7 @@ import "package:flutter_clean_architecture/core/widgets/painter/logo_painter.dar
 import "package:gap/gap.dart";
 
 part "app_utils.dart";
+
 part "base_functions.dart";
+
 part "log_bloc_observer.dart";
