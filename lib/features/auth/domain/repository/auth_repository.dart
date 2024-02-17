@@ -13,7 +13,9 @@ import "package:flutter_clean_architecture/features/auth/data/models/send_messag
 
 part "../../data/repository/auth_repository_impl.dart";
 
-sealed class AuthRepository {
+abstract class AuthRepository {
+  const AuthRepository();
+
   Future<Either<Failure, SendMessageResponse>> sendCode({
     required SendCodeRequest request,
   });

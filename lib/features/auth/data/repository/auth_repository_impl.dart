@@ -1,7 +1,7 @@
 part of "../../domain/repository/auth_repository.dart";
 
 class AuthRepositoryImpl implements AuthRepository {
-  AuthRepositoryImpl({
+  const AuthRepositoryImpl({
     required this.dio,
   });
 
@@ -12,17 +12,23 @@ class AuthRepositoryImpl implements AuthRepository {
     required SendCodeRequest request,
   }) async {
     try {
-      final Response response = await dio.post(
+      final Response<dynamic> response = await dio.post(
         Constants.authUrl + Urls.sendCode,
         data: request.toJson(),
       );
-      return Right(SendMessageResponse.fromJson(response.data));
+      return Right<Failure, SendMessageResponse>(
+        SendMessageResponse.fromJson(response.data),
+      );
     } on DioException catch (error, stacktrace) {
       log("Exception occurred: $error stacktrace: $stacktrace");
-      return Left(ServerError.withDioError(error: error).failure);
+      return Left<Failure, SendMessageResponse>(
+        ServerError.withDioError(error: error).failure,
+      );
     } on Exception catch (error, stacktrace) {
       log("Exception occurred: $error stacktrace: $stacktrace");
-      return Left(ServerError.withError(message: error.toString()).failure);
+      return Left<Failure, SendMessageResponse>(
+        ServerError.withError(message: error.toString()).failure,
+      );
     }
   }
 
@@ -31,17 +37,23 @@ class AuthRepositoryImpl implements AuthRepository {
     required VerifyRequest request,
   }) async {
     try {
-      final Response response = await dio.post(
-        '${Constants.authUrl}${Urls.loginWithOption}',
+      final Response<dynamic> response = await dio.post(
+        "${Constants.authUrl}${Urls.loginWithOption}",
         data: request.toJson(),
       );
-      return Right(SendMessageResponse.fromJson(response.data));
+      return Right<Failure, SendMessageResponse>(
+        SendMessageResponse.fromJson(response.data),
+      );
     } on DioException catch (error, stacktrace) {
       log("Exception occurred: $error stacktrace: $stacktrace");
-      return Left(ServerError.withDioError(error: error).failure);
+      return Left<Failure, SendMessageResponse>(
+        ServerError.withDioError(error: error).failure,
+      );
     } on Exception catch (error, stacktrace) {
       log("Exception occurred: $error stacktrace: $stacktrace");
-      return Left(ServerError.withError(message: error.toString()).failure);
+      return Left<Failure, SendMessageResponse>(
+        ServerError.withError(message: error.toString()).failure,
+      );
     }
   }
 
@@ -50,18 +62,24 @@ class AuthRepositoryImpl implements AuthRepository {
     required String userId,
   }) async {
     try {
-      final Response response = await dio.get(
-        '${Constants.baseUrl}${Urls.objectSlim}${Slugs.patients}/$userId',
+      final Response<dynamic> response = await dio.get(
+        "${Constants.baseUrl}${Urls.objectSlim}${Slugs.patients}/$userId",
         data: <String, String>{},
       );
       final Map<String, dynamic> data = response.data;
-      return Right(User.fromJson(data["data"]?["data"]?["response"]));
+      return Right<Failure, User>(
+        User.fromJson(data["data"]?["data"]?["response"]),
+      );
     } on DioException catch (error, stacktrace) {
       log("Exception occurred: $error stacktrace: $stacktrace");
-      return Left(ServerError.withDioError(error: error).failure);
+      return Left<Failure, User>(
+        ServerError.withDioError(error: error).failure,
+      );
     } on Exception catch (error, stacktrace) {
       log("Exception occurred: $error stacktrace: $stacktrace");
-      return Left(ServerError.withError(message: error.toString()).failure);
+      return Left<Failure, User>(
+        ServerError.withError(message: error.toString()).failure,
+      );
     }
   }
 
@@ -70,17 +88,23 @@ class AuthRepositoryImpl implements AuthRepository {
     required Map<String, dynamic> request,
   }) async {
     try {
-      final Response response = await dio.post(
+      final Response<dynamic> response = await dio.post(
         Constants.authUrl + Urls.register,
         data: request,
       );
-      return Right(RegisterUserResponse.fromJson(response.data));
+      return Right<Failure, RegisterUserResponse>(
+        RegisterUserResponse.fromJson(response.data),
+      );
     } on DioException catch (error, stacktrace) {
       log("Exception occurred: $error stacktrace: $stacktrace");
-      return Left(ServerError.withDioError(error: error).failure);
+      return Left<Failure, RegisterUserResponse>(
+        ServerError.withDioError(error: error).failure,
+      );
     } on Exception catch (error, stacktrace) {
       log("Exception occurred: $error stacktrace: $stacktrace");
-      return Left(ServerError.withError(message: error.toString()).failure);
+      return Left<Failure, RegisterUserResponse>(
+        ServerError.withError(message: error.toString()).failure,
+      );
     }
   }
 }
