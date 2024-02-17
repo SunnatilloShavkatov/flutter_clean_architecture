@@ -35,18 +35,21 @@ class _CatalogPageState extends State<CatalogPage>
           ],
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(45),
-            child: TabBar(
-              controller: _tabController,
-              isScrollable: true,
-              padding: AppUtils.kPaddingHor10,
-              indicatorWeight: 4,
-              tabs: const <Widget>[
-                Tab(text: "Эксклюзив", height: 45),
-                Tab(text: "Фильмы", height: 45),
-                Tab(text: "ТВ", height: 45),
-                Tab(text: "Спорт", height: 45),
-                Tab(text: "Сериалы", height: 45),
-              ],
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: TabBar(
+                controller: _tabController,
+                isScrollable: true,
+                padding: AppUtils.kPaddingHor10,
+                indicatorWeight: 4,
+                tabs: const <Widget>[
+                  Tab(text: "Эксклюзив", height: 45),
+                  Tab(text: "Фильмы", height: 45),
+                  Tab(text: "ТВ", height: 45),
+                  Tab(text: "Спорт", height: 45),
+                  Tab(text: "Сериалы", height: 45),
+                ],
+              ),
             ),
           ),
         ),

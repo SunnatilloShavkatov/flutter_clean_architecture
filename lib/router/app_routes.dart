@@ -31,9 +31,6 @@ final PackageInfo packageInfo = sl<PackageInfo>();
 final NetworkInfo networkInfo = sl<NetworkInfo>();
 final LocalSource localSource = sl<LocalSource>();
 
-final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
-    GlobalKey<ScaffoldMessengerState>();
-
 final Chuck chuck = Chuck(navigatorKey: rootNavigatorKey);
 
 final GoRouter router = GoRouter(

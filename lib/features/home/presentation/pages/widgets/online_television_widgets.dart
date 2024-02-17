@@ -13,8 +13,9 @@ class OnlineTelevisionWidgets extends StatelessWidget {
         child: ListView.separated(
           scrollDirection: Axis.horizontal,
           padding: AppUtils.kPaddingHor12,
+          findChildIndexCallback: findChildIndexCallbackKeyInt,
           itemBuilder: (_, int index) => OnlineTelevisionItem(
-            key: ValueKey(index),
+            key: ObjectKey(index),
           ),
           separatorBuilder: (_, __) => AppUtils.kGap8,
           itemCount: 6,

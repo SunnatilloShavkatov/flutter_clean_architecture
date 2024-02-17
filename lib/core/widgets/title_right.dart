@@ -31,7 +31,9 @@ class TitleRight extends StatelessWidget {
                 backgroundColor: MaterialStatePropertyAll<Color>(
                   Colors.white.withOpacity(0.1),
                 ),
-                padding: const MaterialStatePropertyAll(EdgeInsets.zero),
+                padding: const MaterialStatePropertyAll<EdgeInsets>(
+                  EdgeInsets.zero,
+                ),
               ),
               icon: const Icon(AppIcons.arrow_right),
             ),

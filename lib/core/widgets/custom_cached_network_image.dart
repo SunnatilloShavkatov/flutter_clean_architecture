@@ -31,8 +31,9 @@ class CustomCachedNetworkImage extends StatelessWidget {
         imageUrl: imageUrl,
         width: width,
         height: height,
-        memCacheWidth:
-            width == null ? null : (width! * context.devicePixelRatio).toInt(),
+        memCacheWidth: width == null
+            ? null
+            : (width! * context.devicePixelRatio).toInt(),
         memCacheHeight: height == null
             ? null
             : (height! * context.devicePixelRatio).toInt(),
@@ -48,14 +49,30 @@ class CustomCachedNetworkImage extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(StringProperty("imageUrl", imageUrl))
-      ..add(ObjectFlagProperty<ImageWidgetBuilder?>.has(
-          "imageBuilder", imageBuilder,),)
-      ..add(ObjectFlagProperty<PlaceholderWidgetBuilder?>.has(
-          "placeholder", placeholder,),)
-      ..add(ObjectFlagProperty<ProgressIndicatorBuilder?>.has(
-          "progressIndicatorBuilder", progressIndicatorBuilder,),)
-      ..add(ObjectFlagProperty<LoadingErrorWidgetBuilder?>.has(
-          "errorWidget", errorWidget,),)
+      ..add(
+        ObjectFlagProperty<ImageWidgetBuilder?>.has(
+          "imageBuilder",
+          imageBuilder,
+        ),
+      )
+      ..add(
+        ObjectFlagProperty<PlaceholderWidgetBuilder?>.has(
+          "placeholder",
+          placeholder,
+        ),
+      )
+      ..add(
+        ObjectFlagProperty<ProgressIndicatorBuilder?>.has(
+          "progressIndicatorBuilder",
+          progressIndicatorBuilder,
+        ),
+      )
+      ..add(
+        ObjectFlagProperty<LoadingErrorWidgetBuilder?>.has(
+          "errorWidget",
+          errorWidget,
+        ),
+      )
       ..add(DoubleProperty("width", width))
       ..add(DoubleProperty("height", height))
       ..add(EnumProperty<BoxFit?>("fit", fit));

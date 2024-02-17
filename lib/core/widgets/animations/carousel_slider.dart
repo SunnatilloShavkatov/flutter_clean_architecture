@@ -31,6 +31,7 @@ class CarouselSlider extends StatefulWidget {
     this.onSlideChanged,
     this.controller,
     this.clipBehavior = Clip.hardEdge,
+    this.findChildIndexCallback,
   })  : slideBuilder = null,
         itemCount = children.length;
 
@@ -52,6 +53,7 @@ class CarouselSlider extends StatefulWidget {
     this.onSlideChanged,
     this.controller,
     this.clipBehavior = Clip.hardEdge,
+    this.findChildIndexCallback,
   }) : children = null;
 
   final CarouselSlideBuilder? slideBuilder;
@@ -74,6 +76,7 @@ class CarouselSlider extends StatefulWidget {
   final ValueChanged<int>? onSlideChanged;
   final Clip clipBehavior;
   final CarouselSliderController? controller;
+  final ChildIndexGetter? findChildIndexCallback;
 
   @override
   State<StatefulWidget> createState() => _CarouselSliderState();
@@ -123,6 +126,12 @@ class CarouselSlider extends StatefulWidget {
         DiagnosticsProperty<CarouselSliderController?>(
           "controller",
           controller,
+        ),
+      )
+      ..add(
+        ObjectFlagProperty<ChildIndexGetter?>.has(
+          "findChildIndexCallback",
+          findChildIndexCallback,
         ),
       );
   }
@@ -183,6 +192,7 @@ class _CarouselSliderState extends State<CarouselSlider> {
         controller: _pageController,
         scrollDirection: widget.scrollDirection,
         physics: widget.scrollPhysics,
+        findChildIndexCallback: widget.findChildIndexCallback,
         itemBuilder: (BuildContext context, int index) {
           final int slideIndex = index % widget.itemCount;
           final Widget slide = widget.children == null

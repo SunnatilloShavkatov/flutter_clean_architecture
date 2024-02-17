@@ -26,7 +26,9 @@ class _ContinueBrowsingWidgetsState extends State<ContinueBrowsingWidgets>
           minimum: AppUtils.kPaddingAll16,
           sliver: SliverGrid.builder(
             itemCount: 16,
-            itemBuilder: (_, int index) => ContinueBrowsing(key: ValueKey(index)),
+            findChildIndexCallback: findChildIndexCallbackKeyInt,
+            itemBuilder: (_, int index) =>
+                ContinueBrowsing(key: ObjectKey(index)),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               mainAxisSpacing: 12,

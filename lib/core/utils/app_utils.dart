@@ -3,6 +3,13 @@ part of "utils.dart";
 /// logo
 const Align alignLogo = Align(child: Logo());
 
+int? findChildIndexCallbackKeyInt(Key key) {
+  if (key is ObjectKey && key.value != null && key.value is int) {
+    return key.value! as int;
+  }
+  return null;
+}
+
 sealed class AppUtils {
   AppUtils._();
 

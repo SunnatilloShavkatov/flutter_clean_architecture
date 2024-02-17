@@ -11,7 +11,6 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp.router(
         debugShowCheckedModeBanner: false,
-        scaffoldMessengerKey: scaffoldMessengerKey,
 
         /// theme style
         theme: lightTheme,

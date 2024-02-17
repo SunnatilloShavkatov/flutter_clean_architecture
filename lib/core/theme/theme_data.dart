@@ -62,10 +62,10 @@ final ThemeData lightTheme = ThemeData(
   ),
   scrollbarTheme: ScrollbarThemeData(
     interactive: true,
-    thumbColor: MaterialStatePropertyAll(
+    thumbColor: MaterialStatePropertyAll<Color>(
       ThemeColors.light.main,
     ),
-    thickness: const MaterialStatePropertyAll(5),
+    thickness: const MaterialStatePropertyAll<double>(5),
     minThumbLength: 100,
   ),
   bottomAppBarTheme: const BottomAppBarTheme(
@@ -96,14 +96,16 @@ final ThemeData lightTheme = ThemeData(
           return colorLightScheme.primary;
         },
       ),
-      textStyle: MaterialStatePropertyAll(ThemeTextStyles.light.buttonStyle),
-      elevation: const MaterialStatePropertyAll(0),
-      shape: const MaterialStatePropertyAll(
+      textStyle: MaterialStatePropertyAll<TextStyle>(
+        ThemeTextStyles.light.buttonStyle,
+      ),
+      elevation: const MaterialStatePropertyAll<double>(0),
+      shape: const MaterialStatePropertyAll<OutlinedBorder>(
         RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
       ),
-      fixedSize: const MaterialStatePropertyAll(Size(double.infinity, 48)),
+      fixedSize: const MaterialStatePropertyAll<Size>(Size.fromHeight(48)),
     ),
   ),
   outlinedButtonTheme: OutlinedButtonThemeData(
@@ -111,14 +113,16 @@ final ThemeData lightTheme = ThemeData(
       foregroundColor: MaterialStateProperty.resolveWith(
         (Set<MaterialState> states) => Colors.black,
       ),
-      textStyle: MaterialStatePropertyAll(ThemeTextStyles.light.buttonStyle),
-      elevation: const MaterialStatePropertyAll(0),
-      shape: const MaterialStatePropertyAll(
+      textStyle: MaterialStatePropertyAll<TextStyle>(
+        ThemeTextStyles.light.buttonStyle,
+      ),
+      elevation: const MaterialStatePropertyAll<double>(0),
+      shape: const MaterialStatePropertyAll<OutlinedBorder>(
         RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
       ),
-      fixedSize: const MaterialStatePropertyAll(Size(double.infinity, 48)),
+      fixedSize: const MaterialStatePropertyAll<Size>(Size.fromHeight(48)),
     ),
   ),
   inputDecorationTheme: InputDecorationTheme(
@@ -180,11 +184,12 @@ final ThemeData lightTheme = ThemeData(
     selectedIconTheme: IconThemeData(color: colorLightScheme.primary),
   ),
   tabBarTheme: TabBarTheme(
+    tabAlignment: TabAlignment.start,
     indicatorColor: colorLightScheme.primary,
     labelColor: const Color(0xFF17171C),
     unselectedLabelColor: const Color(0xFFB3BBCD),
     dividerColor: Colors.transparent,
-    overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+    overlayColor: const MaterialStatePropertyAll<Color>(Colors.transparent),
     labelStyle: const TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.w500,
@@ -346,10 +351,10 @@ final ThemeData darkTheme = ThemeData(
   ),
   scrollbarTheme: ScrollbarThemeData(
     interactive: true,
-    thumbColor: MaterialStatePropertyAll(
+    thumbColor: MaterialStatePropertyAll<Color>(
       ThemeColors.light.main,
     ),
-    thickness: const MaterialStatePropertyAll(5),
+    thickness: const MaterialStatePropertyAll<double>(5),
     minThumbLength: 100,
   ),
   bottomAppBarTheme: const BottomAppBarTheme(
@@ -380,14 +385,15 @@ final ThemeData darkTheme = ThemeData(
           return colorDarkScheme.primary;
         },
       ),
-      textStyle: MaterialStatePropertyAll(ThemeTextStyles.dark.buttonStyle),
-      elevation: const MaterialStatePropertyAll(0),
-      shape: const MaterialStatePropertyAll(
+      textStyle:
+          MaterialStatePropertyAll<TextStyle>(ThemeTextStyles.dark.buttonStyle),
+      elevation: const MaterialStatePropertyAll<double>(0),
+      shape: const MaterialStatePropertyAll<OutlinedBorder>(
         RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
       ),
-      fixedSize: const MaterialStatePropertyAll(Size(double.infinity, 48)),
+      fixedSize: const MaterialStatePropertyAll<Size>(Size.fromHeight(48)),
     ),
   ),
   outlinedButtonTheme: OutlinedButtonThemeData(
@@ -395,14 +401,16 @@ final ThemeData darkTheme = ThemeData(
       foregroundColor: MaterialStateProperty.resolveWith(
         (Set<MaterialState> states) => Colors.black,
       ),
-      textStyle: MaterialStatePropertyAll(ThemeTextStyles.dark.buttonStyle),
-      elevation: const MaterialStatePropertyAll(0),
-      shape: const MaterialStatePropertyAll(
+      textStyle: MaterialStatePropertyAll<TextStyle>(
+        ThemeTextStyles.dark.buttonStyle,
+      ),
+      elevation: const MaterialStatePropertyAll<double>(0),
+      shape: const MaterialStatePropertyAll<OutlinedBorder>(
         RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
       ),
-      fixedSize: const MaterialStatePropertyAll(Size(double.infinity, 48)),
+      fixedSize: const MaterialStatePropertyAll<Size>(Size.fromHeight(48)),
     ),
   ),
   inputDecorationTheme: InputDecorationTheme(
@@ -471,7 +479,7 @@ final ThemeData darkTheme = ThemeData(
     tabAlignment: TabAlignment.start,
     labelPadding: AppUtils.kPaddingHor6,
     dividerColor: Colors.transparent,
-    overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+    overlayColor: const MaterialStatePropertyAll<Color>(Colors.transparent),
     labelStyle: const TextStyle(
       fontSize: 13,
       fontWeight: FontWeight.w500,

@@ -34,11 +34,11 @@ class _HomePageState extends State<HomePage> with HomeMixin {
         body: CustomScrollView(
           slivers: <Widget>[
             BannersWidget(
-              key: const ValueKey("banners"),
+              key: const ObjectKey("banners"),
               controller: _pageController,
             ),
             SliverList.list(
-              key: const ValueKey("list"),
+              key: const ObjectKey("list"),
               children: <Widget>[
                 TitleRight(
                   title: "Разработано SalomTV",
@@ -49,8 +49,9 @@ class _HomePageState extends State<HomePage> with HomeMixin {
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     padding: AppUtils.kPaddingHor12,
+                    findChildIndexCallback: findChildIndexCallbackKeyInt,
                     itemBuilder: (_, int index) => MovieItem(
-                      key: ValueKey(index),
+                      key: ObjectKey(index),
                     ),
                     separatorBuilder: (_, __) => AppUtils.kGap8,
                     itemCount: 6,

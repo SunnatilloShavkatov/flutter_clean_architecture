@@ -28,8 +28,9 @@ class BannersWidget extends StatelessWidget {
               enableAutoSlider: true,
               slideTransform: slideTransforms[DateTime.now().weekday % 6],
               controller: controller,
+              findChildIndexCallback: findChildIndexCallbackKeyInt,
               slideBuilder: (int index) => BannerItem(
-                key: ValueKey(index),
+                key: ObjectKey(index),
                 index: index,
               ),
               itemCount: 6,
@@ -40,15 +41,16 @@ class BannersWidget extends StatelessWidget {
           SizedBox(
             height: 12,
             child: Center(
-              child: ValueListenableBuilder(
+              child: ValueListenableBuilder<int>(
                 valueListenable: _currentPage,
                 builder: (_, int value, __) => ListView.separated(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (_, int index) => DotProgress(
-                    key: ValueKey(index),
+                    key: ObjectKey(index),
                     isLoading: index == _currentPage.value % 6,
                   ),
+                  findChildIndexCallback: findChildIndexCallbackKeyInt,
                   separatorBuilder: (_, __) => AppUtils.kGap8,
                   itemCount: 6,
                 ),
@@ -61,7 +63,11 @@ class BannersWidget extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<CarouselSliderController?>(
-        "controller", controller,),);
+    properties.add(
+      DiagnosticsProperty<CarouselSliderController?>(
+        "controller",
+        controller,
+      ),
+    );
   }
 }

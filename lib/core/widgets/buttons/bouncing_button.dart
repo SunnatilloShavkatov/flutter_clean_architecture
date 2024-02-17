@@ -1,5 +1,3 @@
-// ignore_for_file: diagnostic_describe_all_properties
-
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 
@@ -211,6 +209,8 @@ class _BouncingButtonState extends State<BouncingButton>
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-        .add(ObjectFlagProperty<VoidCallback>.has("onPressed", onPressed));
+      ..add(ObjectFlagProperty<VoidCallback>.has("onPressed", onPressed))
+      ..add(DoubleProperty("scaleFactor", scaleFactor))
+      ..add(DiagnosticsProperty<Duration>("duration", duration));
   }
 }

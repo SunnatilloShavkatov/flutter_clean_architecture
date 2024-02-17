@@ -2,7 +2,8 @@ import "package:flutter/material.dart";
 
 class BottomNavigationButton extends StatelessWidget {
   const BottomNavigationButton({
-    required this.child, super.key,
+    required this.child,
+    super.key,
   });
 
   final Widget child;

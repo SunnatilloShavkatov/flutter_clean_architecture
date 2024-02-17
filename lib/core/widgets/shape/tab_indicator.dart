@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
 
 class TabBarIndicator extends Decoration {
-
   TabBarIndicator({
     required Color color,
     required double radius,
@@ -13,7 +12,6 @@ class TabBarIndicator extends Decoration {
 }
 
 class _TabBarIndicator extends BoxPainter {
-
   _TabBarIndicator(Color color, this.radius)
       : _paint = Paint()
           ..color = color

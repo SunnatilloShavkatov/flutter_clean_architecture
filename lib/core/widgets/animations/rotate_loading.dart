@@ -41,13 +41,11 @@ class _RotateIconState extends State<RotateIcon>
   @override
   void initState() {
     super.initState();
-    if (mounted) {
-      _animationController = AnimationController(
-        vsync: this,
-        duration: widget.duration,
-      );
-      _animationController.repeat();
-    }
+    _animationController = AnimationController(
+      vsync: this,
+      duration: widget.duration,
+    );
+    _animationController.repeat();
   }
 
   @override

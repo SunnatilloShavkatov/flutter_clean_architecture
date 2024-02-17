@@ -27,8 +27,9 @@ class ModalProgressHUD extends StatelessWidget {
           child,
           Offstage(
             offstage: !inAsyncCall,
-            child: Opacity(
+            child: AnimatedOpacity(
               opacity: opacity,
+              duration: const Duration(milliseconds: 100),
               child: ModalBarrier(dismissible: dismissible, color: color),
             ),
           ),

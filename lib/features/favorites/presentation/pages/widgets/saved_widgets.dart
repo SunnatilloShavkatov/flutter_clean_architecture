@@ -24,7 +24,8 @@ class _SavedWidgetsState extends State<SavedWidgets>
           minimum: AppUtils.kPaddingAll16,
           sliver: SliverGrid.builder(
             itemCount: 16,
-            itemBuilder: (_, int index) => SavedItem(key: ValueKey(index)),
+            findChildIndexCallback: findChildIndexCallbackKeyInt,
+            itemBuilder: (_, int index) => SavedItem(key: ObjectKey(index)),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
               mainAxisSpacing: 12,

@@ -31,7 +31,7 @@ class _FavoritesPageState extends State<FavoritesPage>
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(45),
             child: Align(
-              alignment: Alignment.bottomCenter,
+              alignment: Alignment.centerLeft,
               child: TabBar(
                 controller: _tabController,
                 isScrollable: true,
