@@ -54,9 +54,7 @@ android {
         versionName flutterVersionName
         multiDexEnabled true
         archivesBaseName = "archive_name_${versionName}_(${versionCode})"
-        ndk {
-            abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
-        }
+        ndk.abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
     }
 
     signingConfigs {
