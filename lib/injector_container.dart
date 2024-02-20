@@ -62,14 +62,6 @@ Future<void> init() async {
 
   sl<Dio>().interceptors.addAll(
     <Interceptor>[
-      InterceptorsWrapper(
-        onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
-          final Map<String, dynamic> headers = options.headers;
-          headers["Authorization"] = "Bearer ${sl<LocalSource>().accessToken}";
-          options.headers = headers;
-          return handler.next(options);
-        },
-      ),
       chuck.getDioInterceptor(),
       RetryInterceptor(
         dio: sl<Dio>(),
