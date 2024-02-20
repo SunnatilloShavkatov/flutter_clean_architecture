@@ -13,10 +13,11 @@ import "package:flutter_clean_architecture/router/app_routes.dart";
 import "package:flutter_clean_architecture/services/notification_service.dart";
 
 void main() async {
-  final WidgetsBinding widgetsBinding =
-      WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  /// flutter_native_splash
+  final WidgetsBinding binding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: binding);
 
+  /// notification initialize
   await NotificationService.initialize();
 
   /// bloc logger

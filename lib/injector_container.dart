@@ -73,6 +73,7 @@ Future<void> init() async {
       chuck.getDioInterceptor(),
       RetryInterceptor(
         dio: sl<Dio>(),
+        retries: 0,
         toNoInternetPageNavigator: () async {
           final RouteMatch lastMatch =
               router.routerDelegate.currentConfiguration.last;
@@ -87,6 +88,13 @@ Future<void> init() async {
         },
         accessTokenGetter: () => "Bearer ${localSource.accessToken}",
         refreshTokenFunction: () async {
+          await localSource.clear().then(
+            (_) {
+              router.goNamed(Routes.initial);
+            },
+          );
+        },
+        forbiddenFunction: () async {
           await localSource.clear().then(
             (_) {
               router.goNamed(Routes.initial);
