@@ -24,8 +24,8 @@ dependencies:
   # path
   path_provider: ^2.1.2
   # rest api
-  dio: ^5.4.0
-  dio_retry_plus: ^2.0.5
+  dio: ^5.4.1
+  dio_retry_plus: ^2.0.6
   chuck_interceptor: ^2.0.9
   # box
   gap: ^3.0.1
@@ -46,9 +46,9 @@ dependencies:
   cached_network_image: ^3.3.1
   # firebase
   firebase_core: ^2.25.4
-  firebase_analytics: ^10.8.5
-  firebase_messaging: ^14.7.15
-  firebase_remote_config: ^4.3.13
+  firebase_analytics: ^10.8.6
+  firebase_messaging: ^14.7.16
+  firebase_remote_config: ^4.3.14
   # local notification
   flutter_local_notifications: ^16.3.2
 

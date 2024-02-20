@@ -51,9 +51,12 @@ final GoRouter router = GoRouter(
     ),
     StatefulShellRoute.indexedStack(
       parentNavigatorKey: rootNavigatorKey,
-      builder:
-          (_, GoRouterState state, StatefulNavigationShell navigationShell) =>
-              BlocProvider<MainBloc>(
+      builder: (
+        _,
+        GoRouterState state,
+        StatefulNavigationShell navigationShell,
+      ) =>
+          BlocProvider<MainBloc>(
         key: state.pageKey,
         create: (_) => sl<MainBloc>(),
         child: MainPage(
