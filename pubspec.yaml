@@ -32,14 +32,13 @@ dependencies:
   # router
   go_router: ^13.2.0
   # svg
-  flutter_svg: ^2.0.9
+  flutter_svg: ^2.0.10+1
   # url launchers
   url_launcher: ^6.2.4
+  # otp autofill
+  otp_autofill: ^3.0.2
   # sms autofill
-  sms_autofill:
-    git:
-      url: https://github.com/SunnatilloShavkatov/sms_autofill.git
-      ref: staging
+  pin_input_text_field: ^4.5.1
   # package info
   package_info_plus: ^5.0.1
   # cached network image

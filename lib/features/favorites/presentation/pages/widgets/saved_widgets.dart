@@ -30,7 +30,7 @@ class _SavedWidgetsState extends State<SavedWidgets>
               crossAxisCount: 3,
               mainAxisSpacing: 12,
               crossAxisSpacing: 8,
-              childAspectRatio: 108 / 164,
+              mainAxisExtent: 190,
             ),
           ),
         ),
@@ -56,12 +56,13 @@ class SavedItem extends StatelessWidget {
               ClipRRect(
                 borderRadius: AppUtils.kBorderRadius8,
                 child: CustomCachedNetworkImage(
-                  height: 130,
+                  height: 152,
                   width: (context.width - 48) / 3,
-                  imageUrl: "https://kinolar.tv/_ld/1/63943269.jpg",
+                  imageUrl:
+                      "https://images.justwatch.com/poster/311294596/s718/kung-fu-panda-4.jpg",
                   placeholder: (_, __) => alignLogo,
                   errorWidget: (_, __, ___) => alignLogo,
-                  fit: BoxFit.contain,
+                  fit: BoxFit.fitWidth,
                 ),
               ),
               Positioned(
@@ -142,8 +143,8 @@ class SavedItem extends StatelessWidget {
                 "Фильм",
                 style: TextStyle(
                   fontSize: 10,
-                  color: Colors.white.withOpacity(0.5),
                   fontWeight: FontWeight.w500,
+                  color: context.color.whiteOpacity5,
                 ),
               ),
               AppUtils.kGap4,
@@ -152,9 +153,9 @@ class SavedItem extends StatelessWidget {
               Text(
                 "1994",
                 style: TextStyle(
-                  color: Colors.white.withOpacity(0.5),
                   fontSize: 10,
                   fontWeight: FontWeight.w500,
+                  color: context.color.whiteOpacity5,
                 ),
               ),
             ],

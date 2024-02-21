@@ -32,8 +32,8 @@ class _ContinueBrowsingWidgetsState extends State<ContinueBrowsingWidgets>
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               mainAxisSpacing: 12,
-              crossAxisSpacing: 9,
-              childAspectRatio: 167 / 131,
+              crossAxisSpacing: 8,
+              mainAxisExtent: 137,
             ),
           ),
         ),
@@ -88,11 +88,7 @@ class ContinueBrowsing extends StatelessWidget {
                   ),
                 ),
                 const Positioned.fill(
-                  child: Center(
-                    child: Icon(
-                      AppIcons.player_play_filled,
-                    ),
-                  ),
+                  child: Center(child: Icon(AppIcons.player_play_filled)),
                 ),
                 const Positioned(
                   bottom: 6,

@@ -95,15 +95,25 @@ class _AuthPageState extends State<AuthPage> with AuthMixin {
                   CustomLoadingButton(
                 isLoading: state is AuthLoadingState,
                 onPressed: () {
-                  if (!_formKey.currentState!.validate()) {
-                    return;
-                  }
-                  _formKey.currentState!.save();
-                  context.read<AuthBloc>().add(
-                        LoginPhoneButtonPressedEvent(
-                          phoneNumber: phoneNumberController.text.trim(),
-                        ),
-                      );
+                  // if (!_formKey.currentState!.validate()) {
+                  //   return;
+                  // }
+                  // _formKey.currentState!.save();
+                  // context.read<AuthBloc>().add(
+                  //       LoginPhoneButtonPressedEvent(
+                  //         phoneNumber: phoneNumberController.text.trim(),
+                  //       ),
+                  //     );
+                  // ignore: discarded_futures
+                  context.pushNamed(
+                    Routes.confirmCode,
+                    extra: const AuthSuccessState(
+                      smsId: "",
+                      phone: "",
+                      uiPhone: "",
+                      data: <String, dynamic>{},
+                    ),
+                  );
                 },
                 child: const Text("Продолжить"),
               ),

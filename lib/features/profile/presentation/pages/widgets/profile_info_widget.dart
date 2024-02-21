@@ -1,10 +1,10 @@
 import "dart:ui";
 
-import "package:cached_network_image/cached_network_image.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 
 import "package:flutter_clean_architecture/core/utils/utils.dart";
+import "package:flutter_clean_architecture/core/widgets/custom_cached_network_image.dart";
 
 class ProfileInfoWidget extends StatelessWidget {
   const ProfileInfoWidget({super.key});
@@ -20,14 +20,14 @@ class ProfileInfoWidget extends StatelessWidget {
             borderRadius: AppUtils.kBorderRadius8,
           ),
         ),
-        child: Stack(
+        child: const Stack(
           children: <Widget>[
             Positioned(
               left: 56,
               top: -81,
               child: ClipRRect(
                 borderRadius: AppUtils.kBorderRadius8,
-                child: CachedNetworkImage(
+                child: CustomCachedNetworkImage(
                   imageUrl:
                       "https://firebasestorage.googleapis.com/v0/b/sample-bloc-5b8b9.appspot.com/o/image_29.webp?alt=media",
                   width: 342,
@@ -35,7 +35,7 @@ class ProfileInfoWidget extends StatelessWidget {
                 ),
               ),
             ),
-            const Positioned(
+            Positioned(
               left: 0,
               right: 0,
               top: 0,
@@ -54,7 +54,7 @@ class ProfileInfoWidget extends StatelessWidget {
                 ),
               ),
             ),
-            const Padding(
+            Padding(
               padding: AppUtils.kPaddingAll12,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -122,6 +122,7 @@ class _Item extends StatelessWidget {
           ),
         ),
       );
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);

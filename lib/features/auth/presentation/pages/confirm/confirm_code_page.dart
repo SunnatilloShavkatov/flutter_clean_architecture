@@ -1,4 +1,6 @@
 import "dart:async";
+import "dart:developer";
+import "dart:io";
 
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
@@ -13,7 +15,8 @@ import "package:flutter_clean_architecture/features/auth/presentation/bloc/login
 import "package:flutter_clean_architecture/features/auth/presentation/pages/register/args/register_args.dart";
 import "package:flutter_clean_architecture/router/app_routes.dart";
 import "package:go_router/go_router.dart";
-import "package:sms_autofill/sms_autofill.dart";
+import "package:otp_autofill/otp_autofill.dart";
+import "package:pin_input_text_field/pin_input_text_field.dart";
 
 part "mixin/confirm_code_mixin.dart";
 
@@ -55,10 +58,7 @@ class _ConfirmCodePageState extends State<ConfirmCodePage>
                   phone: widget.authState.phone,
                 ),
               );
-              if (result != null) {
-                if (!context.mounted) {
-                  return;
-                }
+              if (result != null && context.mounted) {
                 context.pop(true);
               }
             }
@@ -87,8 +87,7 @@ class _ConfirmCodePageState extends State<ConfirmCodePage>
                   ),
                   AppUtils.kGap32,
                   Center(
-                    child: PinFieldAutoFill(
-                      enableInteractiveSelection: false,
+                    child: PinInputTextField(
                       cursor: Cursor(
                         color: context.colorScheme.primary,
                         enabled: true,
@@ -97,9 +96,8 @@ class _ConfirmCodePageState extends State<ConfirmCodePage>
                       ),
                       controller: controller,
                       autoFocus: true,
-                      currentCode: controller.text.trim(),
-                      onCodeSubmitted: (String code) {},
-                      onCodeChanged: (String? v) {},
+                      onSubmit: (String code) {},
+                      onChanged: (String? v) {},
                       decoration: BoxLooseDecoration(
                         textStyle: context.textTheme.titleMedium,
                         strokeColorBuilder: FixedColorBuilder(

@@ -18,37 +18,46 @@ class CustomCachedNetworkImage extends StatelessWidget {
   });
 
   final String imageUrl;
+  final double? width;
+  final double? height;
+  final BoxFit? fit;
   final ImageWidgetBuilder? imageBuilder;
   final PlaceholderWidgetBuilder? placeholder;
   final ProgressIndicatorBuilder? progressIndicatorBuilder;
   final LoadingErrorWidgetBuilder? errorWidget;
-  final double? width;
-  final double? height;
-  final BoxFit? fit;
 
   @override
-  Widget build(BuildContext context) => CachedNetworkImage(
-        imageUrl: imageUrl,
-        width: width,
-        height: height,
-        memCacheWidth: width == null
-            ? null
-            : (width! * context.devicePixelRatio).toInt(),
-        memCacheHeight: height == null
-            ? null
-            : (height! * context.devicePixelRatio).toInt(),
-        fit: fit,
-        placeholder: placeholder,
-        errorWidget: errorWidget,
-        progressIndicatorBuilder: progressIndicatorBuilder,
-        imageBuilder: imageBuilder,
-      );
+  Widget build(BuildContext context) {
+    final int? cacheWidth =
+        width == null ? null : (width! * context.devicePixelRatio).toInt();
+    final int? cacheHeight =
+        height == null ? null : (height! * context.devicePixelRatio).toInt();
+    return CachedNetworkImage(
+      cacheKey: imageUrl,
+      imageUrl: imageUrl,
+      width: width,
+      height: height,
+      memCacheWidth: cacheWidth,
+      memCacheHeight: cacheHeight,
+      maxWidthDiskCache: cacheWidth,
+      maxHeightDiskCache: cacheHeight,
+      fit: fit,
+      placeholder: placeholder,
+      errorWidget: errorWidget,
+      progressIndicatorBuilder: progressIndicatorBuilder,
+      imageBuilder: imageBuilder,
+      placeholderFadeInDuration: const Duration(milliseconds: 300),
+    );
+  }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(StringProperty("imageUrl", imageUrl))
+      ..add(DoubleProperty("width", width))
+      ..add(DoubleProperty("height", height))
+      ..add(EnumProperty<BoxFit?>("fit", fit))
       ..add(
         ObjectFlagProperty<ImageWidgetBuilder?>.has(
           "imageBuilder",
@@ -72,9 +81,6 @@ class CustomCachedNetworkImage extends StatelessWidget {
           "errorWidget",
           errorWidget,
         ),
-      )
-      ..add(DoubleProperty("width", width))
-      ..add(DoubleProperty("height", height))
-      ..add(EnumProperty<BoxFit?>("fit", fit));
+      );
   }
 }
