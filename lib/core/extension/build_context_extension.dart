@@ -5,6 +5,8 @@ extension BuildContextExt on BuildContext {
 
   ThemeData get theme => Theme.of(this);
 
+  TextTheme get textTheme => theme.textTheme;
+
   ColorScheme get colorScheme => theme.colorScheme;
 
   bool get isDarkMode => theme.brightness == Brightness.dark;
@@ -14,8 +16,6 @@ extension BuildContextExt on BuildContext {
   ThemeTextStyles get textStyle => theme.extension<ThemeTextStyles>()!;
 
   ThemeCustomShapes get shapes => theme.extension<ThemeCustomShapes>()!;
-
-  TextTheme get textTheme => theme.textTheme;
 
   ScaffoldFeatureController<SnackBar, SnackBarClosedReason> Function(
     SnackBar snackBar,

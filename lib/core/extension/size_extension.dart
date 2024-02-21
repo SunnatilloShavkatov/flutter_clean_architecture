@@ -13,13 +13,13 @@ extension SizeExtension on BuildContext {
 
   double get height => MediaQuery.sizeOf(this).height;
 
-  double get devicePixelRatio => MediaQuery.devicePixelRatioOf(this);
-
-  EdgeInsets get viewPadding => MediaQuery.viewPaddingOf(this);
+  EdgeInsets get padding => MediaQuery.paddingOf(this);
 
   EdgeInsets get viewInsets => MediaQuery.viewInsetsOf(this);
 
-  EdgeInsets get padding => MediaQuery.paddingOf(this);
+  EdgeInsets get viewPadding => MediaQuery.viewPaddingOf(this);
+
+  double get devicePixelRatio => MediaQuery.devicePixelRatioOf(this);
 }
 
 extension OrientationExtension on Orientation {
