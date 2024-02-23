@@ -12,6 +12,9 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) => MaterialApp.router(
         debugShowCheckedModeBanner: false,
 
+        /// router
+        routerConfig: router,
+
         /// theme style
         theme: lightTheme,
         darkTheme: darkTheme,
@@ -21,10 +24,5 @@ class App extends StatelessWidget {
         locale: context.options.locale,
         supportedLocales: AppLocalizations.supportedLocales,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
-
-        /// pages
-        routerDelegate: router.routerDelegate,
-        routeInformationParser: router.routeInformationParser,
-        routeInformationProvider: router.routeInformationProvider,
       );
 }

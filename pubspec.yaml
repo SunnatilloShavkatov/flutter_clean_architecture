@@ -36,7 +36,10 @@ dependencies:
   # url launchers
   url_launcher: ^6.2.5
   # otp autofill
-  otp_autofill: ^3.0.2
+  otp_autofill:
+    git:
+      url: https://github.com/SunnatilloShavkatov/otp_autofill.git
+      ref: main
   # sms autofill
   pin_input_text_field: ^4.5.1
   # package info
