@@ -1,4 +1,3 @@
-import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
 
 import "package:flutter_clean_architecture/core/extension/extension.dart";
@@ -12,7 +11,6 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp.router(
         debugShowCheckedModeBanner: false,
-        scrollBehavior: const _CustomScrollBehavior(),
 
         /// theme style
         theme: lightTheme,
@@ -29,12 +27,4 @@ class App extends StatelessWidget {
         routeInformationParser: router.routeInformationParser,
         routeInformationProvider: router.routeInformationProvider,
       );
-}
-
-class _CustomScrollBehavior extends MaterialScrollBehavior {
-  const _CustomScrollBehavior();
-
-  @override
-  MultitouchDragStrategy get multitouchDragStrategy =>
-      MultitouchDragStrategy.sumAllPointers;
 }
