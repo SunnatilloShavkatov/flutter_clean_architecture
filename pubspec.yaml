@@ -34,7 +34,7 @@ dependencies:
   # svg
   flutter_svg: ^2.0.10+1
   # url launchers
-  url_launcher: ^6.2.4
+  url_launcher: ^6.2.5
   # otp autofill
   otp_autofill: ^3.0.2
   # sms autofill
