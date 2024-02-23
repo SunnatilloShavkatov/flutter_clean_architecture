@@ -15,7 +15,7 @@ import "package:flutter_clean_architecture/features/auth/presentation/bloc/login
 import "package:flutter_clean_architecture/features/auth/presentation/pages/register/args/register_args.dart";
 import "package:flutter_clean_architecture/router/app_routes.dart";
 import "package:go_router/go_router.dart";
-import "package:otp_autofill/otp_autofill.dart";
+import "package:otp_autofill_plus/otp_autofill_plus.dart";
 import "package:pin_input_text_field/pin_input_text_field.dart";
 
 part "mixin/confirm_code_mixin.dart";
