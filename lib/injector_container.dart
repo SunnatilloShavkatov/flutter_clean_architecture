@@ -4,8 +4,10 @@ import "dart:developer";
 import "dart:io";
 
 import "package:dio/dio.dart";
+import "package:dio/io.dart";
 import "package:dio_retry_plus/dio_retry_plus.dart";
 import "package:flutter/foundation.dart";
+import "package:flutter/services.dart";
 import "package:flutter_clean_architecture/constants/constants.dart";
 import "package:flutter_clean_architecture/core/connectivity/network_info.dart";
 import "package:flutter_clean_architecture/core/local_source/local_source.dart";
@@ -26,6 +28,9 @@ late Box<dynamic> _box;
 Future<void> init() async {
   /// External
   await _initHive();
+  final String certificate = await rootBundle.loadString(
+    "assets/ca/certificate.pem",
+  );
 
   /// Dio
   sl.registerLazySingleton(
@@ -41,16 +46,34 @@ Future<void> init() async {
           "Resource-Id": Constants.resourceId,
           "Environment-Id": Constants.environmentId,
         },
-        queryParameters: <String, String>{"project-id": Constants.projectId},
+      )
+      ..httpClientAdapter = IOHttpClientAdapter(
+        createHttpClient: () {
+          final HttpClient client = HttpClient()
+            ..badCertificateCallback = (X509Certificate cert, String host, __) {
+              log("cert: ${cert.pem}");
+              log("host: $host");
+              return cert.pem == certificate;
+            };
+          return client;
+        },
+        validateCertificate: (X509Certificate? cert, String host, __) {
+          log("cert: ${cert?.pem}");
+          log("host: $host");
+          if (cert == null) {
+            return true;
+          }
+          return cert.pem == certificate;
+        },
       )
       ..interceptors.add(
         LogInterceptor(
-          request: kDebugMode,
-          requestHeader: kDebugMode,
-          requestBody: kDebugMode,
-          responseHeader: kDebugMode,
-          responseBody: kDebugMode,
           error: kDebugMode,
+          request: kDebugMode,
+          requestBody: kDebugMode,
+          responseBody: kDebugMode,
+          requestHeader: kDebugMode,
+          responseHeader: kDebugMode,
           logPrint: (Object object) {
             if (kDebugMode) {
               log("dio: $object");

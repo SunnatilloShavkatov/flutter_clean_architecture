@@ -33,20 +33,19 @@ class CustomCachedNetworkImage extends StatelessWidget {
     final int? cacheHeight =
         height == null ? null : (height! * context.devicePixelRatio).toInt();
     return CachedNetworkImage(
-      cacheKey: imageUrl,
-      imageUrl: imageUrl,
+      fit: fit,
       width: width,
       height: height,
+      cacheKey: imageUrl,
+      imageUrl: imageUrl,
       memCacheWidth: cacheWidth,
       memCacheHeight: cacheHeight,
       maxWidthDiskCache: cacheWidth,
       maxHeightDiskCache: cacheHeight,
-      fit: fit,
       placeholder: placeholder,
       errorWidget: errorWidget,
-      progressIndicatorBuilder: progressIndicatorBuilder,
       imageBuilder: imageBuilder,
-      placeholderFadeInDuration: const Duration(milliseconds: 300),
+      progressIndicatorBuilder: progressIndicatorBuilder,
     );
   }
 

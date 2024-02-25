@@ -49,7 +49,6 @@ class _HomePageState extends State<HomePage> with HomeMixin {
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     padding: AppUtils.kPaddingHor12,
-                    findChildIndexCallback: findChildIndexCallbackKeyInt,
                     itemBuilder: (_, int index) => MovieItem(
                       key: ObjectKey(index),
                     ),
@@ -61,7 +60,9 @@ class _HomePageState extends State<HomePage> with HomeMixin {
                   title: "Онлайн телевидение",
                   onPressed: () {},
                 ),
-                const OnlineTelevisionWidgets(),
+                const OnlineTelevisionWidgets(
+                  key: ObjectKey("onlineTelevision"),
+                ),
                 AppUtils.kGap16,
               ],
             ),
