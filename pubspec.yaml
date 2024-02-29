@@ -44,10 +44,10 @@ dependencies:
   # cached network image
   cached_network_image: ^3.3.1
   # firebase
-  firebase_core: ^2.25.4
-  firebase_analytics: ^10.8.6
-  firebase_messaging: ^14.7.16
-  firebase_remote_config: ^4.3.14
+  firebase_core: ^2.25.5
+  firebase_analytics: ^10.8.7
+  firebase_messaging: ^14.7.17
+  firebase_remote_config: ^4.3.15
   # local notification
   flutter_local_notifications: ^16.3.2
 

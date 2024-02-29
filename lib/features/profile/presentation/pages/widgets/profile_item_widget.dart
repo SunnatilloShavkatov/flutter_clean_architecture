@@ -22,6 +22,7 @@ class ProfileItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Material(
         shape: shape,
+        clipBehavior: Clip.antiAlias,
         child: InkWell(
           onTap: onTap,
           customBorder: shape,

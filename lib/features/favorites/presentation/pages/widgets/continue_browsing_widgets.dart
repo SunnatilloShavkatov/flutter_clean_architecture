@@ -21,6 +21,7 @@ class _ContinueBrowsingWidgetsState extends State<ContinueBrowsingWidgets>
   Widget build(BuildContext context) {
     super.build(context);
     return CustomScrollView(
+      cacheExtent: 1000,
       slivers: <Widget>[
         SliverSafeArea(
           minimum: AppUtils.kPaddingAll16,

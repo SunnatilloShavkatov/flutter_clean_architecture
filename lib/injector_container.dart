@@ -63,6 +63,7 @@ Future<void> init() async {
           if (cert == null) {
             return true;
           }
+          // Clipboard.setData(ClipboardData(text: cert.pem));
           return cert.pem == certificate;
         },
       )

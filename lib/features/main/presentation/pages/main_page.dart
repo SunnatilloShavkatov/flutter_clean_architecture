@@ -56,5 +56,6 @@ class MainPage extends StatelessWidget {
       index,
       initialLocation: index == navigationShell.currentIndex,
     );
+
   }
 }
