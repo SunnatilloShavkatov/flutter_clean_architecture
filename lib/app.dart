@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 
 import "package:flutter_clean_architecture/core/extension/extension.dart";
-import "package:flutter_clean_architecture/core/l10n/app_localizations.dart";
+import "package:flutter_clean_architecture/core/l10n/app_localizations_setup.dart";
 import "package:flutter_clean_architecture/core/theme/themes.dart";
 import "package:flutter_clean_architecture/router/app_routes.dart";
 
@@ -22,7 +22,9 @@ class App extends StatelessWidget {
 
         /// locale
         locale: context.options.locale,
-        supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizationsSetup.supportedLocales,
+        localizationsDelegates: AppLocalizationsSetup.localizationsDelegates,
+        localeResolutionCallback:
+            AppLocalizationsSetup.localeResolutionCallback,
       );
 }

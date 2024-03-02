@@ -1,19 +1,16 @@
-import "dart:async";
-import "dart:convert";
-import "package:flutter/foundation.dart";
-import "package:flutter/material.dart";
-import "package:flutter/services.dart" show rootBundle;
-import "package:flutter_localizations/flutter_localizations.dart";
+part of "app_localizations_setup.dart";
 
 final class AppLocalizations {
-  AppLocalizations();
+  AppLocalizations({
+    required this.locale,
+  });
 
-  static AppLocalizations of(BuildContext context) =>
-      Localizations.of<AppLocalizations>(context, AppLocalizations) ?? instance;
-  static final AppLocalizations _instance = AppLocalizations();
+  final Locale locale;
 
-  static AppLocalizations get instance => _instance;
-  static Map<String, dynamic> _localizedValues = <String, dynamic>{};
+  static AppLocalizations? of(BuildContext context) =>
+      Localizations.of<AppLocalizations>(context, AppLocalizations);
+
+  late Map<String, String> _localizedValues = <String, String>{};
 
   String translate(String key, {Map<String, String>? namedArgs}) {
     if (_localizedValues.isNotEmpty) {
@@ -31,49 +28,16 @@ final class AppLocalizations {
     return "";
   }
 
-  static Future<AppLocalizations> load(Locale locale) async {
+  Future<void> load() async {
     final String jsonContent = await rootBundle.loadString(
       "assets/locale/${locale.languageCode}.json",
     );
-    _localizedValues = jsonDecode(jsonContent);
-
-    // Dio dio = Dio();
-    // String token = "d933cb36-26c1-4c9a-8440-5f0b643dea2f";
-    // final response = await dio.get(
-    //   "https://firebasestorage.googleapis.com/v0/b/ets-iternational.appspot.com/o/${locale.languageCode}.json?alt=media&token=$token",
-    // );
-    // _localizedValues = response.data;
-    return instance;
+    final Map<String, dynamic> jsonMap = json.decode(jsonContent);
+    _localizedValues = jsonMap.map<String, String>(
+      (String key, value) => MapEntry<String, String>(key, value.toString()),
+    );
   }
 
-  static const Iterable<LocalizationsDelegate<dynamic>> localizationsDelegates =
-      <LocalizationsDelegate<dynamic>>[
-    TranslationsDelegate(),
-    GlobalWidgetsLocalizations.delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-  ];
-
-  static const List<Locale> supportedLocales = <Locale>[
-    Locale("en"),
-    Locale("ru"),
-    Locale("uz"),
-  ];
-}
-
-class TranslationsDelegate extends LocalizationsDelegate<AppLocalizations> {
-  const TranslationsDelegate();
-
-  @override
-  bool isSupported(Locale locale) =>
-      <String>["ru", "uz", "en"].contains(locale.languageCode);
-
-  @override
-  Future<AppLocalizations> load(Locale locale) async =>
-      await SynchronousFuture<AppLocalizations>(
-        await AppLocalizations.load(locale),
-      );
-
-  @override
-  bool shouldReload(TranslationsDelegate old) => false;
+  static const LocalizationsDelegate<AppLocalizations> delegate =
+      AppLocalizationsDelegate();
 }

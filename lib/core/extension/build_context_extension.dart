@@ -35,7 +35,7 @@ extension BuildContextExt on BuildContext {
     String key, {
     Map<String, String>? namedArgs,
   }) =>
-      AppLocalizations.of(this).translate(key, namedArgs: namedArgs);
+      AppLocalizations.of(this)!.translate(key, namedArgs: namedArgs);
 
   AppOptions get options => AppOptions.of(this);
 
@@ -60,6 +60,9 @@ extension LocalizationExtension on String {
     Map<String, String>? namedArgs,
   }) =>
       context == null
-          ? AppLocalizations.instance.translate(this, namedArgs: namedArgs)
-          : AppLocalizations.of(context).translate(this, namedArgs: namedArgs);
+          ? AppLocalizations.of(rootNavigatorKey.currentContext!)!.translate(
+              this,
+              namedArgs: namedArgs,
+            )
+          : AppLocalizations.of(context)!.translate(this, namedArgs: namedArgs);
 }
