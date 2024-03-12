@@ -56,6 +56,7 @@ android {
         multiDexEnabled true
         archivesBaseName = "archive_name_${versionName}_(${versionCode})"
         ndk.abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     signingConfigs {
@@ -83,4 +84,10 @@ flutter {
 
 dependencies {
     implementation "androidx.multidex:multidex:2.0.1"
+    /// test
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test:runner:1.5.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    /// flutter
+    implementation "com.google.android.play:core:1.10.3"
 }
