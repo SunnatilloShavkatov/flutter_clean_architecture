@@ -24,7 +24,5 @@ class App extends StatelessWidget {
         locale: context.options.locale,
         supportedLocales: AppLocalizationsSetup.supportedLocales,
         localizationsDelegates: AppLocalizationsSetup.localizationsDelegates,
-        localeResolutionCallback:
-            AppLocalizationsSetup.localeResolutionCallback,
       );
 }
