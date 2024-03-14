@@ -136,7 +136,6 @@ analyzer:
     avoid_private_typedef_functions: error
     binary_operator_written_out: error
     body_might_complete_normally: error
-    diagnostic_describe_all_properties: error
     cast_nullable_to_non_nullable: error
     avoid_redundant_argument_values: error
     avoid_relative_lib_imports: error
@@ -268,7 +267,6 @@ linter:
     - depend_on_referenced_packages
     - deprecated_consistency
     - deprecated_member_use_from_same_package
-    - diagnostic_describe_all_properties
     - directives_ordering
     - discarded_futures
     - do_not_use_environment
