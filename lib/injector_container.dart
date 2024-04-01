@@ -7,8 +7,6 @@ import "package:dio/dio.dart";
 import "package:dio/io.dart";
 import "package:dio_retry_plus/dio_retry_plus.dart";
 import "package:flutter/foundation.dart";
-import "package:flutter/services.dart";
-import "package:flutter_clean_architecture/constants/constants.dart";
 import "package:flutter_clean_architecture/core/connectivity/network_info.dart";
 import "package:flutter_clean_architecture/core/local_source/local_source.dart";
 import "package:flutter_clean_architecture/features/auth/domain/repository/auth_repository.dart";
@@ -28,9 +26,6 @@ late Box<dynamic> _box;
 Future<void> init() async {
   /// External
   await _initHive();
-  final String certificate = await rootBundle.loadString(
-    "assets/ca/certificate.pem",
-  );
 
   /// Dio
   sl.registerLazySingleton(
@@ -40,12 +35,7 @@ Future<void> init() async {
         sendTimeout: const Duration(seconds: 30),
         connectTimeout: const Duration(seconds: 30),
         receiveTimeout: const Duration(seconds: 30),
-        headers: <String, String>{
-          "Authorization": "API-KEY",
-          "X-API-KEY": Constants.apiKey,
-          "Resource-Id": Constants.resourceId,
-          "Environment-Id": Constants.environmentId,
-        },
+        headers: <String, String>{},
       )
       ..httpClientAdapter = IOHttpClientAdapter(
         createHttpClient: () {
@@ -53,7 +43,8 @@ Future<void> init() async {
             ..badCertificateCallback = (X509Certificate cert, String host, __) {
               log("cert: ${cert.pem}");
               log("host: $host");
-              return cert.pem == certificate;
+              // return cert.pem == certificate;
+              return true;
             };
           return client;
         },
@@ -64,7 +55,8 @@ Future<void> init() async {
             return true;
           }
           // Clipboard.setData(ClipboardData(text: cert.pem));
-          return cert.pem == certificate;
+          return true;
+          // return cert.pem == certificate;
         },
       )
       ..interceptors.add(
@@ -89,7 +81,7 @@ Future<void> init() async {
       chuck.getDioInterceptor(),
       RetryInterceptor(
         dio: sl<Dio>(),
-        retries: 0,
+        retries: 1,
         toNoInternetPageNavigator: () async {
           final RouteMatch lastMatch =
               router.routerDelegate.currentConfiguration.last;

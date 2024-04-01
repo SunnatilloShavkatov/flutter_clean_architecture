@@ -7,11 +7,6 @@ sealed class Constants {
   static const String baseUrl = "https://api.admin.u-code.io";
 
   /// id
-  static const String projectId = "25d16930-b1a9-4ae5-ab01-b79cc993f06e";
-  static const String environmentId = "f1fc135e-10c2-4ea9-8183-54cafb0a0486";
-  static const String resourceId = "944cd0d2-fc17-4095-b410-8e9d6007ac39";
-  static const String apiKey = "P-MLu5nUkI5FIl2VQ91sV0MeawEMgSdSld";
-
   static const String clientTypeId = "f312b956-e6b3-4b45-aa1c-c9d717b3d42f";
   static const String companyId = "07660ee4-78fc-4709-badb-bca9897070a1";
   static const String roleId = "81a2b429-fe32-4781-adf5-aacc94c5ef45";

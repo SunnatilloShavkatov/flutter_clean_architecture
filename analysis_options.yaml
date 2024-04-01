@@ -207,7 +207,6 @@ linter:
   rules:
     - always_declare_return_types
     - always_put_control_body_on_new_line
-    - always_put_required_named_parameters_first
     - always_specify_types
     - always_use_package_imports
     - annotate_overrides
@@ -350,7 +349,6 @@ linter:
     - prefer_typing_uninitialized_variables
     - prefer_void_to_null
     - provide_deprecation_message
-    #    - public_member_api_docs
     - recursive_getters
     - require_trailing_commas
     - secure_pubspec_urls
