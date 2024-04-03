@@ -3,13 +3,13 @@ import "dart:io";
 sealed class Constants {
   Constants._();
 
-  static const String authUrl = "https://api.auth.u-code.io";
-  static const String baseUrl = "https://api.admin.u-code.io";
+  static const String authUrl = "";
+  static const String baseUrl = "";
 
   /// id
-  static const String clientTypeId = "f312b956-e6b3-4b45-aa1c-c9d717b3d42f";
-  static const String companyId = "07660ee4-78fc-4709-badb-bca9897070a1";
-  static const String roleId = "81a2b429-fe32-4781-adf5-aacc94c5ef45";
+  static const String clientTypeId = "";
+  static const String companyId = "";
+  static const String roleId = "";
 
   static final String appLink = Platform.isIOS
       ? "https://apps.apple.com/us/app/q-watt-powerbank-sharing/id6444178516"

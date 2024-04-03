@@ -14,7 +14,7 @@ dependencies:
     sdk: flutter
   intl: ^0.18.1
   # di
-  get_it: ^7.6.7
+  get_it: ^7.6.8
   # equatable
   equatable: ^2.0.5
   # state manager
@@ -45,10 +45,10 @@ dependencies:
   # cached network image
   cached_network_image: ^3.3.1
   # firebase
-  firebase_core: ^2.27.2
-  firebase_analytics: ^10.9.0
-  firebase_messaging: ^14.7.21
-  firebase_remote_config: ^4.3.19
+  firebase_core: ^2.28.0
+  firebase_analytics: ^10.10.0
+  firebase_messaging: ^14.8.0
+  firebase_remote_config: ^4.4.0
   # local notification
   flutter_local_notifications: ^17.0.0
 
