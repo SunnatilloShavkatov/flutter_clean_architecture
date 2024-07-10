@@ -44,21 +44,7 @@ mixin RegisterMixin on State<RegisterPage> {
     confirmPasswordFocus.dispose();
   }
 
-  void requestFocusNode(RegisterInputErrors? errors) {
-    switch (errors) {
-      case RegisterInputErrors.firstName:
-        firstNameFocus.requestFocus();
-      case RegisterInputErrors.lastName:
-        lastNameFocus.requestFocus();
-      case RegisterInputErrors.email:
-        emailFocus.requestFocus();
-      case RegisterInputErrors.password:
-        passwordFocus.requestFocus();
-      case RegisterInputErrors.confirmPassword:
-        confirmPasswordFocus.requestFocus();
-      default:
-    }
-  }
+  void requestFocusNode(RegisterInputErrors? errors) {}
 
   @override
   void dispose() {

@@ -1,61 +1,61 @@
+# ignore_for_file: sort_pub_dependencies
 name: flutter_clean_architecture
 description: A new Flutter project.
-publish_to: 'none'
+publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.3.0 <4.0.0'
-  flutter: '>=3.19.0'
+  sdk: ">=3.4.0 <4.0.0"
+  flutter: ">=3.22.0"
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  intl: ^0.18.1
+  intl: ^0.19.0
   # di
   get_it: ^7.7.0
   # equatable
   equatable: ^2.0.5
   # state manager
-  flutter_bloc: ^8.1.5
+  flutter_bloc: ^8.1.6
   # hive
   hive: ^2.2.3
   # path
   path_provider: ^2.1.3
   # rest api
-  dio: ^5.4.3+1
+  dio: ^5.5.0+1
   dio_retry_plus: ^2.0.7
   # chuck
-  chuck_interceptor: ^2.1.6
+  chuck_interceptor: ^2.1.7
   # box
   gap: ^3.0.1
   # router
-  go_router: ^14.0.1
+  go_router: ^14.2.0
   # svg
   flutter_svg: ^2.0.10+1
   # url launchers
-  url_launcher: ^6.2.6
+  url_launcher: ^6.3.0
   # otp autofill
-  otp_autofill_plus: ^1.0.5
-  # sms autofill
-  pin_input_text_field: ^4.5.1
+  pinput: ^5.0.0
+  sms_autofill: ^2.4.0
   # package info
   package_info_plus: ^8.0.0
   # cached network image
   cached_network_image: ^3.3.1
   # firebase
-  firebase_core: ^2.30.1
-  firebase_analytics: ^10.10.4
-  firebase_messaging: ^14.9.1
-  firebase_remote_config: ^4.4.4
+  firebase_core: ^3.2.0
+  firebase_analytics: ^11.2.0
+  firebase_messaging: ^15.0.3
+  firebase_remote_config: ^5.0.3
   # local notification
-  flutter_local_notifications: ^17.1.0
+  flutter_local_notifications: ^17.2.1+1
 
 dev_dependencies:
   bloc_test: ^9.1.7
-  build_runner: ^2.4.9
-  flutter_lints: ^3.0.2
+  build_runner: ^2.4.11
+  flutter_lints: ^4.0.0
   flutter_test:
     sdk: flutter
   mockito: ^5.4.4

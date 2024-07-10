@@ -2,7 +2,10 @@ part of "themes.dart";
 
 class ThemeCustomShapes extends ThemeExtension<ThemeCustomShapes> {
   const ThemeCustomShapes({
-    required this.buttonDecoration, required this.buttonsShadowDecoration, required this.favoriteButtonStyle, this.topRectangleBorder,
+    required this.buttonDecoration,
+    required this.buttonsShadowDecoration,
+    required this.favoriteButtonStyle,
+    this.topRectangleBorder,
     this.bottomRectangleBorder,
     this.circleBorder,
   });
@@ -58,14 +61,14 @@ class ThemeCustomShapes extends ThemeExtension<ThemeCustomShapes> {
       ],
     ),
     favoriteButtonStyle: ButtonStyle(
-      backgroundColor: MaterialStatePropertyAll(
+      backgroundColor: WidgetStatePropertyAll<Color>(
         Color.fromRGBO(0, 0, 0, 0.4),
       ),
-      fixedSize: MaterialStatePropertyAll(
+      fixedSize: WidgetStatePropertyAll<Size>(
         Size.square(24),
       ),
       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      padding: MaterialStatePropertyAll(EdgeInsets.zero),
+      padding: WidgetStatePropertyAll<EdgeInsets>(EdgeInsets.zero),
     ),
   );
 
@@ -113,14 +116,14 @@ class ThemeCustomShapes extends ThemeExtension<ThemeCustomShapes> {
       ],
     ),
     favoriteButtonStyle: ButtonStyle(
-      backgroundColor: MaterialStatePropertyAll(
+      backgroundColor: WidgetStatePropertyAll<Color>(
         Color.fromRGBO(0, 0, 0, 0.4),
       ),
-      fixedSize: MaterialStatePropertyAll(
+      fixedSize: WidgetStatePropertyAll<Size>(
         Size.square(24),
       ),
       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      padding: MaterialStatePropertyAll(EdgeInsets.zero),
+      padding: WidgetStatePropertyAll<EdgeInsets>(EdgeInsets.zero),
     ),
   );
 

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_dynamic_calls
+
 part of "../../domain/repository/auth_repository.dart";
 
 class AuthRepositoryImpl implements AuthRepository {

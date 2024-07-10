@@ -144,8 +144,8 @@ class ConfirmCodeBloc extends Bloc<ConfirmCodeEvent, ConfirmCodeState>
     CreatePatientOrderAfterNamedEvent event,
     Emitter<ConfirmCodeState> emit,
   ) async {
-    final String name = event.name;
-    final String surname = event.surname;
+    // final String name = event.name;
+    // final String surname = event.surname;
     // await authRepository.createPatientOrderNamedAfter(
     //   request: OrderNamedAfterRequest(
     //     patientsId: localSource.userId,

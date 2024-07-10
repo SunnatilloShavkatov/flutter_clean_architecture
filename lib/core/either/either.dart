@@ -63,12 +63,6 @@ sealed class Either<L, R> {
   /// Transform value of [Left]
   Either<TL, R> mapLeft<TL>(TL Function(L left) fnL);
 
-  /// Transform value of [Right]
-  Future<Either<L, TR>> mapAsync<TR>(FutureOr<TR> Function(R right) fnR);
-
-  /// Transform value of [Left]
-  Future<Either<TL, R>> mapLeftAsync<TL>(FutureOr<TL> Function(L left) fnL);
-
   /// Fold [Left] and [Right] into the value of one type
   T fold<T>(T Function(L left) fnL, T Function(R right) fnR);
 
@@ -81,9 +75,9 @@ sealed class Either<L, R> {
     R Function() fnR,
   ) {
     try {
-      return Right(fnR());
+      return Right<L, R>(fnR());
     } on Err catch (e) {
-      return Left(onError(e));
+      return Left<L, R>(onError(e));
     }
   }
 
@@ -96,9 +90,9 @@ sealed class Either<L, R> {
   /// ```
   static Either<Err, R> tryExcept<Err extends Object, R>(R Function() fnR) {
     try {
-      return Right(fnR());
+      return Right<Err, R>(fnR());
     } on Err catch (e) {
-      return Left(e);
+      return Left<Err, R>(e);
     }
   }
 
@@ -107,23 +101,26 @@ sealed class Either<L, R> {
     required L leftValue,
     required R rightValue,
   }) =>
-      test ? Right(rightValue) : Left(leftValue);
+      test ? Right<L, R>(rightValue) : Left<L, R>(leftValue);
 
   static Either<L, R> condLazy<L, R>({
     required bool test,
     required Lazy<L> leftValue,
     required Lazy<R> rightValue,
   }) =>
-      test ? Right(rightValue()) : Left(leftValue());
+      test ? Right<L, R>(rightValue()) : Left<L, R>(leftValue());
 
   @override
   bool operator ==(Object other) => this.fold(
-        (left) => other is Left && left == other.value,
-        (right) => other is Right && right == other.value,
+        (L left) => other is Left && left == other.value,
+        (R right) => other is Right && right == other.value,
       );
 
   @override
-  int get hashCode => fold((left) => left.hashCode, (right) => right.hashCode);
+  int get hashCode => fold(
+        (L left) => left.hashCode,
+        (R right) => right.hashCode,
+      );
 }
 
 /// Used for "failure"
@@ -147,7 +144,7 @@ class Left<L, R> extends Either<L, R> {
   Future<Either<L, TR>> thenAsync<TR>(
     FutureOr<Either<L, TR>> Function(R right) fnR,
   ) =>
-      Future.value(Left<L, TR>(value));
+      Future<Either<L, TR>>.value(Left<L, TR>(value));
 
   @override
   Either<TL, R> thenLeft<TL>(Either<TL, R> Function(L left) fnL) => fnL(value);
@@ -156,21 +153,13 @@ class Left<L, R> extends Either<L, R> {
   Future<Either<TL, R>> thenLeftAsync<TL>(
     FutureOr<Either<TL, R>> Function(L left) fnL,
   ) =>
-      Future.value(fnL(value));
+      Future<Either<TL, R>>.value(fnL(value));
 
   @override
   Either<L, TR> map<TR>(TR Function(R right) fnR) => Left<L, TR>(value);
 
   @override
   Either<TL, R> mapLeft<TL>(TL Function(L left) fnL) => Left<TL, R>(fnL(value));
-
-  @override
-  Future<Either<L, TR>> mapAsync<TR>(FutureOr<TR> Function(R right) fnR) =>
-      Future<Either<L, TR>>.value(Left<L, TR>(value));
-
-  @override
-  Future<Either<TL, R>> mapLeftAsync<TL>(FutureOr<TL> Function(L left) fnL) =>
-      Future.value(fnL(value)).then(Left<TL, R>.new);
 
   @override
   T fold<T>(T Function(L left) fnL, T Function(R right) fnR) => fnL(value);
@@ -196,7 +185,7 @@ class Right<L, R> extends Either<L, R> {
   Future<Either<L, TR>> thenAsync<TR>(
     FutureOr<Either<L, TR>> Function(R right) fnR,
   ) =>
-      Future.value(fnR(value));
+      Future<Either<L, TR>>.value(fnR(value));
 
   @override
   Either<TL, R> thenLeft<TL>(Either<TL, R> Function(L left) fnL) =>
@@ -206,21 +195,13 @@ class Right<L, R> extends Either<L, R> {
   Future<Either<TL, R>> thenLeftAsync<TL>(
     FutureOr<Either<TL, R>> Function(L left) fnL,
   ) =>
-      Future.value(Right<TL, R>(value));
+      Future<Either<TL, R>>.value(Right<TL, R>(value));
 
   @override
   Either<L, TR> map<TR>(TR Function(R right) fnR) => Right<L, TR>(fnR(value));
 
   @override
   Either<TL, R> mapLeft<TL>(TL Function(L left) fnL) => Right<TL, R>(value);
-
-  @override
-  Future<Either<L, TR>> mapAsync<TR>(FutureOr<TR> Function(R right) fnR) =>
-      Future.value(fnR(value)).then(Right<L, TR>.new);
-
-  @override
-  Future<Either<TL, R>> mapLeftAsync<TL>(FutureOr<TL> Function(L left) fnL) =>
-      Future.value(Right<TL, R>(value));
 
   @override
   T fold<T>(T Function(L left) fnL, T Function(R right) fnR) => fnR(value);

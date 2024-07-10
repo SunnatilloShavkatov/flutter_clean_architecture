@@ -19,8 +19,7 @@ extension ParseString on DateTime {
     if (hour < 10) {
       date += "0${timeZoneSplit[0]}";
     }
-    date += ":${timeZoneSplit[1]}";
-    return date;
+    return date += ":${timeZoneSplit[1]}";
   }
 }
 

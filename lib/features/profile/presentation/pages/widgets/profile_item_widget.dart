@@ -45,7 +45,7 @@ class ProfileItemWidget extends StatelessWidget {
                 ),
                 Icon(
                   AppIcons.arrow_right,
-                  color: context.colorScheme.onBackground,
+                  color: context.colorScheme.onSurface,
                 ),
               ],
             ),

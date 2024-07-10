@@ -1,9 +1,9 @@
+// ignore_for_file: always_specify_types
+
 part of "app_localizations_setup.dart";
 
 final class AppLocalizations {
-  AppLocalizations({
-    required this.locale,
-  });
+  AppLocalizations({required this.locale});
 
   final Locale locale;
 
@@ -34,7 +34,7 @@ final class AppLocalizations {
     );
     final Map<String, dynamic> jsonMap = json.decode(jsonContent);
     _localizedValues = jsonMap.map<String, String>(
-      (String key, value) => MapEntry<String, String>(key, value.toString()),
+      (String key, value) => MapEntry<String, String>(key, "$value"),
     );
   }
 

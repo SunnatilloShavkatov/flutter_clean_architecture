@@ -14,8 +14,8 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           toolbarHeight: 0,
-          surfaceTintColor: context.colorScheme.background,
-          backgroundColor: context.colorScheme.background,
+          surfaceTintColor: context.colorScheme.surface,
+          backgroundColor: context.colorScheme.surface,
           shape: AppUtils.kShapeZero,
         ),
         body: CustomScrollView(

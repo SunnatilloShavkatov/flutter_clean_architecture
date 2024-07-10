@@ -33,13 +33,13 @@ final ThemeData lightTheme = ThemeData(
   materialTapTargetSize: MaterialTapTargetSize.padded,
   textButtonTheme: const TextButtonThemeData(
     style: ButtonStyle(
-      padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(EdgeInsets.zero),
+      padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(EdgeInsets.zero),
     ),
   ),
   primaryColor: colorLightScheme.primary,
   colorScheme: colorLightScheme,
   dialogBackgroundColor: colorLightScheme.surface,
-  scaffoldBackgroundColor: colorLightScheme.background,
+  scaffoldBackgroundColor: ThemeColors.light.background,
   cardColor: colorLightScheme.surface,
   canvasColor: colorLightScheme.surface,
   shadowColor: const Color(0xFF343434),
@@ -62,10 +62,10 @@ final ThemeData lightTheme = ThemeData(
   ),
   scrollbarTheme: ScrollbarThemeData(
     interactive: true,
-    thumbColor: MaterialStatePropertyAll<Color>(
+    thumbColor: WidgetStatePropertyAll<Color>(
       ThemeColors.light.main,
     ),
-    thickness: const MaterialStatePropertyAll<double>(5),
+    thickness: const WidgetStatePropertyAll<double>(5),
     minThumbLength: 100,
   ),
   bottomAppBarTheme: const BottomAppBarTheme(
@@ -85,44 +85,44 @@ final ThemeData lightTheme = ThemeData(
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
-      foregroundColor: MaterialStateProperty.resolveWith(
-        (Set<MaterialState> states) => Colors.white,
+      foregroundColor: WidgetStateProperty.resolveWith(
+        (Set<WidgetState> states) => Colors.white,
       ),
-      backgroundColor: MaterialStateProperty.resolveWith(
-        (Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
+      backgroundColor: WidgetStateProperty.resolveWith(
+        (Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
             return colorLightScheme.primary.withOpacity(0.4);
           }
           return colorLightScheme.primary;
         },
       ),
-      textStyle: MaterialStatePropertyAll<TextStyle>(
+      textStyle: WidgetStatePropertyAll<TextStyle>(
         ThemeTextStyles.light.buttonStyle,
       ),
-      elevation: const MaterialStatePropertyAll<double>(0),
-      shape: const MaterialStatePropertyAll<OutlinedBorder>(
+      elevation: const WidgetStatePropertyAll<double>(0),
+      shape: const WidgetStatePropertyAll<OutlinedBorder>(
         RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
       ),
-      fixedSize: const MaterialStatePropertyAll<Size>(Size.fromHeight(48)),
+      fixedSize: const WidgetStatePropertyAll<Size>(Size.fromHeight(48)),
     ),
   ),
   outlinedButtonTheme: OutlinedButtonThemeData(
     style: ButtonStyle(
-      foregroundColor: MaterialStateProperty.resolveWith(
-        (Set<MaterialState> states) => Colors.black,
+      foregroundColor: WidgetStateProperty.resolveWith(
+        (Set<WidgetState> states) => Colors.black,
       ),
-      textStyle: MaterialStatePropertyAll<TextStyle>(
+      textStyle: WidgetStatePropertyAll<TextStyle>(
         ThemeTextStyles.light.buttonStyle,
       ),
-      elevation: const MaterialStatePropertyAll<double>(0),
-      shape: const MaterialStatePropertyAll<OutlinedBorder>(
+      elevation: const WidgetStatePropertyAll<double>(0),
+      shape: const WidgetStatePropertyAll<OutlinedBorder>(
         RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
       ),
-      fixedSize: const MaterialStatePropertyAll<Size>(Size.fromHeight(48)),
+      fixedSize: const WidgetStatePropertyAll<Size>(Size.fromHeight(48)),
     ),
   ),
   inputDecorationTheme: InputDecorationTheme(
@@ -189,7 +189,7 @@ final ThemeData lightTheme = ThemeData(
     labelColor: const Color(0xFF17171C),
     unselectedLabelColor: const Color(0xFFB3BBCD),
     dividerColor: Colors.transparent,
-    overlayColor: const MaterialStatePropertyAll<Color>(Colors.transparent),
+    overlayColor: const WidgetStatePropertyAll<Color>(Colors.transparent),
     labelStyle: const TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.w500,
@@ -209,13 +209,13 @@ final ThemeData lightTheme = ThemeData(
     elevation: 0,
     backgroundColor: Colors.white,
     height: kToolbarHeight,
-    iconTheme: MaterialStateProperty.resolveWith<IconThemeData>(
-      (Set<MaterialState> states) => const IconThemeData(
+    iconTheme: WidgetStateProperty.resolveWith<IconThemeData>(
+      (Set<WidgetState> states) => const IconThemeData(
         color: Colors.black,
       ),
     ),
-    labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
-      (Set<MaterialState> states) => ThemeTextStyles.light.appBarTitle,
+    labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>(
+      (Set<WidgetState> states) => ThemeTextStyles.light.appBarTitle,
     ),
   ),
   appBarTheme: AppBarTheme(
@@ -323,7 +323,7 @@ final ThemeData darkTheme = ThemeData(
   primaryColor: colorDarkScheme.primary,
   colorScheme: colorDarkScheme,
   dialogBackgroundColor: colorDarkScheme.surface,
-  scaffoldBackgroundColor: colorDarkScheme.background,
+  scaffoldBackgroundColor: ThemeColors.dark.background,
   cardColor: colorDarkScheme.surface,
   canvasColor: colorDarkScheme.surface,
   shadowColor: const Color(0xFF343434),
@@ -346,15 +346,15 @@ final ThemeData darkTheme = ThemeData(
   ),
   textButtonTheme: const TextButtonThemeData(
     style: ButtonStyle(
-      padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(EdgeInsets.zero),
+      padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(EdgeInsets.zero),
     ),
   ),
   scrollbarTheme: ScrollbarThemeData(
     interactive: true,
-    thumbColor: MaterialStatePropertyAll<Color>(
+    thumbColor: WidgetStatePropertyAll<Color>(
       ThemeColors.light.main,
     ),
-    thickness: const MaterialStatePropertyAll<double>(5),
+    thickness: const WidgetStatePropertyAll<double>(5),
     minThumbLength: 100,
   ),
   bottomAppBarTheme: const BottomAppBarTheme(
@@ -374,43 +374,43 @@ final ThemeData darkTheme = ThemeData(
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
-      foregroundColor: MaterialStateProperty.resolveWith(
-        (Set<MaterialState> states) => Colors.white,
+      foregroundColor: WidgetStateProperty.resolveWith(
+        (Set<WidgetState> states) => Colors.white,
       ),
-      backgroundColor: MaterialStateProperty.resolveWith(
-        (Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
+      backgroundColor: WidgetStateProperty.resolveWith(
+        (Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
             return colorDarkScheme.primary.withOpacity(0.4);
           }
           return colorDarkScheme.primary;
         },
       ),
       textStyle:
-          MaterialStatePropertyAll<TextStyle>(ThemeTextStyles.dark.buttonStyle),
-      elevation: const MaterialStatePropertyAll<double>(0),
-      shape: const MaterialStatePropertyAll<OutlinedBorder>(
+          WidgetStatePropertyAll<TextStyle>(ThemeTextStyles.dark.buttonStyle),
+      elevation: const WidgetStatePropertyAll<double>(0),
+      shape: const WidgetStatePropertyAll<OutlinedBorder>(
         RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
       ),
-      fixedSize: const MaterialStatePropertyAll<Size>(Size.fromHeight(48)),
+      fixedSize: const WidgetStatePropertyAll<Size>(Size.fromHeight(48)),
     ),
   ),
   outlinedButtonTheme: OutlinedButtonThemeData(
     style: ButtonStyle(
-      foregroundColor: MaterialStateProperty.resolveWith(
-        (Set<MaterialState> states) => Colors.black,
+      foregroundColor: WidgetStateProperty.resolveWith(
+        (Set<WidgetState> states) => Colors.black,
       ),
-      textStyle: MaterialStatePropertyAll<TextStyle>(
+      textStyle: WidgetStatePropertyAll<TextStyle>(
         ThemeTextStyles.dark.buttonStyle,
       ),
-      elevation: const MaterialStatePropertyAll<double>(0),
-      shape: const MaterialStatePropertyAll<OutlinedBorder>(
+      elevation: const WidgetStatePropertyAll<double>(0),
+      shape: const WidgetStatePropertyAll<OutlinedBorder>(
         RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
       ),
-      fixedSize: const MaterialStatePropertyAll<Size>(Size.fromHeight(48)),
+      fixedSize: const WidgetStatePropertyAll<Size>(Size.fromHeight(48)),
     ),
   ),
   inputDecorationTheme: InputDecorationTheme(
@@ -479,7 +479,7 @@ final ThemeData darkTheme = ThemeData(
     tabAlignment: TabAlignment.start,
     labelPadding: AppUtils.kPaddingHor6,
     dividerColor: Colors.transparent,
-    overlayColor: const MaterialStatePropertyAll<Color>(Colors.transparent),
+    overlayColor: const WidgetStatePropertyAll<Color>(Colors.transparent),
     labelStyle: const TextStyle(
       fontSize: 13,
       fontWeight: FontWeight.w500,
@@ -498,13 +498,13 @@ final ThemeData darkTheme = ThemeData(
     elevation: 0,
     backgroundColor: Colors.white,
     height: kToolbarHeight,
-    iconTheme: MaterialStateProperty.resolveWith<IconThemeData>(
-      (Set<MaterialState> states) => const IconThemeData(
+    iconTheme: WidgetStateProperty.resolveWith<IconThemeData>(
+      (Set<WidgetState> states) => const IconThemeData(
         color: Colors.black,
       ),
     ),
-    labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
-      (Set<MaterialState> states) => ThemeTextStyles.dark.appBarTitle,
+    labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>(
+      (Set<WidgetState> states) => ThemeTextStyles.dark.appBarTitle,
     ),
   ),
   appBarTheme: AppBarTheme(

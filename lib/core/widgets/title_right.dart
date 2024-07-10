@@ -28,10 +28,10 @@ class TitleRight extends StatelessWidget {
                 height: 36,
               ),
               style: ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll<Color>(
+                backgroundColor: WidgetStatePropertyAll<Color>(
                   Colors.white.withOpacity(0.1),
                 ),
-                padding: const MaterialStatePropertyAll<EdgeInsets>(
+                padding: const WidgetStatePropertyAll<EdgeInsets>(
                   EdgeInsets.zero,
                 ),
               ),

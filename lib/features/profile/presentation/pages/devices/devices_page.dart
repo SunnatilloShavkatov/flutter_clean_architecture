@@ -19,7 +19,7 @@ class DevicesPage extends StatelessWidget {
               pinned: true,
               delegate: SliverHeaderDelegate(
                 child: ColoredBox(
-                  color: context.colorScheme.background,
+                  color: context.colorScheme.surface,
                   child: const Padding(
                     padding: EdgeInsets.fromLTRB(16, 12, 16, 6),
                     child: Column(

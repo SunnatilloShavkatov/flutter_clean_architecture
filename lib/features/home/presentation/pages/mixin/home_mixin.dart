@@ -6,7 +6,6 @@ mixin HomeMixin on State<HomePage> {
   @override
   void initState() {
     super.initState();
-    print("HomePage init");
   }
 
   @override

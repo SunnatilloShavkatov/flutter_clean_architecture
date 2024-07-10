@@ -2,6 +2,7 @@ import "dart:io";
 
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
+import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
 import "package:flutter_clean_architecture/app.dart";
@@ -17,14 +18,32 @@ void main() async {
   final WidgetsBinding binding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: binding);
 
-  /// notification initialize
-  await NotificationService.initialize();
+  await Future.wait(
+    <Future<void>>[
+      /// set orientation
+      SystemChrome.setPreferredOrientations(
+        <DeviceOrientation>[DeviceOrientation.portraitUp],
+      ),
+      SystemChrome.setEnabledSystemUIMode(
+        SystemUiMode.manual,
+        overlays: <SystemUiOverlay>[
+          SystemUiOverlay.top,
+          SystemUiOverlay.bottom,
+        ],
+      ),
+
+      /// notification initialize
+      NotificationService.initialize(),
+
+      /// di initialize
+      di.init(),
+    ],
+  );
 
   /// bloc logger
   if (kDebugMode) {
     Bloc.observer = LogBlocObserver();
   }
-  await di.init();
 
   /// global CERTIFICATE_VERIFY_FAILEd_KEY
   HttpOverrides.global = _HttpOverrides();

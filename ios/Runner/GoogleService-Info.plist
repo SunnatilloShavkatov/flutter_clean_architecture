@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyAPCPZWfOLCPf4NfuniTQ1MqVMFsT0xXkc</string>
+	<string>AIzaSyDTG3mgzQ1PFau9l6tSH_ABjoNnj0AjV7Q</string>
 	<key>GCM_SENDER_ID</key>
-	<string>565463368310</string>
+	<string>738452141157</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>uz.udevs.cleanArchitecture</string>
 	<key>PROJECT_ID</key>
-	<string>sample-bloc-5b8b9</string>
+	<string>sample-562f9</string>
 	<key>STORAGE_BUCKET</key>
-	<string>sample-bloc-5b8b9.appspot.com</string>
+	<string>sample-562f9.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:565463368310:ios:6f165dd5dde1c2d6f75557</string>
+	<string>1:738452141157:ios:e1035442a17d6abfa8828c</string>
 </dict>
 </plist>

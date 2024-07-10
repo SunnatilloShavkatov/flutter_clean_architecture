@@ -46,7 +46,6 @@ Future<T?> customModalBottomSheet<T>({
 }) async =>
     showModalBottomSheet(
       context: context,
-      isScrollControlled: false,
       enableDrag: enableDrag,
       constraints: BoxConstraints(
         maxHeight: context.kSize.height * 0.9,

@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_dynamic_calls
 import "package:dio/dio.dart" hide Headers;
 
 import "package:flutter_clean_architecture/core/error/failure.dart";
