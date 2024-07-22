@@ -15,7 +15,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }) async {
     try {
       final Response<dynamic> response = await dio.post(
-        Constants.authUrl + Urls.sendCode,
+        Constants.baseUrl + Urls.sendCode,
         data: request.toJson(),
       );
       return Right<Failure, SendMessageResponse>(
@@ -40,7 +40,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }) async {
     try {
       final Response<dynamic> response = await dio.post(
-        "${Constants.authUrl}${Urls.loginWithOption}",
+        "${Constants.baseUrl}${Urls.loginWithOption}",
         data: request.toJson(),
       );
       return Right<Failure, SendMessageResponse>(
@@ -91,7 +91,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }) async {
     try {
       final Response<dynamic> response = await dio.post(
-        Constants.authUrl + Urls.register,
+        Constants.baseUrl + Urls.register,
         data: request,
       );
       return Right<Failure, RegisterUserResponse>(

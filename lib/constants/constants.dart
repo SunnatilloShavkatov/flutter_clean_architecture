@@ -1,10 +1,15 @@
 import "dart:io";
 
+import "package:flutter_clean_architecture/constants/.env.dart";
+
 sealed class Constants {
   Constants._();
 
-  static const String authUrl = "";
-  static const String baseUrl = "";
+  static String get baseUrl => AppEnvironment.instance.config.baseUrl;
+
+  static AppConfig get config => AppEnvironment.instance.config;
+
+  static Environment get environment => AppEnvironment.instance.currentEnv;
 
   /// id
   static const String clientTypeId = "";

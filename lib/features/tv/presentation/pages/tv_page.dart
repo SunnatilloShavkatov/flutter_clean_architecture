@@ -28,7 +28,7 @@ class _TvPageState extends State<TvPage> with TvMixin {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Image(
-                image: AssetImage(Images.icBoxEmpty),
+                image: AssetImage(AppImages.icBoxEmpty),
                 width: 135,
                 height: 135,
               ),
