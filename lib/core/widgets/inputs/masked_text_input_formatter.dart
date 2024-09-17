@@ -17,17 +17,23 @@ class MaskedTextInputFormatter extends TextInputFormatter {
     TextEditingValue newValue,
   ) {
     final String text = newValue.text;
-    final String newText = newValue.toJSON()["text"].toString();
-    final String separatorWithText = newValue.text.replaceAll(separator, "");
-    final Iterable<Match> matches = filter.allMatches(separatorWithText);
-    if (matches.length != separatorWithText.length) {
+    final String cleanText = text.replaceAll(separator, "");
+    final Iterable<Match> matches = filter.allMatches(cleanText);
+
+    // Agar matn filtrga mos kelmasa, eski qiymatni qaytarish
+    if (matches.length != cleanText.length) {
       return oldValue;
     }
+
+    // Matn bo'sh bo'lmasa davom etadi
     if (text.isNotEmpty) {
       if (text.length > oldValue.text.length) {
+        // Matn maskadan uzun bo'lmasligi kerak
         if (text.length > mask.length) {
           return oldValue;
         }
+
+        // Agar qo'shish kerak bo'lsa va yangi belgidan oldin separator kiritish kerak bo'lsa
         if (text.length < mask.length && mask[text.length - 1] == separator) {
           return TextEditingValue(
             text:
@@ -37,41 +43,44 @@ class MaskedTextInputFormatter extends TextInputFormatter {
             ),
           );
         }
+
+        // Matn butunlay to'ldirilganda separatorlar bilan formatlash
         if (text.length == mask.replaceAll(separator, "").length &&
             oldValue.text.isEmpty) {
-          final StringBuffer bufferText = StringBuffer();
+          final StringBuffer formattedText = StringBuffer();
           int t = 0;
           for (int i = 0; i < text.length; i++) {
             if (mask[i + t] == separator) {
-              bufferText.write(separator);
+              formattedText.write(separator);
               t++;
             }
-            bufferText.write(text[i]);
+            formattedText.write(text[i]);
           }
           return TextEditingValue(
-            text: bufferText.toString(),
+            text: formattedText.toString(),
             selection: TextSelection.collapsed(
-              offset: bufferText.toString().length,
+              offset: formattedText.toString().length,
             ),
           );
         }
       } else {
-        if (newText.substring(newText.length - 1) == separator) {
+        // Agar oxirgi belgi separator bo'lsa, uni olib tashlash
+        if (text.endsWith(separator)) {
           return TextEditingValue(
-            text: newValue.text.substring(0, newValue.text.length - 1),
+            text: text.substring(0, text.length - 1),
             selection: TextSelection.collapsed(
               offset: newValue.selection.end - 1,
             ),
           );
         }
       }
+
       return TextEditingValue(
-        text: newText,
-        selection: TextSelection.collapsed(
-          offset: newValue.selection.end,
-        ),
+        text: text,
+        selection: TextSelection.collapsed(offset: newValue.selection.end),
       );
     }
+
     return newValue;
   }
 }

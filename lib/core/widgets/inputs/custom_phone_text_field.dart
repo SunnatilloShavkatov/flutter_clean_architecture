@@ -1,4 +1,3 @@
-import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:flutter_clean_architecture/core/extension/extension.dart";
@@ -74,58 +73,6 @@ class CustomPhoneTextField extends StatefulWidget {
 
   @override
   State<CustomPhoneTextField> createState() => _CustomPhoneTextFieldState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(StringProperty("titleText", titleText))
-      ..add(
-        ObjectFlagProperty<String? Function(String? p1)?>.has(
-          "validator",
-          validator,
-        ),
-      )
-      ..add(StringProperty("labelText", labelText))
-      ..add(DiagnosticsProperty<bool?>("showError", showError))
-      ..add(
-        DiagnosticsProperty<TextEditingController?>("controller", controller),
-      )
-      ..add(DiagnosticsProperty<bool>("autoFocus", autoFocus))
-      ..add(
-        ObjectFlagProperty<void Function(String value)?>.has(
-          "onChanged",
-          onChanged,
-        ),
-      )
-      ..add(StringProperty("prefixText", prefixText))
-      ..add(StringProperty("errorText", errorText))
-      ..add(EnumProperty<TextInputAction?>("inputAction", inputAction))
-      ..add(DiagnosticsProperty<FocusNode?>("currentFocus", currentFocus))
-      ..add(DiagnosticsProperty<FocusNode?>("nextFocus", nextFocus))
-      ..add(StringProperty("hintText", hintText))
-      ..add(DiagnosticsProperty<bool?>("obscureText", obscureText))
-      ..add(DiagnosticsProperty<BuildContext?>("context", context))
-      ..add(ObjectFlagProperty<void Function()?>.has("onTap", onTap))
-      ..add(ObjectFlagProperty<void Function()?>.has("onComplete", onComplete))
-      ..add(DiagnosticsProperty<bool>("readOnly", readOnly))
-      ..add(StringProperty("suffixText", suffixText))
-      ..add(DiagnosticsProperty<TextStyle?>("suffixStyle", suffixStyle))
-      ..add(ColorProperty("fillColor", fillColor))
-      ..add(DiagnosticsProperty<EdgeInsets?>("contentPadding", contentPadding))
-      ..add(DiagnosticsProperty<InputBorder?>("focusedBorder", focusedBorder))
-      ..add(DiagnosticsProperty<InputBorder?>("enabledBorder", enabledBorder))
-      ..add(DiagnosticsProperty<InputBorder?>("errorBorder", errorBorder))
-      ..add(
-        DiagnosticsProperty<InputBorder?>(
-          "focusedErrorBorder",
-          focusedErrorBorder,
-        ),
-      )
-      ..add(DiagnosticsProperty<bool>("required", required))
-      ..add(DiagnosticsProperty<bool?>("filled", filled))
-      ..add(DiagnosticsProperty<bool>("haveBorder", haveBorder));
-  }
 }
 
 class _CustomPhoneTextFieldState extends State<CustomPhoneTextField> {
@@ -135,20 +82,25 @@ class _CustomPhoneTextFieldState extends State<CustomPhoneTextField> {
   @override
   void initState() {
     super.initState();
-    if (widget.controller != null) {
-      focusNode.addListener(() {
-        if (focusNode.hasFocus) {
-          setState(() {
-            _prefixText = "+998 ";
-          });
-        } else {
-          if (widget.controller!.text.isEmpty) {
-            setState(() {
-              _prefixText = null;
-            });
-          }
-        }
+    focusNode.addListener(listener);
+    if ((widget.controller?.text ?? "").isNotEmpty) {
+      setState(() {
+        _prefixText = "+998 ";
       });
+    }
+  }
+
+  void listener() {
+    if (focusNode.hasFocus) {
+      setState(() {
+        _prefixText = "+998 ";
+      });
+    } else {
+      if (widget.controller!.text.isEmpty) {
+        setState(() {
+          _prefixText = null;
+        });
+      }
     }
   }
 
@@ -170,7 +122,7 @@ class _CustomPhoneTextFieldState extends State<CustomPhoneTextField> {
             ),
           TextFormField(
             validator: widget.validator,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
+            autovalidateMode: AutovalidateMode.onUnfocus,
             inputFormatters: <TextInputFormatter>[
               MaskedTextInputFormatter(
                 mask: "## ### ## ##",
@@ -228,11 +180,5 @@ class _CustomPhoneTextFieldState extends State<CustomPhoneTextField> {
       currentFocus.unfocus();
       FocusScope.of(context).requestFocus(nextFocus);
     }
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<FocusNode>("focusNode", focusNode));
   }
 }

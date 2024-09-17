@@ -13,7 +13,7 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => PopScope(
         canPop: navigationShell.currentIndex != 0,
-        onPopInvoked: (bool v) => navigationShell.goBranch(0),
+        onPopInvokedWithResult: (bool v, _) => navigationShell.goBranch(0),
         child: Scaffold(
           body: navigationShell,
           bottomNavigationBar: BottomIndicatorBar(

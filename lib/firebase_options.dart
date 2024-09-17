@@ -51,20 +51,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyD1-E8_GuHEvMjuzNiWd2DhYZ_HWH-c90I',
-    appId: '1:738452141157:android:b2cfed318090a080a8828c',
-    messagingSenderId: '738452141157',
-    projectId: 'sample-562f9',
-    storageBucket: 'sample-562f9.appspot.com',
+    apiKey: "AIzaSyD1-E8_GuHEvMjuzNiWd2DhYZ_HWH-c90I",
+    appId: "1:738452141157:android:b2cfed318090a080a8828c",
+    messagingSenderId: "738452141157",
+    projectId: "sample-562f9",
+    storageBucket: "sample-562f9.appspot.com",
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDTG3mgzQ1PFau9l6tSH_ABjoNnj0AjV7Q',
-    appId: '1:738452141157:ios:e1035442a17d6abfa8828c',
-    messagingSenderId: '738452141157',
-    projectId: 'sample-562f9',
-    storageBucket: 'sample-562f9.appspot.com',
-    iosBundleId: 'uz.udevs.cleanArchitecture',
+    apiKey: "AIzaSyDTG3mgzQ1PFau9l6tSH_ABjoNnj0AjV7Q",
+    appId: "1:738452141157:ios:e1035442a17d6abfa8828c",
+    messagingSenderId: "738452141157",
+    projectId: "sample-562f9",
+    storageBucket: "sample-562f9.appspot.com",
+    iosBundleId: "uz.udevs.cleanArchitecture",
   );
-
 }

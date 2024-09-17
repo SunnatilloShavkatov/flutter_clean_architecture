@@ -20,8 +20,8 @@ sealed class RemoteConfigService {
       try {
         await remoteConfig.setConfigSettings(
           RemoteConfigSettings(
-            fetchTimeout: Duration.zero,
-            minimumFetchInterval: Duration.zero,
+            fetchTimeout: const Duration(seconds: 10),
+            minimumFetchInterval: const Duration(hours: 1),
           ),
         );
         await remoteConfig.fetchAndActivate();
@@ -42,8 +42,13 @@ sealed class RemoteConfigService {
     } else {
       // ignore: use_build_context_synchronously
       return context.pushNamed(Routes.noInternet).then(
-            (Object? value) => isCallCheckAppVersion(context),
-          );
+        (Object? value) {
+          if (context.mounted) {
+            return isCallCheckAppVersion(context);
+          }
+          return (AppUpdate.none, "", "");
+        },
+      );
     }
   }
 
