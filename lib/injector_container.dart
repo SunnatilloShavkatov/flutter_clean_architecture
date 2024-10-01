@@ -39,24 +39,10 @@ Future<void> init() async {
       )
       ..httpClientAdapter = IOHttpClientAdapter(
         createHttpClient: () {
-          final HttpClient client = HttpClient()
-            ..badCertificateCallback = (X509Certificate cert, String host, __) {
-              log("cert: ${cert.pem}");
-              log("host: $host");
-              // return cert.pem == certificate;
-              return true;
-            };
+          final HttpClient client = HttpClient(
+            context: SecurityContext(withTrustedRoots: true),
+          )..badCertificateCallback = (_, __, ___) => false;
           return client;
-        },
-        validateCertificate: (X509Certificate? cert, String host, __) {
-          log("cert: ${cert?.pem}");
-          log("host: $host");
-          if (cert == null) {
-            return true;
-          }
-          // Clipboard.setData(ClipboardData(text: cert.pem));
-          return true;
-          // return cert.pem == certificate;
         },
       )
       ..interceptors.add(
