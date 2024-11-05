@@ -1,8 +1,9 @@
-// ignore_for_file: avoid_redundant_argument_values
+// ignore_for_file: avoid_redundant_argument_values, always_use_package_imports, always_specify_types
 
 import "dart:developer";
 import "dart:io";
 
+import "package:connectivity_plus/connectivity_plus.dart";
 import "package:dio/dio.dart";
 import "package:dio/io.dart";
 import "package:dio_retry_plus/dio_retry_plus.dart";
@@ -20,8 +21,12 @@ import "package:hive/hive.dart";
 import "package:package_info_plus/package_info_plus.dart";
 import "package:path_provider/path_provider.dart";
 
+import "core/widgets/custom_cached_network_image.dart";
+
 final GetIt sl = GetIt.instance;
 late Box<dynamic> _box;
+
+final Connectivity connectivity = sl<Connectivity>();
 
 Future<void> init() async {
   /// External
@@ -69,11 +74,9 @@ Future<void> init() async {
         dio: sl<Dio>(),
         retries: 1,
         toNoInternetPageNavigator: () async {
-          final RouteMatch lastMatch =
-              router.routerDelegate.currentConfiguration.last;
-          final RouteMatchList matchList = lastMatch is ImperativeRouteMatch
-              ? lastMatch.matches
-              : router.routerDelegate.currentConfiguration;
+          final RouteMatch lastMatch = router.routerDelegate.currentConfiguration.last;
+          final RouteMatchList matchList =
+              lastMatch is ImperativeRouteMatch ? lastMatch.matches : router.routerDelegate.currentConfiguration;
           final String location = matchList.uri.toString();
           if (location.contains(Routes.noInternet)) {
             return;
@@ -82,14 +85,14 @@ Future<void> init() async {
         },
         accessTokenGetter: () => "Bearer ${localSource.accessToken}",
         refreshTokenFunction: () async {
-          await localSource.clear().then(
+          await Future.wait([localSource.clear(), CustomImageCacheManager.instance.emptyCache()]).then(
             (_) {
               router.goNamed(Routes.initial);
             },
           );
         },
         forbiddenFunction: () async {
-          await localSource.clear().then(
+          await Future.wait([localSource.clear(), CustomImageCacheManager.instance.emptyCache()]).then(
             (_) {
               router.goNamed(Routes.initial);
             },
@@ -107,11 +110,8 @@ Future<void> init() async {
   /// Core
   sl
     ..registerSingleton<LocalSource>(LocalSource(_box))
-    ..registerLazySingleton(
-      () => InternetConnectionChecker.createInstance(
-        checkInterval: const Duration(seconds: 3),
-      ),
-    )
+    ..registerSingleton<Connectivity>(Connectivity())
+    ..registerLazySingleton(InternetConnectionChecker.createInstance)
     ..registerSingletonAsync<PackageInfo>(PackageInfo.fromPlatform)
     ..registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()))
 

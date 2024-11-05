@@ -1,3 +1,4 @@
+import "package:bloc_concurrency/bloc_concurrency.dart";
 import "package:equatable/equatable.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_clean_architecture/core/either/either.dart";
@@ -15,10 +16,22 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with CacheMixin {
   AuthBloc({
     required this.authRepository,
   }) : super(const AuthInitial()) {
-    on<LoginEnterPhoneNumberEvent>(_enterPhoneNumberHandler);
-    on<LoginPhoneButtonPressedEvent>(_phoneNumberPressedHandler);
-    on<LoginEnterCodeEvent>(_enterCodeHandler);
-    on<LoginCodeButtonPressedEvent>(_codePressedHandler);
+    on<LoginEnterPhoneNumberEvent>(
+      _enterPhoneNumberHandler,
+      transformer: restartable(),
+    );
+    on<LoginPhoneButtonPressedEvent>(
+      _phoneNumberPressedHandler,
+      transformer: restartable(),
+    );
+    on<LoginEnterCodeEvent>(
+      _enterCodeHandler,
+      transformer: restartable(),
+    );
+    on<LoginCodeButtonPressedEvent>(
+      _codePressedHandler,
+      transformer: restartable(),
+    );
   }
 
   final AuthRepository authRepository;

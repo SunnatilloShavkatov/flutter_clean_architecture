@@ -5,12 +5,10 @@ import "package:flutter/foundation.dart";
 
 part "internet_connection_checker.dart";
 
-sealed class NetworkInfo {
+abstract class NetworkInfo {
   const NetworkInfo();
 
   Future<bool> get isConnected;
-
-  Stream<InternetConnectionStatus> get onStatusChange;
 }
 
 @immutable
@@ -23,10 +21,6 @@ class NetworkInfoImpl implements NetworkInfo {
   Future<bool> get isConnected => internetConnection.hasConnection;
 
   @override
-  Stream<InternetConnectionStatus> get onStatusChange =>
-      internetConnection.onStatusChange;
-
-  @override
   String toString() => "NetworkInfoImpl($internetConnection)";
 
   @override
@@ -35,8 +29,7 @@ class NetworkInfoImpl implements NetworkInfo {
       return true;
     }
 
-    return other is NetworkInfoImpl &&
-        other.internetConnection == internetConnection;
+    return other is NetworkInfoImpl && other.internetConnection == internetConnection;
   }
 
   @override

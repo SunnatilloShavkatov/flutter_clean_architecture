@@ -1,6 +1,8 @@
 import "package:cached_network_image/cached_network_image.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
+import "package:flutter_cache_manager/flutter_cache_manager.dart";
+import "package:flutter_clean_architecture/constants/constants.dart";
 
 import "package:flutter_clean_architecture/core/extension/extension.dart";
 
@@ -28,10 +30,8 @@ class CustomCachedNetworkImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final int? cacheWidth =
-        width == null ? null : (width! * context.devicePixelRatio).toInt();
-    final int? cacheHeight =
-        height == null ? null : (height! * context.devicePixelRatio).toInt();
+    final int? cacheWidth = width == null ? null : (width! * context.devicePixelRatio).toInt();
+    final int? cacheHeight = height == null ? null : (height! * context.devicePixelRatio).toInt();
     return CachedNetworkImage(
       fit: fit,
       width: width,
@@ -61,29 +61,26 @@ class CustomCachedNetworkImage extends StatelessWidget {
       ..add(DoubleProperty("width", width))
       ..add(DoubleProperty("height", height))
       ..add(EnumProperty<BoxFit?>("fit", fit))
-      ..add(
-        ObjectFlagProperty<ImageWidgetBuilder?>.has(
-          "imageBuilder",
-          imageBuilder,
-        ),
-      )
-      ..add(
-        ObjectFlagProperty<PlaceholderWidgetBuilder?>.has(
-          "placeholder",
-          placeholder,
-        ),
-      )
-      ..add(
-        ObjectFlagProperty<ProgressIndicatorBuilder?>.has(
-          "progressIndicatorBuilder",
-          progressIndicatorBuilder,
-        ),
-      )
-      ..add(
-        ObjectFlagProperty<LoadingErrorWidgetBuilder?>.has(
-          "errorWidget",
-          errorWidget,
-        ),
-      );
+      ..add(ObjectFlagProperty<ImageWidgetBuilder?>.has("imageBuilder", imageBuilder))
+      ..add(ObjectFlagProperty<PlaceholderWidgetBuilder?>.has("placeholder", placeholder))
+      ..add(ObjectFlagProperty<ProgressIndicatorBuilder?>.has("progressIndicatorBuilder", progressIndicatorBuilder))
+      ..add(ObjectFlagProperty<LoadingErrorWidgetBuilder?>.has("errorWidget", errorWidget));
   }
+}
+
+class CustomImageCacheManager extends CacheManager with ImageCacheManager {
+  CustomImageCacheManager._internal()
+      : super(
+          Config(
+            AppKeys.imageCache,
+            maxNrOfCacheObjects: 500,
+            fileService: HttpFileService(),
+            stalePeriod: const Duration(days: 30),
+            repo: JsonCacheInfoRepository(databaseName: AppKeys.imageCache),
+          ),
+        );
+
+  static CacheManager instance = _instance;
+
+  static final CustomImageCacheManager _instance = CustomImageCacheManager._internal();
 }

@@ -1,8 +1,9 @@
 import "dart:async";
-import "package:flutter/foundation.dart";
+import "package:connectivity_plus/connectivity_plus.dart";
 import "package:flutter/material.dart";
+import "package:flutter_clean_architecture/core/widgets/buttons/custom_loading_button.dart";
 
-import "package:flutter_clean_architecture/core/connectivity/network_info.dart";
+import "package:flutter_clean_architecture/injector_container.dart";
 import "package:flutter_clean_architecture/router/app_routes.dart";
 
 class InternetConnectionPage extends StatefulWidget {
@@ -13,27 +14,19 @@ class InternetConnectionPage extends StatefulWidget {
 }
 
 class InternetConnectionPageState extends State<InternetConnectionPage> {
-  late StreamSubscription<InternetConnectionStatus> listener;
+  late StreamSubscription<List<ConnectivityResult>> _connectivityChangedListener;
+  final ValueNotifier<bool> _isLoaded = ValueNotifier<bool>(false);
 
   @override
   void initState() {
     super.initState();
-    listener = networkInfo.onStatusChange.listen(_updateConnectionStatus);
+    _connectivityChangedListener = connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
   }
 
-  Future<void> _updateConnectionStatus(InternetConnectionStatus status) async {
-    switch (status) {
-      case InternetConnectionStatus.connected:
-        Navigator.of(context).pop();
-      case InternetConnectionStatus.disconnected:
-        break;
+  Future<void> _updateConnectionStatus(List<ConnectivityResult> status) async {
+    if (!status.contains(ConnectivityResult.none) && await networkInfo.isConnected && mounted) {
+      Navigator.of(context).pop();
     }
-  }
-
-  @override
-  void dispose() {
-    unawaited(listener.cancel());
-    super.dispose();
   }
 
   @override
@@ -68,32 +61,35 @@ class InternetConnectionPageState extends State<InternetConnectionPage> {
           ),
           bottomNavigationBar: SafeArea(
             minimum: const EdgeInsets.all(16),
-            child: ElevatedButton(
-              child: const Text("Попробовать снова"),
-              onPressed: () async {
-                Future<void>.delayed(
-                  const Duration(milliseconds: 300),
-                  () async {
-                    final bool isConnected = await networkInfo.isConnected;
-                    if (isConnected && context.mounted) {
-                      Navigator.of(context).pop();
-                    }
-                  },
-                );
-              },
+            child: ValueListenableBuilder<bool>(
+              valueListenable: _isLoaded,
+              builder: (_, bool isLoading, __) => CustomLoadingButton(
+                isLoading: isLoading,
+                child: const Text("Попробовать снова"),
+                onPressed: () async {
+                  _isLoaded.value = true;
+                  Future<void>.delayed(
+                    const Duration(milliseconds: 1),
+                    () async {
+                      final bool isConnected = await networkInfo.isConnected;
+                      if (isConnected && context.mounted) {
+                        Navigator.of(context).pop();
+                      } else if (mounted) {
+                        _isLoaded.value = false;
+                      }
+                    },
+                  );
+                },
+              ),
             ),
           ),
         ),
       );
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(
-      DiagnosticsProperty<StreamSubscription<InternetConnectionStatus>>(
-        "listener",
-        listener,
-      ),
-    );
+  void dispose() {
+    unawaited(_connectivityChangedListener.cancel());
+    _isLoaded.dispose();
+    super.dispose();
   }
 }

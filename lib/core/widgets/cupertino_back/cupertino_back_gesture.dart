@@ -1,4 +1,4 @@
-library cupertino_back_gesture;
+library;
 
 import "dart:math";
 import "dart:ui";

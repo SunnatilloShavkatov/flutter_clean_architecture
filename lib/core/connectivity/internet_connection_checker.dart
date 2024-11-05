@@ -1,18 +1,24 @@
 part of "network_info.dart";
 
+@immutable
 class AddressCheckResult {
-  const AddressCheckResult(
-    this.options, {
-    required this.isSuccess,
-  });
+  const AddressCheckResult(this.options, {required this.isSuccess});
 
   final AddressCheckOptions options;
   final bool isSuccess;
 
   @override
   String toString() => "AddressCheckResult($options, $isSuccess)";
+
+  @override
+  int get hashCode => Object.hashAll(<Object?>[options, isSuccess]);
+
+  @override
+  bool operator ==(Object other) =>
+      other is AddressCheckResult && other.options == options && other.isSuccess == isSuccess;
 }
 
+@immutable
 class AddressCheckOptions {
   const AddressCheckOptions({
     this.address,
@@ -20,8 +26,7 @@ class AddressCheckOptions {
     this.port = InternetConnectionChecker.defaultPort,
     this.timeout = InternetConnectionChecker.defaultTimeout,
   }) : assert(
-          (address != null || hostname != null) &&
-              ((address != null) != (hostname != null)),
+          (address != null || hostname != null) && ((address != null) != (hostname != null)),
           "Either address or hostname must be provided, but not both.",
         );
 
@@ -31,47 +36,26 @@ class AddressCheckOptions {
   final Duration timeout;
 
   @override
-  String toString() => "AddressCheckOptions($address, $port, $timeout)";
+  String toString() => "AddressCheckOptions($address, $port, $timeout, $hostname)";
+
+  @override
+  int get hashCode => Object.hashAll(<Object?>[address, port, timeout]);
+
+  @override
+  bool operator ==(Object other) =>
+      other is AddressCheckOptions && other.address == address && other.port == port && other.timeout == timeout;
 }
 
-enum InternetConnectionStatus {
-  connected,
-  disconnected,
-}
+enum InternetConnectionStatus { connected, disconnected }
 
 class InternetConnectionChecker {
   factory InternetConnectionChecker() => _instance;
 
-  InternetConnectionChecker.createInstance({
-    this.checkTimeout = defaultTimeout,
-    this.checkInterval = defaultInterval,
-    List<AddressCheckOptions>? addresses,
-  }) {
+  InternetConnectionChecker.createInstance({List<AddressCheckOptions>? addresses}) {
     this.addresses = addresses ??
         defaultAddresses
-            .map(
-              (AddressCheckOptions e) => AddressCheckOptions(
-                address: e.address,
-                hostname: e.hostname,
-                port: e.port,
-                timeout: checkTimeout,
-              ),
-            )
+            .map((AddressCheckOptions e) => AddressCheckOptions(address: e.address, hostname: e.hostname, port: e.port))
             .toList();
-
-    // immediately perform an initial check so we know the last status?
-    // connectionStatus.then((status) => _lastStatus = status);
-
-    // start sending status updates to onStatusChange when there are listeners
-    // (emits only if there's any change since the last status update)
-    _statusController
-      ..onListen = _maybeEmitStatusUpdate
-
-      // stop sending status updates when no one is listening
-      ..onCancel = () {
-        _timerHandle?.cancel();
-        _lastStatus = null; // reset last status
-      };
   }
 
   /// More info on why default port is 53
@@ -86,11 +70,6 @@ class InternetConnectionChecker {
   /// and an address is considered unreachable
   static const Duration defaultTimeout = Duration(seconds: 10);
 
-  /// Default interval is 10 seconds
-  ///
-  /// Interval is the time between automatic checks
-  static const Duration defaultInterval = Duration(seconds: 10);
-
   /// | Address        | Provider   | Info                                    |
   /// |:---------------|:-----------|:----------------------------------------|
   /// | 1.1.1.1        | CloudFlare | https://1.1.1.1                                 |
@@ -99,45 +78,14 @@ class InternetConnectionChecker {
   /// | 8.8.4.4        | Google     | https://developers.google.com/speed/public-dns/ |
   /// | 208.67.222.222 | OpenDNS    | https://use.opendns.com/                        |
   /// | 208.67.220.220 | OpenDNS    | https://use.opendns.com/                        |
-  static final List<AddressCheckOptions> defaultAddresses =
-      List<AddressCheckOptions>.unmodifiable(
+  static final List<AddressCheckOptions> defaultAddresses = List<AddressCheckOptions>.unmodifiable(
     <AddressCheckOptions>[
-      AddressCheckOptions(
-        address: InternetAddress(
-          "1.1.1.1", // CloudFlare
-          type: InternetAddressType.IPv4,
-        ),
-      ),
-      AddressCheckOptions(
-        address: InternetAddress(
-          "2606:4700:4700::1111", // CloudFlare
-          type: InternetAddressType.IPv6,
-        ),
-      ),
-      AddressCheckOptions(
-        address: InternetAddress(
-          "8.8.4.4", // Google
-          type: InternetAddressType.IPv4,
-        ),
-      ),
-      AddressCheckOptions(
-        address: InternetAddress(
-          "2001:4860:4860::8888", // Google
-          type: InternetAddressType.IPv6,
-        ),
-      ),
-      AddressCheckOptions(
-        address: InternetAddress(
-          "208.67.222.222", // OpenDNS
-          type: InternetAddressType.IPv4,
-        ), // OpenDNS
-      ),
-      AddressCheckOptions(
-        address: InternetAddress(
-          "2620:0:ccc::2", // OpenDNS
-          type: InternetAddressType.IPv6,
-        ), // OpenDNS
-      ),
+      AddressCheckOptions(address: InternetAddress("1.1.1.1", type: InternetAddressType.IPv4)),
+      AddressCheckOptions(address: InternetAddress("2606:4700:4700::1111", type: InternetAddressType.IPv6)),
+      AddressCheckOptions(address: InternetAddress("8.8.4.4", type: InternetAddressType.IPv4)),
+      AddressCheckOptions(address: InternetAddress("2001:4860:4860::8888", type: InternetAddressType.IPv6)),
+      AddressCheckOptions(address: InternetAddress("208.67.222.222", type: InternetAddressType.IPv4)),
+      AddressCheckOptions(address: InternetAddress("2620:0:ccc::2", type: InternetAddressType.IPv6)),
     ],
   );
 
@@ -147,35 +95,21 @@ class InternetConnectionChecker {
 
   set addresses(List<AddressCheckOptions> value) {
     _addresses = List<AddressCheckOptions>.unmodifiable(value);
-    unawaited(_maybeEmitStatusUpdate());
   }
 
-  static final InternetConnectionChecker _instance =
-      InternetConnectionChecker.createInstance();
+  static final InternetConnectionChecker _instance = InternetConnectionChecker.createInstance();
 
   /// Ping a single address. See [AddressCheckOptions] for
   /// info on the accepted argument.
-  Future<AddressCheckResult> isHostReachable(
-    AddressCheckOptions options,
-  ) async {
+  Future<AddressCheckResult> isHostReachable(AddressCheckOptions options) async {
     Socket? sock;
     try {
-      sock = await Socket.connect(
-        options.address ?? options.hostname,
-        options.port,
-        timeout: options.timeout,
-      )
+      sock = await Socket.connect(options.address ?? options.hostname, options.port, timeout: options.timeout)
         ..destroy();
-      return AddressCheckResult(
-        options,
-        isSuccess: true,
-      );
+      return AddressCheckResult(options, isSuccess: true);
     } on Exception catch (_) {
       sock?.destroy();
-      return AddressCheckResult(
-        options,
-        isSuccess: false,
-      );
+      return AddressCheckResult(options, isSuccess: false);
     }
   }
 
@@ -184,8 +118,7 @@ class InternetConnectionChecker {
     int length = addresses.length;
 
     for (final AddressCheckOptions addressOptions in addresses) {
-      // ignore: unawaited_futures
-      isHostReachable(addressOptions).then(
+      await isHostReachable(addressOptions).then(
         (AddressCheckResult request) {
           length -= 1;
           if (!result.isCompleted) {
@@ -203,48 +136,5 @@ class InternetConnectionChecker {
   }
 
   Future<InternetConnectionStatus> get connectionStatus async =>
-      await hasConnection
-          ? InternetConnectionStatus.connected
-          : InternetConnectionStatus.disconnected;
-
-  final Duration checkInterval;
-  final Duration checkTimeout;
-
-  Future<void> _maybeEmitStatusUpdate([
-    Timer? timer,
-  ]) async {
-    // just in case
-    _timerHandle?.cancel();
-    timer?.cancel();
-
-    final InternetConnectionStatus currentStatus = await connectionStatus;
-
-    // only send status update if last status differs from current
-    // and if someone is actually listening
-    if (_lastStatus != currentStatus && _statusController.hasListener) {
-      _statusController.add(currentStatus);
-    }
-
-    // start new timer only if there are listeners
-    if (!_statusController.hasListener) {
-      return;
-    }
-    _timerHandle = Timer(checkInterval, _maybeEmitStatusUpdate);
-
-    // update last status
-    _lastStatus = currentStatus;
-  }
-
-  InternetConnectionStatus? _lastStatus;
-  Timer? _timerHandle;
-
-  final StreamController<InternetConnectionStatus> _statusController =
-      StreamController<InternetConnectionStatus>.broadcast();
-
-  Stream<InternetConnectionStatus> get onStatusChange =>
-      _statusController.stream;
-
-  bool get hasListeners => _statusController.hasListener;
-
-  bool get isActivelyChecking => _statusController.hasListener;
+      await hasConnection ? InternetConnectionStatus.connected : InternetConnectionStatus.disconnected;
 }

@@ -29,24 +29,21 @@ mixin SplashMixin on State<SplashPage> {
     return;
   }
 
-  Future<void> appUpdateBottomSheet({
-    required bool isForceUpdate,
-  }) async {
+  Future<void> appUpdateBottomSheet({required bool isForceUpdate}) async {
     await customModalBottomSheet<bool>(
       context: context,
       enableDrag: false,
-      builder: (_, ScrollController? controller) => AppUpdateBottomSheetWidget(
+      builder: (_, __) => AppUpdateBottomSheetWidget(
         isForceUpdate: isForceUpdate,
         onTap: () async {
           await launchUrl(
             Uri.parse(Constants.appLink),
             mode: LaunchMode.externalApplication,
           ).then(
-            (bool value) async {
-              if (!mounted) {
-                return;
+            (_) async {
+              if (mounted) {
+                nextToNavigation();
               }
-              nextToNavigation();
             },
           );
         },
